@@ -15,6 +15,16 @@ Repository contains automation scripts for CUCM line change which will be useful
 - logger.py : creates a logging pipeline to report events for each function calls and respection exceptions
 - debugplugin.py : to be used if there is issue observed with zeep libraries, native from cisco repository.
 
+### Requirements:
+- install requirements.txt
+- create .env file which would contain:
+    1. Username for CUCM
+    2. Password
+    3. URL of CUCM
+- Sample of .env:
+CUCM_ADDRESS="cucm-addresss"
+AXL_USERNAME="username"
+AXL_PASSWORD="password"
 
 ### API interface:
 - main.py : bridges user interaction with the script and performs the required changes.
