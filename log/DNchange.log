@@ -1,0 +1,12 @@
+2025-08-06 17:58:38,323 - DNchange - INFO - Starting updatePhone for user: testPhone with new DN: 1100
+2025-08-06 17:58:40,801 - DNchange - INFO - Skipping line with pattern starting '555': 555164562
+2025-08-06 17:58:41,135 - DNchange - WARNING - Line 1100 not found in partition pt-global-internal
+2025-08-06 17:58:41,136 - DNchange - INFO - Line with pattern '1100' not found in partition 'pt-global-internal'. Creating new line.
+2025-08-06 17:58:42,308 - DNchange - ERROR - Zeep error: Could not fetch user testPhone: Item not valid: The specified User was not found
+2025-08-06 18:01:45,593 - DNchange - INFO - Starting updatePhone for user: testPhone with new DN: 1101
+2025-08-06 18:01:47,969 - DNchange - INFO - Skipping line with pattern starting '555': 555164562
+2025-08-06 18:01:48,298 - DNchange - WARNING - Line 1101 not found in partition pt-global-internal
+2025-08-06 18:01:48,299 - DNchange - INFO - Line with pattern '1101' not found in partition 'pt-global-internal'. Creating new line.
+2025-08-06 18:01:49,415 - DNchange - ERROR - Zeep error: Could not fetch user testPhone: Item not valid: The specified User was not found
+2025-08-06 18:01:49,416 - DNchange - INFO - Updating line from 1008 to 1101
+2025-08-06 18:01:49,867 - DNchange - INFO - Updating CSF device for user: testPhone
