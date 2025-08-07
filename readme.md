@@ -13,7 +13,7 @@ Repository contains automation scripts for CUCM line change which will be useful
 ### Supporting components:
 - dict_helper.py : Cleans serialized zeep object retrieved from response of getxxxx() calls and converts them to native python dictionaries, and also helps clean unwanted keys from dictionary which cause errors which updating lines.
 - logger.py : creates a logging pipeline to report events for each function calls and respection exceptions
-- plugins.py : to be used if there is issue observed with zeep libraries, native from cisco repository.
+- debugplugin.py : to be used if there is issue observed with zeep libraries, native from cisco repository.
 
 
 ### API interface:
