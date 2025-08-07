@@ -22,9 +22,9 @@ Repository contains automation scripts for CUCM line change which will be useful
     2. Password
     3. URL of CUCM
 - Sample of .env:
-CUCM_ADDRESS="cucm-addresss"
-AXL_USERNAME="username"
-AXL_PASSWORD="password"
+    - CUCM_ADDRESS="cucm-addresss"
+    - AXL_USERNAME="username"
+    - AXL_PASSWORD="password"
 
 ### API interface:
 - main.py : bridges user interaction with the script and performs the required changes.
