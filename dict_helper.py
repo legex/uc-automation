@@ -1,4 +1,8 @@
+import copy
 from collections import OrderedDict
+from logger import setup_logger
+
+logger = setup_logger('utilslog', 'log/utilslog.log')
 
 def clean_axl_dict(obj):
     if isinstance(obj, (OrderedDict, dict)):
@@ -26,3 +30,26 @@ def sanitizedict(linedict, unwantedkeys):
     for key in unwantedkeys:
         linedict.pop(key)
     return linedict
+
+def filter_and_reindex_lines(clean_lines, new_pattern):
+    filtered_lines = copy.deepcopy(clean_lines)
+    remaining_lines = []
+    next_index = 1
+    for line in filtered_lines.get('line', []):
+        pattern = line['dirn']['pattern']
+        if pattern.startswith('555'):
+            continue
+        if pattern != new_pattern:
+            continue
+        line['index'] = next_index
+        line['maxNumCalls'] = 2
+        line['busyTrigger'] = 1
+        remaining_lines.append(line)
+        next_index += 1
+
+    if not remaining_lines:
+        logger.warning("No lines matching new pattern %s after filtering: skipping update", new_pattern)
+        return None
+
+    filtered_lines['line'] = remaining_lines
+    return filtered_lines

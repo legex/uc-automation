@@ -28,14 +28,14 @@ Repository contains automation scripts for CUCM line change which will be useful
 
 ### API interface:
 - main.py : bridges user interaction with the script and performs the required changes.
-    Scope of improvement:
+    #### Scope of improvement:
      1. Implementing file handling
      2. Looping over users (n) extracted from files and change DID
 
 
 ## Workflow:
 - Input user details along with target line number
-- axlop.py will fetch user phone and its current lines,
+- axlop.py will fetch user phone (CSF, TCT and BOT) and its current lines,
 - if current lines have 555 at the begining, it will move to next line where it doesn't start with 555
 - validate if target line number is there already in CUCM or not
 - if not in cucm then create line with basic config (routepartition)

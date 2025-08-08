@@ -2,7 +2,7 @@ import sys
 from zeep.exceptions import Fault
 from zeep.helpers import serialize_object
 from axlconn import ConnectionAXL
-from dict_helper import clean_axl_dict, sanitizedict
+from dict_helper import clean_axl_dict, sanitizedict, filter_and_reindex_lines
 from logger import setup_logger
 
 logger = setup_logger('DNchange', 'log/DNchange.log')
@@ -203,7 +203,7 @@ class AXLOperations:
         return clean_lines
 
 
-    def update_all_devices(self, username: str, clean_lines: str):
+    def update_all_devices(self, username: str, clean_lines: str, new_pattern: str):
         """ Method to update all relevant devices"""
         print(f'username as observed in update_all_devices {username}')
         device_types = ['csf', 'TCT-', 'BOT-']
@@ -212,12 +212,19 @@ class AXLOperations:
         for prefix in device_types:
             device_name = f"{prefix}{username}"
             phone = self.get_device(device_name)
-            print("here is phone: ", phone)
-            print(f'username as observed with {prefix} {device_name}')
+            #print("here is phone: ", phone)
+            #print(f'username as observed with {prefix} {device_name}')
             if phone:
+                if prefix in ['TCT-', 'BOT-']:
+                    lines_to_use = filter_and_reindex_lines(clean_lines, new_pattern)
+                    if lines_to_use is None:
+                        all_results[device_name] = "Skipped: no matching line"
+                        continue
+                else:
+                    lines_to_use = clean_lines
                 try:
                     logger.info("Updating %s device for user: %s", device_name, username)
-                    result = self.service.updatePhone(name=device_name, lines=clean_lines)
+                    result = self.service.updatePhone(name=device_name, lines=lines_to_use)
                     all_results[device_name] = result
                 except Fault as e:
                     logger.error("Zeep error while updating phone for user %s: %s", username, e)
@@ -238,10 +245,10 @@ class AXLOperations:
         logger.info("Starting updatePhone for user: %s with new DN: %s",
                     username,
                     new_pattern)
-        print(f'username as observed in update_phone {username}')
+        #print(f'username as observed in update_phone {username}')
 
         clean_lines = self.update_csf_phone_lines(f"csf{username}", new_pattern)
         print(clean_lines)
         if not clean_lines:
             return None
-        return self.update_all_devices(username, clean_lines)
+        return self.update_all_devices(username, clean_lines, new_pattern)

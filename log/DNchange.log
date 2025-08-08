@@ -195,3 +195,20 @@
 2025-08-07 22:10:19,343 - DNchange - INFO - Skipping line with pattern starting '555': 5552835070
 2025-08-07 22:10:19,462 - DNchange - INFO - Line with pattern '1001001011' already exists in partition 'PT-Global-Internal'
 2025-08-07 22:10:19,710 - DNchange - INFO - Updating line from \+918046001111 to 1001001011
+2025-08-08 13:00:24,175 - DNchange - INFO - Starting updatePhone for user: raksingh with new DN: 1001001011
+2025-08-08 13:00:26,910 - DNchange - INFO - Skipping line with pattern starting '555': 5552835070
+2025-08-08 13:00:27,093 - DNchange - INFO - Line with pattern '1001001011' already exists in partition 'PT-Global-Internal'
+2025-08-08 13:00:27,414 - DNchange - INFO - Updating line from \+918046001111 to 1001001011
+2025-08-08 13:00:27,991 - DNchange - INFO - Updating csfraksingh device for user: raksingh
+2025-08-08 13:00:28,437 - DNchange - ERROR - Zeep error: Failed to get CSF device for TCT-raksingh: Item not valid: The specified TCT-raksingh was not found
+2025-08-08 13:00:28,437 - DNchange - INFO - Device TCT-raksingh does not exist for user raksingh, skipping.
+2025-08-08 13:00:28,669 - DNchange - INFO - Updating BOT-raksingh device for user: raksingh
+2025-08-08 13:00:28,839 - DNchange - ERROR - Zeep error while updating phone for user raksingh: DeviceNumPlanMap MaxNumCalls value exceeds the limitation for this type of device
+2025-08-08 13:05:50,480 - DNchange - INFO - Starting updatePhone for user: raksingh with new DN: 1001001011
+2025-08-08 13:05:52,049 - DNchange - INFO - Skipping line with pattern starting '555': 5552835070
+2025-08-08 13:05:52,181 - DNchange - INFO - Line with pattern '1001001011' already exists in partition 'PT-Global-Internal'
+2025-08-08 13:05:52,425 - DNchange - INFO - Updating line from \+918046001111 to 1001001011
+2025-08-08 13:05:52,783 - DNchange - INFO - Updating csfraksingh device for user: raksingh
+2025-08-08 13:05:53,140 - DNchange - ERROR - Zeep error: Failed to get CSF device for TCT-raksingh: Item not valid: The specified TCT-raksingh was not found
+2025-08-08 13:05:53,140 - DNchange - INFO - Device TCT-raksingh does not exist for user raksingh, skipping.
+2025-08-08 13:05:53,304 - DNchange - INFO - Updating BOT-raksingh device for user: raksingh
