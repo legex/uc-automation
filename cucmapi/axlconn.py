@@ -5,8 +5,8 @@ from requests import Session
 from requests.auth import HTTPBasicAuth
 from zeep import Client, Settings
 from zeep.transports import Transport
-from debugplugin import MyLoggingPlugin
-from logger import setup_logger
+from cucmapi.debugplugin import MyLoggingPlugin
+from utils.logger import setup_logger
 
 load_dotenv()
 

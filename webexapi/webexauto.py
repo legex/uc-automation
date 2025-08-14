@@ -4,7 +4,7 @@ import requests
 from requests import HTTPError
 from dotenv import load_dotenv
 from metadata.settings import license_store, LOCATIONS, WEBEX_URL
-from logger import setup_logger
+from utils.logger import setup_logger
 
 # Load environment variables from .env file
 load_dotenv()

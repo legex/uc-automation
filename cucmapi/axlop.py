@@ -1,12 +1,12 @@
 import sys
 from zeep.exceptions import Fault
 from zeep.helpers import serialize_object
-from axlconn import ConnectionAXL
-from dict_helper import (clean_axl_dict,
+from cucmapi.axlconn import ConnectionAXL
+from utils.dict_helper import (clean_axl_dict,
                          sanitizedict,
                          filter_and_reindex_lines
                          )
-from logger import setup_logger
+from utils.logger import setup_logger
 
 logger = setup_logger('DNchange', 'log/DNchange.log')
 

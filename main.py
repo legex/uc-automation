@@ -1,9 +1,9 @@
 import os
 import pandas as pd
-from updateldap import update_contacts_num
-from axlop import AXLOperations
-from webexauto import patch_license_dn
-from logger import setup_logger
+from ldapapi.updateldap import update_contacts_num
+from cucmapi.axlop import AXLOperations
+from webexapi.webexauto import patch_license_dn
+from utils.logger import setup_logger
 
 logger = setup_logger('mainapp', 'log/mainapp.log')
 
