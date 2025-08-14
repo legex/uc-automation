@@ -6,8 +6,8 @@ Repository contains automation scripts for CUCM line change which will be useful
 ## Components:
 ### Runnable interface:
 - main.py : Run from terminatal using command:
-        - ```python main.py```
-        - arguments needed: csv file location, option from 1 or 2, where 1 is CUCM change and 2 is Webex change
+    - ```python main.py```
+    - arguments needed: csv file location, option from 1 or 2, where 1 is CUCM change and 2 is Webex change
 
 ### main components (backend engine):
 - axlconn.py : Instantiates the connection between localhost and target(cucm)
