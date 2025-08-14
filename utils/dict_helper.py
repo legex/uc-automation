@@ -1,6 +1,6 @@
 import copy
 from collections import OrderedDict
-from logger import setup_logger
+from utils.logger import setup_logger
 
 logger = setup_logger('utilslog', 'log/utilslog.log')
 
