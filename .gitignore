@@ -1,3 +1,6 @@
 .env
 .cucmapi/
 .vscode/
+response.json
+usercsv.csv
+ad_query.py
