@@ -209,11 +209,11 @@ class AXLOperations:
     def update_all_devices(self, username: str, clean_lines: str, new_pattern: str):
         """ Method to update all relevant devices"""
         print(f'username as observed in update_all_devices {username}')
-        device_types = ['csf', 'TCT-', 'BOT-']
+        device_types = ['CSF', 'TCT-', 'BOT-']
 
         all_results = {}
         for prefix in device_types:
-            device_name = f"{prefix}{username}"
+            device_name = f"{prefix}{username.upper()}"
             phone = self.get_device(device_name)
             #print("here is phone: ", phone)
             #print(f'username as observed with {prefix} {device_name}')
@@ -250,7 +250,7 @@ class AXLOperations:
                     new_pattern)
         #print(f'username as observed in update_phone {username}')
 
-        clean_lines = self.update_csf_phone_lines(f"csf{username}", new_pattern)
+        clean_lines = self.update_csf_phone_lines(f"CSF{username.upper()}", new_pattern)
         print(clean_lines)
         if not clean_lines:
             return None

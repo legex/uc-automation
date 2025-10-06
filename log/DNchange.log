@@ -1,0 +1,396 @@
+2025-08-21 20:53:55,950 - DNchange - INFO - Starting updatePhone for user: jhogue with new DN: 8834110000
+2025-08-21 20:54:11,138 - DNchange - ERROR - Zeep error: Failed to get CSF device for csfjhogue: Item not valid: The specified csfjhogue was not found
+2025-08-21 20:54:11,139 - DNchange - ERROR - No CSF device found for user: csfjhogue
+2025-08-21 20:54:11,140 - DNchange - INFO - Starting updatePhone for user: cworm with new DN: 8834110001
+2025-08-21 20:54:11,410 - DNchange - ERROR - Zeep error: Failed to get CSF device for csfcworm: Item not valid: The specified csfcworm was not found
+2025-08-21 20:54:11,410 - DNchange - ERROR - No CSF device found for user: csfcworm
+2025-08-21 20:54:11,411 - DNchange - INFO - Starting updatePhone for user: dbrink with new DN: 8834110002
+2025-08-21 20:54:11,572 - DNchange - ERROR - Zeep error: Failed to get CSF device for csfdbrink: Item not valid: The specified csfdbrink was not found
+2025-08-21 20:54:11,572 - DNchange - ERROR - No CSF device found for user: csfdbrink
+2025-08-21 20:54:11,573 - DNchange - INFO - Starting updatePhone for user: dtamasse with new DN: 8834110003
+2025-08-21 20:54:11,706 - DNchange - ERROR - Zeep error: Failed to get CSF device for csfdtamasse: Item not valid: The specified csfdtamasse was not found
+2025-08-21 20:54:11,707 - DNchange - ERROR - No CSF device found for user: csfdtamasse
+2025-08-21 20:54:11,708 - DNchange - INFO - Starting updatePhone for user: mberger with new DN: 8834110004
+2025-08-21 20:54:11,849 - DNchange - ERROR - Zeep error: Failed to get CSF device for csfmberger: Item not valid: The specified csfmberger was not found
+2025-08-21 20:54:11,850 - DNchange - ERROR - No CSF device found for user: csfmberger
+2025-08-21 20:54:11,851 - DNchange - INFO - Starting updatePhone for user: mgreve with new DN: 8834110005
+2025-08-21 20:54:11,991 - DNchange - ERROR - Zeep error: Failed to get CSF device for csfmgreve: Item not valid: The specified csfmgreve was not found
+2025-08-21 20:54:11,992 - DNchange - ERROR - No CSF device found for user: csfmgreve
+2025-08-21 20:54:11,992 - DNchange - INFO - Starting updatePhone for user: lbrockna with new DN: 8834110006
+2025-08-21 20:54:12,125 - DNchange - ERROR - Zeep error: Failed to get CSF device for csflbrockna: Item not valid: The specified csflbrockna was not found
+2025-08-21 20:54:12,125 - DNchange - ERROR - No CSF device found for user: csflbrockna
+2025-08-21 20:54:12,126 - DNchange - INFO - Starting updatePhone for user: sgourgue with new DN: 8834110007
+2025-08-21 20:54:12,281 - DNchange - ERROR - Zeep error: Failed to get CSF device for csfsgourgue: Item not valid: The specified csfsgourgue was not found
+2025-08-21 20:54:12,281 - DNchange - ERROR - No CSF device found for user: csfsgourgue
+2025-08-21 20:54:12,282 - DNchange - INFO - Starting updatePhone for user: njensen with new DN: 8834110008
+2025-08-21 20:54:12,414 - DNchange - ERROR - Zeep error: Failed to get CSF device for csfnjensen: Item not valid: The specified csfnjensen was not found
+2025-08-21 20:54:12,415 - DNchange - ERROR - No CSF device found for user: csfnjensen
+2025-08-21 20:54:12,415 - DNchange - INFO - Starting updatePhone for user: rsorense with new DN: 8834110009
+2025-08-21 20:54:12,552 - DNchange - ERROR - Zeep error: Failed to get CSF device for csfrsorense: Item not valid: The specified csfrsorense was not found
+2025-08-21 20:54:12,553 - DNchange - ERROR - No CSF device found for user: csfrsorense
+2025-08-21 20:54:12,553 - DNchange - INFO - Starting updatePhone for user: pvejre with new DN: 8834110010
+2025-08-21 20:54:12,688 - DNchange - ERROR - Zeep error: Failed to get CSF device for csfpvejre: Item not valid: The specified csfpvejre was not found
+2025-08-21 20:54:12,689 - DNchange - ERROR - No CSF device found for user: csfpvejre
+2025-08-21 20:54:12,690 - DNchange - INFO - Starting updatePhone for user: tnorlin with new DN: 8834110011
+2025-08-21 20:54:12,829 - DNchange - ERROR - Zeep error: Failed to get CSF device for csftnorlin: Item not valid: The specified csftnorlin was not found
+2025-08-21 20:54:12,830 - DNchange - ERROR - No CSF device found for user: csftnorlin
+2025-08-21 20:54:12,831 - DNchange - INFO - Starting updatePhone for user: erubinsh with new DN: 8834110012
+2025-08-21 20:54:12,988 - DNchange - ERROR - Zeep error: Failed to get CSF device for csferubinsh: Item not valid: The specified csferubinsh was not found
+2025-08-21 20:54:12,989 - DNchange - ERROR - No CSF device found for user: csferubinsh
+2025-08-21 20:54:12,990 - DNchange - INFO - Starting updatePhone for user: szaharia with new DN: 8834110013
+2025-08-21 20:54:13,185 - DNchange - ERROR - Zeep error: Failed to get CSF device for csfszaharia: Item not valid: The specified csfszaharia was not found
+2025-08-21 20:54:13,185 - DNchange - ERROR - No CSF device found for user: csfszaharia
+2025-08-21 20:54:13,186 - DNchange - INFO - Starting updatePhone for user: shojlind with new DN: 8834110014
+2025-08-21 20:54:13,320 - DNchange - ERROR - Zeep error: Failed to get CSF device for csfshojlind: Item not valid: The specified csfshojlind was not found
+2025-08-21 20:54:13,320 - DNchange - ERROR - No CSF device found for user: csfshojlind
+2025-08-21 20:54:13,321 - DNchange - INFO - Starting updatePhone for user: inielsen with new DN: 8834110015
+2025-08-21 20:54:13,548 - DNchange - ERROR - Zeep error: Failed to get CSF device for csfinielsen: Item not valid: The specified csfinielsen was not found
+2025-08-21 20:54:13,549 - DNchange - ERROR - No CSF device found for user: csfinielsen
+2025-08-21 20:54:13,550 - DNchange - INFO - Starting updatePhone for user: nwoltman with new DN: 8834110016
+2025-08-21 20:54:13,688 - DNchange - ERROR - Zeep error: Failed to get CSF device for csfnwoltman: Item not valid: The specified csfnwoltman was not found
+2025-08-21 20:54:13,688 - DNchange - ERROR - No CSF device found for user: csfnwoltman
+2025-08-21 20:54:13,689 - DNchange - INFO - Starting updatePhone for user: jfogh with new DN: 8834110017
+2025-08-21 20:54:13,823 - DNchange - ERROR - Zeep error: Failed to get CSF device for csfjfogh: Item not valid: The specified csfjfogh was not found
+2025-08-21 20:54:13,823 - DNchange - ERROR - No CSF device found for user: csfjfogh
+2025-08-21 20:54:13,824 - DNchange - INFO - Starting updatePhone for user: rvind with new DN: 8834110018
+2025-08-21 20:54:13,973 - DNchange - ERROR - Zeep error: Failed to get CSF device for csfrvind: Item not valid: The specified csfrvind was not found
+2025-08-21 20:54:13,973 - DNchange - ERROR - No CSF device found for user: csfrvind
+2025-08-21 20:54:13,974 - DNchange - INFO - Starting updatePhone for user: aritchie with new DN: 8834110019
+2025-08-21 20:54:14,123 - DNchange - ERROR - Zeep error: Failed to get CSF device for csfaritchie: Item not valid: The specified csfaritchie was not found
+2025-08-21 20:54:14,123 - DNchange - ERROR - No CSF device found for user: csfaritchie
+2025-08-21 20:54:14,124 - DNchange - INFO - Starting updatePhone for user: nbreum with new DN: 8834110020
+2025-08-21 20:54:14,262 - DNchange - ERROR - Zeep error: Failed to get CSF device for csfnbreum: Item not valid: The specified csfnbreum was not found
+2025-08-21 20:54:14,262 - DNchange - ERROR - No CSF device found for user: csfnbreum
+2025-08-21 20:54:14,262 - DNchange - INFO - Starting updatePhone for user: keenberg with new DN: 8834110021
+2025-08-21 20:54:14,404 - DNchange - ERROR - Zeep error: Failed to get CSF device for csfkeenberg: Item not valid: The specified csfkeenberg was not found
+2025-08-21 20:54:14,405 - DNchange - ERROR - No CSF device found for user: csfkeenberg
+2025-08-21 20:54:14,406 - DNchange - INFO - Starting updatePhone for user: dapeters with new DN: 8834110022
+2025-08-21 20:54:14,540 - DNchange - ERROR - Zeep error: Failed to get CSF device for csfdapeters: Item not valid: The specified csfdapeters was not found
+2025-08-21 20:54:14,540 - DNchange - ERROR - No CSF device found for user: csfdapeters
+2025-08-21 20:54:14,541 - DNchange - INFO - Starting updatePhone for user: mmathies with new DN: 8834110023
+2025-08-21 20:54:14,682 - DNchange - ERROR - Zeep error: Failed to get CSF device for csfmmathies: Item not valid: The specified csfmmathies was not found
+2025-08-21 20:54:14,682 - DNchange - ERROR - No CSF device found for user: csfmmathies
+2025-08-21 20:54:14,682 - DNchange - INFO - Starting updatePhone for user: koellers with new DN: 8834110024
+2025-08-21 20:54:14,831 - DNchange - ERROR - Zeep error: Failed to get CSF device for csfkoellers: Item not valid: The specified csfkoellers was not found
+2025-08-21 20:54:14,833 - DNchange - ERROR - No CSF device found for user: csfkoellers
+2025-08-21 20:54:14,834 - DNchange - INFO - Starting updatePhone for user: pborgese with new DN: 8834110025
+2025-08-21 20:54:14,975 - DNchange - ERROR - Zeep error: Failed to get CSF device for csfpborgese: Item not valid: The specified csfpborgese was not found
+2025-08-21 20:54:14,976 - DNchange - ERROR - No CSF device found for user: csfpborgese
+2025-08-21 20:54:14,976 - DNchange - INFO - Starting updatePhone for user: mbay with new DN: 8834110026
+2025-08-21 20:54:15,119 - DNchange - ERROR - Zeep error: Failed to get CSF device for csfmbay: Item not valid: The specified csfmbay was not found
+2025-08-21 20:54:15,120 - DNchange - ERROR - No CSF device found for user: csfmbay
+2025-08-21 21:02:28,174 - DNchange - INFO - Starting updatePhone for user: jhogue with new DN: 8834110000
+2025-08-21 21:02:30,280 - DNchange - ERROR - Zeep error: Failed to get CSF device for CSFJHOGUE: Item not valid: The specified CSFJHOGUE was not found
+2025-08-21 21:02:30,280 - DNchange - ERROR - No CSF device found for user: CSFJHOGUE
+2025-08-21 21:02:30,280 - DNchange - INFO - Starting updatePhone for user: cworm with new DN: 8834110001
+2025-08-21 21:02:30,399 - DNchange - ERROR - Zeep error: Failed to get CSF device for CSFCWORM: Item not valid: The specified CSFCWORM was not found
+2025-08-21 21:02:30,400 - DNchange - ERROR - No CSF device found for user: CSFCWORM
+2025-08-21 21:02:30,400 - DNchange - INFO - Starting updatePhone for user: dbrink with new DN: 8834110002
+2025-08-21 21:02:30,520 - DNchange - ERROR - Zeep error: Failed to get CSF device for CSFDBRINK: Item not valid: The specified CSFDBRINK was not found
+2025-08-21 21:02:30,520 - DNchange - ERROR - No CSF device found for user: CSFDBRINK
+2025-08-21 21:02:30,521 - DNchange - INFO - Starting updatePhone for user: dtamasse with new DN: 8834110003
+2025-08-21 21:02:30,640 - DNchange - ERROR - Zeep error: Failed to get CSF device for CSFDTAMASSE: Item not valid: The specified CSFDTAMASSE was not found
+2025-08-21 21:02:30,640 - DNchange - ERROR - No CSF device found for user: CSFDTAMASSE
+2025-08-21 21:02:30,641 - DNchange - INFO - Starting updatePhone for user: mberger with new DN: 8834110004
+2025-08-21 21:02:30,759 - DNchange - ERROR - Zeep error: Failed to get CSF device for CSFMBERGER: Item not valid: The specified CSFMBERGER was not found
+2025-08-21 21:02:30,759 - DNchange - ERROR - No CSF device found for user: CSFMBERGER
+2025-08-21 21:02:30,760 - DNchange - INFO - Starting updatePhone for user: mgreve with new DN: 8834110005
+2025-08-21 21:02:30,897 - DNchange - ERROR - Zeep error: Failed to get CSF device for CSFMGREVE: Item not valid: The specified CSFMGREVE was not found
+2025-08-21 21:02:30,897 - DNchange - ERROR - No CSF device found for user: CSFMGREVE
+2025-08-21 21:02:30,898 - DNchange - INFO - Starting updatePhone for user: lbrockna with new DN: 8834110006
+2025-08-21 21:02:31,018 - DNchange - ERROR - Zeep error: Failed to get CSF device for CSFLBROCKNA: Item not valid: The specified CSFLBROCKNA was not found
+2025-08-21 21:02:31,018 - DNchange - ERROR - No CSF device found for user: CSFLBROCKNA
+2025-08-21 21:02:31,019 - DNchange - INFO - Starting updatePhone for user: sgourgue with new DN: 8834110007
+2025-08-21 21:02:31,139 - DNchange - ERROR - Zeep error: Failed to get CSF device for CSFSGOURGUE: Item not valid: The specified CSFSGOURGUE was not found
+2025-08-21 21:02:31,140 - DNchange - ERROR - No CSF device found for user: CSFSGOURGUE
+2025-08-21 21:02:31,141 - DNchange - INFO - Starting updatePhone for user: njensen with new DN: 8834110008
+2025-08-21 21:02:31,258 - DNchange - ERROR - Zeep error: Failed to get CSF device for CSFNJENSEN: Item not valid: The specified CSFNJENSEN was not found
+2025-08-21 21:02:31,258 - DNchange - ERROR - No CSF device found for user: CSFNJENSEN
+2025-08-21 21:02:31,259 - DNchange - INFO - Starting updatePhone for user: rsorense with new DN: 8834110009
+2025-08-21 21:02:31,378 - DNchange - ERROR - Zeep error: Failed to get CSF device for CSFRSORENSE: Item not valid: The specified CSFRSORENSE was not found
+2025-08-21 21:02:31,379 - DNchange - ERROR - No CSF device found for user: CSFRSORENSE
+2025-08-21 21:02:31,380 - DNchange - INFO - Starting updatePhone for user: pvejre with new DN: 8834110010
+2025-08-21 21:02:31,498 - DNchange - ERROR - Zeep error: Failed to get CSF device for CSFPVEJRE: Item not valid: The specified CSFPVEJRE was not found
+2025-08-21 21:02:31,499 - DNchange - ERROR - No CSF device found for user: CSFPVEJRE
+2025-08-21 21:02:31,499 - DNchange - INFO - Starting updatePhone for user: tnorlin with new DN: 8834110011
+2025-08-21 21:02:31,619 - DNchange - ERROR - Zeep error: Failed to get CSF device for CSFTNORLIN: Item not valid: The specified CSFTNORLIN was not found
+2025-08-21 21:02:31,619 - DNchange - ERROR - No CSF device found for user: CSFTNORLIN
+2025-08-21 21:02:31,620 - DNchange - INFO - Starting updatePhone for user: erubinsh with new DN: 8834110012
+2025-08-21 21:02:31,739 - DNchange - ERROR - Zeep error: Failed to get CSF device for CSFERUBINSH: Item not valid: The specified CSFERUBINSH was not found
+2025-08-21 21:02:31,740 - DNchange - ERROR - No CSF device found for user: CSFERUBINSH
+2025-08-21 21:02:31,741 - DNchange - INFO - Starting updatePhone for user: szaharia with new DN: 8834110013
+2025-08-21 21:02:31,866 - DNchange - ERROR - Zeep error: Failed to get CSF device for CSFSZAHARIA: Item not valid: The specified CSFSZAHARIA was not found
+2025-08-21 21:02:31,867 - DNchange - ERROR - No CSF device found for user: CSFSZAHARIA
+2025-08-21 21:02:31,868 - DNchange - INFO - Starting updatePhone for user: shojlind with new DN: 8834110014
+2025-08-21 21:02:31,992 - DNchange - ERROR - Zeep error: Failed to get CSF device for CSFSHOJLIND: Item not valid: The specified CSFSHOJLIND was not found
+2025-08-21 21:02:31,993 - DNchange - ERROR - No CSF device found for user: CSFSHOJLIND
+2025-08-21 21:02:31,994 - DNchange - INFO - Starting updatePhone for user: inielsen with new DN: 8834110015
+2025-08-21 21:02:32,114 - DNchange - ERROR - Zeep error: Failed to get CSF device for CSFINIELSEN: Item not valid: The specified CSFINIELSEN was not found
+2025-08-21 21:02:32,115 - DNchange - ERROR - No CSF device found for user: CSFINIELSEN
+2025-08-21 21:02:32,115 - DNchange - INFO - Starting updatePhone for user: nwoltman with new DN: 8834110016
+2025-08-21 21:02:32,264 - DNchange - ERROR - Zeep error: Failed to get CSF device for CSFNWOLTMAN: Item not valid: The specified CSFNWOLTMAN was not found
+2025-08-21 21:02:32,264 - DNchange - ERROR - No CSF device found for user: CSFNWOLTMAN
+2025-08-21 21:02:32,265 - DNchange - INFO - Starting updatePhone for user: jfogh with new DN: 8834110017
+2025-08-21 21:02:32,388 - DNchange - ERROR - Zeep error: Failed to get CSF device for CSFJFOGH: Item not valid: The specified CSFJFOGH was not found
+2025-08-21 21:02:32,388 - DNchange - ERROR - No CSF device found for user: CSFJFOGH
+2025-08-21 21:02:32,393 - DNchange - INFO - Starting updatePhone for user: rvind with new DN: 8834110018
+2025-08-21 21:02:32,519 - DNchange - ERROR - Zeep error: Failed to get CSF device for CSFRVIND: Item not valid: The specified CSFRVIND was not found
+2025-08-21 21:02:32,519 - DNchange - ERROR - No CSF device found for user: CSFRVIND
+2025-08-21 21:02:32,520 - DNchange - INFO - Starting updatePhone for user: aritchie with new DN: 8834110019
+2025-08-21 21:02:32,692 - DNchange - ERROR - Zeep error: Failed to get CSF device for CSFARITCHIE: Item not valid: The specified CSFARITCHIE was not found
+2025-08-21 21:02:32,693 - DNchange - ERROR - No CSF device found for user: CSFARITCHIE
+2025-08-21 21:02:32,693 - DNchange - INFO - Starting updatePhone for user: nbreum with new DN: 8834110020
+2025-08-21 21:02:32,815 - DNchange - ERROR - Zeep error: Failed to get CSF device for CSFNBREUM: Item not valid: The specified CSFNBREUM was not found
+2025-08-21 21:02:32,816 - DNchange - ERROR - No CSF device found for user: CSFNBREUM
+2025-08-21 21:02:32,817 - DNchange - INFO - Starting updatePhone for user: keenberg with new DN: 8834110021
+2025-08-21 21:02:32,935 - DNchange - ERROR - Zeep error: Failed to get CSF device for CSFKEENBERG: Item not valid: The specified CSFKEENBERG was not found
+2025-08-21 21:02:32,935 - DNchange - ERROR - No CSF device found for user: CSFKEENBERG
+2025-08-21 21:02:32,936 - DNchange - INFO - Starting updatePhone for user: dapeters with new DN: 8834110022
+2025-08-21 21:02:33,060 - DNchange - ERROR - Zeep error: Failed to get CSF device for CSFDAPETERS: Item not valid: The specified CSFDAPETERS was not found
+2025-08-21 21:02:33,060 - DNchange - ERROR - No CSF device found for user: CSFDAPETERS
+2025-08-21 21:02:33,061 - DNchange - INFO - Starting updatePhone for user: mmathies with new DN: 8834110023
+2025-08-21 21:02:33,183 - DNchange - ERROR - Zeep error: Failed to get CSF device for CSFMMATHIES: Item not valid: The specified CSFMMATHIES was not found
+2025-08-21 21:02:33,184 - DNchange - ERROR - No CSF device found for user: CSFMMATHIES
+2025-08-21 21:02:33,184 - DNchange - INFO - Starting updatePhone for user: koellers with new DN: 8834110024
+2025-08-21 21:02:33,314 - DNchange - ERROR - Zeep error: Failed to get CSF device for CSFKOELLERS: Item not valid: The specified CSFKOELLERS was not found
+2025-08-21 21:02:33,314 - DNchange - ERROR - No CSF device found for user: CSFKOELLERS
+2025-08-21 21:02:33,315 - DNchange - INFO - Starting updatePhone for user: pborgese with new DN: 8834110025
+2025-08-21 21:02:33,443 - DNchange - ERROR - Zeep error: Failed to get CSF device for CSFPBORGESE: Item not valid: The specified CSFPBORGESE was not found
+2025-08-21 21:02:33,444 - DNchange - ERROR - No CSF device found for user: CSFPBORGESE
+2025-08-21 21:02:33,445 - DNchange - INFO - Starting updatePhone for user: mbay with new DN: 8834110026
+2025-08-21 21:02:33,575 - DNchange - ERROR - Zeep error: Failed to get CSF device for CSFMBAY: Item not valid: The specified CSFMBAY was not found
+2025-08-21 21:02:33,575 - DNchange - ERROR - No CSF device found for user: CSFMBAY
+2025-08-21 21:04:27,811 - DNchange - INFO - Starting updatePhone for user: jhogue with new DN: 8834110000
+2025-08-21 21:04:32,969 - DNchange - INFO - Line with pattern '8834110000' already exists in partition 'PT-Global-Internal'
+2025-08-21 21:04:34,109 - DNchange - INFO - Updating line from \+4532701019 to 8834110000
+2025-08-21 21:04:34,988 - DNchange - INFO - Skipping update for line \+4532704518; already updated or duplicate
+2025-08-21 21:04:35,409 - DNchange - INFO - Updating CSFJHOGUE device for user: jhogue
+2025-08-21 21:04:36,710 - DNchange - INFO - Starting updatePhone for user: cworm with new DN: 8834110001
+2025-08-21 21:04:37,645 - DNchange - INFO - Line with pattern '8834110001' already exists in partition 'PT-Global-Internal'
+2025-08-21 21:04:38,584 - DNchange - INFO - Updating line from \+4532701009 to 8834110001
+2025-08-21 21:04:39,485 - DNchange - ERROR - Failed to update line: Can not place a administrator configured URI into the Directory URI partition.
+2025-08-21 21:04:39,888 - DNchange - INFO - Updating CSFCWORM device for user: cworm
+2025-08-21 21:04:40,977 - DNchange - INFO - Starting updatePhone for user: dbrink with new DN: 8834110002
+2025-08-21 21:04:41,887 - DNchange - INFO - Line with pattern '8834110002' already exists in partition 'PT-Global-Internal'
+2025-08-21 21:04:42,749 - DNchange - INFO - Updating line from \+4532701003 to 8834110002
+2025-08-21 21:04:43,241 - DNchange - ERROR - Failed to update line: Can not place a administrator configured URI into the Directory URI partition.
+2025-08-21 21:04:43,731 - DNchange - INFO - Updating CSFDBRINK device for user: dbrink
+2025-08-21 21:04:44,672 - DNchange - INFO - Starting updatePhone for user: dtamasse with new DN: 8834110003
+2025-08-21 21:04:45,551 - DNchange - INFO - Line with pattern '8834110003' already exists in partition 'PT-Global-Internal'
+2025-08-21 21:04:46,344 - DNchange - INFO - Updating line from \+4532701016 to 8834110003
+2025-08-21 21:04:46,868 - DNchange - ERROR - Failed to update line: Can not place a administrator configured URI into the Directory URI partition.
+2025-08-21 21:04:46,868 - DNchange - INFO - Skipping update for line \+4532701000; already updated or duplicate
+2025-08-21 21:04:47,298 - DNchange - INFO - Updating CSFDTAMASSE device for user: dtamasse
+2025-08-21 21:04:48,376 - DNchange - INFO - Starting updatePhone for user: mberger with new DN: 8834110004
+2025-08-21 21:04:49,283 - DNchange - INFO - Line with pattern '8834110004' already exists in partition 'PT-Global-Internal'
+2025-08-21 21:04:50,072 - DNchange - INFO - Updating line from \+4532701002 to 8834110004
+2025-08-21 21:04:50,556 - DNchange - ERROR - Failed to update line: Can not place a administrator configured URI into the Directory URI partition.
+2025-08-21 21:04:50,951 - DNchange - INFO - Updating CSFMBERGER device for user: mberger
+2025-08-21 21:04:51,896 - DNchange - INFO - Starting updatePhone for user: mgreve with new DN: 8834110005
+2025-08-21 21:04:52,787 - DNchange - INFO - Line with pattern '8834110005' already exists in partition 'PT-Global-Internal'
+2025-08-21 21:04:53,673 - DNchange - INFO - Updating line from \+4532701005 to 8834110005
+2025-08-21 21:04:54,262 - DNchange - ERROR - Failed to update line: Can not place a administrator configured URI into the Directory URI partition.
+2025-08-21 21:04:54,907 - DNchange - INFO - Updating CSFMGREVE device for user: mgreve
+2025-08-21 21:04:55,900 - DNchange - INFO - Starting updatePhone for user: lbrockna with new DN: 8834110006
+2025-08-21 21:04:56,767 - DNchange - INFO - Line with pattern '8834110006' already exists in partition 'PT-Global-Internal'
+2025-08-21 21:04:57,526 - DNchange - INFO - Updating line from \+4532701015 to 8834110006
+2025-08-21 21:04:58,023 - DNchange - ERROR - Failed to update line: Can not place a administrator configured URI into the Directory URI partition.
+2025-08-21 21:04:58,421 - DNchange - INFO - Updating CSFLBROCKNA device for user: lbrockna
+2025-08-21 21:04:59,452 - DNchange - INFO - Starting updatePhone for user: sgourgue with new DN: 8834110007
+2025-08-21 21:05:00,314 - DNchange - INFO - Line with pattern '8834110007' already exists in partition 'PT-Global-Internal'
+2025-08-21 21:05:01,149 - DNchange - INFO - Updating line from \+33156695284 to 8834110007
+2025-08-21 21:05:01,653 - DNchange - ERROR - Failed to update line: Can not place a administrator configured URI into the Directory URI partition.
+2025-08-21 21:05:02,059 - DNchange - INFO - Updating CSFSGOURGUE device for user: sgourgue
+2025-08-21 21:05:03,022 - DNchange - INFO - Starting updatePhone for user: njensen with new DN: 8834110008
+2025-08-21 21:05:03,888 - DNchange - INFO - Line with pattern '8834110008' already exists in partition 'PT-Global-Internal'
+2025-08-21 21:05:04,658 - DNchange - INFO - Updating line from \+4532701006 to 8834110008
+2025-08-21 21:05:05,097 - DNchange - ERROR - Failed to update line: Can not place a administrator configured URI into the Directory URI partition.
+2025-08-21 21:05:05,485 - DNchange - INFO - Updating CSFNJENSEN device for user: njensen
+2025-08-21 21:05:06,561 - DNchange - INFO - Starting updatePhone for user: rsorense with new DN: 8834110009
+2025-08-21 21:05:07,544 - DNchange - INFO - Line with pattern '8834110009' already exists in partition 'PT-Global-Internal'
+2025-08-21 21:05:08,505 - DNchange - INFO - Updating line from \+4532701023 to 8834110009
+2025-08-21 21:05:09,388 - DNchange - INFO - Updating CSFRSORENSE device for user: rsorense
+2025-08-21 21:05:10,340 - DNchange - INFO - Starting updatePhone for user: pvejre with new DN: 8834110010
+2025-08-21 21:05:11,145 - DNchange - INFO - Line with pattern '8834110010' already exists in partition 'PT-Global-Internal'
+2025-08-21 21:05:11,919 - DNchange - INFO - Updating line from \+4532701004 to 8834110010
+2025-08-21 21:05:12,732 - DNchange - INFO - Updating CSFPVEJRE device for user: pvejre
+2025-08-21 21:05:13,648 - DNchange - INFO - Starting updatePhone for user: tnorlin with new DN: 8834110011
+2025-08-21 21:05:13,993 - DNchange - ERROR - Zeep error: Failed to get CSF device for CSFTNORLIN: Item not valid: The specified CSFTNORLIN was not found
+2025-08-21 21:05:13,994 - DNchange - ERROR - No CSF device found for user: CSFTNORLIN
+2025-08-21 21:05:13,994 - DNchange - INFO - Starting updatePhone for user: erubinsh with new DN: 8834110012
+2025-08-21 21:05:14,817 - DNchange - INFO - Line with pattern '8834110012' already exists in partition 'PT-Global-Internal'
+2025-08-21 21:05:15,622 - DNchange - INFO - Updating line from \+972732858830 to 8834110012
+2025-08-21 21:05:16,440 - DNchange - INFO - Updating CSFERUBINSH device for user: erubinsh
+2025-08-21 21:05:17,358 - DNchange - INFO - Starting updatePhone for user: szaharia with new DN: 8834110013
+2025-08-21 21:05:18,237 - DNchange - INFO - Line with pattern '8834110013' already exists in partition 'PT-Global-Internal'
+2025-08-21 21:05:19,043 - DNchange - INFO - Updating line from \+14532701038 to 8834110013
+2025-08-21 21:05:19,874 - DNchange - INFO - Updating CSFSZAHARIA device for user: szaharia
+2025-08-21 21:05:20,802 - DNchange - INFO - Starting updatePhone for user: shojlind with new DN: 8834110014
+2025-08-21 21:05:21,601 - DNchange - INFO - Line with pattern '8834110014' already exists in partition 'PT-Global-Internal'
+2025-08-21 21:05:22,366 - DNchange - INFO - Updating line from \+4532701001 to 8834110014
+2025-08-21 21:05:23,175 - DNchange - INFO - Updating CSFSHOJLIND device for user: shojlind
+2025-08-21 21:05:24,067 - DNchange - INFO - Starting updatePhone for user: inielsen with new DN: 8834110015
+2025-08-21 21:05:24,890 - DNchange - INFO - Line with pattern '8834110015' already exists in partition 'PT-Global-Internal'
+2025-08-21 21:05:25,653 - DNchange - INFO - Updating line from \+972733910474 to 8834110015
+2025-08-21 21:05:26,462 - DNchange - INFO - Updating CSFINIELSEN device for user: inielsen
+2025-08-21 21:05:27,319 - DNchange - INFO - Starting updatePhone for user: nwoltman with new DN: 8834110016
+2025-08-21 21:05:28,158 - DNchange - INFO - Line with pattern '8834110016' already exists in partition 'PT-Global-Internal'
+2025-08-21 21:05:28,910 - DNchange - INFO - Updating line from \+4532701028 to 8834110016
+2025-08-21 21:05:29,743 - DNchange - INFO - Updating CSFNWOLTMAN device for user: nwoltman
+2025-08-21 21:05:30,678 - DNchange - INFO - Starting updatePhone for user: jfogh with new DN: 8834110017
+2025-08-21 21:05:31,490 - DNchange - INFO - Line with pattern '8834110017' already exists in partition 'PT-Global-Internal'
+2025-08-21 21:05:32,236 - DNchange - INFO - Updating line from \+4532701011 to 8834110017
+2025-08-21 21:05:33,032 - DNchange - INFO - Updating CSFJFOGH device for user: jfogh
+2025-08-21 21:05:33,866 - DNchange - INFO - Starting updatePhone for user: rvind with new DN: 8834110018
+2025-08-21 21:05:34,688 - DNchange - INFO - Line with pattern '8834110018' already exists in partition 'PT-Global-Internal'
+2025-08-21 21:05:35,421 - DNchange - INFO - Updating line from \+4532701007 to 8834110018
+2025-08-21 21:05:36,213 - DNchange - INFO - Updating CSFRVIND device for user: rvind
+2025-08-21 21:05:37,149 - DNchange - INFO - Starting updatePhone for user: aritchie with new DN: 8834110019
+2025-08-21 21:05:38,021 - DNchange - INFO - Line with pattern '8834110019' already exists in partition 'PT-Global-Internal'
+2025-08-21 21:05:38,729 - DNchange - INFO - Updating line from \+4532701014 to 8834110019
+2025-08-21 21:05:39,517 - DNchange - INFO - Updating CSFARITCHIE device for user: aritchie
+2025-08-21 21:05:40,384 - DNchange - INFO - Starting updatePhone for user: nbreum with new DN: 8834110020
+2025-08-21 21:05:41,216 - DNchange - INFO - Line with pattern '8834110020' already exists in partition 'PT-Global-Internal'
+2025-08-21 21:05:41,944 - DNchange - INFO - Updating line from \+4532701022 to 8834110020
+2025-08-21 21:05:42,747 - DNchange - INFO - Updating CSFNBREUM device for user: nbreum
+2025-08-21 21:05:43,690 - DNchange - INFO - Starting updatePhone for user: keenberg with new DN: 8834110021
+2025-08-21 21:05:44,530 - DNchange - INFO - Line with pattern '8834110021' already exists in partition 'PT-Global-Internal'
+2025-08-21 21:05:45,275 - DNchange - INFO - Updating line from \+4532701024 to 8834110021
+2025-08-21 21:05:46,122 - DNchange - INFO - Updating CSFKEENBERG device for user: keenberg
+2025-08-21 21:05:46,998 - DNchange - INFO - Starting updatePhone for user: dapeters with new DN: 8834110022
+2025-08-21 21:05:47,817 - DNchange - INFO - Line with pattern '8834110022' already exists in partition 'PT-Global-Internal'
+2025-08-21 21:05:48,556 - DNchange - INFO - Updating line from \+4532701031 to 8834110022
+2025-08-21 21:05:49,357 - DNchange - INFO - Updating CSFDAPETERS device for user: dapeters
+2025-08-21 21:05:50,312 - DNchange - INFO - Starting updatePhone for user: mmathies with new DN: 8834110023
+2025-08-21 21:05:51,177 - DNchange - INFO - Line with pattern '8834110023' already exists in partition 'PT-Global-Internal'
+2025-08-21 21:05:51,908 - DNchange - INFO - Updating line from \+4532701025 to 8834110023
+2025-08-21 21:05:52,757 - DNchange - INFO - Updating CSFMMATHIES device for user: mmathies
+2025-08-21 21:05:53,643 - DNchange - INFO - Starting updatePhone for user: koellers with new DN: 8834110024
+2025-08-21 21:05:54,438 - DNchange - INFO - Line with pattern '8834110024' already exists in partition 'PT-Global-Internal'
+2025-08-21 21:05:55,179 - DNchange - INFO - Updating line from \+4532701027 to 8834110024
+2025-08-21 21:05:55,973 - DNchange - INFO - Updating CSFKOELLERS device for user: koellers
+2025-08-21 21:05:56,841 - DNchange - INFO - Starting updatePhone for user: pborgese with new DN: 8834110025
+2025-08-21 21:05:57,663 - DNchange - INFO - Line with pattern '8834110025' already exists in partition 'PT-Global-Internal'
+2025-08-21 21:05:58,381 - DNchange - INFO - Updating line from \+4532701029 to 8834110025
+2025-08-21 21:05:59,202 - DNchange - INFO - Updating CSFPBORGESE device for user: pborgese
+2025-08-21 21:06:00,028 - DNchange - INFO - Starting updatePhone for user: mbay with new DN: 8834110026
+2025-08-21 21:06:00,772 - DNchange - INFO - Line with pattern '8834110026' already exists in partition 'PT-Global-Internal'
+2025-08-21 21:06:01,524 - DNchange - INFO - Updating line from \+4532701099 to 8834110026
+2025-08-21 21:06:02,350 - DNchange - INFO - Updating CSFMBAY device for user: mbay
+2025-08-21 22:27:52,651 - DNchange - INFO - Starting updatePhone for user: jhogue with new DN: 8834110000
+2025-08-21 22:27:55,362 - DNchange - INFO - Line with pattern '8834110000' already exists in partition 'PT-Global-Internal'
+2025-08-21 22:27:56,244 - DNchange - INFO - Updating line from \+4532701019 to 8834110000
+2025-08-21 22:27:56,714 - DNchange - INFO - Skipping update for line \+4532704518; already updated or duplicate
+2025-08-21 22:27:57,136 - DNchange - INFO - Updating CSFJHOGUE device for user: jhogue
+2025-08-21 22:28:06,260 - DNchange - INFO - Starting updatePhone for user: cworm with new DN: 8834110001
+2025-08-21 22:28:07,057 - DNchange - INFO - Line with pattern '8834110001' already exists in partition 'PT-Global-Internal'
+2025-08-21 22:28:07,782 - DNchange - INFO - Updating line from \+4532701009 to 8834110001
+2025-08-21 22:28:08,293 - DNchange - ERROR - Failed to update line: Can not place a administrator configured URI into the Directory URI partition.
+2025-08-21 22:28:08,719 - DNchange - INFO - Updating CSFCWORM device for user: cworm
+2025-08-21 22:28:17,098 - DNchange - INFO - Starting updatePhone for user: dbrink with new DN: 8834110002
+2025-08-21 22:28:17,896 - DNchange - INFO - Line with pattern '8834110002' already exists in partition 'PT-Global-Internal'
+2025-08-21 22:28:18,649 - DNchange - INFO - Updating line from \+4532701003 to 8834110002
+2025-08-21 22:28:19,145 - DNchange - ERROR - Failed to update line: Can not place a administrator configured URI into the Directory URI partition.
+2025-08-21 22:28:19,559 - DNchange - INFO - Updating CSFDBRINK device for user: dbrink
+2025-08-21 22:28:28,011 - DNchange - INFO - Starting updatePhone for user: dtamasse with new DN: 8834110003
+2025-08-21 22:28:28,825 - DNchange - INFO - Line with pattern '8834110003' already exists in partition 'PT-Global-Internal'
+2025-08-21 22:28:29,572 - DNchange - INFO - Updating line from \+4532701016 to 8834110003
+2025-08-21 22:28:30,044 - DNchange - ERROR - Failed to update line: Can not place a administrator configured URI into the Directory URI partition.
+2025-08-21 22:28:30,044 - DNchange - INFO - Skipping update for line \+4532701000; already updated or duplicate
+2025-08-21 22:28:30,444 - DNchange - INFO - Updating CSFDTAMASSE device for user: dtamasse
+2025-08-21 22:28:41,143 - DNchange - INFO - Starting updatePhone for user: mberger with new DN: 8834110004
+2025-08-21 22:28:41,953 - DNchange - INFO - Line with pattern '8834110004' already exists in partition 'PT-Global-Internal'
+2025-08-21 22:28:42,695 - DNchange - INFO - Updating line from \+4532701002 to 8834110004
+2025-08-21 22:28:43,197 - DNchange - ERROR - Failed to update line: Can not place a administrator configured URI into the Directory URI partition.
+2025-08-21 22:28:43,611 - DNchange - INFO - Updating CSFMBERGER device for user: mberger
+2025-08-21 22:28:52,133 - DNchange - INFO - Starting updatePhone for user: mgreve with new DN: 8834110005
+2025-08-21 22:28:52,946 - DNchange - INFO - Line with pattern '8834110005' already exists in partition 'PT-Global-Internal'
+2025-08-21 22:28:53,705 - DNchange - INFO - Updating line from \+4532701005 to 8834110005
+2025-08-21 22:28:54,154 - DNchange - ERROR - Failed to update line: Can not place a administrator configured URI into the Directory URI partition.
+2025-08-21 22:28:54,544 - DNchange - INFO - Updating CSFMGREVE device for user: mgreve
+2025-08-21 22:29:03,744 - DNchange - INFO - Starting updatePhone for user: lbrockna with new DN: 8834110006
+2025-08-21 22:29:04,621 - DNchange - INFO - Line with pattern '8834110006' already exists in partition 'PT-Global-Internal'
+2025-08-21 22:29:05,375 - DNchange - INFO - Updating line from \+4532701015 to 8834110006
+2025-08-21 22:29:05,854 - DNchange - ERROR - Failed to update line: Can not place a administrator configured URI into the Directory URI partition.
+2025-08-21 22:29:06,312 - DNchange - INFO - Updating CSFLBROCKNA device for user: lbrockna
+2025-08-21 22:29:18,579 - DNchange - INFO - Starting updatePhone for user: sgourgue with new DN: 8834110007
+2025-08-21 22:29:19,395 - DNchange - INFO - Line with pattern '8834110007' already exists in partition 'PT-Global-Internal'
+2025-08-21 22:29:20,163 - DNchange - INFO - Updating line from \+33156695284 to 8834110007
+2025-08-21 22:29:20,624 - DNchange - ERROR - Failed to update line: Can not place a administrator configured URI into the Directory URI partition.
+2025-08-21 22:29:21,072 - DNchange - INFO - Updating CSFSGOURGUE device for user: sgourgue
+2025-08-21 22:29:30,984 - DNchange - INFO - Starting updatePhone for user: njensen with new DN: 8834110008
+2025-08-21 22:29:31,786 - DNchange - INFO - Line with pattern '8834110008' already exists in partition 'PT-Global-Internal'
+2025-08-21 22:29:32,554 - DNchange - INFO - Updating line from \+4532701006 to 8834110008
+2025-08-21 22:29:33,076 - DNchange - ERROR - Failed to update line: Can not place a administrator configured URI into the Directory URI partition.
+2025-08-21 22:29:33,499 - DNchange - INFO - Updating CSFNJENSEN device for user: njensen
+2025-08-21 22:29:42,071 - DNchange - INFO - Starting updatePhone for user: rsorense with new DN: 8834110009
+2025-08-21 22:29:42,875 - DNchange - INFO - Line with pattern '8834110009' already exists in partition 'PT-Global-Internal'
+2025-08-21 22:29:43,624 - DNchange - INFO - Updating line from 8834110009 to 8834110009
+2025-08-21 22:29:44,472 - DNchange - INFO - Updating CSFRSORENSE device for user: rsorense
+2025-08-21 22:29:54,534 - DNchange - INFO - Starting updatePhone for user: pvejre with new DN: 8834110010
+2025-08-21 22:29:55,333 - DNchange - INFO - Line with pattern '8834110010' already exists in partition 'PT-Global-Internal'
+2025-08-21 22:29:56,039 - DNchange - INFO - Updating line from 4532701004 to 8834110010
+2025-08-21 22:29:56,911 - DNchange - INFO - Updating CSFPVEJRE device for user: pvejre
+2025-08-21 22:30:05,917 - DNchange - INFO - Starting updatePhone for user: tnorlin with new DN: 8834110011
+2025-08-21 22:30:06,359 - DNchange - ERROR - Zeep error: Failed to get CSF device for CSFTNORLIN: Item not valid: The specified CSFTNORLIN was not found
+2025-08-21 22:30:06,360 - DNchange - ERROR - No CSF device found for user: CSFTNORLIN
+2025-08-21 22:30:06,360 - DNchange - INFO - Starting updatePhone for user: erubinsh with new DN: 8834110012
+2025-08-21 22:30:07,143 - DNchange - INFO - Line with pattern '8834110012' already exists in partition 'PT-Global-Internal'
+2025-08-21 22:30:07,923 - DNchange - INFO - Updating line from 8834110012 to 8834110012
+2025-08-21 22:30:08,767 - DNchange - INFO - Updating CSFERUBINSH device for user: erubinsh
+2025-08-21 22:30:17,300 - DNchange - INFO - Starting updatePhone for user: szaharia with new DN: 8834110013
+2025-08-21 22:30:18,182 - DNchange - INFO - Line with pattern '8834110013' already exists in partition 'PT-Global-Internal'
+2025-08-21 22:30:18,913 - DNchange - INFO - Updating line from 8834110013 to 8834110013
+2025-08-21 22:30:19,775 - DNchange - INFO - Updating CSFSZAHARIA device for user: szaharia
+2025-08-21 22:30:30,799 - DNchange - INFO - Starting updatePhone for user: shojlind with new DN: 8834110014
+2025-08-21 22:30:31,600 - DNchange - INFO - Line with pattern '8834110014' already exists in partition 'PT-Global-Internal'
+2025-08-21 22:30:32,335 - DNchange - INFO - Updating line from 8834110014 to 8834110014
+2025-08-21 22:30:33,194 - DNchange - INFO - Updating CSFSHOJLIND device for user: shojlind
+2025-08-21 22:30:42,395 - DNchange - INFO - Starting updatePhone for user: inielsen with new DN: 8834110015
+2025-08-21 22:30:43,322 - DNchange - INFO - Line with pattern '8834110015' already exists in partition 'PT-Global-Internal'
+2025-08-21 22:30:44,101 - DNchange - INFO - Updating line from 8834110015 to 8834110015
+2025-08-21 22:30:44,969 - DNchange - INFO - Updating CSFINIELSEN device for user: inielsen
+2025-08-21 22:30:55,737 - DNchange - INFO - Starting updatePhone for user: nwoltman with new DN: 8834110016
+2025-08-21 22:30:56,558 - DNchange - INFO - Line with pattern '8834110016' already exists in partition 'PT-Global-Internal'
+2025-08-21 22:30:57,298 - DNchange - INFO - Updating line from 8834110016 to 8834110016
+2025-08-21 22:30:58,147 - DNchange - INFO - Updating CSFNWOLTMAN device for user: nwoltman
+2025-08-21 22:31:07,724 - DNchange - INFO - Starting updatePhone for user: jfogh with new DN: 8834110017
+2025-08-21 22:31:08,569 - DNchange - INFO - Line with pattern '8834110017' already exists in partition 'PT-Global-Internal'
+2025-08-21 22:31:09,291 - DNchange - INFO - Updating line from 8834110017 to 8834110017
+2025-08-21 22:31:10,152 - DNchange - INFO - Updating CSFJFOGH device for user: jfogh
+2025-08-21 22:31:19,359 - DNchange - INFO - Starting updatePhone for user: rvind with new DN: 8834110018
+2025-08-21 22:31:20,158 - DNchange - INFO - Line with pattern '8834110018' already exists in partition 'PT-Global-Internal'
+2025-08-21 22:31:20,892 - DNchange - INFO - Updating line from 8834110018 to 8834110018
+2025-08-21 22:31:21,765 - DNchange - INFO - Updating CSFRVIND device for user: rvind
+2025-08-21 22:31:31,914 - DNchange - INFO - Starting updatePhone for user: aritchie with new DN: 8834110019
+2025-08-21 22:31:32,718 - DNchange - INFO - Line with pattern '8834110019' already exists in partition 'PT-Global-Internal'
+2025-08-21 22:31:33,451 - DNchange - INFO - Updating line from 8834110019 to 8834110019
+2025-08-21 22:31:34,368 - DNchange - INFO - Updating CSFARITCHIE device for user: aritchie
+2025-08-21 22:31:44,077 - DNchange - INFO - Starting updatePhone for user: nbreum with new DN: 8834110020
+2025-08-21 22:31:44,884 - DNchange - INFO - Line with pattern '8834110020' already exists in partition 'PT-Global-Internal'
+2025-08-21 22:31:45,590 - DNchange - INFO - Updating line from 8834110020 to 8834110020
+2025-08-21 22:31:46,464 - DNchange - INFO - Updating CSFNBREUM device for user: nbreum
+2025-08-21 22:31:55,780 - DNchange - INFO - Starting updatePhone for user: keenberg with new DN: 8834110021
+2025-08-21 22:31:56,622 - DNchange - INFO - Line with pattern '8834110021' already exists in partition 'PT-Global-Internal'
+2025-08-21 22:31:57,394 - DNchange - INFO - Updating line from 8834110021 to 8834110021
+2025-08-21 22:31:58,221 - DNchange - INFO - Updating CSFKEENBERG device for user: keenberg
+2025-08-21 22:32:07,430 - DNchange - INFO - Starting updatePhone for user: dapeters with new DN: 8834110022
+2025-08-21 22:32:08,233 - DNchange - INFO - Line with pattern '8834110022' already exists in partition 'PT-Global-Internal'
+2025-08-21 22:32:08,998 - DNchange - INFO - Updating line from 8834110022 to 8834110022
+2025-08-21 22:32:09,818 - DNchange - INFO - Updating CSFDAPETERS device for user: dapeters
+2025-08-21 22:32:21,090 - DNchange - INFO - Starting updatePhone for user: mmathies with new DN: 8834110023
+2025-08-21 22:32:21,876 - DNchange - INFO - Line with pattern '8834110023' already exists in partition 'PT-Global-Internal'
+2025-08-21 22:32:22,602 - DNchange - INFO - Updating line from 8834110023 to 8834110023
+2025-08-21 22:32:23,471 - DNchange - INFO - Updating CSFMMATHIES device for user: mmathies
+2025-08-21 22:32:33,570 - DNchange - INFO - Starting updatePhone for user: koellers with new DN: 8834110024
+2025-08-21 22:32:34,380 - DNchange - INFO - Line with pattern '8834110024' already exists in partition 'PT-Global-Internal'
+2025-08-21 22:32:35,110 - DNchange - INFO - Updating line from 8834110024 to 8834110024
+2025-08-21 22:32:35,947 - DNchange - INFO - Updating CSFKOELLERS device for user: koellers
+2025-08-21 22:32:44,509 - DNchange - INFO - Starting updatePhone for user: pborgese with new DN: 8834110025
+2025-08-21 22:32:45,276 - DNchange - INFO - Line with pattern '8834110025' already exists in partition 'PT-Global-Internal'
+2025-08-21 22:32:46,010 - DNchange - INFO - Updating line from 8834110025 to 8834110025
+2025-08-21 22:32:46,840 - DNchange - INFO - Updating CSFPBORGESE device for user: pborgese
+2025-08-21 22:32:55,471 - DNchange - INFO - Starting updatePhone for user: mbay with new DN: 8834110026
+2025-08-21 22:32:56,291 - DNchange - INFO - Line with pattern '8834110026' already exists in partition 'PT-Global-Internal'
+2025-08-21 22:32:57,003 - DNchange - INFO - Updating line from 8834110026 to 8834110026
+2025-08-21 22:32:57,819 - DNchange - INFO - Updating CSFMBAY device for user: mbay

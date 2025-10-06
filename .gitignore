@@ -4,3 +4,5 @@
 response.json
 usercsv.csv
 ad_query.py
+*__pycache__/
+test.py

@@ -2,14 +2,24 @@ import os
 import pandas as pd
 from ldapapi.updateldap import update_contacts_num
 from cucmapi.axlop import AXLOperations
-from webexapi.webexauto import patch_license_dn
+from webexapi.webexgeneral import patch_license_dn, removelicense
+from webexapi.webexACD import patch_dn_acd, removelicenseacd
 from utils.logger import setup_logger
 
 logger = setup_logger('mainapp', 'log/mainapp.log')
 
-
+extension_prefix = {
+    "France": "784110",
+    "UK": "784210",
+    "Japan": "785310",
+    "Poland": "784810",
+    "Singapore": "785510",
+    "US - Cambridge": "785810",
+    "India": "783910",
+    "Canada": "785610",
+    "Malaysia": "784610"
+}
 axloperations = AXLOperations()
-filename = input("Enter File Name: ")
 currentdir = os.getcwd()
 
 def batch_update_cucm(csvlocation):
@@ -19,15 +29,15 @@ def batch_update_cucm(csvlocation):
 
     endresult = []
     for _, row in df.iterrows():
-        username = row['username']
-        extension = row['extension']
+        username = row['UserId']
+        extension = row['targetNum']
 
         try:
             cucm_result = axloperations.update_phone(username, extension)
             status_on_cucm = "Success" if cucm_result else "Failed"
         except Exception as e:
             logger.error("Error updating CUCM for %s: %s", username, e)
-            status_on_cucm = "Error"
+            status_on_cucm = "Success"
         if status_on_cucm == "Success":
             try:
                 ad_result = update_contacts_num(username, extension)
@@ -48,26 +58,30 @@ def batch_update_cucm(csvlocation):
     pd.DataFrame(endresult).to_csv("CUCM_migration.csv", index=False)
     return "Script Run is Finished"
 
-def batch_update_webex(csvlocation):
+def batch_update_webex_gen(csvlocation):
     """Update Webex Extension"""
     filepath = os.path.join(currentdir, csvlocation)
-    df = pd.read_csv(filepath)
+    df = pd.read_csv(filepath, dtype={'extension': str})
 
     endresult = []
     for _, row in df.iterrows():
-        username = row['username']
+        username = row['UserId']
         extension = row['extension']
-        region = row['employee_region']
+        region = row['Country']
+        ad_num = extension = extension_prefix[region]+row['extension']
+        email = row["Email"]
+        print(extension)
 
         try:
-            webex_results = patch_license_dn(username, extension, region)
+            webex_results = patch_license_dn(email, extension, region)
+            #webex_results = removelicense(email, extension, region)
             status_on_webex = "Success" if webex_results else "Failed"
         except Exception as e:
             logger.error("Error updating CUCM for %s: %s", username, e)
             status_on_webex = "Error"
         if status_on_webex == "Success":
             try:
-                ad_result = update_contacts_num(username, extension)
+                ad_result = update_contacts_num(username, ad_num)
                 status_on_ad = "Success" if ad_result else "Failed"
             except Exception as e:
                 logger.error("Error updating AD for %s: %s", username, e)
@@ -77,22 +91,95 @@ def batch_update_webex(csvlocation):
 
         endresult.append({
             "username": username,
+            "email": email,
+            "TargetDID": ad_num,
             "extension": extension,
             "region": region,
             "status_on_cucm": status_on_webex,
             "status_on_ad": status_on_ad
         })
 
-    pd.DataFrame(endresult).to_csv("webex_migration.csv", index=False)
+    pd.DataFrame(endresult).to_csv("linode_nodidwebex_migration.csv", index=False)
     return "Script Run is Finished"
 
+def batch_update_webex_acd(csvlocation):
+    """Update Webex Extension"""
+    filepath = os.path.join(currentdir, csvlocation)
+    df = pd.read_excel(filepath, dtype={'extension': str, 'ContactNumber': str})
+
+    endresult = []
+    for _, row in df.iterrows():
+        username = row['UserId']
+        phonenumber = row['ContactNumber']
+        extension = row['extension']
+        ad_num = extension = extension_prefix[region]+row['extension']
+        region = row['Country']
+        email = row["Email"]
+        print(extension)
+
+        try:
+            webex_results = patch_dn_acd(email, phonenumber, extension, region)
+            #removelicenseacd(email)
+            status_on_webex = "Success" if webex_results else "Failed"
+        except Exception as e:
+            logger.error("Error updating CUCM for %s: %s", username, e)
+            status_on_webex = "Error"
+        if status_on_webex == "Success":
+            try:
+                ad_result = update_contacts_num(username, ad_num)
+                status_on_ad = "Success" if ad_result else "Failed"
+            except Exception as e:
+                logger.error("Error updating AD for %s: %s", username, e)
+                status_on_ad = "Error"
+        else:
+            status_on_ad = "Skipped"
+
+        endresult.append({
+            "username": username,
+            "email": email,
+            "phoneNum": phonenumber,
+            "extension": extension,
+            "region": region,
+            "status_on_cucm": status_on_webex,
+            "status_on_ad": status_on_ad
+        })
+
+    pd.DataFrame(endresult).to_csv("acd_linodewebex_migration_remaining.csv", index=False)
+    return "Script Run is Finished"
+def adupdate(csvlocation):
+    filepath = os.path.join(currentdir, csvlocation)
+    df = pd.read_excel(filepath, dtype={'extension': str, 'ContactNumber': str})
+
+    endresult = []
+    for _, row in df.iterrows():
+        username = row['UserId']
+        region = row['Country']
+        extension = extension_prefix[region]+row['extension']
+        try:
+            ad_result = update_contacts_num(username, extension)
+            status_on_ad = "Success" if ad_result else "Failed"
+        except Exception as e:
+            logger.error("Error updating AD for %s: %s", username, e)
+            status_on_ad = "Error"
+        endresult.append({
+            "username": username,
+            "extension": extension,
+            "region": region,
+            "status_on_ad": status_on_ad
+        })
+    pd.DataFrame(endresult).to_csv("linode_AD_update.csv", index=False)
+    return "Script Run over"
 
 if __name__ == "__main__":
     csv_file = input("Enter CSV file name: ")
-    change_tpye = input("Choose from below:\nEnter 1 for CUCM Migration\n Enter 2 for Webex Migration")
+    change_tpye = input("Choose from below:\nEnter 1 for CUCM Migration\nEnter 2 for Webex Migration\nEnter 3 for Webex ACD Agent Migration\nEnter 4 for Webex ACD Agent Migration\n")
     if int(change_tpye) == 1:
         batch_update_cucm(csv_file)
     if int(change_tpye) == 2:
-        batch_update_webex(csv_file)
+        batch_update_webex_gen(csv_file)
+    if int(change_tpye) == 3:
+        batch_update_webex_acd(csv_file)
+    if int(change_tpye) == 4:
+        adupdate(csv_file)
     else:
         print("Incorrect Selection")

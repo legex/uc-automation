@@ -1,46 +1,18 @@
-import os
 import json
 import requests
 from requests import HTTPError
-from dotenv import load_dotenv
-from metadata.settings import license_store, LOCATIONS, WEBEX_URL
+from metadata.settings import license_store, ACDLOCATIONS, WEBEX_URL, PATCH_LIC_URL
 from utils.logger import setup_logger
+from webexapi.webexBase import WebexBase
 
-# Load environment variables from .env file
-load_dotenv()
 
-# Initialize logger
-logger = setup_logger('webexcalls', 'log/webexcalls.log')
+logger = setup_logger('webexacdmig', 'log/webexacdmig.log')
 
-# Read API token from environment
-AUTH_TOKEN = os.getenv('AUTHTOKEN')
-if not AUTH_TOKEN:
-    raise RuntimeError("AUTHTOKEN environment variable must be set")
-
-# License IDs sourced from settings metadata
 WEBEX_LICENSE_ID = license_store["webexlic"]
 UCM_LICENSE_ID = license_store["ucmlic"]
 
-
-def build_headers() -> dict:
-    """
-    Build authorization and content headers for Webex API calls.
-
-    Returns:
-        dict: HTTP headers containing:
-            - Authorization: Bearer token fetched from AUTHTOKEN env var.
-            - Content-Type: application/json
-            - Accept: application/json
-
-    Raises:
-        RuntimeError: If AUTHTOKEN is not set in the environment.
-    """
-    return {
-        "Authorization": f"Bearer {AUTH_TOKEN}",
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-    }
-
+headclass = WebexBase()
+headers = headclass.build_headers()
 
 def query_user_id_by_email(email: str) -> str | None:
     """
@@ -61,7 +33,7 @@ def query_user_id_by_email(email: str) -> str | None:
     """
     params = {'email': email}
     try:
-        resp = requests.get(WEBEX_URL, headers=build_headers(), params=params, timeout=30)
+        resp = requests.get(WEBEX_URL, headers=headers, params=params, timeout=30)
         resp.raise_for_status()
         items = resp.json().get("items", [])
         if not items:
@@ -93,7 +65,7 @@ def get_person(userid: str) -> dict | None:
     """
     url = f"{WEBEX_URL}/{userid}?callingData=true"
     try:
-        resp = requests.get(url, headers=build_headers(), timeout=30)
+        resp = requests.get(url, headers=headers, timeout=30)
         resp.raise_for_status()
         return resp.json()
     except HTTPError as e:
@@ -117,14 +89,11 @@ def get_location_id(employee_region: str) -> str | None:
     Logs:
         - Warning if no match is found.
     """
-    for region in LOCATIONS['items']:
-        if employee_region in region['name']:
-            return region['id']
-    logger.warning("Region not found: %s", employee_region)
+    if ACDLOCATIONS[employee_region]:
+        return ACDLOCATIONS[employee_region]
     return None
 
-
-def patch_license_dn(email: str, extension: str, employee_region: str):
+def patch_dn_acd(email: str, telephone: str, extension: str, employee_region: str):
     """
     Update a user's Webex license to Webex Calling (Professional) and remove
     UCM license if present, while also setting locationId and extension.
@@ -171,26 +140,57 @@ def patch_license_dn(email: str, extension: str, employee_region: str):
         return None
 
     location_id = get_location_id(employee_region)
-    existing_licenses = set(payload.get("licenses", []))
-    licenses_ops = []
-
-    # Add Webex license if missing
-    if WEBEX_LICENSE_ID not in existing_licenses:
-        licenses_ops.append({
+    licenses_ops = [{
             "id": WEBEX_LICENSE_ID,
             "operation": "add",
             "properties": {
                 "locationId": location_id,
+                "phoneNumber": telephone,
                 "extension": extension
             }
-        })
+            }]
 
-        # Remove UCM license if present
-        if UCM_LICENSE_ID in existing_licenses:
-            licenses_ops.append({
-                "id": UCM_LICENSE_ID,
-                "operation": "remove"
-            })
+
+    patch_payload = {
+        "email": email,
+        "personId": userid,
+        "orgId": payload["orgId"],
+        "licenses": licenses_ops
+    }
+
+    try:
+        url = PATCH_LIC_URL
+        resp = requests.patch(url,
+                              headers=headers,
+                              data=json.dumps(patch_payload),
+                              timeout=30)
+        resp.raise_for_status()
+        return resp.json()
+    except HTTPError as e:
+        logger.error("HTTP error updating user: %s", e)
+    except Exception as e:
+        logger.error("General error updating user: %s", e)
+    return None
+
+def removelicenseacd(email: str):
+
+    userid = query_user_id_by_email(email)
+    if not userid:
+        logger.error("User ID not found for email: %s", email)
+        return None
+
+    payload = get_person(userid)
+    if not payload:
+        logger.error("User detail not found for user: %s", userid)
+        return None
+    existing_licenses = set(payload.get("licenses", []))
+    licenses_ops = []
+    # Remove UCM license if present
+    if UCM_LICENSE_ID in existing_licenses:
+        licenses_ops.append({
+            "id": UCM_LICENSE_ID,
+            "operation": "remove"
+        })
 
     if not licenses_ops:
         logger.info("No license changes required for %s", email)
@@ -206,7 +206,7 @@ def patch_license_dn(email: str, extension: str, employee_region: str):
     try:
         url = "https://webexapis.com/v1/licenses/users"
         resp = requests.patch(url,
-                              headers=build_headers(),
+                              headers=headers,
                               data=json.dumps(patch_payload),
                               timeout=30)
         resp.raise_for_status()
