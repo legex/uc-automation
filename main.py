@@ -2,24 +2,16 @@ import os
 import pandas as pd
 from ldapapi.updateldap import update_contacts_num
 from cucmapi.axlop import AXLOperations
-from webexapi.webexgeneral import patch_license_dn, removelicense
-from webexapi.webexACD import patch_dn_acd, removelicenseacd
+from metadata.settings import extension_prefix
+from webexapi.webexgeneral import WebexGenMigration
+from webexapi.webexACD import WebexMigACD
 from utils.logger import setup_logger
 
 logger = setup_logger('mainapp', 'log/mainapp.log')
-
-extension_prefix = {
-    "France": "784110",
-    "UK": "784210",
-    "Japan": "785310",
-    "Poland": "784810",
-    "Singapore": "785510",
-    "US - Cambridge": "785810",
-    "India": "783910",
-    "Canada": "785610",
-    "Malaysia": "784610"
-}
+prefixes = extension_prefix
 axloperations = AXLOperations()
+webex_mig_gen = WebexGenMigration()
+webex_acd_mig = WebexMigACD()
 currentdir = os.getcwd()
 
 def batch_update_cucm(csvlocation):
@@ -68,12 +60,12 @@ def batch_update_webex_gen(csvlocation):
         username = row['UserId']
         extension = row['extension']
         region = row['Country']
-        ad_num = extension = extension_prefix[region]+row['extension']
+        ad_num = prefixes[region]+row['extension']
         email = row["Email"]
         print(extension)
 
         try:
-            webex_results = patch_license_dn(email, extension, region)
+            webex_results = webex_mig_gen.patch_license_dn(email, extension, region)
             #webex_results = removelicense(email, extension, region)
             status_on_webex = "Success" if webex_results else "Failed"
         except Exception as e:
@@ -112,13 +104,13 @@ def batch_update_webex_acd(csvlocation):
         username = row['UserId']
         phonenumber = row['ContactNumber']
         extension = row['extension']
-        ad_num = extension = extension_prefix[region]+row['extension']
+        ad_num = prefixes[region]+row['extension']
         region = row['Country']
         email = row["Email"]
         print(extension)
 
         try:
-            webex_results = patch_dn_acd(email, phonenumber, extension, region)
+            webex_results = webex_acd_mig.patch_dn_acd(email, phonenumber, extension, region)
             #removelicenseacd(email)
             status_on_webex = "Success" if webex_results else "Failed"
         except Exception as e:
@@ -146,6 +138,7 @@ def batch_update_webex_acd(csvlocation):
 
     pd.DataFrame(endresult).to_csv("acd_linodewebex_migration_remaining.csv", index=False)
     return "Script Run is Finished"
+
 def adupdate(csvlocation):
     filepath = os.path.join(currentdir, csvlocation)
     df = pd.read_excel(filepath, dtype={'extension': str, 'ContactNumber': str})
@@ -154,7 +147,7 @@ def adupdate(csvlocation):
     for _, row in df.iterrows():
         username = row['UserId']
         region = row['Country']
-        extension = extension_prefix[region]+row['extension']
+        extension = prefixes[region]+row['extension']
         try:
             ad_result = update_contacts_num(username, extension)
             status_on_ad = "Success" if ad_result else "Failed"

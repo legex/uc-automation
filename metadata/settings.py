@@ -11,3 +11,15 @@ with open("metadata/location.json", 'r') as f:
 
 with open("metadata/acd_locations.json", 'r') as f:
     ACDLOCATIONS = json.load(f)
+
+extension_prefix = {
+    "France": "784110",
+    "UK": "784210",
+    "Japan": "785310",
+    "Poland": "784810",
+    "Singapore": "785510",
+    "US - Cambridge": "785810",
+    "India": "783910",
+    "Canada": "785610",
+    "Malaysia": "784610"
+}
