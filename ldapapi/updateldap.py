@@ -42,7 +42,7 @@ def update_contacts_num(userid, internal_extension):
 			dnc= a.distinguishedName[0]
 			employee_badge_number= a.employeeNumber[0]
 			conn.bind()
-			conn.modify(dnc,{'AKA-phoneExtension': [(ldap3.MODIFY_REPLACE, [internal_extension])]})
+			conn.modify(dnc,{'telephoneNumber': [(ldap3.MODIFY_REPLACE, [internal_extension])]})
 			conn.unbind()
 			return True
 	except ConnectionError as er:

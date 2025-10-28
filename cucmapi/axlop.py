@@ -251,7 +251,6 @@ class AXLOperations:
         #print(f'username as observed in update_phone {username}')
 
         clean_lines = self.update_csf_phone_lines(f"CSF{username.upper()}", new_pattern)
-        print(clean_lines)
         if not clean_lines:
             return None
         return self.update_all_devices(username, clean_lines, new_pattern)

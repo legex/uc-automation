@@ -17,6 +17,7 @@ Repository contains automation scripts for CUCM line change which will be useful
 - cucmapi: handles everything CUCM related
     - axlconn.py : Instantiates the connection between localhost and target(cucm)
     - axlop.py : Performs operations on device line.
+    - axlroutepatternop.py: to update route pattern on cucm
 - Webex API : Performs operations on webex control hub
     - License update and Extension update
     - ACD Agent migration

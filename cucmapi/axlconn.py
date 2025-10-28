@@ -13,7 +13,15 @@ load_dotenv()
 logger = setup_logger('axlconnection', 'log/axlconnection.log')
 
 DEBUG = False
-
+mode = "Dev"
+if mode == "Dev":
+    AXL_USERNAME = os.getenv("DEVAXL_USERNAME")
+    AXL_PASSWORD = os.getenv("DEVAXL_PASSWORD")
+    CUCM_ADDRESS = os.getenv("DEVCUCM_ADDRESS")
+else:
+    AXL_USERNAME = os.getenv("AXL_USERNAME")
+    AXL_PASSWORD = os.getenv("AXL_PASSWORD")
+    CUCM_ADDRESS = os.getenv("CUCM_ADDRESS")
 class ConnectionAXL:
     """
     Manages a connection to Cisco CUCM AXL API using the Zeep SOAP client.
@@ -32,8 +40,8 @@ class ConnectionAXL:
         urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
         self.session.auth = HTTPBasicAuth(
-            os.getenv('AXL_USERNAME'),
-            os.getenv('AXL_PASSWORD')
+            AXL_USERNAME,
+            AXL_PASSWORD
         )
 
         self._client = None
@@ -106,7 +114,7 @@ class ConnectionAXL:
             client = self._clientcreate()
             self._service = client.create_service(
                 '{http://www.cisco.com/AXLAPIService/}AXLAPIBinding',
-                f'https://{os.getenv("CUCM_ADDRESS")}:8443/axl/'
+                f'https://{CUCM_ADDRESS}:8443/axl/'
             )
             logger.debug("AXL service binding created")
         return self._service

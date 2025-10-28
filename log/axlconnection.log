@@ -1,87 +1,90 @@
-2025-08-20 18:09:26,513 - axlconnection - INFO - Initialized AXL session
-2025-08-20 18:09:26,514 - axlconnection - INFO - Creating AXL service binding
-2025-08-20 18:09:26,514 - axlconnection - INFO - Creating Zeep client from WSDL
-2025-08-20 18:09:50,474 - axlconnection - INFO - Initialized AXL session
-2025-08-20 18:09:50,474 - axlconnection - INFO - Creating AXL service binding
-2025-08-20 18:09:50,474 - axlconnection - INFO - Creating Zeep client from WSDL
-2025-08-20 18:12:56,869 - axlconnection - INFO - Initialized AXL session
-2025-08-20 18:12:56,869 - axlconnection - INFO - Creating AXL service binding
-2025-08-20 18:12:56,870 - axlconnection - INFO - Creating Zeep client from WSDL
-2025-08-20 18:14:56,206 - axlconnection - INFO - Initialized AXL session
-2025-08-20 18:14:56,206 - axlconnection - INFO - Creating AXL service binding
-2025-08-20 18:14:56,206 - axlconnection - INFO - Creating Zeep client from WSDL
-2025-08-20 22:04:05,518 - axlconnection - INFO - Initialized AXL session
-2025-08-20 22:04:05,519 - axlconnection - INFO - Creating AXL service binding
-2025-08-20 22:04:05,519 - axlconnection - INFO - Creating Zeep client from WSDL
-2025-08-21 20:53:32,034 - axlconnection - INFO - Initialized AXL session
-2025-08-21 20:53:32,034 - axlconnection - INFO - Creating AXL service binding
-2025-08-21 20:53:32,035 - axlconnection - INFO - Creating Zeep client from WSDL
-2025-08-21 21:02:05,744 - axlconnection - INFO - Initialized AXL session
-2025-08-21 21:02:05,744 - axlconnection - INFO - Creating AXL service binding
-2025-08-21 21:02:05,744 - axlconnection - INFO - Creating Zeep client from WSDL
-2025-08-21 21:04:09,113 - axlconnection - INFO - Initialized AXL session
-2025-08-21 21:04:09,113 - axlconnection - INFO - Creating AXL service binding
-2025-08-21 21:04:09,113 - axlconnection - INFO - Creating Zeep client from WSDL
-2025-08-21 22:27:42,534 - axlconnection - INFO - Initialized AXL session
-2025-08-21 22:27:42,534 - axlconnection - INFO - Creating AXL service binding
-2025-08-21 22:27:42,534 - axlconnection - INFO - Creating Zeep client from WSDL
-2025-08-21 22:37:25,269 - axlconnection - INFO - Initialized AXL session
-2025-08-21 22:37:25,269 - axlconnection - INFO - Creating AXL service binding
-2025-08-21 22:37:25,269 - axlconnection - INFO - Creating Zeep client from WSDL
-2025-08-21 22:50:36,318 - axlconnection - INFO - Initialized AXL session
-2025-08-21 22:50:36,319 - axlconnection - INFO - Creating AXL service binding
-2025-08-21 22:50:36,319 - axlconnection - INFO - Creating Zeep client from WSDL
-2025-08-21 22:52:02,239 - axlconnection - INFO - Initialized AXL session
-2025-08-21 22:52:02,239 - axlconnection - INFO - Creating AXL service binding
-2025-08-21 22:52:02,240 - axlconnection - INFO - Creating Zeep client from WSDL
-2025-08-21 23:04:52,751 - axlconnection - INFO - Initialized AXL session
-2025-08-21 23:04:52,751 - axlconnection - INFO - Creating AXL service binding
-2025-08-21 23:04:52,751 - axlconnection - INFO - Creating Zeep client from WSDL
-2025-08-21 23:07:34,926 - axlconnection - INFO - Initialized AXL session
-2025-08-21 23:07:34,926 - axlconnection - INFO - Creating AXL service binding
-2025-08-21 23:07:34,926 - axlconnection - INFO - Creating Zeep client from WSDL
-2025-08-21 23:13:02,445 - axlconnection - INFO - Initialized AXL session
-2025-08-21 23:13:02,445 - axlconnection - INFO - Creating AXL service binding
-2025-08-21 23:13:02,445 - axlconnection - INFO - Creating Zeep client from WSDL
-2025-08-21 23:26:25,137 - axlconnection - INFO - Initialized AXL session
-2025-08-21 23:26:25,137 - axlconnection - INFO - Creating AXL service binding
-2025-08-21 23:26:25,137 - axlconnection - INFO - Creating Zeep client from WSDL
-2025-08-21 23:30:24,489 - axlconnection - INFO - Initialized AXL session
-2025-08-21 23:30:24,489 - axlconnection - INFO - Creating AXL service binding
-2025-08-21 23:30:24,490 - axlconnection - INFO - Creating Zeep client from WSDL
-2025-08-21 23:43:01,776 - axlconnection - INFO - Initialized AXL session
-2025-08-21 23:43:01,776 - axlconnection - INFO - Creating AXL service binding
-2025-08-21 23:43:01,776 - axlconnection - INFO - Creating Zeep client from WSDL
-2025-08-21 23:43:34,522 - axlconnection - INFO - Initialized AXL session
-2025-08-21 23:43:34,522 - axlconnection - INFO - Creating AXL service binding
-2025-08-21 23:43:34,523 - axlconnection - INFO - Creating Zeep client from WSDL
-2025-08-21 23:44:00,445 - axlconnection - INFO - Initialized AXL session
-2025-08-21 23:44:00,445 - axlconnection - INFO - Creating AXL service binding
-2025-08-21 23:44:00,445 - axlconnection - INFO - Creating Zeep client from WSDL
-2025-08-21 23:44:17,639 - axlconnection - INFO - Initialized AXL session
-2025-08-21 23:44:17,640 - axlconnection - INFO - Creating AXL service binding
-2025-08-21 23:44:17,640 - axlconnection - INFO - Creating Zeep client from WSDL
-2025-08-21 23:47:28,477 - axlconnection - INFO - Initialized AXL session
-2025-08-21 23:47:28,477 - axlconnection - INFO - Creating AXL service binding
-2025-08-21 23:47:28,477 - axlconnection - INFO - Creating Zeep client from WSDL
-2025-08-21 23:48:12,421 - axlconnection - INFO - Initialized AXL session
-2025-08-21 23:48:12,421 - axlconnection - INFO - Creating AXL service binding
-2025-08-21 23:48:12,421 - axlconnection - INFO - Creating Zeep client from WSDL
-2025-08-21 23:51:09,887 - axlconnection - INFO - Initialized AXL session
-2025-08-21 23:51:09,888 - axlconnection - INFO - Creating AXL service binding
-2025-08-21 23:51:09,888 - axlconnection - INFO - Creating Zeep client from WSDL
-2025-10-04 16:41:57,454 - axlconnection - INFO - Initialized AXL session
-2025-10-04 16:41:57,455 - axlconnection - INFO - Creating AXL service binding
-2025-10-04 16:41:57,455 - axlconnection - INFO - Creating Zeep client from WSDL
-2025-10-04 17:09:58,816 - axlconnection - INFO - Initialized AXL session
-2025-10-04 17:09:58,816 - axlconnection - INFO - Creating AXL service binding
-2025-10-04 17:09:58,816 - axlconnection - INFO - Creating Zeep client from WSDL
-2025-10-04 17:18:51,331 - axlconnection - INFO - Initialized AXL session
-2025-10-04 17:18:51,331 - axlconnection - INFO - Creating AXL service binding
-2025-10-04 17:18:51,331 - axlconnection - INFO - Creating Zeep client from WSDL
-2025-10-04 17:26:25,873 - axlconnection - INFO - Initialized AXL session
-2025-10-04 17:26:25,874 - axlconnection - INFO - Creating AXL service binding
-2025-10-04 17:26:25,874 - axlconnection - INFO - Creating Zeep client from WSDL
-2025-10-04 21:12:31,736 - axlconnection - INFO - Initialized AXL session
-2025-10-04 21:12:31,736 - axlconnection - INFO - Creating AXL service binding
-2025-10-04 21:12:31,736 - axlconnection - INFO - Creating Zeep client from WSDL
+2025-10-25 10:37:19,217 - axlconnection - INFO - Initialized AXL session
+2025-10-25 10:37:19,218 - axlconnection - INFO - Creating AXL service binding
+2025-10-25 10:37:19,218 - axlconnection - INFO - Creating Zeep client from WSDL
+2025-10-25 10:45:49,866 - axlconnection - INFO - Initialized AXL session
+2025-10-25 10:45:49,866 - axlconnection - INFO - Creating AXL service binding
+2025-10-25 10:45:49,866 - axlconnection - INFO - Creating Zeep client from WSDL
+2025-10-25 10:50:52,423 - axlconnection - INFO - Initialized AXL session
+2025-10-25 10:50:52,424 - axlconnection - INFO - Creating AXL service binding
+2025-10-25 10:50:52,424 - axlconnection - INFO - Creating Zeep client from WSDL
+2025-10-25 10:52:48,033 - axlconnection - INFO - Initialized AXL session
+2025-10-25 10:52:48,033 - axlconnection - INFO - Creating AXL service binding
+2025-10-25 10:52:48,033 - axlconnection - INFO - Creating Zeep client from WSDL
+2025-10-25 10:55:04,479 - axlconnection - INFO - Initialized AXL session
+2025-10-25 10:55:04,480 - axlconnection - INFO - Creating AXL service binding
+2025-10-25 10:55:04,480 - axlconnection - INFO - Creating Zeep client from WSDL
+2025-10-25 10:56:18,189 - axlconnection - INFO - Initialized AXL session
+2025-10-25 10:56:18,189 - axlconnection - INFO - Creating AXL service binding
+2025-10-25 10:56:18,189 - axlconnection - INFO - Creating Zeep client from WSDL
+2025-10-25 11:03:30,368 - axlconnection - INFO - Initialized AXL session
+2025-10-25 11:03:30,368 - axlconnection - INFO - Creating AXL service binding
+2025-10-25 11:03:30,368 - axlconnection - INFO - Creating Zeep client from WSDL
+2025-10-25 11:05:52,423 - axlconnection - INFO - Initialized AXL session
+2025-10-25 11:05:52,424 - axlconnection - INFO - Creating AXL service binding
+2025-10-25 11:05:52,424 - axlconnection - INFO - Creating Zeep client from WSDL
+2025-10-25 11:18:25,308 - axlconnection - INFO - Initialized AXL session
+2025-10-25 11:18:25,309 - axlconnection - INFO - Creating AXL service binding
+2025-10-25 11:18:25,309 - axlconnection - INFO - Creating Zeep client from WSDL
+2025-10-25 11:28:35,875 - axlconnection - INFO - Initialized AXL session
+2025-10-25 11:28:35,876 - axlconnection - INFO - Creating AXL service binding
+2025-10-25 11:28:35,876 - axlconnection - INFO - Creating Zeep client from WSDL
+2025-10-25 12:28:15,621 - axlconnection - INFO - Initialized AXL session
+2025-10-25 12:28:15,622 - axlconnection - INFO - Creating AXL service binding
+2025-10-25 12:28:15,622 - axlconnection - INFO - Creating Zeep client from WSDL
+2025-10-25 14:59:22,598 - axlconnection - INFO - Initialized AXL session
+2025-10-25 14:59:22,598 - axlconnection - INFO - Creating AXL service binding
+2025-10-25 14:59:22,598 - axlconnection - INFO - Creating Zeep client from WSDL
+2025-10-26 10:59:23,102 - axlconnection - INFO - Initialized AXL session
+2025-10-26 10:59:23,102 - axlconnection - INFO - Creating AXL service binding
+2025-10-26 10:59:23,102 - axlconnection - INFO - Creating Zeep client from WSDL
+2025-10-26 11:00:58,442 - axlconnection - INFO - Initialized AXL session
+2025-10-26 11:00:58,442 - axlconnection - INFO - Creating AXL service binding
+2025-10-26 11:00:58,442 - axlconnection - INFO - Creating Zeep client from WSDL
+2025-10-26 12:52:25,915 - axlconnection - INFO - Initialized AXL session
+2025-10-26 12:52:25,915 - axlconnection - INFO - Creating AXL service binding
+2025-10-26 12:52:25,915 - axlconnection - INFO - Creating Zeep client from WSDL
+2025-10-26 15:06:18,409 - axlconnection - INFO - Initialized AXL session
+2025-10-26 15:06:18,409 - axlconnection - INFO - Creating AXL service binding
+2025-10-26 15:06:18,409 - axlconnection - INFO - Creating Zeep client from WSDL
+2025-10-26 15:06:54,638 - axlconnection - INFO - Initialized AXL session
+2025-10-26 15:06:54,638 - axlconnection - INFO - Creating AXL service binding
+2025-10-26 15:06:54,638 - axlconnection - INFO - Creating Zeep client from WSDL
+2025-10-27 19:58:18,785 - axlconnection - INFO - Initialized AXL session
+2025-10-27 19:58:18,786 - axlconnection - INFO - Creating AXL service binding
+2025-10-27 19:58:18,786 - axlconnection - INFO - Creating Zeep client from WSDL
+2025-10-28 16:34:08,647 - axlconnection - INFO - Initialized AXL session
+2025-10-28 16:34:08,647 - axlconnection - INFO - Creating AXL service binding
+2025-10-28 16:34:08,647 - axlconnection - INFO - Creating Zeep client from WSDL
+2025-10-28 17:01:43,724 - axlconnection - INFO - Initialized AXL session
+2025-10-28 17:01:43,725 - axlconnection - INFO - Creating AXL service binding
+2025-10-28 17:01:43,725 - axlconnection - INFO - Creating Zeep client from WSDL
+2025-10-28 17:04:23,812 - axlconnection - INFO - Initialized AXL session
+2025-10-28 17:04:23,812 - axlconnection - INFO - Creating AXL service binding
+2025-10-28 17:04:23,812 - axlconnection - INFO - Creating Zeep client from WSDL
+2025-10-28 17:31:47,696 - axlconnection - INFO - Initialized AXL session
+2025-10-28 17:31:47,697 - axlconnection - INFO - Creating AXL service binding
+2025-10-28 17:31:47,697 - axlconnection - INFO - Creating Zeep client from WSDL
+2025-10-28 17:33:53,808 - axlconnection - INFO - Initialized AXL session
+2025-10-28 17:33:53,808 - axlconnection - INFO - Creating AXL service binding
+2025-10-28 17:33:53,808 - axlconnection - INFO - Creating Zeep client from WSDL
+2025-10-28 17:46:23,325 - axlconnection - INFO - Initialized AXL session
+2025-10-28 17:46:23,326 - axlconnection - INFO - Creating AXL service binding
+2025-10-28 17:46:23,326 - axlconnection - INFO - Creating Zeep client from WSDL
+2025-10-28 17:46:57,494 - axlconnection - INFO - Initialized AXL session
+2025-10-28 17:46:57,494 - axlconnection - INFO - Creating AXL service binding
+2025-10-28 17:46:57,495 - axlconnection - INFO - Creating Zeep client from WSDL
+2025-10-28 17:47:39,201 - axlconnection - INFO - Initialized AXL session
+2025-10-28 17:47:39,201 - axlconnection - INFO - Creating AXL service binding
+2025-10-28 17:47:39,201 - axlconnection - INFO - Creating Zeep client from WSDL
+2025-10-28 17:48:20,537 - axlconnection - INFO - Initialized AXL session
+2025-10-28 17:48:20,537 - axlconnection - INFO - Creating AXL service binding
+2025-10-28 17:48:20,537 - axlconnection - INFO - Creating Zeep client from WSDL
+2025-10-28 17:49:01,507 - axlconnection - INFO - Initialized AXL session
+2025-10-28 17:49:01,507 - axlconnection - INFO - Creating AXL service binding
+2025-10-28 17:49:01,507 - axlconnection - INFO - Creating Zeep client from WSDL
+2025-10-28 17:56:29,188 - axlconnection - INFO - Initialized AXL session
+2025-10-28 17:56:29,188 - axlconnection - INFO - Creating AXL service binding
+2025-10-28 17:56:29,188 - axlconnection - INFO - Creating Zeep client from WSDL
+2025-10-28 17:57:24,370 - axlconnection - INFO - Initialized AXL session
+2025-10-28 17:57:24,370 - axlconnection - INFO - Creating AXL service binding
+2025-10-28 17:57:24,370 - axlconnection - INFO - Creating Zeep client from WSDL
