@@ -10,9 +10,9 @@ ngrok_url = "https://872d3923b6a6.ngrok-free.app"
 
 payload = json.dumps({
   "resource": "rooms",
-  "event": "create",
+  "event": "created",
   "targetUrl": f"{ngrok_url}/roomwebhook",
-  "name": "MytestwebHook"
+  "name": "webhookroom"
 })
 headers = {
   'Authorization': f'Bearer {API_TOKEN}',
@@ -25,7 +25,7 @@ payload = json.dumps({
   "resource": "messages",
   "event": "all",
   "targetUrl": f"{ngrok_url}/messagewebhook",
-  "name": "MytestwebHook"
+  "name": "webhookmessage"
 })
 headers = {
   'Authorization': f'Bearer {API_TOKEN}',

@@ -26,7 +26,6 @@ def batch_update_cucm(csvlocation):
     exclude_list = exclude_df['UserId'].tolist()
     status_on_ad = ""
     status_on_cucm = ""
-    endresult = []
     counter = 0
     for _, row in df.iterrows():
         username = row['UserId']
@@ -59,22 +58,19 @@ def batch_update_cucm(csvlocation):
         else:
             logger.info("User %s is in Exclude list", username)
 
-        endresult.append({
+        result = {
             "username": username,
             "extension": extension,
             "status_on_cucm": status_on_cucm,
             "status_on_ad": status_on_ad
-        })
-
-    pd.DataFrame(endresult).to_csv("CUCM_migrationfirst5.csv", index=False)
+        }
+        pd.DataFrame([result]).to_csv("CUCM_migration.csv", mode='a', header=False, index=False)
     return "Script Run is Finished"
 
 def batch_update_webex_gen(csvlocation):
     """Update Webex Extension"""
     filepath = os.path.join(currentdir, csvlocation)
     df = pd.read_csv(filepath, dtype={'extension': str})
-
-    endresult = []
     for _, row in df.iterrows():
         username = row['UserId']
         extension = row['extension']
@@ -100,7 +96,7 @@ def batch_update_webex_gen(csvlocation):
         else:
             status_on_ad = "Skipped"
 
-        endresult.append({
+        webex_mig_result = {
             "username": username,
             "email": email,
             "TargetDID": ad_num,
@@ -108,17 +104,14 @@ def batch_update_webex_gen(csvlocation):
             "region": region,
             "status_on_cucm": status_on_webex,
             "status_on_ad": status_on_ad
-        })
-
-    pd.DataFrame(endresult).to_csv("linode_nodidwebex_migration.csv", index=False)
+        }
+        pd.DataFrame([webex_mig_result]).to_csv("nodidwebex_migration.csv", mode='a', header=False, index=False)
     return "Script Run is Finished"
 
 def batch_update_webex_acd(csvlocation):
     """Update Webex Extension"""
     filepath = os.path.join(currentdir, csvlocation)
     df = pd.read_excel(filepath, dtype={'extension': str, 'ContactNumber': str})
-
-    endresult = []
     for _, row in df.iterrows():
         username = row['UserId']
         phonenumber = row['ContactNumber']
@@ -145,7 +138,7 @@ def batch_update_webex_acd(csvlocation):
         else:
             status_on_ad = "Skipped"
 
-        endresult.append({
+        acd_result = {
             "username": username,
             "email": email,
             "phoneNum": phonenumber,
@@ -153,16 +146,13 @@ def batch_update_webex_acd(csvlocation):
             "region": region,
             "status_on_cucm": status_on_webex,
             "status_on_ad": status_on_ad
-        })
-
-    pd.DataFrame(endresult).to_csv("acd_linodewebex_migration_remaining.csv", index=False)
+        }
+        pd.DataFrame([acd_result]).to_csv("acd_migration.csv", mode='a', header=False, index=False)
     return "Script Run is Finished"
 
 def adupdate(csvlocation):
     filepath = os.path.join(currentdir, csvlocation)
     df = pd.read_excel(filepath, dtype={'extension': str, 'ContactNumber': str})
-
-    endresult = []
     for _, row in df.iterrows():
         username = row['UserId']
         region = row['Country']
@@ -173,13 +163,13 @@ def adupdate(csvlocation):
         except Exception as e:
             logger.error("Error updating AD for %s: %s", username, e)
             status_on_ad = "Error"
-        endresult.append({
+        ad_result = {
             "username": username,
             "extension": extension,
             "region": region,
             "status_on_ad": status_on_ad
-        })
-    pd.DataFrame(endresult).to_csv("linode_AD_update.csv", index=False)
+        }
+        pd.DataFrame([ad_result]).to_csv("linode_AD_update.csv", mode='a', header=False, index=False)
     return "Script Run over"
 
 def batch_update_ad_cucm_extension(csvlocation):
@@ -189,7 +179,6 @@ def batch_update_ad_cucm_extension(csvlocation):
     exclude_df = pd.read_csv("excludelist.csv")
     exclude_list = exclude_df['UserId'].tolist()
     status_on_ad = ""
-    endresult = []
     for _, row in df.iterrows():
         username = row['UserId']
         extension = row['targetNum']
@@ -203,20 +192,19 @@ def batch_update_ad_cucm_extension(csvlocation):
         else:
             logger.info("User %s is in Exclude list", username)
             status_on_ad = "Skipped"
-    endresult.append({
+        ad_result = {
             "username": username,
             "extension": extension,
             "status_on_ad": status_on_ad
-        })
+        }
+        pd.DataFrame([ad_result]).to_csv("AD_update_correction.csv", mode='a', header=False, index=False)
 
-    pd.DataFrame(endresult).to_csv("AD_update_correction.csv", index=False)
     return "Script Run is Finished"
 
 def batch_update_routepattern(csvlocation):
     """Update CUCM Route Pattern"""
     filepath = os.path.join(currentdir, csvlocation)
     df = pd.read_csv(filepath, dtype={'pattern': str})
-    endresult = []
     for _, row in df.iterrows():
         routepattern = row['pattern']
         username = row["username"]
@@ -228,13 +216,12 @@ def batch_update_routepattern(csvlocation):
         except Exception as e:
             logger.error("Error updating CUCM for route pattern %s: %s", routepattern, e)
             status_on_cucm = "Error"
-        endresult.append({
+        results = {
             "routepattern": routepattern,
             "status_on_cucm": status_on_cucm,
             "rp_update_status": status_partition
-        })
-
-    pd.DataFrame(endresult).to_csv("Routepattern_update.csv", index=False)
+        }
+        pd.DataFrame([results]).to_csv("Routepattern_update.csv", mode='a', header=False, index=False)
     return "Script Run is Finished"
 
 if __name__ == "__main__":
