@@ -7,15 +7,17 @@ from cucmapi.axlroutepattern import AXLRoutePatternOperations
 from metadata.settings import extension_prefix
 from webexapi.webexgeneral import WebexGenMigration
 from webexapi.webexACD import WebexMigACD
+from webexapi.webexoperations import WebexOperation
 from utils.logger import setup_logger
 
 logger = setup_logger('mainapp', 'log/mainapp.log')
 prefixes = extension_prefix
 axloperations = AXLOperations()
-axlroutepattern = AXLRoutePatternOperations()
+axlrp = AXLRoutePatternOperations()
 webex_mig_gen = WebexGenMigration()
 webex_acd_mig = WebexMigACD()
 currentdir = os.getcwd()
+webop = WebexOperation()
 
 def batch_update_cucm(csvlocation):
     """Update CUCM Extension"""
@@ -105,7 +107,7 @@ def batch_update_webex_gen(csvlocation):
             "status_on_cucm": status_on_webex,
             "status_on_ad": status_on_ad
         }
-        pd.DataFrame([webex_mig_result]).to_csv("nodidwebex_migration.csv", mode='a', header=False, index=False)
+        pd.DataFrame([webex_mig_result]).to_csv("nodidwebex_migration2.csv", mode='a', header=False, index=False)
     return "Script Run is Finished"
 
 def batch_update_webex_acd(csvlocation):
@@ -116,15 +118,16 @@ def batch_update_webex_acd(csvlocation):
         username = row['UserId']
         phonenumber = row['ContactNumber']
         extension = row['extension']
-        ad_num = prefixes[region]+row['extension']
         region = row['Country']
+        ad_num = prefixes[region]+row['extension']
         email = row["Email"]
         print(extension)
 
         try:
             webex_results = webex_acd_mig.patch_dn_acd(email, phonenumber, extension, region)
-            #removelicenseacd(email)
+            #webop.removelicense(email)
             status_on_webex = "Success" if webex_results else "Failed"
+            #status_on_webex = "Failed"
         except Exception as e:
             logger.error("Error updating CUCM for %s: %s", username, e)
             status_on_webex = "Error"
@@ -147,7 +150,7 @@ def batch_update_webex_acd(csvlocation):
             "status_on_cucm": status_on_webex,
             "status_on_ad": status_on_ad
         }
-        pd.DataFrame([acd_result]).to_csv("acd_migration.csv", mode='a', header=False, index=False)
+        pd.DataFrame([acd_result]).to_csv("acd_migration2211.csv", mode='a', header=False, index=False)
     return "Script Run is Finished"
 
 def adupdate(csvlocation):
@@ -201,25 +204,28 @@ def batch_update_ad_cucm_extension(csvlocation):
 
     return "Script Run is Finished"
 
-def batch_update_routepattern(csvlocation):
-    """Update CUCM Route Pattern"""
-    filepath = os.path.join(currentdir, csvlocation)
-    df = pd.read_csv(filepath, dtype={'pattern': str})
+def batch_routepattern_auto(csvlocation):
+    """Create Route Pattern in CUCM from CSV"""
+    filepath = os.path.join(os.getcwd(), csvlocation)
+    df = pd.read_excel(filepath, dtype={'ContactNumber': str})
     for _, row in df.iterrows():
-        routepattern = row['pattern']
-        username = row["username"]
+        routepattern = f"\{row['ContactNumber']}"
+        username = row["UserId"]
         try:
-            update_partition = axlroutepattern.update_line(routepattern, "PT-Global-Internal")
-            update_rp = axlroutepattern.create_routepattern(routepattern, username)
+            update_partition = axlrp.update_line(routepattern)
+            #update_user = axlrp.update_phone(username, routepattern)
+            update_rp = axlrp.create_routepattern(routepattern, username)
             status_on_cucm = "Success" if update_rp else "Failed"
+            #status_on_user = "Success" if update_user else "Failed"
             status_partition = "Success" if update_partition else "Failed"
         except Exception as e:
             logger.error("Error updating CUCM for route pattern %s: %s", routepattern, e)
             status_on_cucm = "Error"
+            status_partition = "Error"
         results = {
             "routepattern": routepattern,
             "status_on_cucm": status_on_cucm,
-            "rp_update_status": status_partition
+            "rp_update_status": status_partition,
         }
         pd.DataFrame([results]).to_csv("Routepattern_update.csv", mode='a', header=False, index=False)
     return "Script Run is Finished"
@@ -230,8 +236,9 @@ if __name__ == "__main__":
     Enter 1 for CUCM Migration
     Enter 2 for Webex Migration
     Enter 3 for Webex ACD Agent Migration
-    Enter 4 for Webex ACD Agent Migration
+    Enter 4 for AD update ACD
     Enter 5 for AD Extension Update Correction
+    Enter 6 for CUCM Route Pattern Auto Creation
     """
     print(STRTOPRINT)
     change_type = input()
@@ -245,5 +252,7 @@ if __name__ == "__main__":
         adupdate(csv_file)
     if int(change_type) == 5:
         batch_update_ad_cucm_extension(csv_file)
+    if int(change_type) == 6:
+        batch_routepattern_auto(csv_file)
     else:
         print("Incorrect Selection")

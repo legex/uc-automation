@@ -65,7 +65,11 @@ class WebexMigACD:
             return None
 
         location_id = self.baseoperations.get_location_id_acd(employee_region)
-        licenses_ops = [{
+        existing_licenses = set(payload.get("licenses", []))
+        licenses_ops = []
+
+        if WEBEX_LICENSE_ID not in existing_licenses:
+            licenses_ops.append({
                 "id": WEBEX_LICENSE_ID,
                 "operation": "add",
                 "properties": {
@@ -73,9 +77,18 @@ class WebexMigACD:
                     "phoneNumber": telephone,
                     "extension": extension
                 }
-                }]
+            })
 
+            # Remove UCM license if present
+            if UCM_LICENSE_ID in existing_licenses:
+                licenses_ops.append({
+                    "id": UCM_LICENSE_ID,
+                    "operation": "remove"
+                })
 
+        if not licenses_ops:
+            logger.info("No license changes required for %s", email)
+            return None
         patch_payload = {
             "email": email,
             "personId": userid,
@@ -83,8 +96,8 @@ class WebexMigACD:
             "licenses": licenses_ops
         }
 
+        url = PATCH_LIC_URL
         try:
-            url = PATCH_LIC_URL
             resp = requests.patch(url,
                                 headers=self.headers,
                                 data=json.dumps(patch_payload),

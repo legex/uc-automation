@@ -12,7 +12,7 @@ from webexapi.webexoperations import WebexOperation
 load_dotenv()
 
 # Initialize logger
-logger = setup_logger('webexcalls', 'log/webexcalls.log')
+logger = setup_logger('webexgeneral', 'log/webexgeneral.log')
 
 # Read API token from environment
 AUTH_TOKEN = os.getenv('AUTHTOKEN')

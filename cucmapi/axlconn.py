@@ -13,7 +13,7 @@ load_dotenv()
 logger = setup_logger('axlconnection', 'log/axlconnection.log')
 
 DEBUG = False
-mode = "Dev"
+mode = "Prod"
 if mode == "Dev":
     AXL_USERNAME = os.getenv("DEVAXL_USERNAME")
     AXL_PASSWORD = os.getenv("DEVAXL_PASSWORD")

@@ -11,7 +11,7 @@ from webexapi.webexBase import WebexBase
 load_dotenv()
 
 # Initialize logger
-logger = setup_logger('webexcalls', 'log/webexcalls.log')
+logger = setup_logger('webexops', 'log/webexops.log')
 
 # Read API token from environment
 AUTH_TOKEN = os.getenv('AUTHTOKEN')
@@ -88,7 +88,7 @@ class WebexOperation:
         return None
 
 
-    def get_location_id(self, employee_region: str) -> str | None:
+    def get_location_id_nonwebex(self, employee_region: str) -> str | None:
         """
         Look up the Webex location ID that matches a given region substring.
 
@@ -106,6 +106,24 @@ class WebexOperation:
             if employee_region in region['name']:
                 return region['id']
         logger.warning("Region not found: %s", employee_region)
+        return None
+
+    def get_location_id(self, employee_region: str) -> str | None:
+        """
+        Look up the Webex location ID that matches a given region substring.
+
+        Args:
+            employee_region (str): A substring to search in location names
+                                (e.g., 'New York', 'London').
+
+        Returns:
+            str | None: Location ID if a match is found, otherwise None.
+
+        Logs:
+            - Warning if no match is found.
+        """
+        if ACDLOCATIONS[employee_region]:
+            return ACDLOCATIONS[employee_region]
         return None
 
     def get_location_id_acd(self, employee_region: str) -> str | None:
@@ -141,18 +159,18 @@ class WebexOperation:
         licenses_ops = []
 
         # Add Webex license if missing
-        if WEBEX_LICENSE_ID in existing_licenses:
-            licenses_ops.append({
-                "id": WEBEX_LICENSE_ID,
-                "operation": "remove"
-            })
+        # if WEBEX_LICENSE_ID in existing_licenses:
+        #     licenses_ops.append({
+        #         "id": WEBEX_LICENSE_ID,
+        #         "operation": "remove"
+        #     })
 
             # Remove UCM license if present
-            if UCM_LICENSE_ID not in existing_licenses:
-                licenses_ops.append({
-                    "id": UCM_LICENSE_ID,
-                    "operation": "add"
-                })
+        if UCM_LICENSE_ID not in existing_licenses:
+            licenses_ops.append({
+                "id": UCM_LICENSE_ID,
+                "operation": "add"
+            })
 
         if not licenses_ops:
             logger.info("No license changes required for %s", email)

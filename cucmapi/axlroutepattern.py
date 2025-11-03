@@ -10,6 +10,7 @@ logger = setup_logger('RoutepatternApp', 'log/Routepattern.log')
 UNWANTEDELEMENTS = [
     'associatedDevices',
     'usage',
+    'directoryURIs',
     'confidentialAccess',
     'enterpriseAltNum',
     'useEnterpriseAltNum',
@@ -34,9 +35,24 @@ class AXLRoutePatternOperations:
         axlclient = ConnectionAXL()
         self.service = axlclient.service()
 
+    def get_device(self,
+                username: str):
+        """
+        Get the CSF device (softphone) line configuration for the user.
+
+        Returns:
+            object or None: Lines object if found, otherwise None.
+        """
+        print(f'username as observed in get_device {username}')
+        try:
+            user_details = self.service.getPhone(name=username)['return'].phone
+            return user_details
+        except Fault as e:
+            logger.error("Zeep error: Failed to get CSF device for %s: %s", username, e)
+            return None
+        
     def get_line(self,
-                 pattern: str,
-                 route_partition: str):
+                 pattern: str):
         """
         Fetch the line configuration for a given pattern and partition.
 
@@ -49,15 +65,14 @@ class AXLRoutePatternOperations:
         """
         try:
             return self.service.getLine(pattern=pattern,
-                                        routePartitionName=route_partition
+                                        routePartitionName="PT-Global-Internal"
                                         )['return']
         except Fault:
-            logger.warning("Line %s not found in partition %s", pattern, route_partition)
+            logger.warning("Line %s not found", pattern)
             return None
 
     def update_line(self,
-                    old_pattern: str,
-                    route_partition: str):
+                    old_pattern: str):
         """
         Update an existing line to use the new pattern and update display name.
 
@@ -68,24 +83,48 @@ class AXLRoutePatternOperations:
         Returns:
             dict or None: Update response if successful, otherwise None.
         """
-        line_data = self.get_line(old_pattern, route_partition)
+        line_data = self.get_line(old_pattern)
         if not line_data:
             logger.warning("No line data found for pattern: %s", old_pattern)
             sys.exit(1)
-
+        
         line_serialized = serialize_object(line_data)
         line_dict = clean_axl_dict(line_serialized)['line']
-        line_dict['routePartitionName'] = "pt-hidden-internal"
-        print(line_dict)
+        line_dict['newRoutePartitionName'] = "PT-Hidden"
         slinedict = sanitizedict(line_dict, UNWANTEDELEMENTS)
-        return slinedict
-        # try:
-        #     logger.info("Updating line from %s to %s", old_pattern, new_pattern)
-        #     return self.service.updateLine(**slinedict)['return']
-        # except Fault as e:
-        #     logger.error("Failed to update line: %s", e)
-        #     return f"error: {e}"
+        print(slinedict)
+        try:
+            logger.info("Updating line %s ", old_pattern)
+            return self.service.updateLine(**slinedict)['return']
+        except Fault as e:
+            logger.error("Failed to update line: %s", e)
+            return f"error: {e}"
 
+    def update_phone(self,username: str, pattern: str):
+        """
+        Update the phone configuration for the user.
+
+        Args:
+            username (str): CUCM user ID.
+        """
+        userdetails = self.get_device(f"csf{username}")
+        if not userdetails:
+            logger.warning("No user details found for username: %s", username)
+
+        ser_obj = serialize_object(userdetails.lines.line)
+        clean_obj = clean_axl_dict(ser_obj)
+        updated_lines = []
+        for line in clean_obj:
+            if not (pattern in line['dirn']['pattern'] and line['dirn']['routePartitionName'] == 'PT-Hidden'):
+                updated_lines.append(line)
+        try:
+            logger.info("Updating phone %s ", username)
+            response = self.service.updatePhone(name=f"csf{username}",lines={'line': []})
+            logger.info("Phone %s updated successfully", username)
+            return response
+        except Fault as e:
+            logger.error("Failed to update phone: %s", e)
+            return f"error: {e}"
 
     def get_routepattern(self, pattern):
         """
@@ -116,7 +155,7 @@ class AXLRoutePatternOperations:
             dict or None: Response from CUCM if successful, else None.
         """
         routerpattern = {
-        'pattern': f'\\{pattern}',
+        'pattern': f'{pattern}',
         'description':f'WxC DID - {username}',
         'usage':'Route',
         'routePartitionName' : 'PT-Global-Internal',
@@ -134,7 +173,10 @@ class AXLRoutePatternOperations:
 
 }
         try:
-            return self.service.addRoutePattern(routerpattern)['return']
+            logger.info("Creating route pattern %s ", pattern)
+            response = self.service.addRoutePattern(routerpattern)['return']
+            logger.info("Route pattern %s created successfully", pattern)
+            return response
         except Fault as e:
             logger.error("Failed to create route pattern: %s", e)
             return None

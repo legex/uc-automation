@@ -21,5 +21,8 @@ extension_prefix = {
     "US - Cambridge": "785810",
     "India": "783910",
     "Canada": "785610",
-    "Malaysia": "784610"
+    "Malaysia": "784610",
+    "Germany": "785210",
+    "Costa Rica": "785910",
+    "Brazil": "784510"
 }
