@@ -10,7 +10,7 @@ from utils.logger import setup_logger
 load_dotenv()
 
 # Initialize logger
-logger = setup_logger('webexcalls', 'log/webexcalls.log')
+logger = setup_logger('webexbaseheader', 'log/webexbaseheader.log')
 
 # Read API token from environment
 AUTH_TOKEN = os.getenv('AUTHTOKEN')

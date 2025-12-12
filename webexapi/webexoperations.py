@@ -158,14 +158,14 @@ class WebexOperation:
         existing_licenses = set(payload.get("licenses", []))
         licenses_ops = []
 
-        # Add Webex license if missing
-        # if WEBEX_LICENSE_ID in existing_licenses:
-        #     licenses_ops.append({
-        #         "id": WEBEX_LICENSE_ID,
-        #         "operation": "remove"
-        #     })
+        # Remove Webex license if missing
+        if WEBEX_LICENSE_ID in existing_licenses:
+            licenses_ops.append({
+                "id": WEBEX_LICENSE_ID,
+                "operation": "remove"
+            })
 
-            # Remove UCM license if present
+            # Add UCM license if present
         if UCM_LICENSE_ID not in existing_licenses:
             licenses_ops.append({
                 "id": UCM_LICENSE_ID,

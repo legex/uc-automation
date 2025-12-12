@@ -8,3 +8,5 @@ ad_query.py
 test.py
 webexapi/testapiforcalligo.py
 reference
+log
+excludelist.csv

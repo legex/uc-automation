@@ -24,5 +24,6 @@ extension_prefix = {
     "Malaysia": "784610",
     "Germany": "785210",
     "Costa Rica": "785910",
-    "Brazil": "784510"
+    "Brazil": "784510",
+    "Seoul": "785710"
 }

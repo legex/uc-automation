@@ -36,17 +36,23 @@ def user_details(userid):
 			for entry in range(len(conn.entries)):
 					json_data_emp = json.loads(conn.entries[entry].entry_to_json())
 					telephone_num = json_data_emp.get('attributes', {}).get("telephoneNumber", [])
+					othertelephone = json_data_emp.get('attributes', {}).get("otherTelephone", [])
 					dict_emp = {}
 					dict_emp.update({"Name": json_data_emp['attributes']["cn"][0]})
 					dict_emp.update({"Email": json_data_emp['attributes']["sAMAccountName"][0]+"@akamai.com"})
 					dict_emp.update({"UserId": json_data_emp['attributes']["sAMAccountName"][0]})
 					dict_emp.update({"Emp_ID": json_data_emp['attributes']["employeeNumber"][0]})
 					dict_emp.update({"Country": json_data_emp['attributes']["co"][0]})
+					if othertelephone:
+						extension = othertelephone[0].strip("\t\\")
+					else:
+						extension = ''
 					if telephone_num:
 						contact = telephone_num[0].strip("\t\\")
 					else:
 						contact = ''
 					dict_emp.update({"ContactNumber": contact })
+					dict_emp.update({"Extension": extension})
 					return dict_emp
 	except ConnectionError as er:
 		print(f'Error encountered as {er}')

@@ -86,13 +86,11 @@ class AXLRoutePatternOperations:
         line_data = self.get_line(old_pattern)
         if not line_data:
             logger.warning("No line data found for pattern: %s", old_pattern)
-            sys.exit(1)
         
         line_serialized = serialize_object(line_data)
         line_dict = clean_axl_dict(line_serialized)['line']
         line_dict['newRoutePartitionName'] = "PT-Hidden"
         slinedict = sanitizedict(line_dict, UNWANTEDELEMENTS)
-        print(slinedict)
         try:
             logger.info("Updating line %s ", old_pattern)
             return self.service.updateLine(**slinedict)['return']
@@ -119,7 +117,7 @@ class AXLRoutePatternOperations:
                 updated_lines.append(line)
         try:
             logger.info("Updating phone %s ", username)
-            response = self.service.updatePhone(name=f"csf{username}",lines={'line': []})
+            response = self.service.updatePhone(name=f"csf{username}",lines={'line': updated_lines})
             logger.info("Phone %s updated successfully", username)
             return response
         except Fault as e:

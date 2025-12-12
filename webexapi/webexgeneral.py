@@ -122,4 +122,85 @@ class WebexGenMigration:
             logger.error("General error updating user: %s", e)
         return None
 
+    def patch_dn(self, email: str, extension: str, employee_region: str):
+        """
+        Update a user's Webex license to Webex Calling (Professional) and remove
+        UCM license if present, while also setting locationId and extension.
+
+        This function:
+        1. Looks up a Webex user by email.
+        2. Fetches their current licenses.
+        3. If missing, adds the Webex Calling license with provided location and extension.
+        4. Removes UCM license if present.
+        5. Sends a PATCH request to update licenses.
+
+        Args:
+            email (str): User's Webex-registered email address.
+            extension (str): Extension number to assign to the user.
+            employee_region (str): Region name substring to determine locationId.
+
+        Returns:
+            dict | None: JSON API response if successful, else None.
+
+        Logs:
+            - User lookup issues.
+            - Missing license cases.
+            - HTTP and general API errors.
+
+        API Endpoint:
+            PATCH https://webexapis.com/v1/licenses/users
+
+        Notes:
+            - Uses the legacy licenses/users API — verify in current Webex API docs for suitability.
+            - Requires administrative privileges and the correct org context.
+            - AUTHTOKEN must include scopes to manage user licenses.
+
+        Raises:
+            HTTPError: If the API request fails due to client/server errors.
+        """
+        userid = self.baseoperations.query_user_id_by_email(email)
+        if not userid:
+            logger.error("User ID not found for email: %s", email)
+            return None
+
+        payload = self.baseoperations.get_person(userid)
+        if not payload:
+            logger.error("User detail not found for user: %s", userid)
+            return None
+
+        location_id = self.baseoperations.get_location_id(employee_region)
+        licenses_ops = [{
+                "id": "Y2lzY29zcGFyazovL3VzL0xJQ0VOU0UvYTM3NDkzMTUtYWUwOS00YTUyLTgwNmMtMmMzMjIyZmE3YzJjOkJDU1REXzFhNGRhOTZiLTNmYWUtNGVlYi1hZDYwLWFkNTA3MTE4NzFkMA",
+                "operation": "add",
+                "properties": {
+                    "locationId": location_id,
+                    "extension": extension
+                }
+            },
+            {
+                "id": "Y2lzY29zcGFyazovL3VzL0xJQ0VOU0UvYTM3NDkzMTUtYWUwOS00YTUyLTgwNmMtMmMzMjIyZmE3YzJjOkNKUFNURF84NTk0NTU0Ny1hODJlLTQzNjItYjMyNC0xZjcwNzkwNDk1ODY",
+                "operation": "add"
+            }]
+
+        patch_payload = {
+            "email": email,
+            "personId": userid,
+            "orgId": payload["orgId"],
+            "licenses": licenses_ops
+        }
+        print(patch_payload)
+        try:
+            url = PATCH_LIC_URL
+            resp = requests.patch(url,
+                                headers=self.headers,
+                                data=json.dumps(patch_payload),
+                                timeout=30)
+            resp.raise_for_status()
+            return resp.json()
+        except HTTPError as e:
+            logger.error("HTTP error updating user: %s", e)
+        except Exception as e:
+            logger.error("General error updating user: %s", e)
+        return None
+
 

@@ -28,7 +28,8 @@ def clean_axl_dict(obj):
 
 def sanitizedict(linedict, unwantedkeys):
     for key in unwantedkeys:
-        linedict.pop(key)
+        if key in linedict:
+            linedict.pop(key)
     return linedict
 
 def filter_and_reindex_lines(clean_lines, new_pattern):
