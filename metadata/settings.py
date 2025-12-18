@@ -1,5 +1,13 @@
 import json
+import pandas as pd
 
+mode = "Dev"
+if mode == "Prod":
+    with open("metadata/acd_locations.json", 'r') as f:
+        ACDLOCATIONS = json.load(f)
+else:
+    with open("metadata/dev_location.json", 'r') as f:
+        ACDLOCATIONS = json.load(f)
 license_store = {
     "ucmlic": "Y2lzY29zcGFyazovL3VzL0xJQ0VOU0UvYTM3NDkzMTUtYWUwOS00YTUyLTgwNmMtMmMzMjIyZmE3YzJjOlVDUFJFTV9jMzMyOWQzMi0xNmVkLTQxNDUtOTUyNS02M2FjYjRiMzFiMjA",
     "webexlic": "Y2lzY29zcGFyazovL3VzL0xJQ0VOU0UvYTM3NDkzMTUtYWUwOS00YTUyLTgwNmMtMmMzMjIyZmE3YzJjOkJDU1REXzFhNGRhOTZiLTNmYWUtNGVlYi1hZDYwLWFkNTA3MTE4NzFkMA"
@@ -9,8 +17,8 @@ PATCH_LIC_URL = "https://webexapis.com/v1/licenses/users"
 with open("metadata/location.json", 'r') as f:
     LOCATIONS = json.load(f)
 
-with open("metadata/acd_locations.json", 'r') as f:
-    ACDLOCATIONS = json.load(f)
+exclude_df = pd.read_csv("excludelist.csv")
+exclude_list = exclude_df['UserId'].tolist()
 
 extension_prefix = {
     "France": "784110",
