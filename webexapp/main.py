@@ -45,5 +45,5 @@ def batch_update_ldap(file, filename):
             "extension": extension,
             "status_on_ad": status_on_ad
         }
-        pd.DataFrame([ad_result]).to_csv(f"Aresultfiles/ldap_response_{filename}", mode='a', header=False, index=False)
+        pd.DataFrame([ad_result]).to_csv(f"resultfiles/ldap_response_{filename}", mode='a', header=False, index=False)
     return "Script Run is Finished"
