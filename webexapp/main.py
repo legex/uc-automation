@@ -24,7 +24,6 @@ webex_acd_mig = WebexMigACD()
 currentdir = os.getcwd()
 webop = WebexOperation()
 
-
 def batch_update_ldap(file, filename):
     """Update CUCM Extension"""
     df = pd.read_csv(file, dtype={'targetNum': str})
@@ -65,7 +64,6 @@ def batch_update_ldap(file, filename):
                                 index=False
                                 )
     return "Script Run is Finished"
-
 
 def batch_update_webex_gen(file, filename):
     """Update Webex Extension"""

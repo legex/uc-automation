@@ -1,11 +1,11 @@
-import json
 import os
 import pandas as pd
 from pydantic import BaseModel
 from dotenv import load_dotenv
-from fastapi import FastAPI, Request, UploadFile, HTTPException, status
-from fastapi.responses import FileResponse
-from ldapapi.updateldap import update_contacts_num, update_contacts_num_withDID
+from fastapi import FastAPI, Request, UploadFile, HTTPException, status, Form, File
+from fastapi.responses import FileResponse, HTMLResponse
+from fastapi.templating import Jinja2Templates
+from ldapapi.updateldap import update_contacts_num, update_contacts_num_withDID, update_general_contacts_num_withDID
 from webexapp.main import batch_routepattern_auto, batch_update_ldap, batch_update_webex_gen, batch_update_webex_acd
 from cucmapi.axlop import AXLOperations
 from cucmapi.axlroutepattern import AXLRoutePatternOperations
@@ -19,7 +19,7 @@ from utils.logger import setup_logger
 # Load environment variables from .env file
 load_dotenv()
 API_TOKEN = os.getenv("WEBEXBOTTOKEN")
-
+templates = Jinja2Templates(directory="webexapp/templates")
 logger = setup_logger('webapp', 'log/webapp.log')
 prefixes = extension_prefix
 axloperations = AXLOperations()
@@ -55,6 +55,11 @@ async def room_webhook(request: Request):
         webexbot.send_message(room_id, "Hello! Welcome to the Webex Room.")
     return {"status": "success"}
 
+
+@app.get("/")
+@app.get("/", response_class=HTMLResponse)
+async def get_ui(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
 
 @app.get("/download/template/{template_name}")
 async def download_template(template_name: str):
@@ -104,101 +109,106 @@ async def download_numberadd_response(filename: str):
                         filename=f"numberadd_response_{filename}",
                         media_type='application/octet-stream')
 
-@app.post("/updateldap")
-async def update_ldap_numbers(query: QueryModelLdap | None = None,
-                              file: UploadFile | None = None):
-    if query is None and file is None:
+@app.post("/updateldap/single")
+async def update_ldap_numbers(query: QueryModelLdap):
+    if query is None:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
-                            detail="Either query or file must be provided.")
-    if query:
-        extension = query.extension
-        if query.externalnumber:
-            externalnumber = query.externalnumber
-            try:
-                update_contacts_num_withDID(
-                    query.username,
-                    internal_extension=extension,
-                    external_number=externalnumber
-                    )
-                return {"Status": "LDAP update initiated"}
-            except Exception as e:
-                raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                                    detail=f"Error updating LDAP: {str(e)}") from e
+                            detail="Query must be provided.")
+    extension = query.extension
+    if query.externalnumber:
+        externalnumber = query.externalnumber
         try:
-            update_contacts_num(query.username, internal_extension=extension)
+            update_general_contacts_num_withDID(
+                query.username,
+                external_number=externalnumber,
+                internal_extension=extension
+                )
             return {"Status": "LDAP update initiated"}
         except Exception as e:
             raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                                 detail=f"Error updating LDAP: {str(e)}") from e
-    if file:
-        if file.content_type != 'text/csv':
-            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
-                                detail="Invalid file type. Please upload a CSV file.")
-        contents = await file.read()
-        if not contents:
-            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
-                                detail="Uploaded file is empty")
-        try:
-            response = batch_update_ldap(pd.io.common.BytesIO(contents), file.filename)
-            return {"Status": "Success", "Detail": response}
-        except HTTPException as e:
-            return {"error": str(e)}
-        except Exception as e:
-            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                                detail=f"Error processing file: {str(e)}") from e
+    try:
+        update_contacts_num(query.username, internal_extension=extension)
+        return {"Status": "LDAP update initiated"}
+    except Exception as e:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                            detail=f"Error updating LDAP: {str(e)}") from e
 
-@app.post("/updatewebexgeneral")
-async def update_webex_general(query: QueryModelWebex | None = None,
-                                 file: UploadFile | None = None):
-    if query is None and file is None:
+@app.post("/updateldap/batch")
+async def batch_update_ldap_numbers(file: UploadFile):
+    if file is None:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
-                            detail="Either query or file must be provided.")
-    if query:
-        if query.externalnumber:
-            try:
-                webex_results = webex_acd_mig.patch_dn_acd(
-                    query.username,
-                    query.externalnumber,
-                    query.extension,
-                    query.region
-                    )
-                return {"Status": "Webex update initiated", "Detail": webex_results}
-            except Exception as e:
-                raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                                    detail=f"Error updating Webex with DID: {str(e)}") from e
+                            detail="File must be provided.")
+    if file.content_type != 'text/csv':
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail="Invalid file type. Please upload a CSV file.")
+    contents = await file.read()
+    if not contents:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail="Uploaded file is empty")
+    try:
+        response = batch_update_ldap(pd.io.common.BytesIO(contents), file.filename)
+        return {"Status": "Success", "Detail": response}
+    except HTTPException as e:
+        return {"error": str(e)}
+    except Exception as e:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                            detail=f"Error processing file: {str(e)}") from e
+
+@app.post("/updatewebexgeneral/single")
+async def update_webex_general(query: QueryModelWebex):
+    if query is None:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail="Query must be provided.")
+    if query.externalnumber:
         try:
-            webex_results = webex_mig_gen.patch_license_dn(
+            webex_results = webex_acd_mig.patch_dn_acd(
                 query.username,
+                query.externalnumber,
                 query.extension,
                 query.region
                 )
             return {"Status": "Webex update initiated", "Detail": webex_results}
         except Exception as e:
             raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                                detail=f"Error updating Webex: {str(e)}") from e
-    if file:
-        if file.content_type != 'text/csv':
-            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
-                                detail="Invalid file type. Please upload a CSV file.")
-        contents = await file.read()
-        if not contents:
-            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
-                                detail="Uploaded file is empty")
-        try:
-            response = batch_update_webex_gen(pd.io.common.BytesIO(contents), file.filename)
-            return {"Status": "Success", "Detail": response}
-        except HTTPException as e:
-            return {"error": str(e)}
-        except Exception as e:
-            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                                detail=f"Error processing file: {str(e)}") from e
+                                detail=f"Error updating Webex with DID: {str(e)}") from e
+    try:
+        webex_results = webex_mig_gen.patch_license_dn(
+            query.username,
+            query.extension,
+            query.region
+            )
+        return {"Status": "Webex update initiated", "Detail": webex_results}
+    except Exception as e:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                            detail=f"Error updating Webex: {str(e)}") from e
 
-@app.post("/updatewebexacd")
-async def update_webex_acd(query: QueryModelWebex | None = None,
-                                 file: UploadFile | None = None):
-    if query is None and file is None:
+@app.post("/updatewebexgeneral/batch")
+async def batch_update_webex_general(file: UploadFile | None = None):
+    if file is None:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
-                            detail="Either query or file must be provided.")
+                            detail="File must be provided.")
+    if file.content_type != 'text/csv':
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail="Invalid file type. Please upload a CSV file.")
+    contents = await file.read()
+    if not contents:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail="Uploaded file is empty")
+    try:
+        response = batch_update_webex_gen(pd.io.common.BytesIO(contents), file.filename)
+        return {"Status": "Success", "Detail": response}
+    except HTTPException as e:
+        return {"error": str(e)}
+    except Exception as e:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                            detail=f"Error processing file: {str(e)}") from e
+
+@app.post("/updatewebexacd/single")
+async def update_webex_acd(query: QueryModelWebex):
+    if query is None:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail="Query must be provided.")
     if query:
         if query.externalnumber:
             try:
@@ -215,22 +225,28 @@ async def update_webex_acd(query: QueryModelWebex | None = None,
         else:
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                                 detail="External number must be provided for ACD updates.")
-    if file:
-        if file.content_type != 'text/csv':
-            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
-                                detail="Invalid file type. Please upload a CSV file.")
-        contents = await file.read()
-        if not contents:
-            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
-                                detail="Uploaded file is empty")
-        try:
-            response = batch_update_webex_acd(pd.io.common.BytesIO(contents), file.filename)
-            return {"Status": "Success", "Detail": response}
-        except HTTPException as e:
-            return {"error": str(e)}
-        except Exception as e:
-            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                                detail=f"Error processing file: {str(e)}") from e
+
+@app.post("/updatewebexacd/batch")
+async def b_update_webex_acd(file: UploadFile | None = None):
+    if file is None:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail="File must be provided.")
+
+    if file.content_type != 'text/csv':
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail="Invalid file type. Please upload a CSV file.")
+    contents = await file.read()
+    if not contents:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail="Uploaded file is empty")
+    try:
+        response = batch_update_webex_acd(pd.io.common.BytesIO(contents), file.filename)
+        return {"Status": "Success", "Detail": response}
+    except HTTPException as e:
+        return {"error": str(e)}
+    except Exception as e:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                            detail=f"Error processing file: {str(e)}") from e
 
 @app.post("/routepattern")
 async def create_route_pattern(file: UploadFile):
