@@ -6,7 +6,7 @@ from fastapi import FastAPI, Request, UploadFile, HTTPException, status, Form, F
 from fastapi.responses import FileResponse, HTMLResponse
 from fastapi.templating import Jinja2Templates
 from ldapapi.updateldap import update_contacts_num, update_contacts_num_withDID, update_general_contacts_num_withDID
-from webexapp.main import batch_routepattern_auto, batch_update_ldap, batch_update_webex_gen, batch_update_webex_acd
+from webexapp.main import batch_routepattern_auto, batch_update_ldap, batch_update_ldap_acd, batch_update_webex_gen, batch_update_webex_acd
 from cucmapi.axlop import AXLOperations
 from cucmapi.axlroutepattern import AXLRoutePatternOperations
 from metadata.settings import extension_prefix
@@ -56,19 +56,30 @@ async def room_webhook(request: Request):
     return {"status": "success"}
 
 
-@app.get("/")
 @app.get("/", response_class=HTMLResponse)
 async def get_ui(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+    return templates.TemplateResponse("index_new.html", {"request": request})
+
+@app.get("/single-update", response_class=HTMLResponse)
+async def single_update_page(request: Request):
+    return templates.TemplateResponse("single_update.html", {"request": request})
+
+@app.get("/batch-update", response_class=HTMLResponse)
+async def batch_update_page(request: Request):
+    return templates.TemplateResponse("batch_update.html", {"request": request})
+
+@app.get("/templates", response_class=HTMLResponse)
+async def templates_page(request: Request):
+    return templates.TemplateResponse("templates.html", {"request": request})
 
 @app.get("/download/template/{template_name}")
 async def download_template(template_name: str):
     templates = {
-        "ldap_update": "templates/ldap_update_template.csv",
-        "webex_general_update": "templates/webex_general_update_template.csv",
-        "webex_acd_update": "templates/webex_acd_update_template.csv",
-        "number_add": "templates/number_add_template.csv",
-        "cucm_route_pattern": "templates/cucm_route_pattern_template.csv"
+        "ldap_update": "template/ldap_update_template.csv",
+        "webex_general_update": "template/webex_general_update_template.csv",
+        "webex_acd_update": "template/webex_general_update_template.csv",
+        "number_add": "template/number_add_template.csv",
+        "cucm_route_pattern": "template/cucm_route_pattern_template.csv"
     }
     file_path = templates.get(template_name)
     if not file_path or not os.path.exists(file_path):
@@ -99,24 +110,48 @@ async def number_add(file: UploadFile):
     except HTTPException as e:
         return {"error": str(e)}
 
-@app.get("/download/{filename}")
-async def download_numberadd_response(filename: str):
-    file_path = f"resultfiles/numberadd_response_{filename}"
+@app.get("/download/result/{result_type}/{filename}")
+async def download_result_file(result_type: str, filename: str):
+    # Map result types to file prefixes
+    result_prefixes = {
+        "ldap": "ldap_response_",
+        "webex_general": "webex_migresult_",
+        "webex_acd": "acd_migresult_",
+        "number_add": "numberadd_response_",
+        "route_pattern": "rpupdateresult_"
+    }
+    
+    if result_type not in result_prefixes:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail="Invalid result type.")
+    
+    file_path = f"resultfiles/{result_prefixes[result_type]}{filename}"
     if not os.path.exists(file_path):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                             detail="File not found.")
     return FileResponse(path=file_path,
-                        filename=f"numberadd_response_{filename}",
+                        filename=f"{result_prefixes[result_type]}{filename}",
                         media_type='application/octet-stream')
 
 @app.post("/updateldap/single")
-async def update_ldap_numbers(query: QueryModelLdap):
+async def update_ldap_numbers(query: QueryModelLdap, acd: bool = Form(False)):
     if query is None:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail="Query must be provided.")
     extension = query.extension
     if query.externalnumber:
         externalnumber = query.externalnumber
+        if acd:
+            try:
+                update_contacts_num_withDID(
+                    query.username,
+                    internal_extension=extension,
+                    external_number=externalnumber
+                    )
+                return {"Status": "LDAP update initiated"}
+            except Exception as e:
+                raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                                    detail=f"Error updating LDAP with DID: {str(e)}") from e
         try:
             update_general_contacts_num_withDID(
                 query.username,
@@ -135,7 +170,7 @@ async def update_ldap_numbers(query: QueryModelLdap):
                             detail=f"Error updating LDAP: {str(e)}") from e
 
 @app.post("/updateldap/batch")
-async def batch_update_ldap_numbers(file: UploadFile):
+async def batch_update_ldap_numbers(file: UploadFile, acd: bool = Form(False)):
     if file is None:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail="File must be provided.")
@@ -146,6 +181,15 @@ async def batch_update_ldap_numbers(file: UploadFile):
     if not contents:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail="Uploaded file is empty")
+    if acd:
+        try:
+            response = batch_update_ldap_acd(pd.io.common.BytesIO(contents), file.filename)
+            return {"Status": "Success", "Detail": response}
+        except HTTPException as e:
+            return {"error": str(e)}
+        except Exception as e:
+            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                                detail=f"Error processing file: {str(e)}") from e
     try:
         response = batch_update_ldap(pd.io.common.BytesIO(contents), file.filename)
         return {"Status": "Success", "Detail": response}
@@ -268,3 +312,15 @@ async def create_route_pattern(file: UploadFile):
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                             detail=f"Error processing file: {str(e)}") from e
+
+@app.post("/removewebexlicense/single")
+async def remove_webex_license(email: str = Form(...)):
+    if not email:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail="Email must be provided.")
+    try:
+        result = webop.remove_webex_license(email)
+        return {"Status": "Webex license removal initiated", "Detail": result}
+    except Exception as e:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                            detail=f"Error removing Webex license: {str(e)}") from e

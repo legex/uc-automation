@@ -169,19 +169,20 @@ class WebexGenMigration:
             return None
 
         location_id = self.baseoperations.get_location_id(employee_region)
+        existing_licenses = set(payload.get("licenses", []))
         licenses_ops = [{
-                "id": "Y2lzY29zcGFyazovL3VzL0xJQ0VOU0UvYTM3NDkzMTUtYWUwOS00YTUyLTgwNmMtMmMzMjIyZmE3YzJjOkJDU1REXzFhNGRhOTZiLTNmYWUtNGVlYi1hZDYwLWFkNTA3MTE4NzFkMA",
+                "id": WEBEX_LICENSE_ID,
                 "operation": "add",
                 "properties": {
                     "locationId": location_id,
                     "extension": extension
                 }
-            },
-            {
-                "id": "Y2lzY29zcGFyazovL3VzL0xJQ0VOU0UvYTM3NDkzMTUtYWUwOS00YTUyLTgwNmMtMmMzMjIyZmE3YzJjOkNKUFNURF84NTk0NTU0Ny1hODJlLTQzNjItYjMyNC0xZjcwNzkwNDk1ODY",
-                "operation": "add"
             }]
-
+        if UCM_LICENSE_ID in existing_licenses:
+            licenses_ops.append({
+                "id": UCM_LICENSE_ID,
+                "operation": "remove"
+            })
         patch_payload = {
             "email": email,
             "personId": userid,

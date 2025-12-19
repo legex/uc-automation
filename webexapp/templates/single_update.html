@@ -1,0 +1,244 @@
+{% extends "base.html" %}
+
+{% block title %}Single Update - Webex CUCM Integration{% endblock %}
+
+{% block content %}
+<h1>Single User Update</h1>
+
+<div class="section">
+    <a href="/" class="btn btn-secondary" style="margin-bottom: 20px;">← Back to Home</a>
+    
+    <h2>Update Individual User Records</h2>
+    <p style="color: #cccccc; margin-bottom: 30px;">Choose the type of update you want to perform for a single user.</p>
+
+    <!-- LDAP Update -->
+    <div class="section" style="background: rgba(0, 100, 200, 0.15);">
+        <h3 style="color: #00d4ff; margin-bottom: 15px;">📁 LDAP Directory Update</h3>
+        <form id="ldapForm">
+            <div class="form-group">
+                <label for="ldap_username">Username *</label>
+                <input type="text" id="ldap_username" name="username" required placeholder="Enter username">
+            </div>
+            <div class="form-group">
+                <label for="ldap_extension">Extension *</label>
+                <input type="text" id="ldap_extension" name="extension" required placeholder="Enter extension">
+            </div>
+            <div class="form-group">
+                <label for="ldap_external">External Number (Optional)</label>
+                <input type="text" id="ldap_external" name="externalnumber" placeholder="Enter external number">
+            </div>
+            <div class="form-group">
+                <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                    <input type="checkbox" id="ldap_acd" name="acd" style="width: auto; cursor: pointer;">
+                    <span>ACD (Automatic Call Distribution)</span>
+                </label>
+            </div>
+            <button type="submit" class="btn btn-primary">Update LDAP</button>
+            <div id="ldap_loader" class="loader"></div>
+            <div id="ldap_result"></div>
+        </form>
+    </div>
+
+    <!-- Webex General Update -->
+    <div class="section" style="background: rgba(0, 100, 200, 0.15);">
+        <h3 style="color: #00d4ff; margin-bottom: 15px;">☁️ Webex General Update</h3>
+        <form id="webexGeneralForm">
+            <div class="form-group">
+                <label for="webex_gen_username">Username *</label>
+                <input type="text" id="webex_gen_username" name="username" required placeholder="Enter username">
+            </div>
+            <div class="form-group">
+                <label for="webex_gen_extension">Extension *</label>
+                <input type="text" id="webex_gen_extension" name="extension" required placeholder="Enter extension">
+            </div>
+            <div class="form-group">
+                <label for="webex_gen_region">Region *</label>
+                <input type="text" id="webex_gen_region" name="region" required placeholder="Enter region">
+            </div>
+            <div class="form-group">
+                <label for="webex_gen_external">External Number (Optional)</label>
+                <input type="text" id="webex_gen_external" name="externalnumber" placeholder="Enter external number">
+            </div>
+            <button type="submit" class="btn btn-primary">Update Webex General</button>
+            <div id="webex_gen_loader" class="loader"></div>
+            <div id="webex_gen_result"></div>
+        </form>
+    </div>
+
+    <!-- Webex ACD Update -->
+    <div class="section" style="background: rgba(0, 100, 200, 0.15);">
+        <h3 style="color: #00d4ff; margin-bottom: 15px;">📞 Webex ACD Update</h3>
+        <form id="webexACDForm">
+            <div class="form-group">
+                <label for="webex_acd_username">Username *</label>
+                <input type="text" id="webex_acd_username" name="username" required placeholder="Enter username">
+            </div>
+            <div class="form-group">
+                <label for="webex_acd_extension">Extension *</label>
+                <input type="text" id="webex_acd_extension" name="extension" required placeholder="Enter extension">
+            </div>
+            <div class="form-group">
+                <label for="webex_acd_region">Region *</label>
+                <input type="text" id="webex_acd_region" name="region" required placeholder="Enter region">
+            </div>
+            <div class="form-group">
+                <label for="webex_acd_external">External Number *</label>
+                <input type="text" id="webex_acd_external" name="externalnumber" required placeholder="Enter external number">
+            </div>
+            <button type="submit" class="btn btn-primary">Update Webex ACD</button>
+            <div id="webex_acd_loader" class="loader"></div>
+            <div id="webex_acd_result"></div>
+        </form>
+    </div>
+
+    <!-- Remove Webex License -->
+    <div class="section" style="background: rgba(0, 100, 200, 0.15);">
+        <h3 style="color: #00d4ff; margin-bottom: 15px;">🗑️ Remove Webex License</h3>
+        <form id="removeLicenseForm">
+            <div class="form-group">
+                <label for="remove_license_email">Email *</label>
+                <input type="email" id="remove_license_email" name="email" required placeholder="Enter email address">
+            </div>
+            <button type="submit" class="btn btn-primary">Remove License</button>
+            <div id="remove_license_loader" class="loader"></div>
+            <div id="remove_license_result"></div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // LDAP Form Handler
+    document.getElementById('ldapForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const loader = document.getElementById('ldap_loader');
+        const result = document.getElementById('ldap_result');
+        
+        loader.style.display = 'block';
+        result.innerHTML = '';
+        
+        const formData = new FormData();
+        formData.append('username', document.getElementById('ldap_username').value);
+        formData.append('extension', document.getElementById('ldap_extension').value);
+        const externalNumber = document.getElementById('ldap_external').value;
+        if (externalNumber) {
+            formData.append('externalnumber', externalNumber);
+        }
+        formData.append('acd', document.getElementById('ldap_acd').checked);
+        
+        try {
+            const response = await fetch('/updateldap/single', {
+                method: 'POST',
+                body: formData
+            });
+            const data = await response.json();
+            loader.style.display = 'none';
+            result.innerHTML = `<div class="alert alert-success">${data.Status || JSON.stringify(data)}</div>`;
+        } catch (error) {
+            loader.style.display = 'none';
+            result.innerHTML = `<div class="alert alert-error">Error: ${error.message}</div>`;
+        }
+    });
+
+    // Webex General Form Handler
+    document.getElementById('webexGeneralForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const loader = document.getElementById('webex_gen_loader');
+        const result = document.getElementById('webex_gen_result');
+        
+        loader.style.display = 'block';
+        result.innerHTML = '';
+        
+        const formData = {
+            username: document.getElementById('webex_gen_username').value,
+            extension: document.getElementById('webex_gen_extension').value,
+            region: document.getElementById('webex_gen_region').value,
+            externalnumber: document.getElementById('webex_gen_external').value || null
+        };
+        
+        try {
+            const response = await fetch('/updatewebexgeneral/single', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(formData)
+            });
+            const data = await response.json();
+            loader.style.display = 'none';
+            result.innerHTML = `<div class="alert alert-success">${data.Status || JSON.stringify(data)}</div>`;
+        } catch (error) {
+            loader.style.display = 'none';
+            result.innerHTML = `<div class="alert alert-error">Error: ${error.message}</div>`;
+        }
+    });
+
+    // Webex ACD Form Handler
+    document.getElementById('webexACDForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const loader = document.getElementById('webex_acd_loader');
+        const result = document.getElementById('webex_acd_result');
+        
+        loader.style.display = 'block';
+        result.innerHTML = '';
+        
+        const formData = {
+            username: document.getElementById('webex_acd_username').value,
+            extension: document.getElementById('webex_acd_extension').value,
+            region: document.getElementById('webex_acd_region').value,
+            externalnumber: document.getElementById('webex_acd_external').value
+        };
+        
+        try {
+            const response = await fetch('/updatewebexacd/single', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(formData)
+            });
+            const data = await response.json();
+            loader.style.display = 'none';
+            result.innerHTML = `<div class="alert alert-success">${data.Status || JSON.stringify(data)}</div>`;
+        } catch (error) {
+            loader.style.display = 'none';
+            result.innerHTML = `<div class="alert alert-error">Error: ${error.message}</div>`;
+        }
+    });
+
+    // Remove License Form Handler
+    document.getElementById('removeLicenseForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const loader = document.getElementById('remove_license_loader');
+        const result = document.getElementById('remove_license_result');
+        
+        loader.style.display = 'block';
+        result.innerHTML = '';
+        
+        const formData = new FormData();
+        formData.append('email', document.getElementById('remove_license_email').value);
+        
+        try {
+            const response = await fetch('/removewebexlicense/single', {
+                method: 'POST',
+                body: formData
+            });
+            const data = await response.json();
+            loader.style.display = 'none';
+            
+            if (response.ok) {
+                result.innerHTML = `<div class="alert alert-success">
+                    <strong>Success!</strong> ${data.Status || 'License removed successfully'}
+                    ${data.Detail ? '<br><small>' + JSON.stringify(data.Detail) + '</small>' : ''}
+                </div>`;
+            } else {
+                result.innerHTML = `<div class="alert alert-error">
+                    <strong>Error!</strong> ${data.detail || data.error || 'Operation failed'}
+                </div>`;
+            }
+        } catch (error) {
+            loader.style.display = 'none';
+            result.innerHTML = `<div class="alert alert-error">
+                <strong>Error!</strong> ${error.message}
+            </div>`;
+        }
+    });
+</script>
+{% endblock %}

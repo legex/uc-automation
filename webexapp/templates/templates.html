@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block title %}Templates - Webex CUCM Integration{% endblock %}
+
+{% block content %}
+<h1>Download CSV Templates</h1>
+
+<div class="section">
+    <a href="/" class="btn btn-secondary" style="margin-bottom: 20px;">← Back to Home</a>
+    
+    <h2>Available Templates</h2>
+    <p style="color: #cccccc; margin-bottom: 30px;">Download CSV templates for batch operations. Each template includes the required columns and sample data.</p>
+
+    <div class="card-grid">
+        <!-- LDAP Update Template -->
+        <div class="card">
+            <div class="card-icon">📁</div>
+            <h3 class="card-title">LDAP Update Template</h3>
+            <p class="card-description">
+                Template for batch LDAP directory updates including username, extension, and external number fields.
+            </p>
+            <a href="/download/template/ldap_update" class="btn btn-primary" style="margin-top: 15px; width: 100%; text-align: center;">
+                📥 Download Template
+            </a>
+        </div>
+
+        <!-- Webex General Update Template -->
+        <div class="card">
+            <div class="card-icon">☁️</div>
+            <h3 class="card-title">Webex General Update Template</h3>
+            <p class="card-description">
+                Template for batch Webex general user updates with license, DN, and region configuration.
+            </p>
+            <a href="/download/template/webex_general_update" class="btn btn-primary" style="margin-top: 15px; width: 100%; text-align: center;">
+                📥 Download Template
+            </a>
+        </div>
+
+        <!-- Webex ACD Update Template -->
+        <div class="card">
+            <div class="card-icon">📞</div>
+            <h3 class="card-title">Webex ACD Update Template</h3>
+            <p class="card-description">
+                Template for batch Webex ACD configuration including external number and region settings.
+            </p>
+            <a href="/download/template/webex_acd_update" class="btn btn-primary" style="margin-top: 15px; width: 100%; text-align: center;">
+                📥 Download Template
+            </a>
+        </div>
+
+        <!-- Number Add Template -->
+        <div class="card">
+            <div class="card-icon">🔢</div>
+            <h3 class="card-title">Number Add Template</h3>
+            <p class="card-description">
+                Template for adding new phone numbers to the system in bulk operations.
+            </p>
+            <a href="/download/template/number_add" class="btn btn-primary" style="margin-top: 15px; width: 100%; text-align: center;">
+                📥 Download Template
+            </a>
+        </div>
+
+        <!-- CUCM Route Pattern Template -->
+        <div class="card">
+            <div class="card-icon">🛣️</div>
+            <h3 class="card-title">CUCM Route Pattern Template</h3>
+            <p class="card-description">
+                Template for batch creation of CUCM route patterns with automated configuration.
+            </p>
+            <a href="/download/template/cucm_route_pattern" class="btn btn-primary" style="margin-top: 15px; width: 100%; text-align: center;">
+                📥 Download Template
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="section">
+    <h2>Template Guidelines</h2>
+    <div style="color: #cccccc; line-height: 1.8;">
+        <h3 style="color: #00d4ff; margin-top: 20px; margin-bottom: 10px;">📝 General Guidelines:</h3>
+        <ul style="list-style-position: inside;">
+            <li>• All templates are in CSV format</li>
+            <li>• First row contains column headers - do not modify them</li>
+            <li>• Required fields are marked with asterisks (*)</li>
+            <li>• Optional fields can be left empty</li>
+            <li>• Remove sample data before uploading your actual data</li>
+        </ul>
+
+        <h3 style="color: #00d4ff; margin-top: 20px; margin-bottom: 10px;">⚠️ Important Notes:</h3>
+        <ul style="list-style-position: inside;">
+            <li>• Ensure proper CSV formatting (comma-separated values)</li>
+            <li>• Use UTF-8 encoding to avoid character issues</li>
+            <li>• Maximum file size: 10MB</li>
+            <li>• Test with a small batch before processing large files</li>
+            <li>• Keep backups of your data before batch operations</li>
+        </ul>
+
+        <h3 style="color: #00d4ff; margin-top: 20px; margin-bottom: 10px;">✅ Best Practices:</h3>
+        <ul style="list-style-position: inside;">
+            <li>• Validate data format before upload</li>
+            <li>• Use consistent data formatting across all rows</li>
+            <li>• Double-check critical fields like usernames and extensions</li>
+            <li>• Review result files after batch operations</li>
+            <li>• Contact support if you encounter repeated errors</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Add smooth animations
+    document.addEventListener('DOMContentLoaded', function() {
+        const cards = document.querySelectorAll('.card');
+        cards.forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+                card.style.transition = 'all 0.5s ease';
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, index * 100);
+        });
+    });
+</script>
+{% endblock %}

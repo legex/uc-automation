@@ -212,11 +212,19 @@ class WebexOperation:
         licenses_ops = []
 
         # Add Webex license if missing
-        if WEBEX_LICENSE_ID in existing_licenses:
+        if UCM_LICENSE_ID not in existing_licenses:
             licenses_ops.append({
-                "id": WEBEX_LICENSE_ID,
-                "operation": "remove"
+                "id": UCM_LICENSE_ID,
+                "operation": "add"
             })
+
+            # Remove Webex license if present
+            if WEBEX_LICENSE_ID in existing_licenses:
+                licenses_ops.append({
+                    "id": WEBEX_LICENSE_ID,
+                    "operation": "remove"
+                })
+
 
         if not licenses_ops:
             logger.info("No license changes required for %s", email)

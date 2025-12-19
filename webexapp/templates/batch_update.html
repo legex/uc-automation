@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+
+{% block title %}Batch Update - Webex CUCM Integration{% endblock %}
+
+{% block content %}
+<h1>Batch Operations</h1>
+
+<div class="section">
+    <a href="/" class="btn btn-secondary" style="margin-bottom: 20px;">← Back to Home</a>
+    
+    <h2>Upload CSV Files for Bulk Updates</h2>
+    <p style="color: #cccccc; margin-bottom: 30px;">Upload CSV files to perform batch operations on multiple users. Download templates from the Templates page.</p>
+
+    <!-- LDAP Batch Update -->
+    <div class="section" style="background: rgba(0, 100, 200, 0.15);">
+        <h3 style="color: #00d4ff; margin-bottom: 15px;">📁 LDAP Batch Update</h3>
+        <form id="ldapBatchForm">
+            <div class="form-group">
+                <label for="ldap_batch_file">Upload CSV File *</label>
+                <input type="file" id="ldap_batch_file" accept=".csv" required style="padding: 8px; background: rgba(0, 0, 0, 0.5);">
+            </div>
+            <div class="form-group">
+                <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                    <input type="checkbox" id="ldap_batch_acd" name="acd" style="width: auto; cursor: pointer;">
+                    <span>ACD (Automatic Call Distribution)</span>
+                </label>
+            </div>
+            <button type="submit" class="btn btn-primary">Upload and Process</button>
+            <div id="ldap_batch_loader" class="loader"></div>
+            <div id="ldap_batch_result"></div>
+        </form>
+    </div>
+
+    <!-- Webex General Batch Update -->
+    <div class="section" style="background: rgba(0, 100, 200, 0.15);">
+        <h3 style="color: #00d4ff; margin-bottom: 15px;">☁️ Webex General Batch Update</h3>
+        <form id="webexGeneralBatchForm">
+            <div class="form-group">
+                <label for="webex_gen_batch_file">Upload CSV File *</label>
+                <input type="file" id="webex_gen_batch_file" accept=".csv" required style="padding: 8px; background: rgba(0, 0, 0, 0.5);">
+            </div>
+            <button type="submit" class="btn btn-primary">Upload and Process</button>
+            <div id="webex_gen_batch_loader" class="loader"></div>
+            <div id="webex_gen_batch_result"></div>
+        </form>
+    </div>
+
+    <!-- Webex ACD Batch Update -->
+    <div class="section" style="background: rgba(0, 100, 200, 0.15);">
+        <h3 style="color: #00d4ff; margin-bottom: 15px;">📞 Webex ACD Batch Update</h3>
+        <form id="webexACDBatchForm">
+            <div class="form-group">
+                <label for="webex_acd_batch_file">Upload CSV File *</label>
+                <input type="file" id="webex_acd_batch_file" accept=".csv" required style="padding: 8px; background: rgba(0, 0, 0, 0.5);">
+            </div>
+            <button type="submit" class="btn btn-primary">Upload and Process</button>
+            <div id="webex_acd_batch_loader" class="loader"></div>
+            <div id="webex_acd_batch_result"></div>
+        </form>
+    </div>
+
+    <!-- Number Add -->
+    <div class="section" style="background: rgba(0, 100, 200, 0.15);">
+        <h3 style="color: #00d4ff; margin-bottom: 15px;">🔢 Add Numbers</h3>
+        <form id="numberAddForm">
+            <div class="form-group">
+                <label for="number_add_file">Upload CSV File *</label>
+                <input type="file" id="number_add_file" accept=".csv" required style="padding: 8px; background: rgba(0, 0, 0, 0.5);">
+            </div>
+            <button type="submit" class="btn btn-primary">Upload and Process</button>
+            <div id="number_add_loader" class="loader"></div>
+            <div id="number_add_result"></div>
+        </form>
+    </div>
+
+    <!-- Route Pattern -->
+    <div class="section" style="background: rgba(0, 100, 200, 0.15);">
+        <h3 style="color: #00d4ff; margin-bottom: 15px;">🛣️ Route Pattern Creation</h3>
+        <form id="routePatternForm">
+            <div class="form-group">
+                <label for="route_pattern_file">Upload CSV File *</label>
+                <input type="file" id="route_pattern_file" accept=".csv" required style="padding: 8px; background: rgba(0, 0, 0, 0.5);">
+            </div>
+            <button type="submit" class="btn btn-primary">Upload and Process</button>
+            <div id="route_pattern_loader" class="loader"></div>
+            <div id="route_pattern_result"></div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Helper function to handle file upload with download option
+    async function handleFileUpload(formId, fileInputId, endpoint, loaderId, resultId, resultType, acdCheckboxId = null) {
+        const form = document.getElementById(formId);
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const loader = document.getElementById(loaderId);
+            const result = document.getElementById(resultId);
+            const fileInput = document.getElementById(fileInputId);
+            
+            loader.style.display = 'block';
+            result.innerHTML = '';
+            
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+            const fileName = fileInput.files[0].name;
+            
+            // Add ACD checkbox value if checkbox ID is provided
+            if (acdCheckboxId) {
+                const acdCheckbox = document.getElementById(acdCheckboxId);
+                if (acdCheckbox) {
+                    formData.append('acd', acdCheckbox.checked);
+                }
+            }
+            
+            try {
+                const response = await fetch(endpoint, {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.json();
+                loader.style.display = 'none';
+                
+                if (response.ok) {
+                    result.innerHTML = `<div class="alert alert-success">
+                        <strong>Success!</strong> ${data.Status || 'Operation completed successfully'}
+                        ${data.Detail ? '<br><small>' + JSON.stringify(data.Detail) + '</small>' : ''}
+                        <br><br>
+                        <a href="/download/result/${resultType}/${fileName}" 
+                           class="btn btn-primary" 
+                           style="margin-top: 10px; display: inline-block;">
+                            📥 Download Result File
+                        </a>
+                    </div>`;
+                } else {
+                    result.innerHTML = `<div class="alert alert-error">
+                        <strong>Error!</strong> ${data.detail || data.error || 'Operation failed'}
+                    </div>`;
+                }
+            } catch (error) {
+                loader.style.display = 'none';
+                result.innerHTML = `<div class="alert alert-error">
+                    <strong>Error!</strong> ${error.message}
+                </div>`;
+            }
+        });
+    }
+
+    // Initialize all form handlers with result types
+    handleFileUpload('ldapBatchForm', 'ldap_batch_file', '/updateldap/batch', 'ldap_batch_loader', 'ldap_batch_result', 'ldap', 'ldap_batch_acd');
+    handleFileUpload('webexGeneralBatchForm', 'webex_gen_batch_file', '/updatewebexgeneral/batch', 'webex_gen_batch_loader', 'webex_gen_batch_result', 'webex_general');
+    handleFileUpload('webexACDBatchForm', 'webex_acd_batch_file', '/updatewebexacd/batch', 'webex_acd_batch_loader', 'webex_acd_batch_result', 'webex_acd');
+    handleFileUpload('numberAddForm', 'number_add_file', '/numberadd', 'number_add_loader', 'number_add_result', 'number_add');
+    handleFileUpload('routePatternForm', 'route_pattern_file', '/routepattern', 'route_pattern_loader', 'route_pattern_result', 'route_pattern');
+</script>
+{% endblock %}
