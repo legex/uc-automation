@@ -20,10 +20,12 @@ ipython==9.5.0
 ipython_pygments_lexers==1.1.1
 isodate==0.7.2
 jedi==0.19.2
+Jinja2==3.1.6
 jupyter_client==8.6.3
 jupyter_core==5.8.1
 ldap3==2.9.1
 lxml==6.0.0
+MarkupSafe==3.0.3
 matplotlib-inline==0.1.7
 nest-asyncio==1.6.0
 numpy==2.3.2
@@ -44,6 +46,7 @@ pydantic_core==2.41.4
 Pygments==2.19.2
 python-dateutil==2.9.0.post0
 python-dotenv==1.1.1
+python-multipart==0.0.21
 pytz==2025.2
 pyzmq==27.1.0
 requests==2.32.4

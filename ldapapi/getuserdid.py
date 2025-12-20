@@ -1,3 +1,11 @@
+"""LDAP User DID Retrieval Module.
+
+This module provides functions to retrieve user details including DID numbers
+from Active Directory via LDAP queries.
+
+Functions:
+    user_details: Fetch user contact and DID information from LDAP.
+"""
 import os
 from dotenv import load_dotenv
 import ldap3
@@ -18,6 +26,28 @@ SERVER = os.getenv('LDAP_SERVER')
 LDAP_USERNAME = os.getenv('LDAPUSER')
 LDAP_PASSWORD = os.getenv('LDAPPASS')
 def user_details(userid):
+	"""
+	Retrieve detailed user information from Active Directory.
+	
+	Queries LDAP for user details including name, email, phone numbers,
+	employee ID, and country.
+	
+	Args:
+		userid (str): The sAMAccountName of the user to query.
+	
+	Returns:
+		dict: Dictionary containing user details with keys:
+			- Name: Full name
+			- Email: Email address
+			- UserId: sAMAccountName
+			- Emp_ID: Employee number
+			- Country: Country code
+			- extension: Extension/other telephone number
+			- DID: Main telephone number
+	
+	Raises:
+		ConnectionError: If LDAP connection fails.
+	"""
 	try:
 		server = Server(SERVER, get_info=ALL)
 		conn = Connection(server, user=LDAP_USERNAME, password=LDAP_PASSWORD, authentication=NTLM)
