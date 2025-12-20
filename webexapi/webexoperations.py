@@ -1,3 +1,12 @@
+"""Webex Operations Module.
+
+This module provides common operations for interacting with Webex APIs,
+including user lookups, location queries, and license management.
+
+Classes:
+    WebexOperation: Handles core Webex API operations like user queries,
+                    location lookups, and license updates.
+"""
 import os
 import json
 import requests

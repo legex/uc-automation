@@ -1,3 +1,12 @@
+"""Webex General Migration Module.
+
+This module handles Webex Calling license migration for general users.
+It manages the addition of Webex Calling Professional licenses and removal
+of UCM licenses, along with location and extension configuration.
+
+Classes:
+    WebexGenMigration: Manages general Webex user license and calling configuration.
+"""
 import os
 import json
 import requests
@@ -77,25 +86,21 @@ class WebexGenMigration:
 
         location_id = self.baseoperations.get_location_id(employee_region)
         existing_licenses = set(payload.get("licenses", []))
-        licenses_ops = []
-
-        # Add Webex license if missing
-        if WEBEX_LICENSE_ID not in existing_licenses:
-            licenses_ops.append({
+        licenses_ops = [{
                 "id": WEBEX_LICENSE_ID,
                 "operation": "add",
                 "properties": {
                     "locationId": location_id,
                     "extension": extension
                 }
-            })
+            }]
 
-            # Remove UCM license if present
-            if UCM_LICENSE_ID in existing_licenses:
-                licenses_ops.append({
-                    "id": UCM_LICENSE_ID,
-                    "operation": "remove"
-                })
+        # Remove UCM license if present
+        if UCM_LICENSE_ID in existing_licenses:
+            licenses_ops.append({
+                "id": UCM_LICENSE_ID,
+                "operation": "remove"
+            })
 
         if not licenses_ops:
             logger.info("No license changes required for %s", email)

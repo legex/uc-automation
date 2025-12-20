@@ -1,3 +1,11 @@
+"""Webex Base Module.
+
+This module provides the base class for Webex API operations, handling
+authentication and common HTTP header construction.
+
+Classes:
+    WebexBase: Abstract base class providing authentication headers for Webex API calls.
+"""
 import os
 import json
 import requests

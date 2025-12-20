@@ -1,3 +1,15 @@
+"""
+LDAP Contact Number Update Module.
+
+This module provides functions to update user contact information in Active Directory
+via LDAP. It supports updating internal extensions, external DID numbers, and various
+combinations for both general and ACD (Automatic Call Distribution) users.
+
+Environment Variables Required:
+    LDAP_SERVER: The LDAP server hostname
+    LDAPUSER: LDAP username for authentication
+    LDAPPASS: LDAP password for authentication
+"""
 import os
 from dotenv import load_dotenv
 import ldap3
@@ -19,6 +31,26 @@ LDAP_PASSWORD = os.getenv('LDAPPASS')
 def update_contacts_num_withDID(userid, internal_extension,
 								external_number
 								):
+	"""
+	Update LDAP contact information with both internal extension and external DID number.
+	
+	This function updates three LDAP attributes:
+	- telephoneNumber: Set to the external_number
+	- AKA-phoneExtension: Set to the internal_extension
+	- otherTelephone: Cleared (set to empty)
+	
+	Args:
+		userid (str): The sAMAccountName of the user in Active Directory.
+		internal_extension (str): The internal phone extension number.
+		external_number (str): The external/DID phone number.
+	
+	Returns:
+		bool: True if update successful, False if an error occurs.
+	
+	Raises:
+		ConnectionError: If LDAP connection fails.
+		Exception: For other errors during the update process.
+	"""
 	try:
 		server = Server(SERVER, get_info=ALL)
 		conn = Connection(server, user=LDAP_USERNAME, password=LDAP_PASSWORD, authentication=NTLM)
@@ -58,6 +90,23 @@ def update_contacts_num_withDID(userid, internal_extension,
 
 
 def update_contacts_num(userid, internal_extension):
+	"""
+	Update LDAP contact with internal extension only.
+	
+	This function updates the telephoneNumber LDAP attribute with the
+	provided internal extension.
+	
+	Args:
+		userid (str): The sAMAccountName of the user in Active Directory.
+		internal_extension (str): The internal phone extension number.
+	
+	Returns:
+		bool: True if update successful, False if an error occurs.
+	
+	Raises:
+		ConnectionError: If LDAP connection fails.
+		Exception: For other errors during the update process.
+	"""
 	try:
 		server = Server(SERVER, get_info=ALL)
 		conn = Connection(server, user=LDAP_USERNAME, password=LDAP_PASSWORD, authentication=NTLM)
@@ -94,6 +143,23 @@ def update_contacts_num(userid, internal_extension):
 		return False
 	
 def update_acdcontacts_num(userid, internal_extension):
+	"""
+	Update LDAP ACD contact with internal extension.
+	
+	This function updates the AKA-phoneExtension LDAP attribute with the
+	provided internal extension for ACD (Automatic Call Distribution) users.
+	
+	Args:
+		userid (str): The sAMAccountName of the user in Active Directory.
+		internal_extension (str): The internal phone extension number.
+	
+	Returns:
+		bool: True if update successful, False if an error occurs.
+	
+	Raises:
+		ConnectionError: If LDAP connection fails.
+		Exception: For other errors during the update process.
+	"""
 	try:
 		server = Server(SERVER, get_info=ALL)
 		conn = Connection(server, user=LDAP_USERNAME, password=LDAP_PASSWORD, authentication=NTLM)
@@ -130,6 +196,26 @@ def update_acdcontacts_num(userid, internal_extension):
 		return False
 	
 def update_general_contacts_num_withDID(userid,external_number, internal_extension):
+	"""
+	Update LDAP general contact with extension and external number.
+	
+	This function updates three LDAP attributes for general users:
+	- telephoneNumber: Set to the internal_extension
+	- AKA-phoneExtension: Cleared (set to empty)
+	- otherTelephone: Set to the external_number
+	
+	Args:
+		userid (str): The sAMAccountName of the user in Active Directory.
+		external_number (str): The external/DID phone number.
+		internal_extension (str): The internal phone extension number.
+	
+	Returns:
+		bool: True if update successful, False if an error occurs.
+	
+	Raises:
+		ConnectionError: If LDAP connection fails.
+		Exception: For other errors during the update process.
+	"""
 	try:
 		server = Server(SERVER, get_info=ALL)
 		conn = Connection(server, user=LDAP_USERNAME, password=LDAP_PASSWORD, authentication=NTLM)

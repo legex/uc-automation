@@ -1,3 +1,11 @@
+"""Webex ACD Migration Module.
+
+This module handles Webex Calling license migration for ACD (Automatic Call Distribution) users.
+It manages license updates with phone numbers, extensions, and location configuration.
+
+Classes:
+    WebexMigACD: Manages ACD user license and calling configuration with phone number assignment.
+"""
 import json
 import requests
 from requests import HTTPError

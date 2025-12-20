@@ -1,4 +1,11 @@
-import sys
+"""CUCM AXL Route Pattern Operations Module.
+
+This module provides operations for managing route patterns and directory numbers
+in Cisco Unified Communications Manager (CUCM) via the AXL SOAP API.
+
+Classes:
+    AXLRoutePatternOperations: Manages CUCM route patterns, lines, and device configurations.
+"""
 from zeep.exceptions import Fault
 from zeep.helpers import serialize_object
 from cucmapi.axlconn import ConnectionAXL
