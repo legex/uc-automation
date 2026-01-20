@@ -27,14 +27,14 @@ from ldapapi.updateldap import (
     )
 from webexapp.services.ldap_batch import batch_update_ldap, batch_update_ldap_acd
 from webexapp.services.webex_batch import batch_update_webex_gen, batch_update_webex_acd
-from webexapp.models.query_models import QueryModelLdap, QueryModelWebex
+from webexapp.models.query_models import QueryModelLdap, QueryModelWebex, QueryModelNumberSingle
 from webexapp.services.rp_batch import batch_routepattern_auto
+from webexapp.webexbotbase import WebexbotBase
 from cucmapi.axlroutepattern import AXLRoutePatternOperations
 from webexapi.webexgeneral import WebexGenMigration
 from webexapi.webexACD import WebexMigACD
 from webexapi.webexoperations import WebexOperation
-from webexapi.webexnumberadd import addnumber
-from webexapp.webexbotbase import WebexbotBase
+from webexapi.webexnumberadd import addnumbersingle, addnumberbatch
 from utils.logger import setup_logger
 # Load environment variables from .env file
 load_dotenv()
@@ -177,7 +177,7 @@ async def number_add(file: UploadFile):
                             detail="Uploaded file is empty")
     try:
         logger.debug("Processing number add for file: %s", file.filename)
-        response = addnumber(pd.io.common.BytesIO(contents))
+        response = addnumberbatch(pd.io.common.BytesIO(contents))
         pd.DataFrame(
             [response]
             ).to_csv(f"resultfiles/numberadd_response_{file.filename}",
@@ -188,6 +188,35 @@ async def number_add(file: UploadFile):
         return {"Status": "Success"}
     except HTTPException as e:
         logger.error("HTTPException in number add for %s: %s", file.filename, str(e))
+        return {"error": str(e)}
+
+@app.post("/numberaddsingle")
+async def number_add_single(query: QueryModelNumberSingle):
+    """
+    Add phone numbers to Webex locations from a CSV file.
+    
+    Args:
+        file (UploadFile): CSV file containing columns: Country, ContactNumber.
+    
+    Returns:
+        dict: Status message indicating success or error.
+    
+    Raises:
+        HTTPException: 400 if file type is invalid or file is empty.
+    """
+    logger.info("Single number update requested for number: %s, region=%s",
+                query.number if query else "None", query.region if query else "None")
+    if query is None:
+        logger.error("No query provided for number add single")
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail="Query must be provided.")
+    try:
+        logger.debug("Processing number add for Number: %s", query.number)
+        addnumbersingle(query.number, query.region)
+        logger.info("Single number add completed successfully for number: %s", query.number)
+        return {"Status": "Success"}
+    except HTTPException as e:
+        logger.error("HTTPException in number add for %s: %s", query.number, str(e))
         return {"error": str(e)}
 
 @app.get("/download/result/{result_type}/{filename}")
@@ -247,7 +276,8 @@ async def update_ldap_numbers(query: QueryModelLdap, acd: bool = Form(False)):
     Raises:
         HTTPException: 400 if query is invalid, 500 if LDAP update fails.
     """
-    logger.info("Single LDAP update requested for user: %s, acd=%s", query.username if query else "None", acd)
+    logger.info("Single LDAP update requested for user: %s, acd=%s",
+                query.username if query else "None", acd)
     if query is None:
         logger.error("No query provided for LDAP update")
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
@@ -263,10 +293,12 @@ async def update_ldap_numbers(query: QueryModelLdap, acd: bool = Form(False)):
                     internal_extension=extension,
                     external_number=externalnumber
                     )
-                logger.info("LDAP update with DID completed for ACD user: %s", query.username)
+                logger.info("LDAP update with DID completed for ACD user: %s",
+                            query.username)
                 return {"Status": "LDAP update initiated"}
             except Exception as e:
-                logger.error("Error updating LDAP with DID for ACD user %s: %s", query.username, str(e))
+                logger.error("Error updating LDAP with DID for ACD user %s: %s",
+                             query.username, str(e))
                 raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                                     detail=f"Error updating LDAP with DID: {str(e)}") from e
         try:
@@ -306,7 +338,8 @@ async def batch_update_ldap_numbers(file: UploadFile, acd: bool = Form(False)):
     Raises:
         HTTPException: 400 if file is invalid or empty, 500 if processing fails.
     """
-    logger.info("Batch LDAP update requested with file: %s, acd=%s", file.filename if file else "None", acd)
+    logger.info("Batch LDAP update requested with file: %s, acd=%s",
+                file.filename if file else "None", acd)
     if file is None:
         logger.error("No file provided for batch LDAP update")
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
@@ -361,7 +394,8 @@ async def update_webex_general(query: QueryModelWebex):
     Raises:
         HTTPException: 400 if query is invalid, 500 if Webex update fails.
     """
-    logger.info("Single Webex general update requested for user: %s", query.username if query else "None")
+    logger.info("Single Webex general update requested for user: %s",
+                query.username if query else "None")
     if query is None:
         logger.error("No query provided for Webex update")
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
@@ -409,7 +443,8 @@ async def batch_update_webex_general(file: UploadFile | None = None):
     Raises:
         HTTPException: 400 if file is invalid or empty, 500 if processing fails.
     """
-    logger.info("Batch Webex general update requested with file: %s", file.filename if file else "None")
+    logger.info("Batch Webex general update requested with file: %s",
+                file.filename if file else "None")
     if file is None:
         logger.error("No file provided for batch Webex update")
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
@@ -452,7 +487,8 @@ async def update_webex_acd(query: QueryModelWebex):
         HTTPException: 400 if query is invalid or external number missing,
                       500 if Webex ACD update fails.
     """
-    logger.info("Single Webex ACD update requested for user: %s", query.username if query else "None")
+    logger.info("Single Webex ACD update requested for user: %s",
+                query.username if query else "None")
     if query is None:
         logger.error("No query provided for Webex ACD update")
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,

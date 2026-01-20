@@ -21,7 +21,7 @@ load_dotenv()
 logger = setup_logger('webexbaseheader', 'log/webexbaseheader.log')
 
 # Read API token from environment
-mode = "Dev"
+mode = "Prod"
 if mode == "Prod":
     AUTH_TOKEN = os.getenv('AUTHTOKEN')
 else:

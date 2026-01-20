@@ -91,6 +91,24 @@
         </form>
     </div>
 
+    <!-- Add Number Single -->
+    <div class="section" style="background: rgba(0, 100, 200, 0.15);">
+        <h3 style="color: #00d4ff; margin-bottom: 15px;">📱 Add Number Single</h3>
+        <form id="numberAddSingleForm">
+            <div class="form-group">
+                <label for="number_add_number">Number *</label>
+                <input type="text" id="number_add_number" name="number" required placeholder="Enter phone number">
+            </div>
+            <div class="form-group">
+                <label for="number_add_region">Region *</label>
+                <input type="text" id="number_add_region" name="region" required placeholder="Enter region">
+            </div>
+            <button type="submit" class="btn btn-primary">Add Number</button>
+            <div id="number_add_loader" class="loader"></div>
+            <div id="number_add_result"></div>
+        </form>
+    </div>
+
     <!-- Remove Webex License -->
     <div class="section" style="background: rgba(0, 100, 200, 0.15);">
         <h3 style="color: #00d4ff; margin-bottom: 15px;">🗑️ Remove Webex License</h3>
@@ -200,6 +218,46 @@
         } catch (error) {
             loader.style.display = 'none';
             result.innerHTML = `<div class="alert alert-error">Error: ${error.message}</div>`;
+        }
+    });
+
+    // Add Number Single Form Handler
+    document.getElementById('numberAddSingleForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const loader = document.getElementById('number_add_loader');
+        const result = document.getElementById('number_add_result');
+        
+        loader.style.display = 'block';
+        result.innerHTML = '';
+        
+        const formData = {
+            number: document.getElementById('number_add_number').value,
+            region: document.getElementById('number_add_region').value
+        };
+        
+        try {
+            const response = await fetch('/numberaddsingle', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(formData)
+            });
+            const data = await response.json();
+            loader.style.display = 'none';
+            
+            if (response.ok) {
+                result.innerHTML = `<div class="alert alert-success">
+                    <strong>Success!</strong> ${data.Status || 'Number added successfully'}
+                </div>`;
+            } else {
+                result.innerHTML = `<div class="alert alert-error">
+                    <strong>Error!</strong> ${data.detail || data.error || 'Operation failed'}
+                </div>`;
+            }
+        } catch (error) {
+            loader.style.display = 'none';
+            result.innerHTML = `<div class="alert alert-error">
+                <strong>Error!</strong> ${error.message}
+            </div>`;
         }
     });
 

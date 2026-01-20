@@ -1,7 +1,7 @@
 import json
 import pandas as pd
 
-mode = "Dev"
+mode = "Prod"
 if mode == "Prod":
     with open("metadata/acd_locations.json", 'r') as f:
         ACDLOCATIONS = json.load(f)

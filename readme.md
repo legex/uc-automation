@@ -1,18 +1,36 @@
-# DID Migration Script
+# Webex CUCM Integration
 
 ## Overview: 
-Repository contains automation scripts for CUCM line change which will be useful during DID migration from external to internal.
+This is a migration tool which aimed to streamline cloud migration with automation.
 
 ## Components:
 ### Runnable interface:
-- main.py : Run from terminatal using command:
-    - ```python main.py```
-    - arguments needed: csv file location, option as below:
-        - 1 is CUCM change and 
-        - 2 is Webex change
-        - 3 is ACD Agent migration
-        - 4 is AD update if anyone is left post change
+![Webex CUCM Integration](images/home.jpg)
+- Webpage, indicating various available features as:
+    - Single user update: for single user
+        - update ldap for single user by providing Username, Extension, External Number
+            - Select ACD box for ACD agent update on Ldap
+            ![LDAP Single](images/ldapupdate.jpg)
+        - migrate single user to webex calling required information; Username, Extension, Region, External Number (optional for DID)
+            ![Webex General](images/webexgeneral.jpg)
+        - migrate single ACD user to webex calling with required information; Extension, Region, External Number
+         **note: does the same thing as above, but external number is mandatory**
+            ![Webex ACD](images/webexacd.jpg)
+        - Add a number to any site on control hub
+            ![Webex Number add](images/addnum.jpg)
+        - remove webex calling licenses and add UCM registration licensefor any user
+            ![Remove license](images/removelicense.jpg)
 
+    - Batch update: for list of users
+        - batch update for all of the above features except remove license
+            ![Batchupdate1](images/batchupdate1.jpg)
+            ![Batchupdate2](images/batchupdate2.jpg)
+
+    - Template download: sample csv files
+        - Download templates which are to be used for batch update
+            ![template](images/templates.jpg)
+
+#Technical Depth
 ### main components (backend engine):
 - cucmapi: handles everything CUCM related
     - axlconn.py : Instantiates the connection between localhost and target(cucm)
@@ -52,11 +70,7 @@ Repository contains automation scripts for CUCM line change which will be useful
     - LDAP_SERVER="wauth.corp.akamai.com:636"
 
 ### API interface:
-- main.py : bridges user interaction with the script and performs the required changes.
-    #### Scope of improvement:
-     1. Make it more presentable
-     2. Does all the work
-
+- webexapp : bridges user interaction with the script and performs the required changes.
 
 ## Workflow:
 - CUCM

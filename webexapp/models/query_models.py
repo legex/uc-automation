@@ -33,3 +33,15 @@ class QueryModelWebex(BaseModel):
     extension: str
     region: str
     externalnumber: str | None = None
+
+
+class QueryModelNumberSingle(BaseModel):
+    """
+    Model for adding a single phone number to Webex.
+    
+    Attributes:
+        number (str): The phone number to add.
+        region (str): The region associated with the phone number.
+    """
+    number: str
+    region: str
