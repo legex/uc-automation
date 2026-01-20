@@ -44,9 +44,9 @@ def get_location_id(employee_region: str) -> str | None:
         return ACDLOCATIONS[employee_region]
     return None
 
-def addnumber(numbercsv):
+def addnumberbatch(numbercsv):
     """
-    Docstring for addnumber
+    Docstring for addnumberbatch
     
     :param numbercsv: CSV file containing phone numbers and their associated regions.
     :return: Dictionary mapping regions to API responses.
@@ -78,3 +78,36 @@ def addnumber(numbercsv):
             logger.error("General error updating user: %s", e)
             responses[region] = None
     return responses
+
+def addnumbersingle(number: str, region: str):
+    """
+    Docstring for addnumbersingle
+    
+    :param number: Phone number to add.
+    :param region: Region associated with the phone number.
+    :return: API response for the added number.
+    """
+    locationid = get_location_id(region)
+    if not locationid:
+        logger.warning("No location ID found for region: %s", region)
+        return None
+    numberpayload = {
+            "phoneNumbers": [number],
+            "numberType": "DID",
+            "state": "ACTIVE"
+        }
+    try:
+        url = f"https://webexapis.com/v1/telephony/config/locations/{locationid}/numbers"
+        resp = requests.post(url,
+                            headers=headers,
+                            data=json.dumps(numberpayload),
+                            timeout=30)
+        logger.info("Status for %s: %s", region, resp.status_code)
+        print(resp.text)
+        return resp.json()
+    except HTTPError as e:
+        logger.error("HTTP error updating Number: %s", e)
+        return None
+    except Exception as e:
+        logger.error("General error updating Number: %s", e)
+        return None

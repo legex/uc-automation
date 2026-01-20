@@ -1,3 +1,11 @@
+"""Webex Base Module.
+
+This module provides the base class for Webex API operations, handling
+authentication and common HTTP header construction.
+
+Classes:
+    WebexBase: Abstract base class providing authentication headers for Webex API calls.
+"""
 import os
 import json
 import requests
@@ -13,7 +21,11 @@ load_dotenv()
 logger = setup_logger('webexbaseheader', 'log/webexbaseheader.log')
 
 # Read API token from environment
-AUTH_TOKEN = os.getenv('AUTHTOKEN')
+mode = "Prod"
+if mode == "Prod":
+    AUTH_TOKEN = os.getenv('AUTHTOKEN')
+else:
+    AUTH_TOKEN = os.getenv('AUTHTOKEN_DEV')
 if not AUTH_TOKEN:
     raise RuntimeError("AUTHTOKEN environment variable must be set")
 

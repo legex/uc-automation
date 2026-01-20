@@ -1,3 +1,12 @@
+"""CUCM AXL Operations Module.
+
+This module provides high-level operations for managing directory numbers (DNs)
+and phone configurations in Cisco Unified Communications Manager (CUCM)
+via the AXL SOAP API.
+
+Classes:
+    AXLOperations: Manages DN changes and phone line configurations.
+"""
 import sys
 from zeep.exceptions import Fault
 from zeep.helpers import serialize_object

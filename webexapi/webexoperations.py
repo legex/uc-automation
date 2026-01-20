@@ -1,3 +1,12 @@
+"""Webex Operations Module.
+
+This module provides common operations for interacting with Webex APIs,
+including user lookups, location queries, and license management.
+
+Classes:
+    WebexOperation: Handles core Webex API operations like user queries,
+                    location lookups, and license updates.
+"""
 import os
 import json
 import requests
@@ -212,11 +221,19 @@ class WebexOperation:
         licenses_ops = []
 
         # Add Webex license if missing
-        if WEBEX_LICENSE_ID in existing_licenses:
+        if UCM_LICENSE_ID not in existing_licenses:
             licenses_ops.append({
-                "id": WEBEX_LICENSE_ID,
-                "operation": "remove"
+                "id": UCM_LICENSE_ID,
+                "operation": "add"
             })
+
+            # Remove Webex license if present
+            if WEBEX_LICENSE_ID in existing_licenses:
+                licenses_ops.append({
+                    "id": WEBEX_LICENSE_ID,
+                    "operation": "remove"
+                })
+
 
         if not licenses_ops:
             logger.info("No license changes required for %s", email)

@@ -1,3 +1,11 @@
+"""Webex Bot Base Module.
+
+This module provides the base class for Webex Bot operations,
+handling authentication and message sending capabilities.
+
+Classes:
+    WebexbotBase: Abstract base class for Webex Bot API interactions.
+"""
 import os
 import json
 import requests

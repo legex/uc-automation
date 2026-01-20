@@ -1,3 +1,11 @@
+"""CUCM AXL Connection Module.
+
+This module provides connection management for Cisco CUCM AXL API
+using the Zeep SOAP client with proper authentication and SSL handling.
+
+Classes:
+    ConnectionAXL: Manages SOAP client connection to CUCM AXL API.
+"""
 import os
 import urllib3
 from dotenv import load_dotenv
