@@ -174,8 +174,6 @@ class AXLRoutePatternOperations:
             'destination': {
                     'routeListName': "RL-WBX-CALLING"
                 }
-
-
 }
         try:
             logger.info("Creating route pattern %s ", pattern)
@@ -184,4 +182,29 @@ class AXLRoutePatternOperations:
             return response
         except Fault as e:
             logger.error("Failed to create route pattern: %s", e)
+            return None
+
+    def update_routepattern(self, pattern):
+        """
+        Update an existing route pattern in CUCM.
+
+        Args:
+            pattern (str): The route pattern to update.
+            username (str): The username associated with the update.
+        Returns:
+            dict or None: Response from CUCM if successful, else None.
+
+        """
+        routerpattern = {
+        'pattern': f'{pattern}',
+        'routePartitionName' : 'pt-global-internal',
+        'newRoutePartitionName' :'PT-Hidden'
+        }
+        try:
+            logger.info("Updating route pattern %s ", pattern)
+            response = self.service.updateRoutePattern(**routerpattern)['return']
+            logger.info("Route pattern %s updated successfully", pattern)
+            return response
+        except Fault as e:
+            logger.error("Failed to update route pattern: %s", e)
             return None
