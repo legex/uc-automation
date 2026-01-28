@@ -5,30 +5,30 @@ This is a migration tool which aimed to streamline cloud migration with automati
 
 ## Components:
 ### Runnable interface:
-![Webex CUCM Integration](images/home.jpg)
+![Webex CUCM Integration](src/images/home.jpg)
 - Webpage, indicating various available features as:
     - Single user update: for single user
         - update ldap for single user by providing Username, Extension, External Number
             - Select ACD box for ACD agent update on Ldap
-            ![LDAP Single](images/ldapupdate.jpg)
+            ![LDAP Single](src/images/ldapupdate.jpg)
         - migrate single user to webex calling required information; Username, Extension, Region, External Number (optional for DID)
-            ![Webex General](images/webexgeneral.jpg)
+            ![Webex General](src/images/webexgeneral.jpg)
         - migrate single ACD user to webex calling with required information; Extension, Region, External Number
          **note: does the same thing as above, but external number is mandatory**
-            ![Webex ACD](images/webexacd.jpg)
+            ![Webex ACD](src/images/webexacd.jpg)
         - Add a number to any site on control hub
-            ![Webex Number add](images/addnum.jpg)
+            ![Webex Number add](src/images/addnum.jpg)
         - remove webex calling licenses and add UCM registration licensefor any user
-            ![Remove license](images/removelicense.jpg)
+            ![Remove license](src/images/removelicense.jpg)
 
     - Batch update: for list of users
         - batch update for all of the above features except remove license
-            ![Batchupdate1](images/batchupdate1.jpg)
-            ![Batchupdate2](images/batchupdate2.jpg)
+            ![Batchupdate1](src/images/batchupdate1.jpg)
+            ![Batchupdate2](src/images/batchupdate2.jpg)
 
     - Template download: sample csv files
         - Download templates which are to be used for batch update
-            ![template](images/templates.jpg)
+            ![template](src/images/templates.jpg)
 
 # Technical Depth
 ### main components (backend engine):
