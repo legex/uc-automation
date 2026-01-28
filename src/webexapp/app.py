@@ -40,7 +40,7 @@ from src.utils.logger import setup_logger
 load_dotenv()
 API_TOKEN = os.getenv("WEBEXBOTTOKEN")
 templates = Jinja2Templates(directory="src/webexapp/templates")
-logger = setup_logger('webapp', 'log/webapp.log')
+logger = setup_logger('webapp', '/a/logs/webapp.log')
 axlrp = AXLRoutePatternOperations()
 webex_mig_gen = WebexGenMigration()
 webex_acd_mig = WebexMigACD()
@@ -289,26 +289,25 @@ async def update_ldap_numbers(query: QueryModelLdap, acd: bool = False):
         logger.error("No query provided for LDAP update")
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail="Query must be provided.")
-    print(query.username)
     extension = query.extension
+    if acd:
+        try:
+            update_contacts_num_withDID(
+                query.username,
+                internal_extension=extension,
+                external_number=query.externalnumber
+                )
+            logger.info("LDAP update with DID completed for ACD user: %s, %s",
+                        query.username, query.externalnumber)
+            return {"Status": "LDAP update initiated"}
+        except Exception as e:
+            logger.error("Error updating LDAP with DID for ACD user %s: %s",
+                            query.username, str(e))
+            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                                detail=f"Error updating LDAP with DID: {str(e)}") from e
     if query.externalnumber:
         externalnumber = query.externalnumber
         logger.debug("LDAP update with external number for user: %s", query.username)
-        if acd:
-            try:
-                update_contacts_num_withDID(
-                    query.username,
-                    internal_extension=extension,
-                    external_number=externalnumber
-                    )
-                logger.info("LDAP update with DID completed for ACD user: %s",
-                            query.username)
-                return {"Status": "LDAP update initiated"}
-            except Exception as e:
-                logger.error("Error updating LDAP with DID for ACD user %s: %s",
-                             query.username, str(e))
-                raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                                    detail=f"Error updating LDAP with DID: {str(e)}") from e
         try:
             update_general_contacts_num_withDID(
                 query.username,

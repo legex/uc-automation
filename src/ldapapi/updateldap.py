@@ -76,7 +76,10 @@ def update_contacts_num_withDID(userid, internal_extension,
 			dnc= a.distinguishedName[0]
 			employee_badge_number= a.employeeNumber[0]
 			conn.bind()
-			conn.modify(dnc,{'telephoneNumber': [(ldap3.MODIFY_REPLACE, [external_number])]})
+			if external_number:
+				conn.modify(dnc,{'telephoneNumber': [(ldap3.MODIFY_REPLACE, [external_number])]})
+			else:
+				conn.modify(dnc,{'telephoneNumber': [(ldap3.MODIFY_REPLACE, [])]})
 			conn.modify(dnc,{'AKA-phoneExtension': [(ldap3.MODIFY_REPLACE, [internal_extension])]})
 			conn.modify(dnc,{'otherTelephone': [(ldap3.MODIFY_REPLACE, [])]})
 			conn.unbind()

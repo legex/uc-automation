@@ -15,7 +15,7 @@ from src.webexapi.webexoperations import WebexOperation
 from src.metadata.settings import extension_prefix, exclude_list
 from src.utils.logger import setup_logger
 
-logger = setup_logger('webex_batch', 'log/webex_batch.log')
+logger = setup_logger('webex_batch', '/a/logs/webex_batch.log')
 
 prefixes = extension_prefix
 excluded_list = exclude_list

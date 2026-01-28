@@ -12,7 +12,7 @@ from src.cucmapi.axlconn import ConnectionAXL
 from src.utils.dict_helper import clean_axl_dict, sanitizedict
 from src.utils.logger import setup_logger
 
-logger = setup_logger('RoutepatternApp', 'log/Routepattern.log')
+logger = setup_logger('RoutepatternApp', '/a/logs/Routepattern.log')
 
 UNWANTEDELEMENTS = [
     'associatedDevices',
