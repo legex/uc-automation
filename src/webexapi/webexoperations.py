@@ -20,7 +20,7 @@ from src.webexapi.webexBase import WebexBase
 load_dotenv()
 
 # Initialize logger
-logger = setup_logger('webexops', '/a/logs/webexops.log')
+logger = setup_logger('webexops', 'temp/a/logs/webexops.log')
 
 # Read API token from environment
 AUTH_TOKEN = os.getenv('AUTHTOKEN')

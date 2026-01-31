@@ -12,7 +12,7 @@ import copy
 from collections import OrderedDict
 from src.utils.logger import setup_logger
 
-logger = setup_logger('utilslog', '/a/logs/utilslog.log')
+logger = setup_logger('utilslog', 'temp/a/logs/utilslog.log')
 
 def clean_axl_dict(obj):
     """

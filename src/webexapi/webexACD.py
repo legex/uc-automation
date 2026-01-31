@@ -15,7 +15,7 @@ from src.webexapi.webexBase import WebexBase
 from src.webexapi.webexoperations import WebexOperation
 
 
-logger = setup_logger('webexacdmig', '/a/logs/webexacdmig.log')
+logger = setup_logger('webexacdmig', 'temp/a/logs/webexacdmig.log')
 
 WEBEX_LICENSE_ID = license_store["webexlic"]
 UCM_LICENSE_ID = license_store["ucmlic"]
@@ -40,7 +40,7 @@ class WebexMigACD:
 
         Args:
             email (str): User's Webex-registered email address.
-            extension (str): Extension number to assign to the user.
+            telephone (str): Telephone number to assign to the user.
             employee_region (str): Region name substring to determine locationId.
 
         Returns:
@@ -71,7 +71,9 @@ class WebexMigACD:
         if not payload:
             logger.error("User detail not found for user: %s", userid)
             return None
-
+        if payload.get("loginEnabled") is False:
+            logger.warning("User %s is disabled in Webex", userid)
+            return None
         location_id = self.baseoperations.get_location_id_acd(employee_region)
         existing_licenses = set(payload.get("licenses", []))
         licenses_ops = [{

@@ -15,7 +15,7 @@ from src.webexapi.webexoperations import WebexOperation
 from src.metadata.settings import extension_prefix, exclude_list
 from src.utils.logger import setup_logger
 
-logger = setup_logger('webex_batch', '/a/logs/webex_batch.log')
+logger = setup_logger('webex_batch', 'temp/a/logs/webex_batch.log')
 
 prefixes = extension_prefix
 excluded_list = exclude_list
@@ -35,14 +35,14 @@ def batch_update_webex_gen(file, filename):
     
     # Now safe to strip (no NaN left)
     df['ContactNumber'] = df['ContactNumber'].replace('', None)
-
+    start_extension = "1001"
     for idx, row in df.iterrows():
         logger.debug("Processing row %d", idx + 1)
         username = row['UserId']
         phonenumber = row["ContactNumber"]
-        extension = row['extension']
+        extension = start_extension
         region = row['Country']
-        ad_num = prefixes[region]+row['extension']
+        ad_num = prefixes[region]+extension
         email = row["Email"]
         status_on_webex = ""
         logger.info("Processing user: %s, email: %s, extension: %s, region: %s", username, email, extension, region)
@@ -80,6 +80,7 @@ def batch_update_webex_gen(file, filename):
                     status_on_webex = "Error"              
         else:
             logger.info("User %s is in Exclude list", username)
+        
 
         webex_mig_result = {
             "username": username,
@@ -88,21 +89,23 @@ def batch_update_webex_gen(file, filename):
             "phoneNum": phonenumber,
             "extension": extension,
             "region": region,
-            "status_on_cucm": status_on_webex,
+            "status_on_webex": status_on_webex,
         }
         pd.DataFrame(
-            [webex_mig_result]).to_csv(f"resultfiles/webex_migresult_{filename}",
+            [webex_mig_result]).to_csv(f"src/resultfiles/webex_migresult_{filename}",
                                        mode='a',
                                        header=False,
                                        index=False
                                        )
+        start_extension = str(int(start_extension) + 1)
+        print(start_extension)
     logger.info("Batch Webex General update completed for file: %s", filename)
     return "Script Run is Finished"
 
 def batch_update_webex_acd(file, filename):
     """Update Webex Extension"""
     logger.info("Starting batch Webex ACD update for file: %s", filename)
-    df = pd.read_excel(file, dtype={'extension': str, 'ContactNumber': str})
+    df = pd.read_csv(file, dtype={'extension': str, 'ContactNumber': str})
     logger.info("Loaded %d rows from Excel file", len(df))
     for idx, row in df.iterrows():
         logger.debug("Processing row %d", idx + 1)
@@ -127,8 +130,7 @@ def batch_update_webex_acd(file, filename):
         except (Exception) as e:
             logger.error("Error updating CUCM for %s: %s", username, e)
             status_on_webex = "Error"
-        else:
-            status_on_ad = "Skipped"
+
 
         acd_result = {
             "username": username,
@@ -136,11 +138,10 @@ def batch_update_webex_acd(file, filename):
             "phoneNum": phonenumber,
             "extension": ad_num,
             "region": region,
-            "status_on_cucm": status_on_webex,
-            "status_on_ad": status_on_ad
+            "status_on_webex": status_on_webex
         }
         pd.DataFrame([acd_result]).to_csv(
-            f"resultfiles/acd_migresult_{filename}",
+            f"src/resultfiles/acd_migresult_{filename}",
             mode='a',
             header=False,
             index=False

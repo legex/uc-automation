@@ -17,7 +17,7 @@ from src.utils.dict_helper import (clean_axl_dict,
                          )
 from src.utils.logger import setup_logger
 
-logger = setup_logger('DNchange', '/a/logs/DNchange.log')
+logger = setup_logger('DNchange', 'temp/a/logs/DNchange.log')
 
 UNWANTEDELEMENTS = [
     'associatedDevices',

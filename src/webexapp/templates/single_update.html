@@ -109,6 +109,24 @@
         </form>
     </div>
 
+    <!-- Update Route Pattern -->
+    <div class="section" style="background: rgba(0, 100, 200, 0.15);">
+        <h3 style="color: #00d4ff; margin-bottom: 15px;">🛣️ Update Route Pattern</h3>
+        <form id="routePatternForm">
+            <div class="form-group">
+                <label for="route_pattern_username">Username *</label>
+                <input type="text" id="route_pattern_username" name="username" required placeholder="Enter username">
+            </div>
+            <div class="form-group">
+                <label for="route_pattern_number">Route Pattern *</label>
+                <input type="text" id="route_pattern_number" name="routepattern" required placeholder="Enter route pattern (e.g., 420212345678)">
+            </div>
+            <button type="submit" class="btn btn-primary">Update Route Pattern</button>
+            <div id="route_pattern_loader" class="loader"></div>
+            <div id="route_pattern_result"></div>
+        </form>
+    </div>
+
     <!-- Remove Webex License -->
     <div class="section" style="background: rgba(0, 100, 200, 0.15);">
         <h3 style="color: #00d4ff; margin-bottom: 15px;">🗑️ Remove Webex License</h3>
@@ -254,6 +272,47 @@
             if (response.ok) {
                 result.innerHTML = `<div class="alert alert-success">
                     <strong>Success!</strong> ${data.Status || 'Number added successfully'}
+                </div>`;
+            } else {
+                result.innerHTML = `<div class="alert alert-error">
+                    <strong>Error!</strong> ${data.detail || data.error || 'Operation failed'}
+                </div>`;
+            }
+        } catch (error) {
+            loader.style.display = 'none';
+            result.innerHTML = `<div class="alert alert-error">
+                <strong>Error!</strong> ${error.message}
+            </div>`;
+        }
+    });
+
+    // Update Route Pattern Form Handler
+    document.getElementById('routePatternForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const loader = document.getElementById('route_pattern_loader');
+        const result = document.getElementById('route_pattern_result');
+        
+        loader.style.display = 'block';
+        result.innerHTML = '';
+        
+        const formData = {
+            username: document.getElementById('route_pattern_username').value,
+            routepattern: document.getElementById('route_pattern_number').value
+        };
+        
+        try {
+            const response = await fetch('/updateroutepattern/single', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(formData)
+            });
+            const data = await response.json();
+            loader.style.display = 'none';
+            
+            if (response.ok) {
+                result.innerHTML = `<div class="alert alert-success">
+                    <strong>Success!</strong> ${data.Status || 'Route pattern updated successfully'}
+                    ${data.Detail ? '<br><small>' + JSON.stringify(data.Detail) + '</small>' : ''}
                 </div>`;
             } else {
                 result.innerHTML = `<div class="alert alert-error">

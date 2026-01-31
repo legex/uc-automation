@@ -1,0 +1,1686 @@
+2026-01-31 15:15:40,244 - webex_batch - INFO - Starting batch Webex General update for file: israelandfrance.csv
+2026-01-31 15:15:40,247 - webex_batch - INFO - Loaded 782 rows from CSV file
+2026-01-31 15:15:40,249 - webex_batch - INFO - Processing user: ggayer, email: ggayer@akamai.com, extension: 1001, region: Israel
+2026-01-31 15:15:46,454 - webex_batch - INFO - Webex license Extension update for ggayer: Success
+2026-01-31 15:15:46,457 - webex_batch - INFO - Processing user: gmenie, email: gmenie@akamai.com, extension: 1001, region: France
+2026-01-31 15:15:52,042 - webex_batch - INFO - Webex license Extension update for gmenie: Success
+2026-01-31 15:15:52,043 - webex_batch - INFO - Processing user: pdelaper, email: pdelaper@akamai.com, extension: 1002, region: France
+2026-01-31 15:15:57,564 - webex_batch - INFO - Webex license Extension update for pdelaper: Success
+2026-01-31 15:15:57,565 - webex_batch - INFO - Processing user: aaitoume, email: aaitoume@akamai.com, extension: 1003, region: France
+2026-01-31 15:15:57,565 - webex_batch - INFO - User aaitoume is in Exclude list
+2026-01-31 15:15:57,566 - webex_batch - INFO - Processing user: jrenoux, email: jrenoux@akamai.com, extension: 1004, region: France
+2026-01-31 15:16:02,771 - webex_batch - INFO - Webex license Extension update for jrenoux: Success
+2026-01-31 15:16:02,772 - webex_batch - INFO - Processing user: jkretchm, email: jkretchm@akamai.com, extension: 1005, region: France
+2026-01-31 15:16:08,601 - webex_batch - INFO - Webex license Extension update for jkretchm: Success
+2026-01-31 15:16:08,602 - webex_batch - INFO - Processing user: lbreuvar, email: lbreuvar@akamai.com, extension: 1006, region: France
+2026-01-31 15:16:13,614 - webex_batch - INFO - Webex license Extension update for lbreuvar: Success
+2026-01-31 15:16:13,615 - webex_batch - INFO - Processing user: fbeletea, email: fbeletea@akamai.com, extension: 1007, region: France
+2026-01-31 15:16:19,053 - webex_batch - INFO - Webex license Extension update for fbeletea: Success
+2026-01-31 15:16:19,054 - webex_batch - INFO - Processing user: rvincent, email: rvincent@akamai.com, extension: 1008, region: France
+2026-01-31 15:16:24,530 - webex_batch - INFO - Webex license Extension update for rvincent: Success
+2026-01-31 15:16:24,532 - webex_batch - INFO - Processing user: kfounadi, email: kfounadi@akamai.com, extension: 1009, region: France
+2026-01-31 15:16:30,130 - webex_batch - INFO - Webex license Extension update for kfounadi: Success
+2026-01-31 15:16:30,131 - webex_batch - INFO - Processing user: dkadim, email: dkadim@akamai.com, extension: 1002, region: Israel
+2026-01-31 15:16:35,244 - webex_batch - INFO - Webex license Extension update for dkadim: Success
+2026-01-31 15:16:35,246 - webex_batch - INFO - Processing user: lgreenbo, email: lise@akamai.com, extension: 1003, region: Israel
+2026-01-31 15:16:40,867 - webex_batch - INFO - Webex license Extension update for lgreenbo: Success
+2026-01-31 15:16:40,870 - webex_batch - INFO - Processing user: gmendele, email: gmendele@akamai.com, extension: 1004, region: Israel
+2026-01-31 15:16:45,886 - webex_batch - INFO - Webex license Extension update for gmendele: Success
+2026-01-31 15:16:45,888 - webex_batch - INFO - Processing user: mocohen, email: mocohen@akamai.com, extension: 1005, region: Israel
+2026-01-31 15:16:50,880 - webex_batch - INFO - Webex license Extension update for mocohen: Success
+2026-01-31 15:16:50,882 - webex_batch - INFO - Processing user: mminkovi, email: mminkovi@akamai.com, extension: 1006, region: Israel
+2026-01-31 15:16:56,800 - webex_batch - INFO - Webex license Extension update for mminkovi: Success
+2026-01-31 15:16:56,801 - webex_batch - INFO - Processing user: mroaky, email: mroaky@akamai.com, extension: 1007, region: Israel
+2026-01-31 15:17:02,402 - webex_batch - INFO - Webex license Extension update for mroaky: Success
+2026-01-31 15:17:02,403 - webex_batch - INFO - Processing user: bvaz, email: bvaz@akamai.com, extension: 1010, region: France
+2026-01-31 15:17:02,403 - webex_batch - INFO - User bvaz is in Exclude list
+2026-01-31 15:17:02,403 - webex_batch - INFO - Processing user: earkush, email: earkush@akamai.com, extension: 1008, region: Israel
+2026-01-31 15:17:07,498 - webex_batch - INFO - Webex license Extension update for earkush: Success
+2026-01-31 15:17:07,499 - webex_batch - INFO - Processing user: imeir, email: imeir@akamai.com, extension: 1009, region: Israel
+2026-01-31 15:17:12,577 - webex_batch - INFO - Webex license Extension update for imeir: Success
+2026-01-31 15:17:12,579 - webex_batch - INFO - Processing user: makremer, email: makremer@akamai.com, extension: 1010, region: Israel
+2026-01-31 15:17:17,800 - webex_batch - INFO - Webex license Extension update for makremer: Success
+2026-01-31 15:17:17,801 - webex_batch - INFO - Processing user: damrani, email: damrani@akamai.com, extension: 1011, region: Israel
+2026-01-31 15:17:23,547 - webex_batch - INFO - Webex license Extension update for damrani: Success
+2026-01-31 15:17:23,548 - webex_batch - INFO - Processing user: bkirzner, email: bkirzner@akamai.com, extension: 1012, region: Israel
+2026-01-31 15:17:28,852 - webex_batch - INFO - Webex license Extension update for bkirzner: Success
+2026-01-31 15:17:28,853 - webex_batch - INFO - Processing user: jfrumer, email: jfrumer@akamai.com, extension: 1013, region: Israel
+2026-01-31 15:17:33,868 - webex_batch - INFO - Webex license Extension update for jfrumer: Success
+2026-01-31 15:17:33,870 - webex_batch - INFO - Processing user: dtuberg, email: dtuberg@akamai.com, extension: 1014, region: Israel
+2026-01-31 15:17:39,104 - webex_batch - INFO - Webex license Extension update for dtuberg: Success
+2026-01-31 15:17:39,105 - webex_batch - INFO - Processing user: aberdin, email: aberdin@akamai.com, extension: 1011, region: France
+2026-01-31 15:17:39,105 - webex_batch - INFO - User aberdin is in Exclude list
+2026-01-31 15:17:39,105 - webex_batch - INFO - Processing user: jprive, email: jprive@akamai.com, extension: 1012, region: France
+2026-01-31 15:17:44,437 - webex_batch - INFO - Webex license Extension update for jprive: Success
+2026-01-31 15:17:44,438 - webex_batch - INFO - Processing user: slopata, email: slopata@akamai.com, extension: 1015, region: Israel
+2026-01-31 15:17:44,438 - webex_batch - INFO - User slopata is in Exclude list
+2026-01-31 15:17:44,439 - webex_batch - INFO - Processing user: croller, email: croller@akamai.com, extension: 1013, region: France
+2026-01-31 15:17:50,102 - webex_batch - INFO - Webex license Extension update for croller: Success
+2026-01-31 15:17:50,105 - webex_batch - INFO - Processing user: noschiff, email: noschiff@akamai.com, extension: 1016, region: Israel
+2026-01-31 15:17:56,738 - webex_batch - INFO - Webex license Extension update for noschiff: Success
+2026-01-31 15:17:56,739 - webex_batch - INFO - Processing user: btaing, email: btaing@akamai.com, extension: 1014, region: France
+2026-01-31 15:18:03,345 - webex_batch - INFO - Webex license Extension update for btaing: Success
+2026-01-31 15:18:03,346 - webex_batch - INFO - Processing user: rmyszka, email: rmyszka@akamai.com, extension: 1015, region: France
+2026-01-31 15:18:08,158 - webex_batch - INFO - Webex license Extension update for rmyszka: Success
+2026-01-31 15:18:08,159 - webex_batch - INFO - Processing user: tsklein, email: tsklein@akamai.com, extension: 1017, region: Israel
+2026-01-31 15:18:14,039 - webex_batch - INFO - Webex license Extension update for tsklein: Success
+2026-01-31 15:18:14,040 - webex_batch - INFO - Processing user: lfriedma, email: lfriedma@akamai.com, extension: 1018, region: Israel
+2026-01-31 15:18:20,619 - webex_batch - INFO - Webex license Extension update for lfriedma: Success
+2026-01-31 15:18:20,620 - webex_batch - INFO - Processing user: jsztykma, email: jsztykma@akamai.com, extension: 1016, region: France
+2026-01-31 15:18:25,699 - webex_batch - INFO - Webex license Extension update for jsztykma: Success
+2026-01-31 15:18:25,701 - webex_batch - INFO - Processing user: lshitrit, email: lshitrit@akamai.com, extension: 1019, region: Israel
+2026-01-31 15:18:30,666 - webex_batch - INFO - Webex license Extension update for lshitrit: Success
+2026-01-31 15:18:30,668 - webex_batch - INFO - Processing user: asivan, email: asivan@akamai.com, extension: 1020, region: Israel
+2026-01-31 15:18:35,875 - webex_batch - INFO - Webex license Extension update for asivan: Success
+2026-01-31 15:18:35,876 - webex_batch - INFO - Processing user: ksibony, email: ksibony@akamai.com, extension: 1021, region: Israel
+2026-01-31 15:18:41,162 - webex_batch - INFO - Webex license Extension update for ksibony: Success
+2026-01-31 15:18:41,163 - webex_batch - INFO - Processing user: terez, email: terez@akamai.com, extension: 1022, region: Israel
+2026-01-31 15:18:46,497 - webex_batch - INFO - Webex license Extension update for terez: Success
+2026-01-31 15:18:46,498 - webex_batch - INFO - Processing user: hluquet, email: hluquet@akamai.com, extension: 1017, region: France
+2026-01-31 15:18:52,150 - webex_batch - INFO - Webex license Extension update for hluquet: Success
+2026-01-31 15:18:52,151 - webex_batch - INFO - Processing user: gridard, email: gridard@akamai.com, extension: 1018, region: France
+2026-01-31 15:18:57,592 - webex_batch - INFO - Webex license Extension update for gridard: Success
+2026-01-31 15:18:57,594 - webex_batch - INFO - Processing user: odutille, email: odutille@akamai.com, extension: 1019, region: France
+2026-01-31 15:19:02,970 - webex_batch - INFO - Webex license Extension update for odutille: Success
+2026-01-31 15:19:02,971 - webex_batch - INFO - Processing user: iihie, email: iihie@akamai.com, extension: 1023, region: Israel
+2026-01-31 15:19:07,834 - webex_batch - INFO - Webex license Extension update for iihie: Success
+2026-01-31 15:19:07,835 - webex_batch - INFO - Processing user: jjoachim, email: jjoachim@akamai.com, extension: 1020, region: France
+2026-01-31 15:19:12,720 - webex_batch - INFO - Webex license Extension update for jjoachim: Success
+2026-01-31 15:19:12,720 - webex_batch - INFO - Processing user: pberthet, email: pberthet@akamai.com, extension: 1021, region: France
+2026-01-31 15:19:18,172 - webex_batch - INFO - Webex license Extension update for pberthet: Success
+2026-01-31 15:19:18,174 - webex_batch - INFO - Processing user: asynhers, email: asynhers@akamai.com, extension: 1024, region: Israel
+2026-01-31 15:19:23,057 - webex_batch - INFO - Webex license Extension update for asynhers: Success
+2026-01-31 15:19:23,058 - webex_batch - INFO - Processing user: elev, email: elev@akamai.com, extension: 1025, region: Israel
+2026-01-31 15:19:28,437 - webex_batch - INFO - Webex license Extension update for elev: Success
+2026-01-31 15:19:28,438 - webex_batch - INFO - Processing user: pmaugeri, email: pmaugeri@akamai.com, extension: 1022, region: France
+2026-01-31 15:19:33,428 - webex_batch - INFO - Webex license Extension update for pmaugeri: Success
+2026-01-31 15:19:33,429 - webex_batch - INFO - Processing user: fpicconi, email: fpicconi@akamai.com, extension: 1023, region: France
+2026-01-31 15:19:38,504 - webex_batch - INFO - Webex license Extension update for fpicconi: Success
+2026-01-31 15:19:38,505 - webex_batch - INFO - Processing user: sguez, email: sguez@akamai.com, extension: 1026, region: Israel
+2026-01-31 15:19:38,505 - webex_batch - INFO - User sguez is in Exclude list
+2026-01-31 15:19:38,506 - webex_batch - INFO - Processing user: ydaya, email: ydaya@akamai.com, extension: 1027, region: Israel
+2026-01-31 15:19:43,986 - webex_batch - INFO - Webex license Extension update for ydaya: Success
+2026-01-31 15:19:43,988 - webex_batch - INFO - Processing user: jtrupin, email: jtrupin@akamai.com, extension: 1024, region: France
+2026-01-31 15:19:49,371 - webex_batch - INFO - Webex license Extension update for jtrupin: Success
+2026-01-31 15:19:49,372 - webex_batch - INFO - Processing user: kshapira, email: kshapira@akamai.com, extension: 1029, region: Israel
+2026-01-31 15:19:54,731 - webex_batch - INFO - Webex license Extension update for kshapira: Success
+2026-01-31 15:19:54,732 - webex_batch - INFO - Processing user: olabrous, email: olabrous@akamai.com, extension: 1025, region: France
+2026-01-31 15:20:00,068 - webex_batch - INFO - Webex license Extension update for olabrous: Success
+2026-01-31 15:20:00,069 - webex_batch - INFO - Processing user: tnutkevi, email: tnutkevi@akamai.com, extension: 1030, region: Israel
+2026-01-31 15:20:06,156 - webex_batch - INFO - Webex license Extension update for tnutkevi: Success
+2026-01-31 15:20:06,156 - webex_batch - INFO - Processing user: oguttman, email: oguttman@akamai.com, extension: 1031, region: Israel
+2026-01-31 15:20:11,728 - webex_batch - INFO - Webex license Extension update for oguttman: Success
+2026-01-31 15:20:11,729 - webex_batch - INFO - Processing user: okanfer, email: okanfer@akamai.com, extension: 1032, region: Israel
+2026-01-31 15:20:16,758 - webex_batch - INFO - Webex license Extension update for okanfer: Success
+2026-01-31 15:20:16,758 - webex_batch - INFO - Processing user: jlharido, email: jlharido@akamai.com, extension: 1026, region: France
+2026-01-31 15:20:16,758 - webex_batch - INFO - User jlharido is in Exclude list
+2026-01-31 15:20:16,759 - webex_batch - INFO - Processing user: gfins, email: gfins@akamai.com, extension: 1033, region: Israel
+2026-01-31 15:20:21,823 - webex_batch - INFO - Webex license Extension update for gfins: Success
+2026-01-31 15:20:21,823 - webex_batch - INFO - Processing user: lbrik, email: lbrik@akamai.com, extension: 1034, region: Israel
+2026-01-31 15:20:26,756 - webex_batch - INFO - Webex license Extension update for lbrik: Success
+2026-01-31 15:20:26,757 - webex_batch - INFO - Processing user: rdan, email: rdan@akamai.com, extension: 1035, region: Israel
+2026-01-31 15:20:32,120 - webex_batch - INFO - Webex license Extension update for rdan: Success
+2026-01-31 15:20:32,121 - webex_batch - INFO - Processing user: bleboime, email: bleboime@akamai.com, extension: 1027, region: France
+2026-01-31 15:20:37,557 - webex_batch - INFO - Webex license Extension update for bleboime: Success
+2026-01-31 15:20:37,559 - webex_batch - INFO - Processing user: fcosta, email: fcosta@akamai.com, extension: 1028, region: France
+2026-01-31 15:20:42,806 - webex_batch - INFO - Webex license Extension update for fcosta: Success
+2026-01-31 15:20:42,806 - webex_batch - INFO - Processing user: gor, email: gor@akamai.com, extension: 1036, region: Israel
+2026-01-31 15:20:48,141 - webex_batch - INFO - Webex license Extension update for gor: Success
+2026-01-31 15:20:48,142 - webex_batch - INFO - Processing user: iverzber, email: iverzber@akamai.com, extension: 1037, region: Israel
+2026-01-31 15:20:52,988 - webex_batch - INFO - Webex license Extension update for iverzber: Success
+2026-01-31 15:20:52,989 - webex_batch - INFO - Processing user: asejourn, email: asejourn@akamai.com, extension: 1029, region: France
+2026-01-31 15:20:57,915 - webex_batch - INFO - Webex license Extension update for asejourn: Success
+2026-01-31 15:20:57,916 - webex_batch - INFO - Processing user: rbaraut, email: rbaraut@akamai.com, extension: 1030, region: France
+2026-01-31 15:21:03,396 - webex_batch - INFO - Webex license Extension update for rbaraut: Success
+2026-01-31 15:21:03,398 - webex_batch - INFO - Processing user: ntal, email: ntal@akamai.com, extension: 1038, region: Israel
+2026-01-31 15:21:08,397 - webex_batch - INFO - Webex license Extension update for ntal: Success
+2026-01-31 15:21:08,399 - webex_batch - INFO - Processing user: msanseau, email: msanseau@akamai.com, extension: 1031, region: France
+2026-01-31 15:21:08,399 - webex_batch - INFO - User msanseau is in Exclude list
+2026-01-31 15:21:08,399 - webex_batch - INFO - Processing user: qminguet, email: qminguet@akamai.com, extension: 1032, region: France
+2026-01-31 15:21:13,747 - webex_batch - INFO - Webex license Extension update for qminguet: Success
+2026-01-31 15:21:13,748 - webex_batch - INFO - Processing user: ogravier, email: ogravier@akamai.com, extension: 1033, region: France
+2026-01-31 15:21:18,669 - webex_batch - INFO - Webex license Extension update for ogravier: Success
+2026-01-31 15:21:18,670 - webex_batch - INFO - Processing user: dattias, email: dattias@akamai.com, extension: 1034, region: France
+2026-01-31 15:21:24,067 - webex_batch - INFO - Webex license Extension update for dattias: Success
+2026-01-31 15:21:24,069 - webex_batch - INFO - Processing user: bbrouard, email: bbrouard@akamai.com, extension: 1035, region: France
+2026-01-31 15:21:29,331 - webex_batch - INFO - Webex license Extension update for bbrouard: Success
+2026-01-31 15:21:29,333 - webex_batch - INFO - Processing user: mcarron, email: mcarron@akamai.com, extension: 1036, region: France
+2026-01-31 15:21:34,735 - webex_batch - INFO - Webex license Extension update for mcarron: Success
+2026-01-31 15:21:34,736 - webex_batch - INFO - Processing user: ahogg, email: ahogg@akamai.com, extension: 1037, region: France
+2026-01-31 15:21:39,874 - webex_batch - INFO - Webex license Extension update for ahogg: Success
+2026-01-31 15:21:39,876 - webex_batch - INFO - Processing user: gduchovn, email: gduchovn@akamai.com, extension: 1039, region: Israel
+2026-01-31 15:21:45,070 - webex_batch - INFO - Webex license Extension update for gduchovn: Success
+2026-01-31 15:21:45,071 - webex_batch - INFO - Processing user: tcomte, email: tcomte@akamai.com, extension: 1038, region: France
+2026-01-31 15:21:49,949 - webex_batch - INFO - Webex license Extension update for tcomte: Success
+2026-01-31 15:21:49,950 - webex_batch - INFO - Processing user: ndayan, email: ndayan@akamai.com, extension: 1040, region: Israel
+2026-01-31 15:21:55,199 - webex_batch - INFO - Webex license Extension update for ndayan: Success
+2026-01-31 15:21:55,199 - webex_batch - INFO - Processing user: alevy, email: alevy@akamai.com, extension: 1041, region: Israel
+2026-01-31 15:22:00,127 - webex_batch - INFO - Webex license Extension update for alevy: Success
+2026-01-31 15:22:00,128 - webex_batch - INFO - Processing user: lostroat, email: lostroat@akamai.com, extension: 1042, region: Israel
+2026-01-31 15:22:05,676 - webex_batch - INFO - Webex license Extension update for lostroat: Success
+2026-01-31 15:22:05,677 - webex_batch - INFO - Processing user: obokobza, email: obokobza@akamai.com, extension: 1043, region: Israel
+2026-01-31 15:22:11,168 - webex_batch - INFO - Webex license Extension update for obokobza: Success
+2026-01-31 15:22:11,169 - webex_batch - INFO - Processing user: hfederov, email: hfederov@akamai.com, extension: 1044, region: Israel
+2026-01-31 15:22:15,971 - webex_batch - INFO - Webex license Extension update for hfederov: Success
+2026-01-31 15:22:15,971 - webex_batch - INFO - Processing user: abella, email: abella@akamai.com, extension: 1039, region: France
+2026-01-31 15:22:21,265 - webex_batch - INFO - Webex license Extension update for abella: Success
+2026-01-31 15:22:21,266 - webex_batch - INFO - Processing user: dfeshenk, email: dfeshenk@akamai.com, extension: 1045, region: Israel
+2026-01-31 15:22:26,192 - webex_batch - INFO - Webex license Extension update for dfeshenk: Success
+2026-01-31 15:22:26,195 - webex_batch - INFO - Processing user: nyehudai, email: nyehudai@akamai.com, extension: 1046, region: Israel
+2026-01-31 15:22:31,510 - webex_batch - INFO - Webex license Extension update for nyehudai: Success
+2026-01-31 15:22:31,511 - webex_batch - INFO - Processing user: gboyer, email: gboyer@akamai.com, extension: 1040, region: France
+2026-01-31 15:22:37,035 - webex_batch - INFO - Webex license Extension update for gboyer: Success
+2026-01-31 15:22:37,036 - webex_batch - INFO - Processing user: agiannin, email: agiannin@akamai.com, extension: 1041, region: France
+2026-01-31 15:22:42,317 - webex_batch - INFO - Webex license Extension update for agiannin: Success
+2026-01-31 15:22:42,318 - webex_batch - INFO - Processing user: slegall, email: slegall@akamai.com, extension: 1042, region: France
+2026-01-31 15:22:47,899 - webex_batch - INFO - Webex license Extension update for slegall: Success
+2026-01-31 15:22:47,900 - webex_batch - INFO - Processing user: nstricha, email: nstricha@akamai.com, extension: 1047, region: Israel
+2026-01-31 15:22:53,223 - webex_batch - INFO - Webex license Extension update for nstricha: Success
+2026-01-31 15:22:53,224 - webex_batch - INFO - Processing user: dpogrebi, email: dpogrebi@akamai.com, extension: 1048, region: Israel
+2026-01-31 15:22:58,028 - webex_batch - INFO - Webex license Extension update for dpogrebi: Success
+2026-01-31 15:22:58,029 - webex_batch - INFO - Processing user: bainbind, email: bainbind@akamai.com, extension: 1049, region: Israel
+2026-01-31 15:23:03,016 - webex_batch - INFO - Webex license Extension update for bainbind: Success
+2026-01-31 15:23:03,017 - webex_batch - INFO - Processing user: eakri, email: eakri@akamai.com, extension: 1050, region: Israel
+2026-01-31 15:23:08,049 - webex_batch - INFO - Webex license Extension update for eakri: Success
+2026-01-31 15:23:08,050 - webex_batch - INFO - Processing user: ychernov, email: ychernov@akamai.com, extension: 1051, region: Israel
+2026-01-31 15:23:13,112 - webex_batch - INFO - Webex license Extension update for ychernov: Success
+2026-01-31 15:23:13,115 - webex_batch - INFO - Processing user: ravidan, email: ravidan@akamai.com, extension: 1052, region: Israel
+2026-01-31 15:23:18,455 - webex_batch - INFO - Webex license Extension update for ravidan: Success
+2026-01-31 15:23:18,456 - webex_batch - INFO - Processing user: ctouche, email: ctouche@akamai.com, extension: 1043, region: France
+2026-01-31 15:23:23,812 - webex_batch - INFO - Webex license Extension update for ctouche: Success
+2026-01-31 15:23:23,812 - webex_batch - INFO - Processing user: tannequi, email: tannequi@akamai.com, extension: 1044, region: France
+2026-01-31 15:23:29,106 - webex_batch - INFO - Webex license Extension update for tannequi: Success
+2026-01-31 15:23:29,108 - webex_batch - INFO - Processing user: mekaplan, email: mekaplan@akamai.com, extension: 1053, region: Israel
+2026-01-31 15:23:34,614 - webex_batch - INFO - Webex license Extension update for mekaplan: Success
+2026-01-31 15:23:34,616 - webex_batch - INFO - Processing user: apotier, email: apotier@akamai.com, extension: 1045, region: France
+2026-01-31 15:23:39,560 - webex_batch - INFO - Webex license Extension update for apotier: Success
+2026-01-31 15:23:39,561 - webex_batch - INFO - Processing user: plebouc, email: plebouc@akamai.com, extension: 1046, region: France
+2026-01-31 15:23:45,021 - webex_batch - INFO - Webex license Extension update for plebouc: Success
+2026-01-31 15:23:45,022 - webex_batch - INFO - Processing user: mcohen, email: mcohen@akamai.com, extension: 1054, region: Israel
+2026-01-31 15:23:49,990 - webex_batch - INFO - Webex license Extension update for mcohen: Success
+2026-01-31 15:23:49,991 - webex_batch - INFO - Processing user: adarcher, email: adarcher@akamai.com, extension: 1047, region: France
+2026-01-31 15:23:55,287 - webex_batch - INFO - Webex license Extension update for adarcher: Success
+2026-01-31 15:23:55,294 - webex_batch - INFO - Processing user: ashtosse, email: ashtosse@akamai.com, extension: 1055, region: Israel
+2026-01-31 15:24:00,165 - webex_batch - INFO - Webex license Extension update for ashtosse: Success
+2026-01-31 15:24:00,167 - webex_batch - INFO - Processing user: gmoissai, email: gmoissai@akamai.com, extension: 1048, region: France
+2026-01-31 15:24:05,567 - webex_batch - INFO - Webex license Extension update for gmoissai: Success
+2026-01-31 15:24:05,568 - webex_batch - INFO - Processing user: mburstei, email: mburstei@akamai.com, extension: 1056, region: Israel
+2026-01-31 15:24:10,578 - webex_batch - INFO - Webex license Extension update for mburstei: Success
+2026-01-31 15:24:10,580 - webex_batch - INFO - Processing user: kmolayem, email: kmolayem@akamai.com, extension: 1057, region: Israel
+2026-01-31 15:24:15,967 - webex_batch - INFO - Webex license Extension update for kmolayem: Success
+2026-01-31 15:24:15,968 - webex_batch - INFO - Processing user: jeroy, email: jeroy@akamai.com, extension: 1049, region: France
+2026-01-31 15:24:21,315 - webex_batch - INFO - Webex license Extension update for jeroy: Success
+2026-01-31 15:24:21,316 - webex_batch - INFO - Processing user: ashoshan, email: ashoshan@akamai.com, extension: 1058, region: Israel
+2026-01-31 15:24:26,691 - webex_batch - INFO - Webex license Extension update for ashoshan: Success
+2026-01-31 15:24:26,692 - webex_batch - INFO - Processing user: fcremey, email: fcremey@akamai.com, extension: 1050, region: France
+2026-01-31 15:24:32,137 - webex_batch - INFO - Webex license Extension update for fcremey: Success
+2026-01-31 15:24:32,138 - webex_batch - INFO - Processing user: ggrinber, email: ggrinber@akamai.com, extension: 1059, region: Israel
+2026-01-31 15:24:37,325 - webex_batch - INFO - Webex license Extension update for ggrinber: Success
+2026-01-31 15:24:37,326 - webex_batch - INFO - Processing user: hhimelbl, email: hhimelbl@akamai.com, extension: 1060, region: Israel
+2026-01-31 15:24:42,489 - webex_batch - INFO - Webex license Extension update for hhimelbl: Success
+2026-01-31 15:24:42,490 - webex_batch - INFO - Processing user: zagmon, email: zagmon@akamai.com, extension: 1061, region: Israel
+2026-01-31 15:24:47,878 - webex_batch - INFO - Webex license Extension update for zagmon: Success
+2026-01-31 15:24:47,881 - webex_batch - INFO - Processing user: tamishai, email: tamishai@akamai.com, extension: 1062, region: Israel
+2026-01-31 15:24:52,668 - webex_batch - INFO - Webex license Extension update for tamishai: Success
+2026-01-31 15:24:52,669 - webex_batch - INFO - Processing user: ipetryde, email: ipetryde@akamai.com, extension: 1063, region: Israel
+2026-01-31 15:24:58,184 - webex_batch - INFO - Webex license Extension update for ipetryde: Success
+2026-01-31 15:24:58,186 - webex_batch - INFO - Processing user: ykunda, email: ykunda@akamai.com, extension: 1064, region: Israel
+2026-01-31 15:25:03,376 - webex_batch - INFO - Webex license Extension update for ykunda: Success
+2026-01-31 15:25:03,377 - webex_batch - INFO - Processing user: lyahav, email: lyahav@akamai.com, extension: 1065, region: Israel
+2026-01-31 15:25:08,319 - webex_batch - INFO - Webex license Extension update for lyahav: Success
+2026-01-31 15:25:08,320 - webex_batch - INFO - Processing user: dsotniko, email: dsotniko@akamai.com, extension: 1066, region: Israel
+2026-01-31 15:25:13,025 - webex_batch - INFO - Webex license Extension update for dsotniko: Success
+2026-01-31 15:25:13,027 - webex_batch - INFO - Processing user: rlecarre, email: rlecarre@akamai.com, extension: 1051, region: France
+2026-01-31 15:25:18,510 - webex_batch - INFO - Webex license Extension update for rlecarre: Success
+2026-01-31 15:25:18,511 - webex_batch - INFO - Processing user: shacohen, email: shacohen@akamai.com, extension: 1067, region: Israel
+2026-01-31 15:25:23,756 - webex_batch - INFO - Webex license Extension update for shacohen: Success
+2026-01-31 15:25:23,757 - webex_batch - INFO - Processing user: htzaban, email: htzaban@akamai.com, extension: 1068, region: Israel
+2026-01-31 15:25:28,613 - webex_batch - INFO - Webex license Extension update for htzaban: Success
+2026-01-31 15:25:28,614 - webex_batch - INFO - Processing user: yguedj, email: yguedj@akamai.com, extension: 1069, region: Israel
+2026-01-31 15:25:33,587 - webex_batch - INFO - Webex license Extension update for yguedj: Success
+2026-01-31 15:25:33,588 - webex_batch - INFO - Processing user: olapid, email: olapid@akamai.com, extension: 1070, region: Israel
+2026-01-31 15:25:38,379 - webex_batch - INFO - Webex license Extension update for olapid: Success
+2026-01-31 15:25:38,380 - webex_batch - INFO - Processing user: tabramch, email: tabramch@akamai.com, extension: 1071, region: Israel
+2026-01-31 15:25:43,699 - webex_batch - INFO - Webex license Extension update for tabramch: Success
+2026-01-31 15:25:43,700 - webex_batch - INFO - Processing user: ywartski, email: ywartski@akamai.com, extension: 1072, region: Israel
+2026-01-31 15:25:49,328 - webex_batch - INFO - Webex license Extension update for ywartski: Success
+2026-01-31 15:25:49,329 - webex_batch - INFO - Processing user: egamliel, email: egamliel@akamai.com, extension: 1073, region: Israel
+2026-01-31 15:25:54,170 - webex_batch - INFO - Webex license Extension update for egamliel: Success
+2026-01-31 15:25:54,170 - webex_batch - INFO - Processing user: demelyan, email: demelyan@akamai.com, extension: 1074, region: Israel
+2026-01-31 15:25:59,777 - webex_batch - INFO - Webex license Extension update for demelyan: Success
+2026-01-31 15:25:59,777 - webex_batch - INFO - Processing user: mhadad, email: mhadad@akamai.com, extension: 1075, region: Israel
+2026-01-31 15:26:04,630 - webex_batch - INFO - Webex license Extension update for mhadad: Success
+2026-01-31 15:26:04,631 - webex_batch - INFO - Processing user: nguttman, email: nguttman@akamai.com, extension: 1076, region: Israel
+2026-01-31 15:26:09,997 - webex_batch - INFO - Webex license Extension update for nguttman: Success
+2026-01-31 15:26:09,999 - webex_batch - INFO - Processing user: ssolomon, email: ssolomon@akamai.com, extension: 1077, region: Israel
+2026-01-31 15:26:14,753 - webex_batch - INFO - Webex license Extension update for ssolomon: Success
+2026-01-31 15:26:14,755 - webex_batch - INFO - Processing user: ysikary, email: ysikary@akamai.com, extension: 1078, region: Israel
+2026-01-31 15:26:20,687 - webex_batch - INFO - Webex license Extension update for ysikary: Success
+2026-01-31 15:26:20,688 - webex_batch - INFO - Processing user: nsadeh, email: nsadeh@akamai.com, extension: 1079, region: Israel
+2026-01-31 15:26:25,937 - webex_batch - INFO - Webex license Extension update for nsadeh: Success
+2026-01-31 15:26:25,938 - webex_batch - INFO - Processing user: inaihoz, email: inaihoz@akamai.com, extension: 1080, region: Israel
+2026-01-31 15:26:31,101 - webex_batch - INFO - Webex license Extension update for inaihoz: Success
+2026-01-31 15:26:31,102 - webex_batch - INFO - Processing user: dedri, email: dedri@akamai.com, extension: 1081, region: Israel
+2026-01-31 15:26:36,546 - webex_batch - INFO - Webex license Extension update for dedri: Success
+2026-01-31 15:26:36,547 - webex_batch - INFO - Processing user: sgoldsht, email: sgoldsht@akamai.com, extension: 1082, region: Israel
+2026-01-31 15:26:41,907 - webex_batch - INFO - Webex license Extension update for sgoldsht: Success
+2026-01-31 15:26:41,907 - webex_batch - INFO - Processing user: mfuterma, email: mfuterma@akamai.com, extension: 1083, region: Israel
+2026-01-31 15:26:46,703 - webex_batch - INFO - Webex license Extension update for mfuterma: Success
+2026-01-31 15:26:46,704 - webex_batch - INFO - Processing user: thacker, email: thacker@akamai.com, extension: 1084, region: Israel
+2026-01-31 15:26:51,970 - webex_batch - INFO - Webex license Extension update for thacker: Success
+2026-01-31 15:26:51,974 - webex_batch - INFO - Processing user: tsiouffi, email: tsiouffi@akamai.com, extension: 1052, region: France
+2026-01-31 15:26:57,819 - webex_batch - INFO - Webex license Extension update for tsiouffi: Success
+2026-01-31 15:26:57,820 - webex_batch - INFO - Processing user: erouet, email: erouet@akamai.com, extension: 1053, region: France
+2026-01-31 15:27:03,666 - webex_batch - INFO - Webex license Extension update for erouet: Success
+2026-01-31 15:27:03,667 - webex_batch - INFO - Processing user: amarks-b, email: amarks-b@akamai.com, extension: 1085, region: Israel
+2026-01-31 15:27:08,935 - webex_batch - INFO - Webex ACD update for amarks-b: Success
+2026-01-31 15:27:08,935 - webex_batch - INFO - Processing user: ocohen, email: ocohen@akamai.com, extension: 1086, region: Israel
+2026-01-31 15:27:14,308 - webex_batch - INFO - Webex license Extension update for ocohen: Success
+2026-01-31 15:27:14,309 - webex_batch - INFO - Processing user: fponcet, email: fponcet@akamai.com, extension: 1054, region: France
+2026-01-31 15:27:19,349 - webex_batch - INFO - Webex license Extension update for fponcet: Success
+2026-01-31 15:27:19,349 - webex_batch - INFO - Processing user: obigelma, email: obigelma@akamai.com, extension: 1087, region: Israel
+2026-01-31 15:27:24,901 - webex_batch - INFO - Webex license Extension update for obigelma: Success
+2026-01-31 15:27:24,902 - webex_batch - INFO - Processing user: udiamant, email: udiamant@akamai.com, extension: 1088, region: Israel
+2026-01-31 15:27:30,329 - webex_batch - INFO - Webex license Extension update for udiamant: Success
+2026-01-31 15:27:30,329 - webex_batch - INFO - Processing user: roknyans, email: roknyans@akamai.com, extension: 1089, region: Israel
+2026-01-31 15:27:35,914 - webex_batch - INFO - Webex license Extension update for roknyans: Success
+2026-01-31 15:27:35,915 - webex_batch - INFO - Processing user: ssofer, email: ssofer@akamai.com, extension: 1090, region: Israel
+2026-01-31 15:27:41,165 - webex_batch - INFO - Webex license Extension update for ssofer: Success
+2026-01-31 15:27:41,166 - webex_batch - INFO - Processing user: joperr, email: joperr@akamai.com, extension: 1091, region: Israel
+2026-01-31 15:27:46,457 - webex_batch - INFO - Webex license Extension update for joperr: Success
+2026-01-31 15:27:46,458 - webex_batch - INFO - Processing user: jambrozi, email: jambrozi@akamai.com, extension: 1055, region: France
+2026-01-31 15:27:51,956 - webex_batch - INFO - Webex license Extension update for jambrozi: Success
+2026-01-31 15:27:51,956 - webex_batch - INFO - Processing user: stkamins, email: stkamins@akamai.com, extension: 1092, region: Israel
+2026-01-31 15:27:57,293 - webex_batch - INFO - Webex license Extension update for stkamins: Success
+2026-01-31 15:27:57,296 - webex_batch - INFO - Processing user: rsharon, email: rsharon@akamai.com, extension: 1093, region: Israel
+2026-01-31 15:27:59,521 - webex_batch - INFO - Webex license Extension update for rsharon: Failed
+2026-01-31 15:27:59,522 - webex_batch - INFO - Processing user: eturgema, email: eturgema@akamai.com, extension: 1094, region: Israel
+2026-01-31 15:28:04,808 - webex_batch - INFO - Webex license Extension update for eturgema: Success
+2026-01-31 15:28:04,809 - webex_batch - INFO - Processing user: aschall, email: aschall@akamai.com, extension: 1056, region: France
+2026-01-31 15:28:04,809 - webex_batch - INFO - User aschall is in Exclude list
+2026-01-31 15:28:04,810 - webex_batch - INFO - Processing user: adondish, email: adondish@akamai.com, extension: 1095, region: Israel
+2026-01-31 15:28:09,677 - webex_batch - INFO - Webex license Extension update for adondish: Success
+2026-01-31 15:28:09,678 - webex_batch - INFO - Processing user: mbenshoa, email: mbenshoa@akamai.com, extension: 1096, region: Israel
+2026-01-31 15:28:15,347 - webex_batch - INFO - Webex license Extension update for mbenshoa: Success
+2026-01-31 15:28:15,347 - webex_batch - INFO - Processing user: gmeiri, email: gmeiri@akamai.com, extension: 1097, region: Israel
+2026-01-31 15:28:20,162 - webex_batch - INFO - Webex license Extension update for gmeiri: Success
+2026-01-31 15:28:20,164 - webex_batch - INFO - Processing user: topate, email: topate@akamai.com, extension: 1098, region: Israel
+2026-01-31 15:28:20,164 - webex_batch - INFO - User topate is in Exclude list
+2026-01-31 15:28:20,165 - webex_batch - INFO - Processing user: sbover, email: sbover@akamai.com, extension: 1099, region: Israel
+2026-01-31 15:28:25,169 - webex_batch - INFO - Webex license Extension update for sbover: Success
+2026-01-31 15:28:25,170 - webex_batch - INFO - Processing user: tbrami, email: tbrami@akamai.com, extension: 1100, region: Israel
+2026-01-31 15:28:30,645 - webex_batch - INFO - Webex license Extension update for tbrami: Success
+2026-01-31 15:28:30,646 - webex_batch - INFO - Processing user: brchrist, email: brchrist@akamai.com, extension: 1057, region: France
+2026-01-31 15:28:36,327 - webex_batch - INFO - Webex license Extension update for brchrist: Success
+2026-01-31 15:28:36,328 - webex_batch - INFO - Processing user: lbukhin, email: lbukhin@akamai.com, extension: 1101, region: Israel
+2026-01-31 15:28:41,589 - webex_batch - INFO - Webex license Extension update for lbukhin: Success
+2026-01-31 15:28:41,590 - webex_batch - INFO - Processing user: bemoskov, email: bemoskov@akamai.com, extension: 1102, region: Israel
+2026-01-31 15:28:46,839 - webex_batch - INFO - Webex license Extension update for bemoskov: Success
+2026-01-31 15:28:46,841 - webex_batch - INFO - Processing user: elcohe, email: elcohe@akamai.com, extension: 1103, region: Israel
+2026-01-31 15:28:52,528 - webex_batch - INFO - Webex license Extension update for elcohe: Success
+2026-01-31 15:28:52,530 - webex_batch - INFO - Processing user: azilberk, email: azilberk@akamai.com, extension: 1104, region: Israel
+2026-01-31 15:28:58,544 - webex_batch - INFO - Webex license Extension update for azilberk: Success
+2026-01-31 15:28:58,546 - webex_batch - INFO - Processing user: syetter, email: syetter@akamai.com, extension: 1105, region: Israel
+2026-01-31 15:29:04,406 - webex_batch - INFO - Webex license Extension update for syetter: Success
+2026-01-31 15:29:04,406 - webex_batch - INFO - Processing user: yvatkin, email: yvatkin@akamai.com, extension: 1106, region: Israel
+2026-01-31 15:29:09,578 - webex_batch - INFO - Webex license Extension update for yvatkin: Success
+2026-01-31 15:29:09,583 - webex_batch - INFO - Processing user: omashal, email: omashal@akamai.com, extension: 1107, region: Israel
+2026-01-31 15:29:14,915 - webex_batch - INFO - Webex license Extension update for omashal: Success
+2026-01-31 15:29:14,916 - webex_batch - INFO - Processing user: acrow, email: acrow@akamai.com, extension: 1108, region: Israel
+2026-01-31 15:29:20,077 - webex_batch - INFO - Webex license Extension update for acrow: Success
+2026-01-31 15:29:20,078 - webex_batch - INFO - Processing user: ekhaitzi, email: ekhaitzi@akamai.com, extension: 1109, region: Israel
+2026-01-31 15:29:25,559 - webex_batch - INFO - Webex license Extension update for ekhaitzi: Success
+2026-01-31 15:29:25,559 - webex_batch - INFO - Processing user: dfink, email: dfink@akamai.com, extension: 1110, region: Israel
+2026-01-31 15:29:28,414 - webex_batch - INFO - Webex license Extension update for dfink: Failed
+2026-01-31 15:29:28,415 - webex_batch - INFO - Processing user: smark, email: smark@akamai.com, extension: 1111, region: Israel
+2026-01-31 15:29:33,737 - webex_batch - INFO - Webex license Extension update for smark: Success
+2026-01-31 15:29:33,738 - webex_batch - INFO - Processing user: yromm, email: yromm@akamai.com, extension: 1112, region: Israel
+2026-01-31 15:29:39,195 - webex_batch - INFO - Webex license Extension update for yromm: Success
+2026-01-31 15:29:39,195 - webex_batch - INFO - Processing user: ashermis, email: ashermis@akamai.com, extension: 1113, region: Israel
+2026-01-31 15:29:44,680 - webex_batch - INFO - Webex license Extension update for ashermis: Success
+2026-01-31 15:29:44,681 - webex_batch - INFO - Processing user: mzavodch, email: mzavodch@akamai.com, extension: 1114, region: Israel
+2026-01-31 15:29:49,784 - webex_batch - INFO - Webex license Extension update for mzavodch: Success
+2026-01-31 15:29:49,785 - webex_batch - INFO - Processing user: delbert, email: delbert@akamai.com, extension: 1115, region: Israel
+2026-01-31 15:29:55,651 - webex_batch - INFO - Webex license Extension update for delbert: Success
+2026-01-31 15:29:55,652 - webex_batch - INFO - Processing user: dshachar, email: dshachar@akamai.com, extension: 1116, region: Israel
+2026-01-31 15:30:01,016 - webex_batch - INFO - Webex license Extension update for dshachar: Success
+2026-01-31 15:30:01,017 - webex_batch - INFO - Processing user: nabu, email: nabu@akamai.com, extension: 1117, region: Israel
+2026-01-31 15:30:06,654 - webex_batch - INFO - Webex license Extension update for nabu: Success
+2026-01-31 15:30:06,655 - webex_batch - INFO - Processing user: szar, email: szar@akamai.com, extension: 1118, region: Israel
+2026-01-31 15:30:11,950 - webex_batch - INFO - Webex license Extension update for szar: Success
+2026-01-31 15:30:11,950 - webex_batch - INFO - Processing user: dmoshe, email: dmoshe@akamai.com, extension: 1119, region: Israel
+2026-01-31 15:30:17,527 - webex_batch - INFO - Webex license Extension update for dmoshe: Success
+2026-01-31 15:30:17,528 - webex_batch - INFO - Processing user: nbendana, email: nbendana@akamai.com, extension: 1120, region: Israel
+2026-01-31 15:30:23,016 - webex_batch - INFO - Webex license Extension update for nbendana: Success
+2026-01-31 15:30:23,016 - webex_batch - INFO - Processing user: ggoldber, email: ggoldber@akamai.com, extension: 1121, region: Israel
+2026-01-31 15:30:28,448 - webex_batch - INFO - Webex license Extension update for ggoldber: Success
+2026-01-31 15:30:28,449 - webex_batch - INFO - Processing user: ehazbani, email: ehazbani@akamai.com, extension: 1122, region: Israel
+2026-01-31 15:30:34,090 - webex_batch - INFO - Webex license Extension update for ehazbani: Success
+2026-01-31 15:30:34,090 - webex_batch - INFO - Processing user: gasulin, email: gasulin@akamai.com, extension: 1123, region: Israel
+2026-01-31 15:30:39,501 - webex_batch - INFO - Webex license Extension update for gasulin: Success
+2026-01-31 15:30:39,502 - webex_batch - INFO - Processing user: achak, email: achak@akamai.com, extension: 1124, region: Israel
+2026-01-31 15:30:41,857 - webex_batch - INFO - Webex license Extension update for achak: Failed
+2026-01-31 15:30:41,858 - webex_batch - INFO - Processing user: egur, email: egur@akamai.com, extension: 1125, region: Israel
+2026-01-31 15:30:47,186 - webex_batch - INFO - Webex license Extension update for egur: Success
+2026-01-31 15:30:47,187 - webex_batch - INFO - Processing user: eavzak, email: eavzak@akamai.com, extension: 1126, region: Israel
+2026-01-31 15:30:52,447 - webex_batch - INFO - Webex license Extension update for eavzak: Success
+2026-01-31 15:30:52,448 - webex_batch - INFO - Processing user: aleiderm, email: aleiderm@akamai.com, extension: 1127, region: Israel
+2026-01-31 15:30:58,412 - webex_batch - INFO - Webex license Extension update for aleiderm: Success
+2026-01-31 15:30:58,413 - webex_batch - INFO - Processing user: tsisserm, email: tsisserm@akamai.com, extension: 1128, region: Israel
+2026-01-31 15:31:03,627 - webex_batch - INFO - Webex ACD update for tsisserm: Success
+2026-01-31 15:31:03,629 - webex_batch - INFO - Processing user: isakazi, email: isakazi@akamai.com, extension: 1129, region: Israel
+2026-01-31 15:31:05,916 - webex_batch - INFO - Webex ACD update for isakazi: Failed
+2026-01-31 15:31:05,917 - webex_batch - INFO - Processing user: mcomte, email: mcomte@akamai.com, extension: 1058, region: France
+2026-01-31 15:31:11,604 - webex_batch - INFO - Webex ACD update for mcomte: Success
+2026-01-31 15:31:11,605 - webex_batch - INFO - Processing user: tshaked, email: tshaked@akamai.com, extension: 1130, region: Israel
+2026-01-31 15:31:16,645 - webex_batch - INFO - Webex license Extension update for tshaked: Success
+2026-01-31 15:31:16,646 - webex_batch - INFO - Processing user: toz, email: toz@akamai.com, extension: 1131, region: Israel
+2026-01-31 15:31:21,598 - webex_batch - INFO - Webex ACD update for toz: Success
+2026-01-31 15:31:21,598 - webex_batch - INFO - Processing user: mkalfon, email: mkalfon@akamai.com, extension: 1132, region: Israel
+2026-01-31 15:31:27,034 - webex_batch - INFO - Webex license Extension update for mkalfon: Success
+2026-01-31 15:31:27,035 - webex_batch - INFO - Processing user: rbushria, email: rbushria@akamai.com, extension: 1133, region: Israel
+2026-01-31 15:31:32,377 - webex_batch - INFO - Webex license Extension update for rbushria: Success
+2026-01-31 15:31:32,380 - webex_batch - INFO - Processing user: dparient, email: dparient@akamai.com, extension: 1059, region: France
+2026-01-31 15:31:38,249 - webex_batch - INFO - Webex license Extension update for dparient: Success
+2026-01-31 15:31:38,250 - webex_batch - INFO - Processing user: ashemesh, email: ashemesh@akamai.com, extension: 1134, region: Israel
+2026-01-31 15:31:43,046 - webex_batch - INFO - Webex license Extension update for ashemesh: Success
+2026-01-31 15:31:43,047 - webex_batch - INFO - Processing user: msaranga, email: msaranga@akamai.com, extension: 1135, region: Israel
+2026-01-31 15:31:48,377 - webex_batch - INFO - Webex license Extension update for msaranga: Success
+2026-01-31 15:31:48,378 - webex_batch - INFO - Processing user: byagoni, email: byagoni@akamai.com, extension: 1136, region: Israel
+2026-01-31 15:31:53,424 - webex_batch - INFO - Webex license Extension update for byagoni: Success
+2026-01-31 15:31:53,425 - webex_batch - INFO - Processing user: tfuteran, email: tfuteran@akamai.com, extension: 1137, region: Israel
+2026-01-31 15:31:59,201 - webex_batch - INFO - Webex license Extension update for tfuteran: Success
+2026-01-31 15:31:59,205 - webex_batch - INFO - Processing user: bchuyko, email: bchuyko@akamai.com, extension: 1138, region: Israel
+2026-01-31 15:32:04,462 - webex_batch - INFO - Webex license Extension update for bchuyko: Success
+2026-01-31 15:32:04,463 - webex_batch - INFO - Processing user: dsalee, email: dsalee@akamai.com, extension: 1139, region: Israel
+2026-01-31 15:32:09,770 - webex_batch - INFO - Webex license Extension update for dsalee: Success
+2026-01-31 15:32:09,771 - webex_batch - INFO - Processing user: lavraham, email: lavraham@akamai.com, extension: 1140, region: Israel
+2026-01-31 15:32:09,771 - webex_batch - INFO - User lavraham is in Exclude list
+2026-01-31 15:32:09,772 - webex_batch - INFO - Processing user: oaldor, email: oaldor@akamai.com, extension: 1141, region: Israel
+2026-01-31 15:32:15,082 - webex_batch - INFO - Webex license Extension update for oaldor: Success
+2026-01-31 15:32:15,084 - webex_batch - INFO - Processing user: ggoldbla, email: ggoldbla@akamai.com, extension: 1142, region: Israel
+2026-01-31 15:32:15,084 - webex_batch - INFO - User ggoldbla is in Exclude list
+2026-01-31 15:32:15,084 - webex_batch - INFO - Processing user: lshasho, email: lshasho@akamai.com, extension: 1143, region: Israel
+2026-01-31 15:32:20,357 - webex_batch - INFO - Webex license Extension update for lshasho: Success
+2026-01-31 15:32:20,358 - webex_batch - INFO - Processing user: vzilius, email: vzilius@akamai.com, extension: 1144, region: Israel
+2026-01-31 15:32:25,302 - webex_batch - INFO - Webex license Extension update for vzilius: Success
+2026-01-31 15:32:25,304 - webex_batch - INFO - Processing user: lporat, email: lporat@akamai.com, extension: 1145, region: Israel
+2026-01-31 15:32:30,446 - webex_batch - INFO - Webex license Extension update for lporat: Success
+2026-01-31 15:32:30,447 - webex_batch - INFO - Processing user: ilazoros, email: ilazoros@akamai.com, extension: 1146, region: Israel
+2026-01-31 15:32:34,846 - webex_batch - INFO - Webex license Extension update for ilazoros: Success
+2026-01-31 15:32:34,847 - webex_batch - INFO - Processing user: rmajadle, email: rmajadle@akamai.com, extension: 1147, region: Israel
+2026-01-31 15:32:40,782 - webex_batch - INFO - Webex license Extension update for rmajadle: Success
+2026-01-31 15:32:40,782 - webex_batch - INFO - Processing user: uhershco, email: uhershco@akamai.com, extension: 1148, region: Israel
+2026-01-31 15:32:46,205 - webex_batch - INFO - Webex license Extension update for uhershco: Success
+2026-01-31 15:32:46,206 - webex_batch - INFO - Processing user: areches, email: areches@akamai.com, extension: 1149, region: Israel
+2026-01-31 15:32:51,842 - webex_batch - INFO - Webex license Extension update for areches: Success
+2026-01-31 15:32:51,843 - webex_batch - INFO - Processing user: myaverba, email: myaverba@akamai.com, extension: 1150, region: Israel
+2026-01-31 15:32:57,943 - webex_batch - INFO - Webex license Extension update for myaverba: Success
+2026-01-31 15:32:57,943 - webex_batch - INFO - Processing user: namit, email: namit@akamai.com, extension: 1151, region: Israel
+2026-01-31 15:33:05,123 - webex_batch - INFO - Webex license Extension update for namit: Success
+2026-01-31 15:33:05,124 - webex_batch - INFO - Processing user: aberman, email: aberman@akamai.com, extension: 1152, region: Israel
+2026-01-31 15:33:11,073 - webex_batch - INFO - Webex license Extension update for aberman: Success
+2026-01-31 15:33:11,074 - webex_batch - INFO - Processing user: kkim, email: kkim@akamai.com, extension: 1153, region: Israel
+2026-01-31 15:33:16,201 - webex_batch - INFO - Webex license Extension update for kkim: Success
+2026-01-31 15:33:16,202 - webex_batch - INFO - Processing user: raharons, email: raharons@akamai.com, extension: 1154, region: Israel
+2026-01-31 15:33:21,461 - webex_batch - INFO - Webex license Extension update for raharons: Success
+2026-01-31 15:33:21,463 - webex_batch - INFO - Processing user: oossie, email: oossie@akamai.com, extension: 1155, region: Israel
+2026-01-31 15:33:27,976 - webex_batch - INFO - Webex license Extension update for oossie: Success
+2026-01-31 15:33:27,977 - webex_batch - INFO - Processing user: ashladov, email: ashladov@akamai.com, extension: 1156, region: Israel
+2026-01-31 15:33:33,303 - webex_batch - INFO - Webex license Extension update for ashladov: Success
+2026-01-31 15:33:33,304 - webex_batch - INFO - Processing user: dbar-gil, email: dbar-gil@akamai.com, extension: 1157, region: Israel
+2026-01-31 15:33:38,839 - webex_batch - INFO - Webex ACD update for dbar-gil: Success
+2026-01-31 15:33:38,841 - webex_batch - INFO - Processing user: ihalakhm, email: ihalakhm@akamai.com, extension: 1158, region: Israel
+2026-01-31 15:33:44,204 - webex_batch - INFO - Webex license Extension update for ihalakhm: Success
+2026-01-31 15:33:44,205 - webex_batch - INFO - Processing user: tabramov, email: tabramov@akamai.com, extension: 1159, region: Israel
+2026-01-31 15:33:49,963 - webex_batch - INFO - Webex license Extension update for tabramov: Success
+2026-01-31 15:33:49,965 - webex_batch - INFO - Processing user: mzimry, email: mzimry@akamai.com, extension: 1160, region: Israel
+2026-01-31 15:33:55,361 - webex_batch - INFO - Webex license Extension update for mzimry: Success
+2026-01-31 15:33:55,362 - webex_batch - INFO - Processing user: sgelband, email: sgelband@akamai.com, extension: 1161, region: Israel
+2026-01-31 15:34:00,608 - webex_batch - INFO - Webex license Extension update for sgelband: Success
+2026-01-31 15:34:00,609 - webex_batch - INFO - Processing user: mshleife, email: mshleife@akamai.com, extension: 1162, region: Israel
+2026-01-31 15:34:05,437 - webex_batch - INFO - Webex license Extension update for mshleife: Success
+2026-01-31 15:34:05,439 - webex_batch - INFO - Processing user: tben-mei, email: tben-mei@akamai.com, extension: 1163, region: Israel
+2026-01-31 15:34:10,485 - webex_batch - INFO - Webex ACD update for tben-mei: Success
+2026-01-31 15:34:10,485 - webex_batch - INFO - Processing user: bthee, email: bthee@akamai.com, extension: 1164, region: Israel
+2026-01-31 15:34:15,783 - webex_batch - INFO - Webex license Extension update for bthee: Success
+2026-01-31 15:34:15,783 - webex_batch - INFO - Processing user: depshtei, email: depshtei@akamai.com, extension: 1165, region: Israel
+2026-01-31 15:34:21,300 - webex_batch - INFO - Webex license Extension update for depshtei: Success
+2026-01-31 15:34:21,301 - webex_batch - INFO - Processing user: rbrunste, email: rbrunste@akamai.com, extension: 1166, region: Israel
+2026-01-31 15:34:26,449 - webex_batch - INFO - Webex license Extension update for rbrunste: Success
+2026-01-31 15:34:26,450 - webex_batch - INFO - Processing user: osergatc, email: osergatc@akamai.com, extension: 1167, region: Israel
+2026-01-31 15:34:31,934 - webex_batch - INFO - Webex license Extension update for osergatc: Success
+2026-01-31 15:34:31,935 - webex_batch - INFO - Processing user: mhatuka, email: mhatuka@akamai.com, extension: 1168, region: Israel
+2026-01-31 15:34:37,245 - webex_batch - INFO - Webex license Extension update for mhatuka: Success
+2026-01-31 15:34:37,246 - webex_batch - INFO - Processing user: cofek, email: cofek@akamai.com, extension: 1169, region: Israel
+2026-01-31 15:34:42,090 - webex_batch - INFO - Webex license Extension update for cofek: Success
+2026-01-31 15:34:42,091 - webex_batch - INFO - Processing user: bpecheny, email: bpecheny@akamai.com, extension: 1170, region: Israel
+2026-01-31 15:34:47,581 - webex_batch - INFO - Webex license Extension update for bpecheny: Success
+2026-01-31 15:34:47,582 - webex_batch - INFO - Processing user: kragor, email: kragor@akamai.com, extension: 1171, region: Israel
+2026-01-31 15:34:53,880 - webex_batch - INFO - Webex license Extension update for kragor: Success
+2026-01-31 15:34:53,880 - webex_batch - INFO - Processing user: owolf, email: owolf@akamai.com, extension: 1172, region: Israel
+2026-01-31 15:34:58,716 - webex_batch - INFO - Webex license Extension update for owolf: Success
+2026-01-31 15:34:58,717 - webex_batch - INFO - Processing user: dsason, email: dsason@akamai.com, extension: 1173, region: Israel
+2026-01-31 15:35:04,492 - webex_batch - INFO - Webex license Extension update for dsason: Success
+2026-01-31 15:35:04,493 - webex_batch - INFO - Processing user: ngolovko, email: ngolovko@akamai.com, extension: 1174, region: Israel
+2026-01-31 15:35:09,965 - webex_batch - INFO - Webex license Extension update for ngolovko: Success
+2026-01-31 15:35:09,965 - webex_batch - INFO - Processing user: ggoren, email: ggoren@akamai.com, extension: 1175, region: Israel
+2026-01-31 15:35:15,734 - webex_batch - INFO - Webex license Extension update for ggoren: Success
+2026-01-31 15:35:15,735 - webex_batch - INFO - Processing user: rchriste, email: rchriste@akamai.com, extension: 1176, region: Israel
+2026-01-31 15:35:21,702 - webex_batch - INFO - Webex license Extension update for rchriste: Success
+2026-01-31 15:35:21,703 - webex_batch - INFO - Processing user: eshtainb, email: eshtainb@akamai.com, extension: 1177, region: Israel
+2026-01-31 15:35:27,152 - webex_batch - INFO - Webex license Extension update for eshtainb: Success
+2026-01-31 15:35:27,153 - webex_batch - INFO - Processing user: nbirman, email: nbirman@akamai.com, extension: 1178, region: Israel
+2026-01-31 15:35:32,475 - webex_batch - INFO - Webex license Extension update for nbirman: Success
+2026-01-31 15:35:32,476 - webex_batch - INFO - Processing user: zrosenta, email: zrosenta@akamai.com, extension: 1179, region: Israel
+2026-01-31 15:35:37,557 - webex_batch - INFO - Webex license Extension update for zrosenta: Success
+2026-01-31 15:35:37,558 - webex_batch - INFO - Processing user: yasraf, email: yasraf@akamai.com, extension: 1180, region: Israel
+2026-01-31 15:35:42,431 - webex_batch - INFO - Webex license Extension update for yasraf: Success
+2026-01-31 15:35:42,432 - webex_batch - INFO - Processing user: isela, email: isela@akamai.com, extension: 1181, region: Israel
+2026-01-31 15:35:47,745 - webex_batch - INFO - Webex license Extension update for isela: Success
+2026-01-31 15:35:47,746 - webex_batch - INFO - Processing user: apilo, email: apilo@akamai.com, extension: 1182, region: Israel
+2026-01-31 15:35:53,381 - webex_batch - INFO - Webex license Extension update for apilo: Success
+2026-01-31 15:35:53,382 - webex_batch - INFO - Processing user: rkatz, email: rkatz@akamai.com, extension: 1183, region: Israel
+2026-01-31 15:35:58,591 - webex_batch - INFO - Webex license Extension update for rkatz: Success
+2026-01-31 15:35:58,592 - webex_batch - INFO - Processing user: dtsiruln, email: dtsiruln@akamai.com, extension: 1184, region: Israel
+2026-01-31 15:36:00,932 - webex_batch - INFO - Webex license Extension update for dtsiruln: Failed
+2026-01-31 15:36:00,932 - webex_batch - INFO - Processing user: mschwarc, email: mschwarc@akamai.com, extension: 1185, region: Israel
+2026-01-31 15:36:03,468 - webex_batch - INFO - Webex license Extension update for mschwarc: Failed
+2026-01-31 15:36:03,469 - webex_batch - INFO - Processing user: mbergwer, email: mbergwer@akamai.com, extension: 1186, region: Israel
+2026-01-31 15:36:09,486 - webex_batch - INFO - Webex license Extension update for mbergwer: Success
+2026-01-31 15:36:09,487 - webex_batch - INFO - Processing user: reizenbe, email: reizenbe@akamai.com, extension: 1187, region: Israel
+2026-01-31 15:36:15,227 - webex_batch - INFO - Webex license Extension update for reizenbe: Success
+2026-01-31 15:36:15,229 - webex_batch - INFO - Processing user: ljacquem, email: ljacquem@akamai.com, extension: 1060, region: France
+2026-01-31 15:36:20,732 - webex_batch - INFO - Webex ACD update for ljacquem: Success
+2026-01-31 15:36:20,734 - webex_batch - INFO - Processing user: awindeck, email: awindeck@akamai.com, extension: 1188, region: Israel
+2026-01-31 15:36:26,081 - webex_batch - INFO - Webex license Extension update for awindeck: Success
+2026-01-31 15:36:26,083 - webex_batch - INFO - Processing user: yfralo, email: yfralo@akamai.com, extension: 1061, region: France
+2026-01-31 15:36:31,775 - webex_batch - INFO - Webex ACD update for yfralo: Success
+2026-01-31 15:36:31,776 - webex_batch - INFO - Processing user: oslev, email: oslev@akamai.com, extension: 1189, region: Israel
+2026-01-31 15:36:36,761 - webex_batch - INFO - Webex license Extension update for oslev: Success
+2026-01-31 15:36:36,762 - webex_batch - INFO - Processing user: elemberb, email: elemberb@akamai.com, extension: 1190, region: Israel
+2026-01-31 15:36:42,273 - webex_batch - INFO - Webex license Extension update for elemberb: Success
+2026-01-31 15:36:42,274 - webex_batch - INFO - Processing user: egoldsch, email: egoldsch@akamai.com, extension: 1191, region: Israel
+2026-01-31 15:36:47,837 - webex_batch - INFO - Webex license Extension update for egoldsch: Success
+2026-01-31 15:36:47,838 - webex_batch - INFO - Processing user: jbourgai, email: jbourgai@akamai.com, extension: 1062, region: France
+2026-01-31 15:36:53,234 - webex_batch - INFO - Webex ACD update for jbourgai: Success
+2026-01-31 15:36:53,235 - webex_batch - INFO - Processing user: mmaman, email: mmaman@akamai.com, extension: 1192, region: Israel
+2026-01-31 15:36:58,808 - webex_batch - INFO - Webex license Extension update for mmaman: Success
+2026-01-31 15:36:58,809 - webex_batch - INFO - Processing user: nrozenbe, email: nrozenbe@akamai.com, extension: 1193, region: Israel
+2026-01-31 15:37:04,496 - webex_batch - INFO - Webex license Extension update for nrozenbe: Success
+2026-01-31 15:37:04,498 - webex_batch - INFO - Processing user: reldor, email: reldor@akamai.com, extension: 1194, region: Israel
+2026-01-31 15:37:09,807 - webex_batch - INFO - Webex license Extension update for reldor: Success
+2026-01-31 15:37:09,808 - webex_batch - INFO - Processing user: imisgav, email: imisgav@akamai.com, extension: 1195, region: Israel
+2026-01-31 15:37:15,073 - webex_batch - INFO - Webex license Extension update for imisgav: Success
+2026-01-31 15:37:15,074 - webex_batch - INFO - Processing user: amor, email: amor@akamai.com, extension: 1196, region: Israel
+2026-01-31 15:37:21,017 - webex_batch - INFO - Webex license Extension update for amor: Success
+2026-01-31 15:37:21,019 - webex_batch - INFO - Processing user: gkochner, email: gkochner@akamai.com, extension: 1197, region: Israel
+2026-01-31 15:37:26,560 - webex_batch - INFO - Webex license Extension update for gkochner: Success
+2026-01-31 15:37:26,562 - webex_batch - INFO - Processing user: mischwar, email: mischwar@akamai.com, extension: 1198, region: Israel
+2026-01-31 15:37:31,745 - webex_batch - INFO - Webex license Extension update for mischwar: Success
+2026-01-31 15:37:31,745 - webex_batch - INFO - Processing user: ybarak, email: ybarak@akamai.com, extension: 1199, region: Israel
+2026-01-31 15:37:36,729 - webex_batch - INFO - Webex license Extension update for ybarak: Success
+2026-01-31 15:37:36,730 - webex_batch - INFO - Processing user: lravid, email: lravid@akamai.com, extension: 1200, region: Israel
+2026-01-31 15:37:42,110 - webex_batch - INFO - Webex license Extension update for lravid: Success
+2026-01-31 15:37:42,111 - webex_batch - INFO - Processing user: isolomon, email: isolomon@akamai.com, extension: 1201, region: Israel
+2026-01-31 15:37:47,944 - webex_batch - INFO - Webex license Extension update for isolomon: Failed
+2026-01-31 15:37:47,945 - webex_batch - INFO - Processing user: abravery, email: abravery@akamai.com, extension: 1202, region: Israel
+2026-01-31 15:37:53,212 - webex_batch - INFO - Webex license Extension update for abravery: Success
+2026-01-31 15:37:53,214 - webex_batch - INFO - Processing user: abujman, email: abujman@akamai.com, extension: 1203, region: Israel
+2026-01-31 15:37:58,542 - webex_batch - INFO - Webex license Extension update for abujman: Success
+2026-01-31 15:37:58,543 - webex_batch - INFO - Processing user: rbloch, email: rbloch@akamai.com, extension: 1204, region: Israel
+2026-01-31 15:38:04,348 - webex_batch - INFO - Webex license Extension update for rbloch: Success
+2026-01-31 15:38:04,349 - webex_batch - INFO - Processing user: ipinto, email: ipinto@akamai.com, extension: 1205, region: Israel
+2026-01-31 15:38:10,106 - webex_batch - INFO - Webex license Extension update for ipinto: Success
+2026-01-31 15:38:10,108 - webex_batch - INFO - Processing user: baizenbe, email: baizenbe@akamai.com, extension: 1206, region: Israel
+2026-01-31 15:38:15,377 - webex_batch - INFO - Webex license Extension update for baizenbe: Success
+2026-01-31 15:38:15,377 - webex_batch - INFO - Processing user: yoche, email: yoche@akamai.com, extension: 1207, region: Israel
+2026-01-31 15:38:20,534 - webex_batch - INFO - Webex license Extension update for yoche: Success
+2026-01-31 15:38:20,534 - webex_batch - INFO - Processing user: oaviv, email: oaviv@akamai.com, extension: 1208, region: Israel
+2026-01-31 15:38:25,487 - webex_batch - INFO - Webex license Extension update for oaviv: Success
+2026-01-31 15:38:25,488 - webex_batch - INFO - Processing user: sfourman, email: sfourman@akamai.com, extension: 1209, region: Israel
+2026-01-31 15:38:31,291 - webex_batch - INFO - Webex license Extension update for sfourman: Success
+2026-01-31 15:38:31,292 - webex_batch - INFO - Processing user: ivorobyo, email: ivorobyo@akamai.com, extension: 1210, region: Israel
+2026-01-31 15:38:36,706 - webex_batch - INFO - Webex license Extension update for ivorobyo: Success
+2026-01-31 15:38:36,710 - webex_batch - INFO - Processing user: ssalama, email: ssalama@akamai.com, extension: 1211, region: Israel
+2026-01-31 15:38:39,124 - webex_batch - INFO - Webex license Extension update for ssalama: Failed
+2026-01-31 15:38:39,126 - webex_batch - INFO - Processing user: erozner, email: erozner@akamai.com, extension: 1212, region: Israel
+2026-01-31 15:38:45,177 - webex_batch - INFO - Webex license Extension update for erozner: Success
+2026-01-31 15:38:45,179 - webex_batch - INFO - Processing user: cmorales, email: cmorales@akamai.com, extension: 1213, region: Israel
+2026-01-31 15:38:50,740 - webex_batch - INFO - Webex license Extension update for cmorales: Success
+2026-01-31 15:38:50,743 - webex_batch - INFO - Processing user: ncaster, email: ncaster@akamai.com, extension: 1214, region: Israel
+2026-01-31 15:38:56,447 - webex_batch - INFO - Webex license Extension update for ncaster: Success
+2026-01-31 15:38:56,448 - webex_batch - INFO - Processing user: oamihay, email: oamihay@akamai.com, extension: 1215, region: Israel
+2026-01-31 15:39:02,269 - webex_batch - INFO - Webex license Extension update for oamihay: Success
+2026-01-31 15:39:02,270 - webex_batch - INFO - Processing user: eleschin, email: eleschin@akamai.com, extension: 1216, region: Israel
+2026-01-31 15:39:07,303 - webex_batch - INFO - Webex license Extension update for eleschin: Success
+2026-01-31 15:39:07,309 - webex_batch - INFO - Processing user: rmankivs, email: rmankivs@akamai.com, extension: 1217, region: Israel
+2026-01-31 15:39:13,291 - webex_batch - INFO - Webex license Extension update for rmankivs: Success
+2026-01-31 15:39:13,293 - webex_batch - INFO - Processing user: lshaya, email: lshaya@akamai.com, extension: 1218, region: Israel
+2026-01-31 15:39:18,631 - webex_batch - INFO - Webex license Extension update for lshaya: Success
+2026-01-31 15:39:18,632 - webex_batch - INFO - Processing user: mbronsht, email: mbronsht@akamai.com, extension: 1219, region: Israel
+2026-01-31 15:39:23,809 - webex_batch - INFO - Webex license Extension update for mbronsht: Success
+2026-01-31 15:39:23,810 - webex_batch - INFO - Processing user: obenharu, email: obenharu@akamai.com, extension: 1220, region: Israel
+2026-01-31 15:39:28,853 - webex_batch - INFO - Webex license Extension update for obenharu: Success
+2026-01-31 15:39:28,854 - webex_batch - INFO - Processing user: mgoldman, email: mgoldman@akamai.com, extension: 1221, region: Israel
+2026-01-31 15:39:35,010 - webex_batch - INFO - Webex license Extension update for mgoldman: Failed
+2026-01-31 15:39:35,011 - webex_batch - INFO - Processing user: klvovsky, email: klvovsky@akamai.com, extension: 1222, region: Israel
+2026-01-31 15:39:50,265 - webex_batch - INFO - Webex license Extension update for klvovsky: Success
+2026-01-31 15:39:50,266 - webex_batch - INFO - Processing user: epasterm, email: epasterm@akamai.com, extension: 1223, region: Israel
+2026-01-31 15:39:56,391 - webex_batch - INFO - Webex license Extension update for epasterm: Success
+2026-01-31 15:39:56,392 - webex_batch - INFO - Processing user: rdagan, email: rdagan@akamai.com, extension: 1224, region: Israel
+2026-01-31 15:40:01,833 - webex_batch - INFO - Webex license Extension update for rdagan: Success
+2026-01-31 15:40:01,833 - webex_batch - INFO - Processing user: rshahar, email: rshahar@akamai.com, extension: 1225, region: Israel
+2026-01-31 15:40:07,708 - webex_batch - INFO - Webex license Extension update for rshahar: Success
+2026-01-31 15:40:07,709 - webex_batch - INFO - Processing user: oshen, email: oshen@akamai.com, extension: 1226, region: Israel
+2026-01-31 15:40:13,340 - webex_batch - INFO - Webex license Extension update for oshen: Success
+2026-01-31 15:40:13,341 - webex_batch - INFO - Processing user: jecoulo, email: jecoulo@akamai.com, extension: 1063, region: France
+2026-01-31 15:40:18,736 - webex_batch - INFO - Webex license Extension update for jecoulo: Success
+2026-01-31 15:40:18,737 - webex_batch - INFO - Processing user: mfranco, email: mfranco@akamai.com, extension: 1227, region: Israel
+2026-01-31 15:40:23,641 - webex_batch - INFO - Webex license Extension update for mfranco: Success
+2026-01-31 15:40:23,642 - webex_batch - INFO - Processing user: ashahar, email: ashahar@akamai.com, extension: 1228, region: Israel
+2026-01-31 15:40:29,028 - webex_batch - INFO - Webex license Extension update for ashahar: Success
+2026-01-31 15:40:29,029 - webex_batch - INFO - Processing user: kmufler, email: kmufler@akamai.com, extension: 1229, region: Israel
+2026-01-31 15:40:34,694 - webex_batch - INFO - Webex license Extension update for kmufler: Success
+2026-01-31 15:40:34,695 - webex_batch - INFO - Processing user: aeliovic, email: aeliovic@akamai.com, extension: 1230, region: Israel
+2026-01-31 15:40:40,476 - webex_batch - INFO - Webex license Extension update for aeliovic: Success
+2026-01-31 15:40:40,477 - webex_batch - INFO - Processing user: arothste, email: arothste@akamai.com, extension: 1231, region: Israel
+2026-01-31 15:40:45,912 - webex_batch - INFO - Webex license Extension update for arothste: Success
+2026-01-31 15:40:45,914 - webex_batch - INFO - Processing user: hweissta, email: hweissta@akamai.com, extension: 1232, region: Israel
+2026-01-31 15:40:50,922 - webex_batch - INFO - Webex license Extension update for hweissta: Success
+2026-01-31 15:40:50,923 - webex_batch - INFO - Processing user: dhirsh, email: dhirsh@akamai.com, extension: 1233, region: Israel
+2026-01-31 15:40:57,048 - webex_batch - INFO - Webex license Extension update for dhirsh: Success
+2026-01-31 15:40:57,049 - webex_batch - INFO - Processing user: mtivin, email: mtivin@akamai.com, extension: 1234, region: Israel
+2026-01-31 15:41:12,453 - webex_batch - INFO - Webex license Extension update for mtivin: Success
+2026-01-31 15:41:12,455 - webex_batch - INFO - Processing user: yrakhlin, email: yrakhlin@akamai.com, extension: 1235, region: Israel
+2026-01-31 15:41:17,350 - webex_batch - INFO - Webex license Extension update for yrakhlin: Success
+2026-01-31 15:41:17,351 - webex_batch - INFO - Processing user: ygilvarg, email: ygilvarg@akamai.com, extension: 1236, region: Israel
+2026-01-31 15:41:22,633 - webex_batch - INFO - Webex license Extension update for ygilvarg: Success
+2026-01-31 15:41:22,634 - webex_batch - INFO - Processing user: rsendovs, email: rsendovs@akamai.com, extension: 1237, region: Israel
+2026-01-31 15:41:27,513 - webex_batch - INFO - Webex license Extension update for rsendovs: Success
+2026-01-31 15:41:27,514 - webex_batch - INFO - Processing user: darev, email: darev@akamai.com, extension: 1238, region: Israel
+2026-01-31 15:41:33,005 - webex_batch - INFO - Webex license Extension update for darev: Success
+2026-01-31 15:41:33,006 - webex_batch - INFO - Processing user: zkaplan, email: zkaplan@akamai.com, extension: 1239, region: Israel
+2026-01-31 15:41:38,993 - webex_batch - INFO - Webex license Extension update for zkaplan: Success
+2026-01-31 15:41:38,994 - webex_batch - INFO - Processing user: ssinger, email: ssinger@akamai.com, extension: 1240, region: Israel
+2026-01-31 15:41:44,101 - webex_batch - INFO - Webex license Extension update for ssinger: Success
+2026-01-31 15:41:44,102 - webex_batch - INFO - Processing user: rhonigma, email: rhonigma@akamai.com, extension: 1241, region: Israel
+2026-01-31 15:41:48,967 - webex_batch - INFO - Webex license Extension update for rhonigma: Success
+2026-01-31 15:41:48,968 - webex_batch - INFO - Processing user: mcohenze, email: mcohenze@akamai.com, extension: 1242, region: Israel
+2026-01-31 15:41:54,304 - webex_batch - INFO - Webex license Extension update for mcohenze: Success
+2026-01-31 15:41:54,305 - webex_batch - INFO - Processing user: ietzion, email: ietzion@akamai.com, extension: 1243, region: Israel
+2026-01-31 15:41:59,767 - webex_batch - INFO - Webex license Extension update for ietzion: Success
+2026-01-31 15:41:59,768 - webex_batch - INFO - Processing user: drahamim, email: drahamim@akamai.com, extension: 1244, region: Israel
+2026-01-31 15:42:06,089 - webex_batch - INFO - Webex license Extension update for drahamim: Success
+2026-01-31 15:42:06,090 - webex_batch - INFO - Processing user: hamon, email: hamon@akamai.com, extension: 1064, region: France
+2026-01-31 15:42:12,284 - webex_batch - INFO - Webex license Extension update for hamon: Success
+2026-01-31 15:42:12,285 - webex_batch - INFO - Processing user: ashlomo, email: ashlomo@akamai.com, extension: 1245, region: Israel
+2026-01-31 15:42:17,263 - webex_batch - INFO - Webex license Extension update for ashlomo: Success
+2026-01-31 15:42:17,266 - webex_batch - INFO - Processing user: ysherer, email: ysherer@akamai.com, extension: 1246, region: Israel
+2026-01-31 15:42:22,873 - webex_batch - INFO - Webex license Extension update for ysherer: Success
+2026-01-31 15:42:22,874 - webex_batch - INFO - Processing user: jbishara, email: jbishara@akamai.com, extension: 1247, region: Israel
+2026-01-31 15:42:27,753 - webex_batch - INFO - Webex license Extension update for jbishara: Success
+2026-01-31 15:42:27,754 - webex_batch - INFO - Processing user: obador, email: obador@akamai.com, extension: 1248, region: Israel
+2026-01-31 15:42:30,077 - webex_batch - INFO - Webex license Extension update for obador: Failed
+2026-01-31 15:42:30,079 - webex_batch - INFO - Processing user: allev, email: allev@akamai.com, extension: 1249, region: Israel
+2026-01-31 15:42:35,622 - webex_batch - INFO - Webex license Extension update for allev: Success
+2026-01-31 15:42:35,626 - webex_batch - INFO - Processing user: nreshef, email: nreshef@akamai.com, extension: 1250, region: Israel
+2026-01-31 15:42:41,050 - webex_batch - INFO - Webex license Extension update for nreshef: Success
+2026-01-31 15:42:41,053 - webex_batch - INFO - Processing user: dlevit, email: dlevit@akamai.com, extension: 1251, region: Israel
+2026-01-31 15:42:46,220 - webex_batch - INFO - Webex license Extension update for dlevit: Success
+2026-01-31 15:42:46,221 - webex_batch - INFO - Processing user: eflash, email: eflash@akamai.com, extension: 1252, region: Israel
+2026-01-31 15:42:51,559 - webex_batch - INFO - Webex license Extension update for eflash: Success
+2026-01-31 15:42:51,561 - webex_batch - INFO - Processing user: yushafri, email: yushafri@akamai.com, extension: 1253, region: Israel
+2026-01-31 15:42:56,667 - webex_batch - INFO - Webex license Extension update for yushafri: Success
+2026-01-31 15:42:56,668 - webex_batch - INFO - Processing user: salmog, email: salmog@akamai.com, extension: 1254, region: Israel
+2026-01-31 15:43:01,740 - webex_batch - INFO - Webex license Extension update for salmog: Success
+2026-01-31 15:43:01,742 - webex_batch - INFO - Processing user: aavivi, email: aavivi@akamai.com, extension: 1255, region: Israel
+2026-01-31 15:43:06,921 - webex_batch - INFO - Webex license Extension update for aavivi: Success
+2026-01-31 15:43:06,922 - webex_batch - INFO - Processing user: ybasford, email: ybasford@akamai.com, extension: 1256, region: Israel
+2026-01-31 15:43:12,706 - webex_batch - INFO - Webex license Extension update for ybasford: Success
+2026-01-31 15:43:12,708 - webex_batch - INFO - Processing user: ikorchom, email: ikorchom@akamai.com, extension: 1257, region: Israel
+2026-01-31 15:43:17,820 - webex_batch - INFO - Webex license Extension update for ikorchom: Success
+2026-01-31 15:43:17,821 - webex_batch - INFO - Processing user: hwarshav, email: hwarshav@akamai.com, extension: 1258, region: Israel
+2026-01-31 15:43:23,064 - webex_batch - INFO - Webex license Extension update for hwarshav: Success
+2026-01-31 15:43:23,066 - webex_batch - INFO - Processing user: myaakobi, email: myaakobi@akamai.com, extension: 1259, region: Israel
+2026-01-31 15:43:28,414 - webex_batch - INFO - Webex license Extension update for myaakobi: Success
+2026-01-31 15:43:28,415 - webex_batch - INFO - Processing user: ohanuka, email: ohanuka@akamai.com, extension: 1260, region: Israel
+2026-01-31 15:43:33,665 - webex_batch - INFO - Webex license Extension update for ohanuka: Success
+2026-01-31 15:43:33,666 - webex_batch - INFO - Processing user: ynewman, email: ynewman@akamai.com, extension: 1261, region: Israel
+2026-01-31 15:43:39,123 - webex_batch - INFO - Webex license Extension update for ynewman: Success
+2026-01-31 15:43:39,123 - webex_batch - INFO - Processing user: ywallach, email: ywallach@akamai.com, extension: 1262, region: Israel
+2026-01-31 15:43:44,025 - webex_batch - INFO - Webex license Extension update for ywallach: Success
+2026-01-31 15:43:44,026 - webex_batch - INFO - Processing user: szehavi, email: szehavi@akamai.com, extension: 1263, region: Israel
+2026-01-31 15:43:46,581 - webex_batch - INFO - Webex license Extension update for szehavi: Failed
+2026-01-31 15:43:46,582 - webex_batch - INFO - Processing user: nmakmal, email: nmakmal@akamai.com, extension: 1264, region: Israel
+2026-01-31 15:43:51,670 - webex_batch - INFO - Webex license Extension update for nmakmal: Success
+2026-01-31 15:43:51,673 - webex_batch - INFO - Processing user: mdemiche, email: mdemiche@akamai.com, extension: 1065, region: France
+2026-01-31 15:43:56,957 - webex_batch - INFO - Webex license Extension update for mdemiche: Success
+2026-01-31 15:43:56,958 - webex_batch - INFO - Processing user: jvermeer, email: jvermeer@akamai.com, extension: 1066, region: France
+2026-01-31 15:44:02,331 - webex_batch - INFO - Webex license Extension update for jvermeer: Success
+2026-01-31 15:44:02,332 - webex_batch - INFO - Processing user: ggeller, email: ggeller@akamai.com, extension: 1265, region: Israel
+2026-01-31 15:44:07,254 - webex_batch - INFO - Webex license Extension update for ggeller: Success
+2026-01-31 15:44:07,255 - webex_batch - INFO - Processing user: ydeissy, email: ydeissy@akamai.com, extension: 1266, region: Israel
+2026-01-31 15:44:09,965 - webex_batch - INFO - Webex license Extension update for ydeissy: Failed
+2026-01-31 15:44:09,967 - webex_batch - INFO - Processing user: ekarol, email: ekarol@akamai.com, extension: 1267, region: Israel
+2026-01-31 15:44:15,183 - webex_batch - INFO - Webex license Extension update for ekarol: Success
+2026-01-31 15:44:15,183 - webex_batch - INFO - Processing user: mtsioni, email: mtsioni@akamai.com, extension: 1268, region: Israel
+2026-01-31 15:44:20,393 - webex_batch - INFO - Webex license Extension update for mtsioni: Success
+2026-01-31 15:44:20,395 - webex_batch - INFO - Processing user: sabulafi, email: sabulafi@akamai.com, extension: 1269, region: Israel
+2026-01-31 15:44:25,781 - webex_batch - INFO - Webex license Extension update for sabulafi: Success
+2026-01-31 15:44:25,782 - webex_batch - INFO - Processing user: mkrispil, email: mkrispil@akamai.com, extension: 1270, region: Israel
+2026-01-31 15:44:31,090 - webex_batch - INFO - Webex license Extension update for mkrispil: Success
+2026-01-31 15:44:31,091 - webex_batch - INFO - Processing user: lbennaon, email: lbennaon@akamai.com, extension: 1271, region: Israel
+2026-01-31 15:44:36,358 - webex_batch - INFO - Webex license Extension update for lbennaon: Success
+2026-01-31 15:44:36,359 - webex_batch - INFO - Processing user: rabloch, email: rabloch@akamai.com, extension: 1272, region: Israel
+2026-01-31 15:44:41,827 - webex_batch - INFO - Webex license Extension update for rabloch: Success
+2026-01-31 15:44:41,828 - webex_batch - INFO - Processing user: akalmovi, email: akalmovi@akamai.com, extension: 1273, region: Israel
+2026-01-31 15:44:46,619 - webex_batch - INFO - Webex license Extension update for akalmovi: Success
+2026-01-31 15:44:46,623 - webex_batch - INFO - Processing user: dtub, email: dtub@akamai.com, extension: 1274, region: Israel
+2026-01-31 15:44:52,110 - webex_batch - INFO - Webex license Extension update for dtub: Success
+2026-01-31 15:44:52,113 - webex_batch - INFO - Processing user: jglushko, email: jglushko@akamai.com, extension: 1275, region: Israel
+2026-01-31 15:44:57,362 - webex_batch - INFO - Webex license Extension update for jglushko: Success
+2026-01-31 15:44:57,362 - webex_batch - INFO - Processing user: magoldma, email: magoldma@akamai.com, extension: 1276, region: Israel
+2026-01-31 15:45:02,464 - webex_batch - INFO - Webex license Extension update for magoldma: Success
+2026-01-31 15:45:02,469 - webex_batch - INFO - Processing user: mdeutsch, email: mdeutsch@akamai.com, extension: 1277, region: Israel
+2026-01-31 15:45:07,848 - webex_batch - INFO - Webex license Extension update for mdeutsch: Success
+2026-01-31 15:45:07,850 - webex_batch - INFO - Processing user: rsirotki, email: rsirotki@akamai.com, extension: 1278, region: Israel
+2026-01-31 15:45:13,164 - webex_batch - INFO - Webex license Extension update for rsirotki: Success
+2026-01-31 15:45:13,165 - webex_batch - INFO - Processing user: nfreedma, email: nfreedma@akamai.com, extension: 1279, region: Israel
+2026-01-31 15:45:19,209 - webex_batch - INFO - Webex license Extension update for nfreedma: Success
+2026-01-31 15:45:19,210 - webex_batch - INFO - Processing user: sleibovi, email: sleibovi@akamai.com, extension: 1280, region: Israel
+2026-01-31 15:45:24,851 - webex_batch - INFO - Webex license Extension update for sleibovi: Success
+2026-01-31 15:45:24,852 - webex_batch - INFO - Processing user: oattar, email: oattar@akamai.com, extension: 1281, region: Israel
+2026-01-31 15:45:29,621 - webex_batch - INFO - Webex license Extension update for oattar: Success
+2026-01-31 15:45:29,622 - webex_batch - INFO - Processing user: ozuckerm, email: ozuckerm@akamai.com, extension: 1282, region: Israel
+2026-01-31 15:45:35,114 - webex_batch - INFO - Webex license Extension update for ozuckerm: Success
+2026-01-31 15:45:35,115 - webex_batch - INFO - Processing user: mrogozov, email: mrogozov@akamai.com, extension: 1283, region: Israel
+2026-01-31 15:45:40,122 - webex_batch - INFO - Webex license Extension update for mrogozov: Success
+2026-01-31 15:45:40,123 - webex_batch - INFO - Processing user: nnamer, email: nnamer@akamai.com, extension: 1284, region: Israel
+2026-01-31 15:45:44,837 - webex_batch - INFO - Webex license Extension update for nnamer: Success
+2026-01-31 15:45:44,838 - webex_batch - INFO - Processing user: hharari, email: hharari@akamai.com, extension: 1285, region: Israel
+2026-01-31 15:45:50,235 - webex_batch - INFO - Webex license Extension update for hharari: Success
+2026-01-31 15:45:50,236 - webex_batch - INFO - Processing user: sgarti, email: sgarti@akamai.com, extension: 1286, region: Israel
+2026-01-31 15:45:55,625 - webex_batch - INFO - Webex license Extension update for sgarti: Success
+2026-01-31 15:45:55,627 - webex_batch - INFO - Processing user: atalyose, email: atalyose@akamai.com, extension: 1287, region: Israel
+2026-01-31 15:46:00,557 - webex_batch - INFO - Webex license Extension update for atalyose: Success
+2026-01-31 15:46:00,557 - webex_batch - INFO - Processing user: ysufrin, email: ysufrin@akamai.com, extension: 1288, region: Israel
+2026-01-31 15:46:06,261 - webex_batch - INFO - Webex license Extension update for ysufrin: Success
+2026-01-31 15:46:06,261 - webex_batch - INFO - Processing user: lforer, email: lforer@akamai.com, extension: 1289, region: Israel
+2026-01-31 15:46:11,766 - webex_batch - INFO - Webex license Extension update for lforer: Success
+2026-01-31 15:46:11,766 - webex_batch - INFO - Processing user: akessner, email: akessner@akamai.com, extension: 1290, region: Israel
+2026-01-31 15:46:16,826 - webex_batch - INFO - Webex license Extension update for akessner: Success
+2026-01-31 15:46:16,827 - webex_batch - INFO - Processing user: skara, email: skara@akamai.com, extension: 1291, region: Israel
+2026-01-31 15:46:22,111 - webex_batch - INFO - Webex license Extension update for skara: Success
+2026-01-31 15:46:22,112 - webex_batch - INFO - Processing user: ikorenbl, email: ikorenbl@akamai.com, extension: 1292, region: Israel
+2026-01-31 15:46:26,895 - webex_batch - INFO - Webex license Extension update for ikorenbl: Success
+2026-01-31 15:46:26,896 - webex_batch - INFO - Processing user: tpeled, email: tpeled@akamai.com, extension: 1293, region: Israel
+2026-01-31 15:46:31,820 - webex_batch - INFO - Webex license Extension update for tpeled: Success
+2026-01-31 15:46:31,821 - webex_batch - INFO - Processing user: orcohen, email: orcohen@akamai.com, extension: 1294, region: Israel
+2026-01-31 15:46:36,618 - webex_batch - INFO - Webex license Extension update for orcohen: Success
+2026-01-31 15:46:36,618 - webex_batch - INFO - Processing user: omoisi, email: omoisi@akamai.com, extension: 1295, region: Israel
+2026-01-31 15:46:42,118 - webex_batch - INFO - Webex license Extension update for omoisi: Success
+2026-01-31 15:46:42,119 - webex_batch - INFO - Processing user: osemyono, email: osemyono@akamai.com, extension: 1296, region: Israel
+2026-01-31 15:46:47,418 - webex_batch - INFO - Webex license Extension update for osemyono: Success
+2026-01-31 15:46:47,420 - webex_batch - INFO - Processing user: mbenyahi, email: mbenyahi@akamai.com, extension: 1067, region: France
+2026-01-31 15:46:52,539 - webex_batch - INFO - Webex license Extension update for mbenyahi: Success
+2026-01-31 15:46:52,539 - webex_batch - INFO - Processing user: oavioz, email: oavioz@akamai.com, extension: 1297, region: Israel
+2026-01-31 15:46:54,879 - webex_batch - INFO - Webex license Extension update for oavioz: Failed
+2026-01-31 15:46:54,880 - webex_batch - INFO - Processing user: natias, email: natias@akamai.com, extension: 1298, region: Israel
+2026-01-31 15:47:00,408 - webex_batch - INFO - Webex license Extension update for natias: Success
+2026-01-31 15:47:00,409 - webex_batch - INFO - Processing user: sacohen, email: sacohen@akamai.com, extension: 1299, region: Israel
+2026-01-31 15:47:05,233 - webex_batch - INFO - Webex license Extension update for sacohen: Success
+2026-01-31 15:47:05,234 - webex_batch - INFO - Processing user: tlevha, email: tlevha@akamai.com, extension: 1300, region: Israel
+2026-01-31 15:47:10,595 - webex_batch - INFO - Webex license Extension update for tlevha: Success
+2026-01-31 15:47:10,597 - webex_batch - INFO - Processing user: aalapi, email: aalapi@akamai.com, extension: 1301, region: Israel
+2026-01-31 15:47:15,870 - webex_batch - INFO - Webex license Extension update for aalapi: Success
+2026-01-31 15:47:15,870 - webex_batch - INFO - Processing user: yzadok, email: yzadok@akamai.com, extension: 1302, region: Israel
+2026-01-31 15:47:21,322 - webex_batch - INFO - Webex license Extension update for yzadok: Success
+2026-01-31 15:47:21,323 - webex_batch - INFO - Processing user: drpaz, email: drpaz@akamai.com, extension: 1303, region: Israel
+2026-01-31 15:47:26,405 - webex_batch - INFO - Webex license Extension update for drpaz: Success
+2026-01-31 15:47:26,408 - webex_batch - INFO - Processing user: lozeryan, email: lozeryan@akamai.com, extension: 1304, region: Israel
+2026-01-31 15:47:31,764 - webex_batch - INFO - Webex license Extension update for lozeryan: Success
+2026-01-31 15:47:31,765 - webex_batch - INFO - Processing user: dshavit, email: dshavit@akamai.com, extension: 1305, region: Israel
+2026-01-31 15:47:36,631 - webex_batch - INFO - Webex license Extension update for dshavit: Success
+2026-01-31 15:47:36,632 - webex_batch - INFO - Processing user: oshochen, email: oshochen@akamai.com, extension: 1306, region: Israel
+2026-01-31 15:47:42,096 - webex_batch - INFO - Webex license Extension update for oshochen: Success
+2026-01-31 15:47:42,097 - webex_batch - INFO - Processing user: tbelouso, email: tbelouso@akamai.com, extension: 1307, region: Israel
+2026-01-31 15:47:47,323 - webex_batch - INFO - Webex license Extension update for tbelouso: Success
+2026-01-31 15:47:47,323 - webex_batch - INFO - Processing user: ashvarts, email: ashvarts@akamai.com, extension: 1308, region: Israel
+2026-01-31 15:47:52,647 - webex_batch - INFO - Webex license Extension update for ashvarts: Success
+2026-01-31 15:47:52,651 - webex_batch - INFO - Processing user: thuber, email: thuber@akamai.com, extension: 1309, region: Israel
+2026-01-31 15:47:57,439 - webex_batch - INFO - Webex license Extension update for thuber: Success
+2026-01-31 15:47:57,441 - webex_batch - INFO - Processing user: smartin, email: smartin@akamai.com, extension: 1310, region: Israel
+2026-01-31 15:48:02,754 - webex_batch - INFO - Webex license Extension update for smartin: Success
+2026-01-31 15:48:02,755 - webex_batch - INFO - Processing user: rceccari, email: rceccari@akamai.com, extension: 1068, region: France
+2026-01-31 15:48:08,035 - webex_batch - INFO - Webex license Extension update for rceccari: Success
+2026-01-31 15:48:08,037 - webex_batch - INFO - Processing user: msimonov, email: msimonov@akamai.com, extension: 1311, region: Israel
+2026-01-31 15:48:13,015 - webex_batch - INFO - Webex license Extension update for msimonov: Success
+2026-01-31 15:48:13,016 - webex_batch - INFO - Processing user: abarel, email: abarel@akamai.com, extension: 1312, region: Israel
+2026-01-31 15:48:18,056 - webex_batch - INFO - Webex license Extension update for abarel: Success
+2026-01-31 15:48:18,057 - webex_batch - INFO - Processing user: abregman, email: abregman@akamai.com, extension: 1313, region: Israel
+2026-01-31 15:48:23,385 - webex_batch - INFO - Webex license Extension update for abregman: Success
+2026-01-31 15:48:23,386 - webex_batch - INFO - Processing user: omcohen, email: omcohen@akamai.com, extension: 1314, region: Israel
+2026-01-31 15:48:28,220 - webex_batch - INFO - Webex license Extension update for omcohen: Success
+2026-01-31 15:48:28,220 - webex_batch - INFO - Processing user: tcastle, email: tcastle@akamai.com, extension: 1069, region: France
+2026-01-31 15:48:33,796 - webex_batch - INFO - Webex license Extension update for tcastle: Success
+2026-01-31 15:48:33,797 - webex_batch - INFO - Processing user: igada, email: igada@akamai.com, extension: 1315, region: Israel
+2026-01-31 15:48:39,043 - webex_batch - INFO - Webex license Extension update for igada: Success
+2026-01-31 15:48:39,044 - webex_batch - INFO - Processing user: traz, email: traz@akamai.com, extension: 1316, region: Israel
+2026-01-31 15:48:44,184 - webex_batch - INFO - Webex license Extension update for traz: Success
+2026-01-31 15:48:44,185 - webex_batch - INFO - Processing user: iharel, email: iharel@akamai.com, extension: 1317, region: Israel
+2026-01-31 15:48:49,238 - webex_batch - INFO - Webex license Extension update for iharel: Success
+2026-01-31 15:48:49,238 - webex_batch - INFO - Processing user: ipolackg, email: ipolackg@akamai.com, extension: 1318, region: Israel
+2026-01-31 15:48:54,205 - webex_batch - INFO - Webex license Extension update for ipolackg: Success
+2026-01-31 15:48:54,207 - webex_batch - INFO - Processing user: amack, email: amack@akamai.com, extension: 1319, region: Israel
+2026-01-31 15:48:59,635 - webex_batch - INFO - Webex license Extension update for amack: Success
+2026-01-31 15:48:59,635 - webex_batch - INFO - Processing user: isushkov, email: isushkov@akamai.com, extension: 1320, region: Israel
+2026-01-31 15:49:05,406 - webex_batch - INFO - Webex license Extension update for isushkov: Success
+2026-01-31 15:49:05,407 - webex_batch - INFO - Processing user: lfux, email: lfux@akamai.com, extension: 1321, region: Israel
+2026-01-31 15:49:10,504 - webex_batch - INFO - Webex license Extension update for lfux: Success
+2026-01-31 15:49:10,511 - webex_batch - INFO - Processing user: rshlomo, email: rshlomo@akamai.com, extension: 1322, region: Israel
+2026-01-31 15:49:15,660 - webex_batch - INFO - Webex license Extension update for rshlomo: Success
+2026-01-31 15:49:15,661 - webex_batch - INFO - Processing user: srabinov, email: srabinov@akamai.com, extension: 1323, region: Israel
+2026-01-31 15:49:21,119 - webex_batch - INFO - Webex license Extension update for srabinov: Success
+2026-01-31 15:49:21,120 - webex_batch - INFO - Processing user: srachami, email: srachami@akamai.com, extension: 1324, region: Israel
+2026-01-31 15:49:26,357 - webex_batch - INFO - Webex license Extension update for srachami: Success
+2026-01-31 15:49:26,358 - webex_batch - INFO - Processing user: ltenenbo, email: ltenenbo@akamai.com, extension: 1325, region: Israel
+2026-01-31 15:49:32,018 - webex_batch - INFO - Webex license Extension update for ltenenbo: Success
+2026-01-31 15:49:32,019 - webex_batch - INFO - Processing user: ikoren, email: ikoren@akamai.com, extension: 1326, region: Israel
+2026-01-31 15:49:36,992 - webex_batch - INFO - Webex license Extension update for ikoren: Success
+2026-01-31 15:49:36,993 - webex_batch - INFO - Processing user: asabo, email: asabo@akamai.com, extension: 1327, region: Israel
+2026-01-31 15:49:42,116 - webex_batch - INFO - Webex license Extension update for asabo: Success
+2026-01-31 15:49:42,120 - webex_batch - INFO - Processing user: erefaeli, email: erefaeli@akamai.com, extension: 1328, region: Israel
+2026-01-31 15:49:47,529 - webex_batch - INFO - Webex license Extension update for erefaeli: Success
+2026-01-31 15:49:47,530 - webex_batch - INFO - Processing user: gtoptuno, email: gtoptuno@akamai.com, extension: 1329, region: Israel
+2026-01-31 15:49:53,225 - webex_batch - INFO - Webex license Extension update for gtoptuno: Success
+2026-01-31 15:49:53,225 - webex_batch - INFO - Processing user: kzemnuch, email: kzemnuch@akamai.com, extension: 1330, region: Israel
+2026-01-31 15:49:58,116 - webex_batch - INFO - Webex license Extension update for kzemnuch: Success
+2026-01-31 15:49:58,117 - webex_batch - INFO - Processing user: ashavit, email: ashavit@akamai.com, extension: 1331, region: Israel
+2026-01-31 15:50:03,501 - webex_batch - INFO - Webex license Extension update for ashavit: Success
+2026-01-31 15:50:03,502 - webex_batch - INFO - Processing user: mrain, email: mrain@akamai.com, extension: 1332, region: Israel
+2026-01-31 15:50:09,032 - webex_batch - INFO - Webex license Extension update for mrain: Success
+2026-01-31 15:50:09,033 - webex_batch - INFO - Processing user: odabach, email: odabach@akamai.com, extension: 1333, region: Israel
+2026-01-31 15:50:14,180 - webex_batch - INFO - Webex license Extension update for odabach: Success
+2026-01-31 15:50:14,182 - webex_batch - INFO - Processing user: eperry, email: eperry@akamai.com, extension: 1334, region: Israel
+2026-01-31 15:50:19,715 - webex_batch - INFO - Webex license Extension update for eperry: Success
+2026-01-31 15:50:19,717 - webex_batch - INFO - Processing user: ufleisch, email: ufleisch@akamai.com, extension: 1335, region: Israel
+2026-01-31 15:50:24,555 - webex_batch - INFO - Webex license Extension update for ufleisch: Success
+2026-01-31 15:50:24,556 - webex_batch - INFO - Processing user: gsayag, email: gsayag@akamai.com, extension: 1336, region: Israel
+2026-01-31 15:50:30,152 - webex_batch - INFO - Webex license Extension update for gsayag: Success
+2026-01-31 15:50:30,153 - webex_batch - INFO - Processing user: gkuznets, email: gkuznets@akamai.com, extension: 1337, region: Israel
+2026-01-31 15:50:35,363 - webex_batch - INFO - Webex license Extension update for gkuznets: Success
+2026-01-31 15:50:35,364 - webex_batch - INFO - Processing user: okogan, email: okogan@akamai.com, extension: 1338, region: Israel
+2026-01-31 15:50:40,726 - webex_batch - INFO - Webex license Extension update for okogan: Success
+2026-01-31 15:50:40,727 - webex_batch - INFO - Processing user: abailly, email: abailly@akamai.com, extension: 1070, region: France
+2026-01-31 15:50:45,660 - webex_batch - INFO - Webex license Extension update for abailly: Success
+2026-01-31 15:50:45,661 - webex_batch - INFO - Processing user: nholl, email: nholl@akamai.com, extension: 1339, region: Israel
+2026-01-31 15:50:50,532 - webex_batch - INFO - Webex license Extension update for nholl: Success
+2026-01-31 15:50:50,534 - webex_batch - INFO - Processing user: rlevron, email: rlevron@akamai.com, extension: 1340, region: Israel
+2026-01-31 15:50:55,714 - webex_batch - INFO - Webex license Extension update for rlevron: Success
+2026-01-31 15:50:55,718 - webex_batch - INFO - Processing user: slaor, email: slaor@akamai.com, extension: 1341, region: Israel
+2026-01-31 15:51:00,973 - webex_batch - INFO - Webex license Extension update for slaor: Success
+2026-01-31 15:51:00,974 - webex_batch - INFO - Processing user: mperlman, email: mperlman@akamai.com, extension: 1342, region: Israel
+2026-01-31 15:51:06,397 - webex_batch - INFO - Webex license Extension update for mperlman: Success
+2026-01-31 15:51:06,399 - webex_batch - INFO - Processing user: acygel, email: acygel@akamai.com, extension: 1343, region: Israel
+2026-01-31 15:51:11,771 - webex_batch - INFO - Webex license Extension update for acygel: Success
+2026-01-31 15:51:11,772 - webex_batch - INFO - Processing user: raroch, email: raroch@akamai.com, extension: 1344, region: Israel
+2026-01-31 15:51:14,002 - webex_batch - INFO - Webex license Extension update for raroch: Failed
+2026-01-31 15:51:14,003 - webex_batch - INFO - Processing user: ylempert, email: ylempert@akamai.com, extension: 1345, region: Israel
+2026-01-31 15:51:18,828 - webex_batch - INFO - Webex license Extension update for ylempert: Success
+2026-01-31 15:51:18,829 - webex_batch - INFO - Processing user: bkolan, email: bkolan@akamai.com, extension: 1346, region: Israel
+2026-01-31 15:51:21,133 - webex_batch - INFO - Webex license Extension update for bkolan: Failed
+2026-01-31 15:51:21,134 - webex_batch - INFO - Processing user: gpeled, email: gpeled@akamai.com, extension: 1347, region: Israel
+2026-01-31 15:51:26,654 - webex_batch - INFO - Webex license Extension update for gpeled: Success
+2026-01-31 15:51:26,655 - webex_batch - INFO - Processing user: ailannav, email: ailannav@akamai.com, extension: 1348, region: Israel
+2026-01-31 15:51:29,165 - webex_batch - INFO - Webex license Extension update for ailannav: Failed
+2026-01-31 15:51:29,166 - webex_batch - INFO - Processing user: dberger, email: dberger@akamai.com, extension: 1349, region: Israel
+2026-01-31 15:51:34,511 - webex_batch - INFO - Webex license Extension update for dberger: Success
+2026-01-31 15:51:34,512 - webex_batch - INFO - Processing user: trozen, email: trozen@akamai.com, extension: 1350, region: Israel
+2026-01-31 15:51:39,340 - webex_batch - INFO - Webex license Extension update for trozen: Success
+2026-01-31 15:51:39,340 - webex_batch - INFO - Processing user: tahrak, email: tahrak@akamai.com, extension: 1351, region: Israel
+2026-01-31 15:51:44,475 - webex_batch - INFO - Webex license Extension update for tahrak: Success
+2026-01-31 15:51:44,478 - webex_batch - INFO - Processing user: avolpert, email: avolpert@akamai.com, extension: 1352, region: Israel
+2026-01-31 15:51:49,734 - webex_batch - INFO - Webex license Extension update for avolpert: Success
+2026-01-31 15:51:49,735 - webex_batch - INFO - Processing user: ybarksht, email: ybarksht@akamai.com, extension: 1353, region: Israel
+2026-01-31 15:51:54,675 - webex_batch - INFO - Webex license Extension update for ybarksht: Success
+2026-01-31 15:51:54,675 - webex_batch - INFO - Processing user: ymorgens, email: ymorgens@akamai.com, extension: 1354, region: Israel
+2026-01-31 15:51:56,932 - webex_batch - INFO - Webex license Extension update for ymorgens: Failed
+2026-01-31 15:51:56,933 - webex_batch - INFO - Processing user: reliyahu, email: reliyahu@akamai.com, extension: 1355, region: Israel
+2026-01-31 15:52:02,168 - webex_batch - INFO - Webex license Extension update for reliyahu: Success
+2026-01-31 15:52:02,168 - webex_batch - INFO - Processing user: gengel, email: gengel@akamai.com, extension: 1356, region: Israel
+2026-01-31 15:52:04,475 - webex_batch - INFO - Webex license Extension update for gengel: Failed
+2026-01-31 15:52:04,476 - webex_batch - INFO - Processing user: ltau, email: ltau@akamai.com, extension: 1357, region: Israel
+2026-01-31 15:52:09,418 - webex_batch - INFO - Webex license Extension update for ltau: Success
+2026-01-31 15:52:09,419 - webex_batch - INFO - Processing user: alionet, email: alionet@akamai.com, extension: 1071, region: France
+2026-01-31 15:52:14,962 - webex_batch - INFO - Webex license Extension update for alionet: Success
+2026-01-31 15:52:14,963 - webex_batch - INFO - Processing user: bsavraso, email: bsavraso@akamai.com, extension: 1358, region: Israel
+2026-01-31 15:52:20,233 - webex_batch - INFO - Webex license Extension update for bsavraso: Success
+2026-01-31 15:52:20,238 - webex_batch - INFO - Processing user: amittler, email: amittler@akamai.com, extension: 1359, region: Israel
+2026-01-31 15:52:25,386 - webex_batch - INFO - Webex license Extension update for amittler: Success
+2026-01-31 15:52:25,386 - webex_batch - INFO - Processing user: ltajan, email: ltajan@akamai.com, extension: 1072, region: France
+2026-01-31 15:52:30,947 - webex_batch - INFO - Webex license Extension update for ltajan: Success
+2026-01-31 15:52:30,947 - webex_batch - INFO - Processing user: yagolan, email: yagolan@akamai.com, extension: 1360, region: Israel
+2026-01-31 15:52:36,373 - webex_batch - INFO - Webex license Extension update for yagolan: Success
+2026-01-31 15:52:36,374 - webex_batch - INFO - Processing user: mshitrit, email: mshitrit@akamai.com, extension: 1361, region: Israel
+2026-01-31 15:52:51,238 - webex_batch - INFO - Webex license Extension update for mshitrit: Success
+2026-01-31 15:52:51,239 - webex_batch - INFO - Processing user: ynabedri, email: ynabedri@akamai.com, extension: 1362, region: Israel
+2026-01-31 15:52:53,746 - webex_batch - INFO - Webex license Extension update for ynabedri: Failed
+2026-01-31 15:52:53,747 - webex_batch - INFO - Processing user: lasraf, email: lasraf@akamai.com, extension: 1363, region: Israel
+2026-01-31 15:52:55,990 - webex_batch - INFO - Webex license Extension update for lasraf: Failed
+2026-01-31 15:52:55,991 - webex_batch - INFO - Processing user: lnachman, email: lnachman@akamai.com, extension: 1364, region: Israel
+2026-01-31 15:53:01,262 - webex_batch - INFO - Webex license Extension update for lnachman: Success
+2026-01-31 15:53:01,265 - webex_batch - INFO - Processing user: jshimoni, email: jshimoni@akamai.com, extension: 1365, region: Israel
+2026-01-31 15:53:07,244 - webex_batch - INFO - Webex license Extension update for jshimoni: Success
+2026-01-31 15:53:07,245 - webex_batch - INFO - Processing user: zfurman, email: zfurman@akamai.com, extension: 1366, region: Israel
+2026-01-31 15:53:12,088 - webex_batch - INFO - Webex license Extension update for zfurman: Success
+2026-01-31 15:53:12,089 - webex_batch - INFO - Processing user: tisascha, email: tisascha@akamai.com, extension: 1367, region: Israel
+2026-01-31 15:53:17,476 - webex_batch - INFO - Webex license Extension update for tisascha: Success
+2026-01-31 15:53:17,477 - webex_batch - INFO - Processing user: ygabai, email: ygabai@akamai.com, extension: 1368, region: Israel
+2026-01-31 15:53:22,691 - webex_batch - INFO - Webex license Extension update for ygabai: Success
+2026-01-31 15:53:22,693 - webex_batch - INFO - Processing user: ydan, email: ydan@akamai.com, extension: 1369, region: Israel
+2026-01-31 15:53:28,078 - webex_batch - INFO - Webex license Extension update for ydan: Success
+2026-01-31 15:53:28,079 - webex_batch - INFO - Processing user: sburman, email: sburman@akamai.com, extension: 1370, region: Israel
+2026-01-31 15:53:33,427 - webex_batch - INFO - Webex license Extension update for sburman: Success
+2026-01-31 15:53:33,428 - webex_batch - INFO - Processing user: iromane, email: iromane@akamai.com, extension: 1073, region: France
+2026-01-31 15:53:38,442 - webex_batch - INFO - Webex license Extension update for iromane: Success
+2026-01-31 15:53:38,444 - webex_batch - INFO - Processing user: trozy, email: trozy@akamai.com, extension: 1371, region: Israel
+2026-01-31 15:53:44,073 - webex_batch - INFO - Webex license Extension update for trozy: Success
+2026-01-31 15:53:44,074 - webex_batch - INFO - Processing user: irolnik, email: irolnik@akamai.com, extension: 1372, region: Israel
+2026-01-31 15:53:49,103 - webex_batch - INFO - Webex license Extension update for irolnik: Success
+2026-01-31 15:53:49,106 - webex_batch - INFO - Processing user: dsweet, email: dsweet@akamai.com, extension: 1373, region: Israel
+2026-01-31 15:53:54,447 - webex_batch - INFO - Webex license Extension update for dsweet: Success
+2026-01-31 15:53:54,448 - webex_batch - INFO - Processing user: mpinto, email: mpinto@akamai.com, extension: 1374, region: Israel
+2026-01-31 15:53:59,944 - webex_batch - INFO - Webex license Extension update for mpinto: Success
+2026-01-31 15:53:59,944 - webex_batch - INFO - Processing user: davihasi, email: davihasi@akamai.com, extension: 1375, region: Israel
+2026-01-31 15:54:05,284 - webex_batch - INFO - Webex license Extension update for davihasi: Success
+2026-01-31 15:54:05,285 - webex_batch - INFO - Processing user: ddori, email: ddori@akamai.com, extension: 1376, region: Israel
+2026-01-31 15:54:10,785 - webex_batch - INFO - Webex license Extension update for ddori: Success
+2026-01-31 15:54:10,787 - webex_batch - INFO - Processing user: skayof, email: skayof@akamai.com, extension: 1377, region: Israel
+2026-01-31 15:54:16,144 - webex_batch - INFO - Webex license Extension update for skayof: Success
+2026-01-31 15:54:16,145 - webex_batch - INFO - Processing user: isagir, email: isagir@akamai.com, extension: 1378, region: Israel
+2026-01-31 15:54:21,225 - webex_batch - INFO - Webex license Extension update for isagir: Success
+2026-01-31 15:54:21,227 - webex_batch - INFO - Processing user: yshlezin, email: yshlezin@akamai.com, extension: 1379, region: Israel
+2026-01-31 15:54:26,893 - webex_batch - INFO - Webex license Extension update for yshlezin: Success
+2026-01-31 15:54:26,895 - webex_batch - INFO - Processing user: noner, email: noner@akamai.com, extension: 1380, region: Israel
+2026-01-31 15:54:32,266 - webex_batch - INFO - Webex license Extension update for noner: Success
+2026-01-31 15:54:32,267 - webex_batch - INFO - Processing user: eungar, email: eungar@akamai.com, extension: 1381, region: Israel
+2026-01-31 15:54:34,877 - webex_batch - INFO - Webex license Extension update for eungar: Failed
+2026-01-31 15:54:34,878 - webex_batch - INFO - Processing user: oyorgen, email: oyorgen@akamai.com, extension: 1382, region: Israel
+2026-01-31 15:54:37,249 - webex_batch - INFO - Webex license Extension update for oyorgen: Failed
+2026-01-31 15:54:37,250 - webex_batch - INFO - Processing user: yshvidle, email: yshvidle@akamai.com, extension: 1383, region: Israel
+2026-01-31 15:54:42,286 - webex_batch - INFO - Webex license Extension update for yshvidle: Success
+2026-01-31 15:54:42,287 - webex_batch - INFO - Processing user: awurom, email: awurom@akamai.com, extension: 1384, region: Israel
+2026-01-31 15:54:47,995 - webex_batch - INFO - Webex license Extension update for awurom: Success
+2026-01-31 15:54:47,995 - webex_batch - INFO - Processing user: mdiamant, email: mdiamant@akamai.com, extension: 1385, region: Israel
+2026-01-31 15:54:53,761 - webex_batch - INFO - Webex license Extension update for mdiamant: Success
+2026-01-31 15:54:53,762 - webex_batch - INFO - Processing user: arikelma, email: arikelma@akamai.com, extension: 1386, region: Israel
+2026-01-31 15:54:59,179 - webex_batch - INFO - Webex license Extension update for arikelma: Success
+2026-01-31 15:54:59,182 - webex_batch - INFO - Processing user: gamit, email: gamit@akamai.com, extension: 1387, region: Israel
+2026-01-31 15:55:05,025 - webex_batch - INFO - Webex license Extension update for gamit: Success
+2026-01-31 15:55:05,026 - webex_batch - INFO - Processing user: kkingyaa, email: kkingyaa@akamai.com, extension: 1388, region: Israel
+2026-01-31 15:55:07,271 - webex_batch - INFO - Webex license Extension update for kkingyaa: Failed
+2026-01-31 15:55:07,272 - webex_batch - INFO - Processing user: emarkov, email: emarkov@akamai.com, extension: 1389, region: Israel
+2026-01-31 15:55:12,624 - webex_batch - INFO - Webex license Extension update for emarkov: Success
+2026-01-31 15:55:12,625 - webex_batch - INFO - Processing user: ghasson, email: ghasson@akamai.com, extension: 1390, region: Israel
+2026-01-31 15:55:18,376 - webex_batch - INFO - Webex license Extension update for ghasson: Success
+2026-01-31 15:55:18,378 - webex_batch - INFO - Processing user: edupont, email: edupont@akamai.com, extension: 1391, region: Israel
+2026-01-31 15:55:24,416 - webex_batch - INFO - Webex license Extension update for edupont: Success
+2026-01-31 15:55:24,417 - webex_batch - INFO - Processing user: yhen, email: yhen@akamai.com, extension: 1392, region: Israel
+2026-01-31 15:55:29,773 - webex_batch - INFO - Webex license Extension update for yhen: Success
+2026-01-31 15:55:29,774 - webex_batch - INFO - Processing user: adyoung, email: adyoung@akamai.com, extension: 1393, region: Israel
+2026-01-31 15:55:34,694 - webex_batch - INFO - Webex license Extension update for adyoung: Success
+2026-01-31 15:55:34,694 - webex_batch - INFO - Processing user: oricohen, email: oricohen@akamai.com, extension: 1394, region: Israel
+2026-01-31 15:55:39,676 - webex_batch - INFO - Webex license Extension update for oricohen: Success
+2026-01-31 15:55:39,677 - webex_batch - INFO - Processing user: gprieste, email: gprieste@akamai.com, extension: 1395, region: Israel
+2026-01-31 15:55:44,467 - webex_batch - INFO - Webex license Extension update for gprieste: Success
+2026-01-31 15:55:44,467 - webex_batch - INFO - Processing user: amaizens, email: amaizens@akamai.com, extension: 1396, region: Israel
+2026-01-31 15:55:49,999 - webex_batch - INFO - Webex license Extension update for amaizens: Success
+2026-01-31 15:55:50,000 - webex_batch - INFO - Processing user: advorets, email: advorets@akamai.com, extension: 1397, region: Israel
+2026-01-31 15:55:55,715 - webex_batch - INFO - Webex license Extension update for advorets: Success
+2026-01-31 15:55:55,716 - webex_batch - INFO - Processing user: gpaz, email: gpaz@akamai.com, extension: 1398, region: Israel
+2026-01-31 15:56:00,821 - webex_batch - INFO - Webex license Extension update for gpaz: Success
+2026-01-31 15:56:00,822 - webex_batch - INFO - Processing user: mberline, email: mberline@akamai.com, extension: 1399, region: Israel
+2026-01-31 15:56:06,116 - webex_batch - INFO - Webex license Extension update for mberline: Success
+2026-01-31 15:56:06,117 - webex_batch - INFO - Processing user: lmalinia, email: lmalinia@akamai.com, extension: 1400, region: Israel
+2026-01-31 15:56:11,780 - webex_batch - INFO - Webex license Extension update for lmalinia: Success
+2026-01-31 15:56:11,785 - webex_batch - INFO - Processing user: omoskovi, email: omoskovi@akamai.com, extension: 1401, region: Israel
+2026-01-31 15:56:16,601 - webex_batch - INFO - Webex license Extension update for omoskovi: Success
+2026-01-31 15:56:16,603 - webex_batch - INFO - Processing user: rrozen, email: rrozen@akamai.com, extension: 1402, region: Israel
+2026-01-31 15:56:21,903 - webex_batch - INFO - Webex license Extension update for rrozen: Success
+2026-01-31 15:56:21,904 - webex_batch - INFO - Processing user: hbar, email: hbar@akamai.com, extension: 1403, region: Israel
+2026-01-31 15:56:26,965 - webex_batch - INFO - Webex license Extension update for hbar: Success
+2026-01-31 15:56:26,967 - webex_batch - INFO - Processing user: aortal, email: aortal@akamai.com, extension: 1404, region: Israel
+2026-01-31 15:56:31,955 - webex_batch - INFO - Webex license Extension update for aortal: Success
+2026-01-31 15:56:31,957 - webex_batch - INFO - Processing user: nnaaman, email: nnaaman@akamai.com, extension: 1405, region: Israel
+2026-01-31 15:56:37,183 - webex_batch - INFO - Webex license Extension update for nnaaman: Success
+2026-01-31 15:56:37,184 - webex_batch - INFO - Processing user: izafrir, email: izafrir@akamai.com, extension: 1406, region: Israel
+2026-01-31 15:56:42,627 - webex_batch - INFO - Webex license Extension update for izafrir: Success
+2026-01-31 15:56:42,628 - webex_batch - INFO - Processing user: tkowler, email: tkowler@akamai.com, extension: 1407, region: Israel
+2026-01-31 15:56:48,317 - webex_batch - INFO - Webex license Extension update for tkowler: Success
+2026-01-31 15:56:48,320 - webex_batch - INFO - Processing user: spodgoro, email: spodgoro@akamai.com, extension: 1408, region: Israel
+2026-01-31 15:56:53,948 - webex_batch - INFO - Webex license Extension update for spodgoro: Success
+2026-01-31 15:56:53,949 - webex_batch - INFO - Processing user: sgazit, email: sgazit@akamai.com, extension: 1409, region: Israel
+2026-01-31 15:56:58,995 - webex_batch - INFO - Webex license Extension update for sgazit: Success
+2026-01-31 15:56:58,996 - webex_batch - INFO - Processing user: ndavidov, email: ndavidov@akamai.com, extension: 1410, region: Israel
+2026-01-31 15:57:04,113 - webex_batch - INFO - Webex license Extension update for ndavidov: Success
+2026-01-31 15:57:04,113 - webex_batch - INFO - Processing user: akreizel, email: akreizel@akamai.com, extension: 1411, region: Israel
+2026-01-31 15:57:09,316 - webex_batch - INFO - Webex license Extension update for akreizel: Success
+2026-01-31 15:57:09,317 - webex_batch - INFO - Processing user: eneufeld, email: eneufeld@akamai.com, extension: 1412, region: Israel
+2026-01-31 15:57:14,303 - webex_batch - INFO - Webex license Extension update for eneufeld: Success
+2026-01-31 15:57:14,304 - webex_batch - INFO - Processing user: bmichali, email: bmichali@akamai.com, extension: 1413, region: Israel
+2026-01-31 15:57:19,610 - webex_batch - INFO - Webex license Extension update for bmichali: Success
+2026-01-31 15:57:19,611 - webex_batch - INFO - Processing user: aavichse, email: aavichse@akamai.com, extension: 1414, region: Israel
+2026-01-31 15:57:25,137 - webex_batch - INFO - Webex license Extension update for aavichse: Success
+2026-01-31 15:57:25,138 - webex_batch - INFO - Processing user: lcozlin, email: lcozlin@akamai.com, extension: 1074, region: France
+2026-01-31 15:57:30,277 - webex_batch - INFO - Webex license Extension update for lcozlin: Success
+2026-01-31 15:57:30,278 - webex_batch - INFO - Processing user: delmaleh, email: delmaleh@akamai.com, extension: 1415, region: Israel
+2026-01-31 15:57:35,475 - webex_batch - INFO - Webex license Extension update for delmaleh: Success
+2026-01-31 15:57:35,478 - webex_batch - INFO - Processing user: rmagori, email: rmagori@akamai.com, extension: 1416, region: Israel
+2026-01-31 15:57:40,666 - webex_batch - INFO - Webex license Extension update for rmagori: Success
+2026-01-31 15:57:40,667 - webex_batch - INFO - Processing user: smanor, email: smanor@akamai.com, extension: 1417, region: Israel
+2026-01-31 15:57:45,867 - webex_batch - INFO - Webex license Extension update for smanor: Success
+2026-01-31 15:57:45,869 - webex_batch - INFO - Processing user: gpliner, email: gpliner@akamai.com, extension: 1418, region: Israel
+2026-01-31 15:57:51,296 - webex_batch - INFO - Webex license Extension update for gpliner: Success
+2026-01-31 15:57:51,298 - webex_batch - INFO - Processing user: szommers, email: szommers@akamai.com, extension: 1419, region: Israel
+2026-01-31 15:57:57,015 - webex_batch - INFO - Webex license Extension update for szommers: Success
+2026-01-31 15:57:57,015 - webex_batch - INFO - Processing user: ddubinsk, email: ddubinsk@akamai.com, extension: 1420, region: Israel
+2026-01-31 15:57:59,354 - webex_batch - INFO - Webex license Extension update for ddubinsk: Failed
+2026-01-31 15:57:59,358 - webex_batch - INFO - Processing user: erom, email: erom@akamai.com, extension: 1421, region: Israel
+2026-01-31 15:58:04,418 - webex_batch - INFO - Webex license Extension update for erom: Success
+2026-01-31 15:58:04,421 - webex_batch - INFO - Processing user: tamiri, email: tamiri@akamai.com, extension: 1422, region: Israel
+2026-01-31 15:58:09,780 - webex_batch - INFO - Webex license Extension update for tamiri: Success
+2026-01-31 15:58:09,781 - webex_batch - INFO - Processing user: ymoshias, email: ymoshias@akamai.com, extension: 1423, region: Israel
+2026-01-31 15:58:15,077 - webex_batch - INFO - Webex license Extension update for ymoshias: Success
+2026-01-31 15:58:15,080 - webex_batch - INFO - Processing user: aganorgr, email: aganorgr@akamai.com, extension: 1424, region: Israel
+2026-01-31 15:58:20,037 - webex_batch - INFO - Webex license Extension update for aganorgr: Success
+2026-01-31 15:58:20,039 - webex_batch - INFO - Processing user: jloubato, email: jloubato@akamai.com, extension: 1425, region: Israel
+2026-01-31 15:58:25,798 - webex_batch - INFO - Webex license Extension update for jloubato: Success
+2026-01-31 15:58:25,799 - webex_batch - INFO - Processing user: salevi, email: salevi@akamai.com, extension: 1426, region: Israel
+2026-01-31 15:58:31,039 - webex_batch - INFO - Webex license Extension update for salevi: Success
+2026-01-31 15:58:31,039 - webex_batch - INFO - Processing user: obracha, email: obracha@akamai.com, extension: 1427, region: Israel
+2026-01-31 15:58:36,309 - webex_batch - INFO - Webex license Extension update for obracha: Success
+2026-01-31 15:58:36,311 - webex_batch - INFO - Processing user: adpopov, email: adpopov@akamai.com, extension: 1428, region: Israel
+2026-01-31 15:58:41,452 - webex_batch - INFO - Webex license Extension update for adpopov: Success
+2026-01-31 15:58:41,452 - webex_batch - INFO - Processing user: smoriyam, email: smoriyam@akamai.com, extension: 1429, region: Israel
+2026-01-31 15:58:47,190 - webex_batch - INFO - Webex license Extension update for smoriyam: Success
+2026-01-31 15:58:47,191 - webex_batch - INFO - Processing user: adcohen, email: adcohen@akamai.com, extension: 1430, region: Israel
+2026-01-31 15:58:52,160 - webex_batch - INFO - Webex license Extension update for adcohen: Success
+2026-01-31 15:58:52,162 - webex_batch - INFO - Processing user: mkatz, email: mkatz@akamai.com, extension: 1431, region: Israel
+2026-01-31 15:58:57,516 - webex_batch - INFO - Webex license Extension update for mkatz: Success
+2026-01-31 15:58:57,516 - webex_batch - INFO - Processing user: ykenan, email: ykenan@akamai.com, extension: 1432, region: Israel
+2026-01-31 15:59:02,803 - webex_batch - INFO - Webex license Extension update for ykenan: Success
+2026-01-31 15:59:02,804 - webex_batch - INFO - Processing user: llykho, email: llykho@akamai.com, extension: 1433, region: Israel
+2026-01-31 15:59:08,300 - webex_batch - INFO - Webex license Extension update for llykho: Success
+2026-01-31 15:59:08,302 - webex_batch - INFO - Processing user: sbenahar, email: sbenahar@akamai.com, extension: 1434, region: Israel
+2026-01-31 15:59:13,095 - webex_batch - INFO - Webex license Extension update for sbenahar: Success
+2026-01-31 15:59:13,096 - webex_batch - INFO - Processing user: afrydman, email: afrydman@akamai.com, extension: 1435, region: Israel
+2026-01-31 15:59:18,229 - webex_batch - INFO - Webex license Extension update for afrydman: Success
+2026-01-31 15:59:18,231 - webex_batch - INFO - Processing user: mdahan, email: mdahan@akamai.com, extension: 1436, region: Israel
+2026-01-31 15:59:23,901 - webex_batch - INFO - Webex license Extension update for mdahan: Success
+2026-01-31 15:59:23,905 - webex_batch - INFO - Processing user: mbetekht, email: mbetekht@akamai.com, extension: 1437, region: Israel
+2026-01-31 15:59:29,454 - webex_batch - INFO - Webex license Extension update for mbetekht: Success
+2026-01-31 15:59:29,458 - webex_batch - INFO - Processing user: yshtein, email: yshtein@akamai.com, extension: 1438, region: Israel
+2026-01-31 15:59:34,594 - webex_batch - INFO - Webex license Extension update for yshtein: Success
+2026-01-31 15:59:34,595 - webex_batch - INFO - Processing user: oshpigel, email: oshpigel@akamai.com, extension: 1439, region: Israel
+2026-01-31 15:59:40,162 - webex_batch - INFO - Webex license Extension update for oshpigel: Success
+2026-01-31 15:59:40,163 - webex_batch - INFO - Processing user: ssalamy, email: ssalamy@akamai.com, extension: 1440, region: Israel
+2026-01-31 15:59:45,662 - webex_batch - INFO - Webex license Extension update for ssalamy: Success
+2026-01-31 15:59:45,663 - webex_batch - INFO - Processing user: akarger, email: akarger@akamai.com, extension: 1441, region: Israel
+2026-01-31 15:59:51,181 - webex_batch - INFO - Webex license Extension update for akarger: Success
+2026-01-31 15:59:51,183 - webex_batch - INFO - Processing user: nlevari, email: nlevari@akamai.com, extension: 1442, region: Israel
+2026-01-31 15:59:56,521 - webex_batch - INFO - Webex license Extension update for nlevari: Success
+2026-01-31 15:59:56,523 - webex_batch - INFO - Processing user: osolomon, email: osolomon@akamai.com, extension: 1443, region: Israel
+2026-01-31 16:00:03,441 - webex_batch - INFO - Webex license Extension update for osolomon: Success
+2026-01-31 16:00:03,442 - webex_batch - INFO - Processing user: yberling, email: yberling@akamai.com, extension: 1444, region: Israel
+2026-01-31 16:00:08,922 - webex_batch - INFO - Webex license Extension update for yberling: Success
+2026-01-31 16:00:08,924 - webex_batch - INFO - Processing user: yshaul, email: yshaul@akamai.com, extension: 1445, region: Israel
+2026-01-31 16:00:13,786 - webex_batch - INFO - Webex license Extension update for yshaul: Success
+2026-01-31 16:00:13,787 - webex_batch - INFO - Processing user: gkaplan, email: gkaplan@akamai.com, extension: 1446, region: Israel
+2026-01-31 16:00:18,904 - webex_batch - INFO - Webex license Extension update for gkaplan: Success
+2026-01-31 16:00:18,905 - webex_batch - INFO - Processing user: obensass, email: obensass@akamai.com, extension: 1447, region: Israel
+2026-01-31 16:00:24,007 - webex_batch - INFO - Webex license Extension update for obensass: Success
+2026-01-31 16:00:24,010 - webex_batch - INFO - Processing user: lshabtai, email: lshabtai@akamai.com, extension: 1448, region: Israel
+2026-01-31 16:00:29,426 - webex_batch - INFO - Webex license Extension update for lshabtai: Success
+2026-01-31 16:00:29,427 - webex_batch - INFO - Processing user: pkrumer, email: pkrumer@akamai.com, extension: 1449, region: Israel
+2026-01-31 16:00:34,703 - webex_batch - INFO - Webex license Extension update for pkrumer: Success
+2026-01-31 16:00:34,704 - webex_batch - INFO - Processing user: aermolae, email: aermolae@akamai.com, extension: 1450, region: Israel
+2026-01-31 16:00:36,971 - webex_batch - INFO - Webex license Extension update for aermolae: Failed
+2026-01-31 16:00:36,971 - webex_batch - INFO - Processing user: celkanar, email: celkanar@akamai.com, extension: 1451, region: Israel
+2026-01-31 16:00:42,089 - webex_batch - INFO - Webex license Extension update for celkanar: Success
+2026-01-31 16:00:42,090 - webex_batch - INFO - Processing user: nbetzale, email: nbetzale@akamai.com, extension: 1452, region: Israel
+2026-01-31 16:00:47,491 - webex_batch - INFO - Webex license Extension update for nbetzale: Success
+2026-01-31 16:00:47,492 - webex_batch - INFO - Processing user: osmadja, email: osmadja@akamai.com, extension: 1453, region: Israel
+2026-01-31 16:00:52,644 - webex_batch - INFO - Webex license Extension update for osmadja: Success
+2026-01-31 16:00:52,648 - webex_batch - INFO - Processing user: lepshtai, email: lepshtai@akamai.com, extension: 1454, region: Israel
+2026-01-31 16:00:57,947 - webex_batch - INFO - Webex license Extension update for lepshtai: Success
+2026-01-31 16:00:57,948 - webex_batch - INFO - Processing user: kelhayak, email: kelhayak@akamai.com, extension: 1455, region: Israel
+2026-01-31 16:01:03,516 - webex_batch - INFO - Webex license Extension update for kelhayak: Success
+2026-01-31 16:01:03,517 - webex_batch - INFO - Processing user: aneishto, email: aneishto@akamai.com, extension: 1456, region: Israel
+2026-01-31 16:01:08,607 - webex_batch - INFO - Webex license Extension update for aneishto: Success
+2026-01-31 16:01:08,609 - webex_batch - INFO - Processing user: vsopilid, email: vsopilid@akamai.com, extension: 1457, region: Israel
+2026-01-31 16:01:13,888 - webex_batch - INFO - Webex license Extension update for vsopilid: Success
+2026-01-31 16:01:13,890 - webex_batch - INFO - Processing user: hbenbiny, email: hbenbiny@akamai.com, extension: 1458, region: Israel
+2026-01-31 16:01:19,072 - webex_batch - INFO - Webex license Extension update for hbenbiny: Success
+2026-01-31 16:01:19,075 - webex_batch - INFO - Processing user: rdavidov, email: rdavidov@akamai.com, extension: 1459, region: Israel
+2026-01-31 16:01:24,508 - webex_batch - INFO - Webex license Extension update for rdavidov: Success
+2026-01-31 16:01:24,510 - webex_batch - INFO - Processing user: liluz, email: liluz@akamai.com, extension: 1460, region: Israel
+2026-01-31 16:01:29,986 - webex_batch - INFO - Webex license Extension update for liluz: Success
+2026-01-31 16:01:29,987 - webex_batch - INFO - Processing user: aarbib, email: aarbib@akamai.com, extension: 1461, region: Israel
+2026-01-31 16:01:35,582 - webex_batch - INFO - Webex license Extension update for aarbib: Success
+2026-01-31 16:01:35,584 - webex_batch - INFO - Processing user: tshemesh, email: tshemesh@akamai.com, extension: 1462, region: Israel
+2026-01-31 16:01:40,515 - webex_batch - INFO - Webex license Extension update for tshemesh: Success
+2026-01-31 16:01:40,518 - webex_batch - INFO - Processing user: arotem, email: arotem@akamai.com, extension: 1463, region: Israel
+2026-01-31 16:01:45,888 - webex_batch - INFO - Webex license Extension update for arotem: Success
+2026-01-31 16:01:45,889 - webex_batch - INFO - Processing user: omiller, email: omiller@akamai.com, extension: 1464, region: Israel
+2026-01-31 16:01:51,305 - webex_batch - INFO - Webex license Extension update for omiller: Success
+2026-01-31 16:01:51,307 - webex_batch - INFO - Processing user: gcohen, email: gcohen@akamai.com, extension: 1465, region: Israel
+2026-01-31 16:01:56,490 - webex_batch - INFO - Webex license Extension update for gcohen: Success
+2026-01-31 16:01:56,492 - webex_batch - INFO - Processing user: yulger, email: yulger@akamai.com, extension: 1466, region: Israel
+2026-01-31 16:02:01,506 - webex_batch - INFO - Webex license Extension update for yulger: Success
+2026-01-31 16:02:01,507 - webex_batch - INFO - Processing user: ralevi, email: ralevi@akamai.com, extension: 1467, region: Israel
+2026-01-31 16:02:06,963 - webex_batch - INFO - Webex license Extension update for ralevi: Success
+2026-01-31 16:02:06,964 - webex_batch - INFO - Processing user: bboger, email: bboger@akamai.com, extension: 1468, region: Israel
+2026-01-31 16:02:12,947 - webex_batch - INFO - Webex license Extension update for bboger: Success
+2026-01-31 16:02:12,949 - webex_batch - INFO - Processing user: asholomo, email: asholomo@akamai.com, extension: 1469, region: Israel
+2026-01-31 16:02:18,091 - webex_batch - INFO - Webex license Extension update for asholomo: Success
+2026-01-31 16:02:18,092 - webex_batch - INFO - Processing user: sbenfred, email: sbenfred@akamai.com, extension: 1075, region: France
+2026-01-31 16:02:23,155 - webex_batch - INFO - Webex license Extension update for sbenfred: Success
+2026-01-31 16:02:23,156 - webex_batch - INFO - Processing user: tlevi, email: tlevi@akamai.com, extension: 1470, region: Israel
+2026-01-31 16:02:28,097 - webex_batch - INFO - Webex license Extension update for tlevi: Success
+2026-01-31 16:02:28,098 - webex_batch - INFO - Processing user: ialayev, email: ialayev@akamai.com, extension: 1471, region: Israel
+2026-01-31 16:02:33,675 - webex_batch - INFO - Webex license Extension update for ialayev: Success
+2026-01-31 16:02:33,676 - webex_batch - INFO - Processing user: obiezune, email: obiezune@akamai.com, extension: 1472, region: Israel
+2026-01-31 16:02:38,908 - webex_batch - INFO - Webex license Extension update for obiezune: Success
+2026-01-31 16:02:38,908 - webex_batch - INFO - Processing user: ksegre, email: ksegre@akamai.com, extension: 1473, region: Israel
+2026-01-31 16:02:44,184 - webex_batch - INFO - Webex license Extension update for ksegre: Success
+2026-01-31 16:02:44,186 - webex_batch - INFO - Processing user: ogolan, email: ogolan@akamai.com, extension: 1474, region: Israel
+2026-01-31 16:02:49,523 - webex_batch - INFO - Webex license Extension update for ogolan: Success
+2026-01-31 16:02:49,524 - webex_batch - INFO - Processing user: oarieli, email: oarieli@akamai.com, extension: 1475, region: Israel
+2026-01-31 16:02:54,422 - webex_batch - INFO - Webex license Extension update for oarieli: Success
+2026-01-31 16:02:54,423 - webex_batch - INFO - Processing user: yalkalai, email: yalkalai@akamai.com, extension: 1476, region: Israel
+2026-01-31 16:02:59,265 - webex_batch - INFO - Webex license Extension update for yalkalai: Success
+2026-01-31 16:02:59,266 - webex_batch - INFO - Processing user: bheller, email: bheller@akamai.com, extension: 1477, region: Israel
+2026-01-31 16:03:05,232 - webex_batch - INFO - Webex license Extension update for bheller: Success
+2026-01-31 16:03:05,233 - webex_batch - INFO - Processing user: minselbe, email: minselbe@akamai.com, extension: 1478, region: Israel
+2026-01-31 16:03:10,509 - webex_batch - INFO - Webex license Extension update for minselbe: Success
+2026-01-31 16:03:10,513 - webex_batch - INFO - Processing user: nzohar, email: nzohar@akamai.com, extension: 1479, region: Israel
+2026-01-31 16:03:15,386 - webex_batch - INFO - Webex license Extension update for nzohar: Success
+2026-01-31 16:03:15,390 - webex_batch - INFO - Processing user: spress, email: spress@akamai.com, extension: 1480, region: Israel
+2026-01-31 16:03:20,900 - webex_batch - INFO - Webex license Extension update for spress: Success
+2026-01-31 16:03:20,903 - webex_batch - INFO - Processing user: ntsin, email: ntsin@akamai.com, extension: 1481, region: Israel
+2026-01-31 16:03:26,558 - webex_batch - INFO - Webex license Extension update for ntsin: Success
+2026-01-31 16:03:26,559 - webex_batch - INFO - Processing user: gblechma, email: gblechma@akamai.com, extension: 1482, region: Israel
+2026-01-31 16:03:31,855 - webex_batch - INFO - Webex license Extension update for gblechma: Success
+2026-01-31 16:03:31,857 - webex_batch - INFO - Processing user: oaharoni, email: oaharoni@akamai.com, extension: 1483, region: Israel
+2026-01-31 16:03:36,615 - webex_batch - INFO - Webex license Extension update for oaharoni: Success
+2026-01-31 16:03:36,616 - webex_batch - INFO - Processing user: oduani, email: oduani@akamai.com, extension: 1484, region: Israel
+2026-01-31 16:03:42,177 - webex_batch - INFO - Webex license Extension update for oduani: Success
+2026-01-31 16:03:42,179 - webex_batch - INFO - Processing user: eperetz, email: eperetz@akamai.com, extension: 1485, region: Israel
+2026-01-31 16:03:47,431 - webex_batch - INFO - Webex license Extension update for eperetz: Success
+2026-01-31 16:03:47,432 - webex_batch - INFO - Processing user: thakak, email: thakak@akamai.com, extension: 1486, region: Israel
+2026-01-31 16:03:52,728 - webex_batch - INFO - Webex license Extension update for thakak: Success
+2026-01-31 16:03:52,730 - webex_batch - INFO - Processing user: yagabay, email: yagabay@akamai.com, extension: 1487, region: Israel
+2026-01-31 16:03:57,731 - webex_batch - INFO - Webex license Extension update for yagabay: Success
+2026-01-31 16:03:57,732 - webex_batch - INFO - Processing user: razria, email: razria@akamai.com, extension: 1488, region: Israel
+2026-01-31 16:04:03,089 - webex_batch - INFO - Webex license Extension update for razria: Success
+2026-01-31 16:04:03,091 - webex_batch - INFO - Processing user: tendelma, email: tendelma@akamai.com, extension: 1489, region: Israel
+2026-01-31 16:04:08,359 - webex_batch - INFO - Webex license Extension update for tendelma: Success
+2026-01-31 16:04:08,360 - webex_batch - INFO - Processing user: tfrisz, email: tfrisz@akamai.com, extension: 1490, region: Israel
+2026-01-31 16:04:13,661 - webex_batch - INFO - Webex license Extension update for tfrisz: Success
+2026-01-31 16:04:13,663 - webex_batch - INFO - Processing user: jkhell, email: jkhell@akamai.com, extension: 1491, region: Israel
+2026-01-31 16:04:18,657 - webex_batch - INFO - Webex license Extension update for jkhell: Success
+2026-01-31 16:04:18,658 - webex_batch - INFO - Processing user: orlevi, email: orlevi@akamai.com, extension: 1492, region: Israel
+2026-01-31 16:04:23,644 - webex_batch - INFO - Webex license Extension update for orlevi: Success
+2026-01-31 16:04:23,646 - webex_batch - INFO - Processing user: ysapir, email: ysapir@akamai.com, extension: 1493, region: Israel
+2026-01-31 16:04:29,740 - webex_batch - INFO - Webex license Extension update for ysapir: Success
+2026-01-31 16:04:29,741 - webex_batch - INFO - Processing user: neren, email: neren@akamai.com, extension: 1494, region: Israel
+2026-01-31 16:04:35,039 - webex_batch - INFO - Webex license Extension update for neren: Success
+2026-01-31 16:04:35,040 - webex_batch - INFO - Processing user: tdidi, email: tdidi@akamai.com, extension: 1495, region: Israel
+2026-01-31 16:04:40,064 - webex_batch - INFO - Webex license Extension update for tdidi: Success
+2026-01-31 16:04:40,066 - webex_batch - INFO - Processing user: aramon, email: aramon@akamai.com, extension: 1496, region: Israel
+2026-01-31 16:04:45,557 - webex_batch - INFO - Webex license Extension update for aramon: Success
+2026-01-31 16:04:45,558 - webex_batch - INFO - Processing user: ashlomov, email: ashlomov@akamai.com, extension: 1497, region: Israel
+2026-01-31 16:04:50,668 - webex_batch - INFO - Webex license Extension update for ashlomov: Success
+2026-01-31 16:04:50,670 - webex_batch - INFO - Processing user: iweiss, email: iweiss@akamai.com, extension: 1498, region: Israel
+2026-01-31 16:04:55,748 - webex_batch - INFO - Webex license Extension update for iweiss: Success
+2026-01-31 16:04:55,752 - webex_batch - INFO - Processing user: awerthei, email: awerthei@akamai.com, extension: 1499, region: Israel
+2026-01-31 16:05:01,728 - webex_batch - INFO - Webex license Extension update for awerthei: Success
+2026-01-31 16:05:01,730 - webex_batch - INFO - Processing user: rsahar, email: rsahar@akamai.com, extension: 1500, region: Israel
+2026-01-31 16:05:06,942 - webex_batch - INFO - Webex license Extension update for rsahar: Success
+2026-01-31 16:05:06,942 - webex_batch - INFO - Processing user: nkohan, email: nkohan@akamai.com, extension: 1501, region: Israel
+2026-01-31 16:05:20,740 - webex_batch - INFO - Webex license Extension update for nkohan: Failed
+2026-01-31 16:05:20,741 - webex_batch - INFO - Processing user: dsela, email: dsela@akamai.com, extension: 1502, region: Israel
+2026-01-31 16:05:26,357 - webex_batch - INFO - Webex license Extension update for dsela: Success
+2026-01-31 16:05:26,360 - webex_batch - INFO - Processing user: llasker, email: llasker@akamai.com, extension: 1503, region: Israel
+2026-01-31 16:05:31,594 - webex_batch - INFO - Webex license Extension update for llasker: Success
+2026-01-31 16:05:31,595 - webex_batch - INFO - Processing user: ishechte, email: ishechte@akamai.com, extension: 1504, region: Israel
+2026-01-31 16:05:37,321 - webex_batch - INFO - Webex license Extension update for ishechte: Success
+2026-01-31 16:05:37,323 - webex_batch - INFO - Processing user: nkarni, email: nkarni@akamai.com, extension: 1505, region: Israel
+2026-01-31 16:05:42,669 - webex_batch - INFO - Webex license Extension update for nkarni: Success
+2026-01-31 16:05:42,670 - webex_batch - INFO - Processing user: gbonnet, email: gbonnet@akamai.com, extension: 1076, region: France
+2026-01-31 16:05:47,651 - webex_batch - INFO - Webex license Extension update for gbonnet: Success
+2026-01-31 16:05:47,653 - webex_batch - INFO - Processing user: rwelber, email: rwelber@akamai.com, extension: 1506, region: Israel
+2026-01-31 16:05:52,930 - webex_batch - INFO - Webex license Extension update for rwelber: Success
+2026-01-31 16:05:52,931 - webex_batch - INFO - Processing user: ablecher, email: ablecher@akamai.com, extension: 1507, region: Israel
+2026-01-31 16:05:58,111 - webex_batch - INFO - Webex license Extension update for ablecher: Success
+2026-01-31 16:05:58,114 - webex_batch - INFO - Processing user: esimhon, email: esimhon@akamai.com, extension: 1508, region: Israel
+2026-01-31 16:06:03,475 - webex_batch - INFO - Webex license Extension update for esimhon: Success
+2026-01-31 16:06:03,476 - webex_batch - INFO - Processing user: nisovich, email: nisovich@akamai.com, extension: 1509, region: Israel
+2026-01-31 16:06:08,789 - webex_batch - INFO - Webex license Extension update for nisovich: Success
+2026-01-31 16:06:08,789 - webex_batch - INFO - Processing user: gasalomo, email: gasalomo@akamai.com, extension: 1510, region: Israel
+2026-01-31 16:06:13,677 - webex_batch - INFO - Webex license Extension update for gasalomo: Success
+2026-01-31 16:06:13,678 - webex_batch - INFO - Processing user: giwolf, email: giwolf@akamai.com, extension: 1511, region: Israel
+2026-01-31 16:06:20,040 - webex_batch - INFO - Webex license Extension update for giwolf: Success
+2026-01-31 16:06:20,041 - webex_batch - INFO - Processing user: mgelband, email: mgelband@akamai.com, extension: 1512, region: Israel
+2026-01-31 16:06:24,965 - webex_batch - INFO - Webex license Extension update for mgelband: Success
+2026-01-31 16:06:24,967 - webex_batch - INFO - Processing user: oatia, email: oatia@akamai.com, extension: 1513, region: Israel
+2026-01-31 16:06:30,506 - webex_batch - INFO - Webex license Extension update for oatia: Success
+2026-01-31 16:06:30,510 - webex_batch - INFO - Processing user: shadar, email: shadar@akamai.com, extension: 1514, region: Israel
+2026-01-31 16:06:35,702 - webex_batch - INFO - Webex license Extension update for shadar: Success
+2026-01-31 16:06:35,702 - webex_batch - INFO - Processing user: dnissan, email: dnissan@akamai.com, extension: 1515, region: Israel
+2026-01-31 16:06:42,243 - webex_batch - INFO - Webex license Extension update for dnissan: Success
+2026-01-31 16:06:42,245 - webex_batch - INFO - Processing user: ipick, email: ipick@akamai.com, extension: 1516, region: Israel
+2026-01-31 16:06:47,688 - webex_batch - INFO - Webex license Extension update for ipick: Success
+2026-01-31 16:06:47,692 - webex_batch - INFO - Processing user: glettron, email: glettron@akamai.com, extension: 1077, region: France
+2026-01-31 16:06:52,850 - webex_batch - INFO - Webex license Extension update for glettron: Success
+2026-01-31 16:06:52,851 - webex_batch - INFO - Processing user: efriedma, email: efriedma@akamai.com, extension: 1517, region: Israel
+2026-01-31 16:06:57,866 - webex_batch - INFO - Webex license Extension update for efriedma: Success
+2026-01-31 16:06:57,867 - webex_batch - INFO - Processing user: sgrunzwe, email: sgrunzwe@akamai.com, extension: 1518, region: Israel
+2026-01-31 16:07:02,958 - webex_batch - INFO - Webex license Extension update for sgrunzwe: Success
+2026-01-31 16:07:02,960 - webex_batch - INFO - Processing user: lcahani, email: lcahani@akamai.com, extension: 1519, region: Israel
+2026-01-31 16:07:08,367 - webex_batch - INFO - Webex license Extension update for lcahani: Success
+2026-01-31 16:07:08,368 - webex_batch - INFO - Processing user: sbenami, email: sbenami@akamai.com, extension: 1520, region: Israel
+2026-01-31 16:07:13,329 - webex_batch - INFO - Webex license Extension update for sbenami: Success
+2026-01-31 16:07:13,331 - webex_batch - INFO - Processing user: traviv, email: traviv@akamai.com, extension: 1521, region: Israel
+2026-01-31 16:07:18,810 - webex_batch - INFO - Webex license Extension update for traviv: Success
+2026-01-31 16:07:18,811 - webex_batch - INFO - Processing user: rvoloshi, email: rvoloshi@akamai.com, extension: 1522, region: Israel
+2026-01-31 16:07:23,950 - webex_batch - INFO - Webex license Extension update for rvoloshi: Success
+2026-01-31 16:07:23,951 - webex_batch - INFO - Processing user: ihornic, email: ihornic@akamai.com, extension: 1523, region: Israel
+2026-01-31 16:07:29,290 - webex_batch - INFO - Webex license Extension update for ihornic: Success
+2026-01-31 16:07:29,291 - webex_batch - INFO - Processing user: dfleishm, email: dfleishm@akamai.com, extension: 1524, region: Israel
+2026-01-31 16:07:34,342 - webex_batch - INFO - Webex license Extension update for dfleishm: Success
+2026-01-31 16:07:34,343 - webex_batch - INFO - Processing user: psuchman, email: psuchman@akamai.com, extension: 1525, region: Israel
+2026-01-31 16:07:39,643 - webex_batch - INFO - Webex license Extension update for psuchman: Success
+2026-01-31 16:07:39,645 - webex_batch - INFO - Processing user: oashkena, email: oashkena@akamai.com, extension: 1526, region: Israel
+2026-01-31 16:07:44,463 - webex_batch - INFO - Webex license Extension update for oashkena: Success
+2026-01-31 16:07:44,464 - webex_batch - INFO - Processing user: skalev, email: skalev@akamai.com, extension: 1527, region: Israel
+2026-01-31 16:07:49,964 - webex_batch - INFO - Webex license Extension update for skalev: Success
+2026-01-31 16:07:49,965 - webex_batch - INFO - Processing user: lmaimon, email: lmaimon@akamai.com, extension: 1528, region: Israel
+2026-01-31 16:07:54,705 - webex_batch - INFO - Webex license Extension update for lmaimon: Success
+2026-01-31 16:07:54,707 - webex_batch - INFO - Processing user: gtager, email: gtager@akamai.com, extension: 1529, region: Israel
+2026-01-31 16:08:00,179 - webex_batch - INFO - Webex license Extension update for gtager: Success
+2026-01-31 16:08:00,180 - webex_batch - INFO - Processing user: esluzki, email: esluzki@akamai.com, extension: 1530, region: Israel
+2026-01-31 16:08:05,203 - webex_batch - INFO - Webex license Extension update for esluzki: Success
+2026-01-31 16:08:05,204 - webex_batch - INFO - Processing user: nrubinst, email: nrubinst@akamai.com, extension: 1531, region: Israel
+2026-01-31 16:08:10,804 - webex_batch - INFO - Webex license Extension update for nrubinst: Success
+2026-01-31 16:08:10,805 - webex_batch - INFO - Processing user: yioukhto, email: yioukhto@akamai.com, extension: 1532, region: Israel
+2026-01-31 16:08:15,816 - webex_batch - INFO - Webex license Extension update for yioukhto: Success
+2026-01-31 16:08:15,818 - webex_batch - INFO - Processing user: orkatz, email: orkatz@akamai.com, extension: 1533, region: Israel
+2026-01-31 16:08:21,233 - webex_batch - INFO - Webex license Extension update for orkatz: Success
+2026-01-31 16:08:21,234 - webex_batch - INFO - Processing user: dkarasik, email: dkarasik@akamai.com, extension: 1534, region: Israel
+2026-01-31 16:08:26,616 - webex_batch - INFO - Webex license Extension update for dkarasik: Success
+2026-01-31 16:08:26,616 - webex_batch - INFO - Processing user: rfeldhei, email: rfeldhei@akamai.com, extension: 1535, region: Israel
+2026-01-31 16:08:31,702 - webex_batch - INFO - Webex license Extension update for rfeldhei: Success
+2026-01-31 16:08:31,703 - webex_batch - INFO - Processing user: ynoy, email: ynoy@akamai.com, extension: 1536, region: Israel
+2026-01-31 16:08:37,139 - webex_batch - INFO - Webex license Extension update for ynoy: Success
+2026-01-31 16:08:37,140 - webex_batch - INFO - Processing user: speretz, email: speretz@akamai.com, extension: 1537, region: Israel
+2026-01-31 16:08:42,366 - webex_batch - INFO - Webex license Extension update for speretz: Success
+2026-01-31 16:08:42,368 - webex_batch - INFO - Processing user: sfogel, email: sfogel@akamai.com, extension: 1538, region: Israel
+2026-01-31 16:08:48,177 - webex_batch - INFO - Webex license Extension update for sfogel: Success
+2026-01-31 16:08:48,178 - webex_batch - INFO - Processing user: shaccohe, email: shaccohe@akamai.com, extension: 1539, region: Israel
+2026-01-31 16:08:53,311 - webex_batch - INFO - Webex license Extension update for shaccohe: Success
+2026-01-31 16:08:53,313 - webex_batch - INFO - Processing user: ahalawi, email: ahalawi@akamai.com, extension: 1540, region: Israel
+2026-01-31 16:08:58,916 - webex_batch - INFO - Webex license Extension update for ahalawi: Success
+2026-01-31 16:08:58,918 - webex_batch - INFO - Processing user: hberkovi, email: hberkovi@akamai.com, extension: 1541, region: Israel
+2026-01-31 16:09:04,168 - webex_batch - INFO - Webex license Extension update for hberkovi: Success
+2026-01-31 16:09:04,169 - webex_batch - INFO - Processing user: nzer, email: nzer@akamai.com, extension: 1542, region: Israel
+2026-01-31 16:09:09,727 - webex_batch - INFO - Webex license Extension update for nzer: Success
+2026-01-31 16:09:09,728 - webex_batch - INFO - Processing user: nfleisch, email: nfleisch@akamai.com, extension: 1543, region: Israel
+2026-01-31 16:09:15,921 - webex_batch - INFO - Webex license Extension update for nfleisch: Success
+2026-01-31 16:09:15,922 - webex_batch - INFO - Processing user: dgor, email: dgor@akamai.com, extension: 1544, region: Israel
+2026-01-31 16:09:21,284 - webex_batch - INFO - Webex license Extension update for dgor: Success
+2026-01-31 16:09:21,286 - webex_batch - INFO - Processing user: micohen, email: micohen@akamai.com, extension: 1545, region: Israel
+2026-01-31 16:09:26,318 - webex_batch - INFO - Webex license Extension update for micohen: Success
+2026-01-31 16:09:26,319 - webex_batch - INFO - Processing user: aduek, email: aduek@akamai.com, extension: 1546, region: Israel
+2026-01-31 16:09:32,139 - webex_batch - INFO - Webex license Extension update for aduek: Success
+2026-01-31 16:09:32,140 - webex_batch - INFO - Processing user: gfogel, email: gfogel@akamai.com, extension: 1547, region: Israel
+2026-01-31 16:09:37,437 - webex_batch - INFO - Webex license Extension update for gfogel: Success
+2026-01-31 16:09:37,438 - webex_batch - INFO - Processing user: kuriah, email: kuriah@akamai.com, extension: 1548, region: Israel
+2026-01-31 16:09:42,689 - webex_batch - INFO - Webex license Extension update for kuriah: Success
+2026-01-31 16:09:42,692 - webex_batch - INFO - Processing user: yabraham, email: yabraham@akamai.com, extension: 1549, region: Israel
+2026-01-31 16:09:48,086 - webex_batch - INFO - Webex license Extension update for yabraham: Success
+2026-01-31 16:09:48,087 - webex_batch - INFO - Processing user: ratias, email: ratias@akamai.com, extension: 1550, region: Israel
+2026-01-31 16:09:53,546 - webex_batch - INFO - Webex license Extension update for ratias: Success
+2026-01-31 16:09:53,547 - webex_batch - INFO - Processing user: mvilla, email: mvilla@akamai.com, extension: 1078, region: France
+2026-01-31 16:09:58,834 - webex_batch - INFO - Webex license Extension update for mvilla: Success
+2026-01-31 16:09:58,834 - webex_batch - INFO - Processing user: thekmati, email: thekmati@akamai.com, extension: 1551, region: Israel
+2026-01-31 16:10:05,143 - webex_batch - INFO - Webex license Extension update for thekmati: Success
+2026-01-31 16:10:05,144 - webex_batch - INFO - Processing user: ykhalifa, email: ykhalifa@akamai.com, extension: 1552, region: Israel
+2026-01-31 16:10:11,155 - webex_batch - INFO - Webex license Extension update for ykhalifa: Success
+2026-01-31 16:10:11,156 - webex_batch - INFO - Processing user: yfogeldr, email: yfogeldr@akamai.com, extension: 1553, region: Israel
+2026-01-31 16:10:16,528 - webex_batch - INFO - Webex license Extension update for yfogeldr: Success
+2026-01-31 16:10:16,529 - webex_batch - INFO - Processing user: tkornis, email: tkornis@akamai.com, extension: 1554, region: Israel
+2026-01-31 16:10:22,091 - webex_batch - INFO - Webex license Extension update for tkornis: Success
+2026-01-31 16:10:22,092 - webex_batch - INFO - Processing user: ialkalai, email: ialkalai@akamai.com, extension: 1555, region: Israel
+2026-01-31 16:10:27,409 - webex_batch - INFO - Webex license Extension update for ialkalai: Success
+2026-01-31 16:10:27,412 - webex_batch - INFO - Processing user: amushins, email: amushins@akamai.com, extension: 1556, region: Israel
+2026-01-31 16:10:32,273 - webex_batch - INFO - Webex license Extension update for amushins: Success
+2026-01-31 16:10:32,275 - webex_batch - INFO - Processing user: ygordon, email: ygordon@akamai.com, extension: 1557, region: Israel
+2026-01-31 16:10:37,678 - webex_batch - INFO - Webex license Extension update for ygordon: Success
+2026-01-31 16:10:37,679 - webex_batch - INFO - Processing user: eedery, email: eedery@akamai.com, extension: 1558, region: Israel
+2026-01-31 16:10:42,584 - webex_batch - INFO - Webex license Extension update for eedery: Success
+2026-01-31 16:10:42,585 - webex_batch - INFO - Processing user: rfuchs, email: rfuchs@akamai.com, extension: 1559, region: Israel
+2026-01-31 16:10:48,219 - webex_batch - INFO - Webex license Extension update for rfuchs: Success
+2026-01-31 16:10:48,221 - webex_batch - INFO - Processing user: ebronsht, email: ebronsht@akamai.com, extension: 1560, region: Israel
+2026-01-31 16:10:53,133 - webex_batch - INFO - Webex license Extension update for ebronsht: Success
+2026-01-31 16:10:53,136 - webex_batch - INFO - Processing user: smarzok, email: smarzok@akamai.com, extension: 1561, region: Israel
+2026-01-31 16:10:58,317 - webex_batch - INFO - Webex license Extension update for smarzok: Success
+2026-01-31 16:10:58,317 - webex_batch - INFO - Processing user: tshapira, email: tshapira@akamai.com, extension: 1562, region: Israel
+2026-01-31 16:11:03,354 - webex_batch - INFO - Webex license Extension update for tshapira: Success
+2026-01-31 16:11:03,355 - webex_batch - INFO - Processing user: mwilfble, email: mwilfble@akamai.com, extension: 1563, region: Israel
+2026-01-31 16:11:18,210 - webex_batch - INFO - Webex license Extension update for mwilfble: Success
+2026-01-31 16:11:18,211 - webex_batch - INFO - Processing user: martarya, email: martarya@akamai.com, extension: 1564, region: Israel
+2026-01-31 16:11:23,040 - webex_batch - INFO - Webex license Extension update for martarya: Success
+2026-01-31 16:11:23,041 - webex_batch - INFO - Processing user: islutzki, email: islutzki@akamai.com, extension: 1565, region: Israel
+2026-01-31 16:11:28,358 - webex_batch - INFO - Webex license Extension update for islutzki: Success
+2026-01-31 16:11:28,359 - webex_batch - INFO - Processing user: lesabag, email: lesabag@akamai.com, extension: 1566, region: Israel
+2026-01-31 16:11:33,251 - webex_batch - INFO - Webex license Extension update for lesabag: Success
+2026-01-31 16:11:33,252 - webex_batch - INFO - Processing user: ashaul, email: ashaul@akamai.com, extension: 1567, region: Israel
+2026-01-31 16:11:38,214 - webex_batch - INFO - Webex license Extension update for ashaul: Success
+2026-01-31 16:11:38,214 - webex_batch - INFO - Processing user: rzonensh, email: rzonensh@akamai.com, extension: 1568, region: Israel
+2026-01-31 16:11:43,131 - webex_batch - INFO - Webex license Extension update for rzonensh: Success
+2026-01-31 16:11:43,131 - webex_batch - INFO - Processing user: tmor, email: tmor@akamai.com, extension: 1569, region: Israel
+2026-01-31 16:11:49,940 - webex_batch - INFO - Webex license Extension update for tmor: Success
+2026-01-31 16:11:49,941 - webex_batch - INFO - Processing user: mdanino, email: mdanino@akamai.com, extension: 1570, region: Israel
+2026-01-31 16:11:54,822 - webex_batch - INFO - Webex license Extension update for mdanino: Success
+2026-01-31 16:11:54,822 - webex_batch - INFO - Processing user: sibaron, email: sibaron@akamai.com, extension: 1571, region: Israel
+2026-01-31 16:11:59,999 - webex_batch - INFO - Webex license Extension update for sibaron: Success
+2026-01-31 16:12:00,002 - webex_batch - INFO - Processing user: yhamo, email: yhamo@akamai.com, extension: 1572, region: Israel
+2026-01-31 16:12:05,525 - webex_batch - INFO - Webex license Extension update for yhamo: Success
+2026-01-31 16:12:05,529 - webex_batch - INFO - Processing user: tcohen, email: tcohen@akamai.com, extension: 1573, region: Israel
+2026-01-31 16:12:10,868 - webex_batch - INFO - Webex license Extension update for tcohen: Success
+2026-01-31 16:12:10,869 - webex_batch - INFO - Processing user: adefioll, email: adefioll@akamai.com, extension: 1079, region: France
+2026-01-31 16:12:16,267 - webex_batch - INFO - Webex ACD update for adefioll: Success
+2026-01-31 16:12:16,268 - webex_batch - INFO - Processing user: gbelkov, email: gbelkov@akamai.com, extension: 1574, region: Israel
+2026-01-31 16:12:21,533 - webex_batch - INFO - Webex license Extension update for gbelkov: Success
+2026-01-31 16:12:21,535 - webex_batch - INFO - Processing user: asimchi, email: asimchi@akamai.com, extension: 1575, region: Israel
+2026-01-31 16:12:27,340 - webex_batch - INFO - Webex license Extension update for asimchi: Success
+2026-01-31 16:12:27,341 - webex_batch - INFO - Processing user: ymarom, email: ymarom@akamai.com, extension: 1576, region: Israel
+2026-01-31 16:12:32,235 - webex_batch - INFO - Webex license Extension update for ymarom: Success
+2026-01-31 16:12:32,236 - webex_batch - INFO - Processing user: glefteri, email: glefteri@akamai.com, extension: 1080, region: France
+2026-01-31 16:12:37,749 - webex_batch - INFO - Webex license Extension update for glefteri: Success
+2026-01-31 16:12:37,750 - webex_batch - INFO - Processing user: syogevro, email: syogevro@akamai.com, extension: 1577, region: Israel
+2026-01-31 16:12:42,935 - webex_batch - INFO - Webex license Extension update for syogevro: Success
+2026-01-31 16:12:42,938 - webex_batch - INFO - Processing user: okuperiu, email: okuperiu@akamai.com, extension: 1578, region: Israel
+2026-01-31 16:12:48,220 - webex_batch - INFO - Webex license Extension update for okuperiu: Success
+2026-01-31 16:12:48,221 - webex_batch - INFO - Processing user: efurman, email: efurman@akamai.com, extension: 1579, region: Israel
+2026-01-31 16:12:53,362 - webex_batch - INFO - Webex license Extension update for efurman: Success
+2026-01-31 16:12:53,364 - webex_batch - INFO - Processing user: metingen, email: metingen@akamai.com, extension: 1580, region: Israel
+2026-01-31 16:12:59,390 - webex_batch - INFO - Webex license Extension update for metingen: Success
+2026-01-31 16:12:59,391 - webex_batch - INFO - Processing user: oorzitze, email: oorzitze@akamai.com, extension: 1581, region: Israel
+2026-01-31 16:13:04,455 - webex_batch - INFO - Webex license Extension update for oorzitze: Success
+2026-01-31 16:13:04,459 - webex_batch - INFO - Processing user: smarom, email: smarom@akamai.com, extension: 1582, region: Israel
+2026-01-31 16:13:09,398 - webex_batch - INFO - Webex license Extension update for smarom: Success
+2026-01-31 16:13:09,398 - webex_batch - INFO - Processing user: ddavydov, email: ddavydov@akamai.com, extension: 1583, region: Israel
+2026-01-31 16:13:14,747 - webex_batch - INFO - Webex license Extension update for ddavydov: Success
+2026-01-31 16:13:14,748 - webex_batch - INFO - Processing user: yabramow, email: yabramow@akamai.com, extension: 1584, region: Israel
+2026-01-31 16:13:20,261 - webex_batch - INFO - Webex license Extension update for yabramow: Success
+2026-01-31 16:13:20,263 - webex_batch - INFO - Processing user: ymatalon, email: ymatalon@akamai.com, extension: 1585, region: Israel
+2026-01-31 16:13:25,640 - webex_batch - INFO - Webex license Extension update for ymatalon: Success
+2026-01-31 16:13:25,641 - webex_batch - INFO - Processing user: mkaro, email: mkaro@akamai.com, extension: 1586, region: Israel
+2026-01-31 16:13:30,676 - webex_batch - INFO - Webex license Extension update for mkaro: Success
+2026-01-31 16:13:30,677 - webex_batch - INFO - Processing user: itune, email: itune@akamai.com, extension: 1587, region: Israel
+2026-01-31 16:13:36,085 - webex_batch - INFO - Webex license Extension update for itune: Success
+2026-01-31 16:13:36,086 - webex_batch - INFO - Processing user: orecohen, email: orecohen@akamai.com, extension: 1588, region: Israel
+2026-01-31 16:13:41,035 - webex_batch - INFO - Webex license Extension update for orecohen: Success
+2026-01-31 16:13:41,037 - webex_batch - INFO - Processing user: gzabib, email: galza@akamai.com, extension: 1589, region: Israel
+2026-01-31 16:13:42,159 - webex_batch - INFO - Webex license Extension update for gzabib: Failed
+2026-01-31 16:13:42,160 - webex_batch - INFO - Processing user: yhayun, email: yhayun@akamai.com, extension: 1590, region: Israel
+2026-01-31 16:13:47,561 - webex_batch - INFO - Webex license Extension update for yhayun: Success
+2026-01-31 16:13:47,562 - webex_batch - INFO - Processing user: sushavit, email: sushavit@akamai.com, extension: 1591, region: Israel
+2026-01-31 16:13:52,808 - webex_batch - INFO - Webex license Extension update for sushavit: Success
+2026-01-31 16:13:52,812 - webex_batch - INFO - Processing user: ikrayten, email: ikrayten@akamai.com, extension: 1592, region: Israel
+2026-01-31 16:13:57,819 - webex_batch - INFO - Webex license Extension update for ikrayten: Success
+2026-01-31 16:13:57,819 - webex_batch - INFO - Processing user: btoledan, email: btoledan@akamai.com, extension: 1593, region: Israel
+2026-01-31 16:14:03,037 - webex_batch - INFO - Webex license Extension update for btoledan: Success
+2026-01-31 16:14:03,039 - webex_batch - INFO - Processing user: sargov, email: sargov@akamai.com, extension: 1594, region: Israel
+2026-01-31 16:14:08,016 - webex_batch - INFO - Webex license Extension update for sargov: Success
+2026-01-31 16:14:08,021 - webex_batch - INFO - Processing user: ayagelya, email: ayagelya@akamai.com, extension: 1595, region: Israel
+2026-01-31 16:14:13,313 - webex_batch - INFO - Webex license Extension update for ayagelya: Success
+2026-01-31 16:14:13,315 - webex_batch - INFO - Processing user: sustinov, email: sustinov@akamai.com, extension: 1596, region: Israel
+2026-01-31 16:14:18,158 - webex_batch - INFO - Webex license Extension update for sustinov: Success
+2026-01-31 16:14:18,159 - webex_batch - INFO - Processing user: ysasson, email: ysasson@akamai.com, extension: 1597, region: Israel
+2026-01-31 16:14:23,713 - webex_batch - INFO - Webex license Extension update for ysasson: Success
+2026-01-31 16:14:23,715 - webex_batch - INFO - Processing user: aaviad, email: aaviad@akamai.com, extension: 1598, region: Israel
+2026-01-31 16:14:28,943 - webex_batch - INFO - Webex license Extension update for aaviad: Success
+2026-01-31 16:14:28,944 - webex_batch - INFO - Processing user: neini, email: neini@akamai.com, extension: 1599, region: Israel
+2026-01-31 16:14:33,908 - webex_batch - INFO - Webex license Extension update for neini: Success
+2026-01-31 16:14:33,909 - webex_batch - INFO - Processing user: ylemkovi, email: ylemkovi@akamai.com, extension: 1600, region: Israel
+2026-01-31 16:14:38,874 - webex_batch - INFO - Webex license Extension update for ylemkovi: Success
+2026-01-31 16:14:38,875 - webex_batch - INFO - Processing user: asafar, email: asafar@akamai.com, extension: 1601, region: Israel
+2026-01-31 16:14:43,950 - webex_batch - INFO - Webex license Extension update for asafar: Success
+2026-01-31 16:14:43,951 - webex_batch - INFO - Processing user: izvik, email: izvik@akamai.com, extension: 1602, region: Israel
+2026-01-31 16:14:48,761 - webex_batch - INFO - Webex license Extension update for izvik: Success
+2026-01-31 16:14:48,762 - webex_batch - INFO - Processing user: mdelalan, email: mdelalan@akamai.com, extension: 1081, region: France
+2026-01-31 16:14:53,763 - webex_batch - INFO - Webex license Extension update for mdelalan: Success
+2026-01-31 16:14:53,765 - webex_batch - INFO - Processing user: igenkin, email: igenkin@akamai.com, extension: 1603, region: Israel
+2026-01-31 16:14:58,828 - webex_batch - INFO - Webex license Extension update for igenkin: Success
+2026-01-31 16:14:58,832 - webex_batch - INFO - Processing user: babuhato, email: babuhato@akamai.com, extension: 1604, region: Israel
+2026-01-31 16:15:04,340 - webex_batch - INFO - Webex license Extension update for babuhato: Success
+2026-01-31 16:15:04,345 - webex_batch - INFO - Processing user: azamir, email: azamir@akamai.com, extension: 1605, region: Israel
+2026-01-31 16:15:09,716 - webex_batch - INFO - Webex license Extension update for azamir: Success
+2026-01-31 16:15:09,718 - webex_batch - INFO - Processing user: nlengel, email: nlengel@akamai.com, extension: 1606, region: Israel
+2026-01-31 16:15:15,072 - webex_batch - INFO - Webex license Extension update for nlengel: Success
+2026-01-31 16:15:15,073 - webex_batch - INFO - Processing user: ykahana, email: ykahana@akamai.com, extension: 1607, region: Israel
+2026-01-31 16:15:20,412 - webex_batch - INFO - Webex license Extension update for ykahana: Success
+2026-01-31 16:15:20,413 - webex_batch - INFO - Processing user: gzandber, email: gzandber@akamai.com, extension: 1608, region: Israel
+2026-01-31 16:15:25,244 - webex_batch - INFO - Webex license Extension update for gzandber: Success
+2026-01-31 16:15:25,246 - webex_batch - INFO - Processing user: nbarkay, email: nbarkay@akamai.com, extension: 1609, region: Israel
+2026-01-31 16:15:30,542 - webex_batch - INFO - Webex license Extension update for nbarkay: Success
+2026-01-31 16:15:30,544 - webex_batch - INFO - Processing user: yegoldbe, email: yegoldbe@akamai.com, extension: 1610, region: Israel
+2026-01-31 16:15:36,129 - webex_batch - INFO - Webex license Extension update for yegoldbe: Success
+2026-01-31 16:15:36,130 - webex_batch - INFO - Processing user: taschwar, email: taschwar@akamai.com, extension: 1611, region: Israel
+2026-01-31 16:15:41,133 - webex_batch - INFO - Webex license Extension update for taschwar: Success
+2026-01-31 16:15:41,137 - webex_batch - INFO - Processing user: llevy, email: llevy@akamai.com, extension: 1612, region: Israel
+2026-01-31 16:15:46,755 - webex_batch - INFO - Webex license Extension update for llevy: Success
+2026-01-31 16:15:46,755 - webex_batch - INFO - Processing user: yregev, email: yregev@akamai.com, extension: 1613, region: Israel
+2026-01-31 16:15:51,689 - webex_batch - INFO - Webex license Extension update for yregev: Success
+2026-01-31 16:15:51,690 - webex_batch - INFO - Processing user: nattia, email: nattia@akamai.com, extension: 1614, region: Israel
+2026-01-31 16:15:57,117 - webex_batch - INFO - Webex license Extension update for nattia: Success
+2026-01-31 16:15:57,118 - webex_batch - INFO - Processing user: sglass, email: sglass@akamai.com, extension: 1615, region: Israel
+2026-01-31 16:16:02,371 - webex_batch - INFO - Webex license Extension update for sglass: Success
+2026-01-31 16:16:02,373 - webex_batch - INFO - Processing user: ofashken, email: ofashken@akamai.com, extension: 1616, region: Israel
+2026-01-31 16:16:07,518 - webex_batch - INFO - Webex license Extension update for ofashken: Success
+2026-01-31 16:16:07,519 - webex_batch - INFO - Processing user: oaziz, email: oaziz@akamai.com, extension: 1617, region: Israel
+2026-01-31 16:16:12,487 - webex_batch - INFO - Webex license Extension update for oaziz: Success
+2026-01-31 16:16:12,489 - webex_batch - INFO - Processing user: hgross, email: hgross@akamai.com, extension: 1618, region: Israel
+2026-01-31 16:16:18,263 - webex_batch - INFO - Webex license Extension update for hgross: Success
+2026-01-31 16:16:18,264 - webex_batch - INFO - Processing user: aguttman, email: aguttman@akamai.com, extension: 1619, region: Israel
+2026-01-31 16:16:23,357 - webex_batch - INFO - Webex license Extension update for aguttman: Success
+2026-01-31 16:16:23,359 - webex_batch - INFO - Processing user: oshecter, email: oshecter@akamai.com, extension: 1620, region: Israel
+2026-01-31 16:16:28,648 - webex_batch - INFO - Webex license Extension update for oshecter: Success
+2026-01-31 16:16:28,649 - webex_batch - INFO - Processing user: btaub, email: btaub@akamai.com, extension: 1621, region: Israel
+2026-01-31 16:16:33,410 - webex_batch - INFO - Webex license Extension update for btaub: Success
+2026-01-31 16:16:33,411 - webex_batch - INFO - Processing user: auntenko, email: auntenko@akamai.com, extension: 1622, region: Israel
+2026-01-31 16:16:33,411 - webex_batch - INFO - User auntenko is in Exclude list
+2026-01-31 16:16:33,412 - webex_batch - INFO - Processing user: ylevi, email: ylevi@akamai.com, extension: 1623, region: Israel
+2026-01-31 16:16:38,462 - webex_batch - INFO - Webex license Extension update for ylevi: Success
+2026-01-31 16:16:38,463 - webex_batch - INFO - Processing user: ohadar, email: ohadar@akamai.com, extension: 1624, region: Israel
+2026-01-31 16:16:43,343 - webex_batch - INFO - Webex license Extension update for ohadar: Success
+2026-01-31 16:16:43,344 - webex_batch - INFO - Processing user: ilevi, email: ilevi@akamai.com, extension: 1625, region: Israel
+2026-01-31 16:16:48,863 - webex_batch - INFO - Webex license Extension update for ilevi: Success
+2026-01-31 16:16:48,864 - webex_batch - INFO - Processing user: ysegev, email: ysegev@akamai.com, extension: 1626, region: Israel
+2026-01-31 16:16:53,977 - webex_batch - INFO - Webex license Extension update for ysegev: Success
+2026-01-31 16:16:53,980 - webex_batch - INFO - Processing user: etzuberi, email: etzuberi@akamai.com, extension: 1627, region: Israel
+2026-01-31 16:16:59,695 - webex_batch - INFO - Webex license Extension update for etzuberi: Success
+2026-01-31 16:16:59,695 - webex_batch - INFO - Processing user: ssurdu, email: ssurdu@akamai.com, extension: 1628, region: Israel
+2026-01-31 16:17:04,730 - webex_batch - INFO - Webex license Extension update for ssurdu: Success
+2026-01-31 16:17:04,731 - webex_batch - INFO - Processing user: vkuzents, email: vkuzents@akamai.com, extension: 1629, region: Israel
+2026-01-31 16:17:17,752 - webex_batch - INFO - Webex license Extension update for vkuzents: Failed
+2026-01-31 16:17:17,754 - webex_batch - INFO - Processing user: efine, email: efine@akamai.com, extension: 1630, region: Israel
+2026-01-31 16:17:23,150 - webex_batch - INFO - Webex license Extension update for efine: Success
+2026-01-31 16:17:23,151 - webex_batch - INFO - Processing user: ameshula, email: ameshula@akamai.com, extension: 1631, region: Israel
+2026-01-31 16:17:28,405 - webex_batch - INFO - Webex license Extension update for ameshula: Success
+2026-01-31 16:17:28,406 - webex_batch - INFO - Processing user: rsasson, email: rsasson@akamai.com, extension: 1632, region: Israel
+2026-01-31 16:17:34,100 - webex_batch - INFO - Webex license Extension update for rsasson: Success
+2026-01-31 16:17:34,102 - webex_batch - INFO - Processing user: srozenma, email: srozenma@akamai.com, extension: 1633, region: Israel
+2026-01-31 16:17:39,413 - webex_batch - INFO - Webex license Extension update for srozenma: Success
+2026-01-31 16:17:39,414 - webex_batch - INFO - Processing user: gavni, email: gavni@akamai.com, extension: 1634, region: Israel
+2026-01-31 16:17:44,496 - webex_batch - INFO - Webex license Extension update for gavni: Success
+2026-01-31 16:17:44,497 - webex_batch - INFO - Processing user: amperez, email: amperez@akamai.com, extension: 1635, region: Israel
+2026-01-31 16:17:49,979 - webex_batch - INFO - Webex license Extension update for amperez: Success
+2026-01-31 16:17:49,979 - webex_batch - INFO - Processing user: sbrovend, email: sbrovend@akamai.com, extension: 1636, region: Israel
+2026-01-31 16:17:55,016 - webex_batch - INFO - Webex license Extension update for sbrovend: Success
+2026-01-31 16:17:55,017 - webex_batch - INFO - Processing user: tnygate, email: tnygate@akamai.com, extension: 1637, region: Israel
+2026-01-31 16:18:00,409 - webex_batch - INFO - Webex license Extension update for tnygate: Success
+2026-01-31 16:18:00,410 - webex_batch - INFO - Processing user: smorag, email: smorag@akamai.com, extension: 1638, region: Israel
+2026-01-31 16:18:05,980 - webex_batch - INFO - Webex license Extension update for smorag: Success
+2026-01-31 16:18:05,981 - webex_batch - INFO - Processing user: amtal, email: amtal@akamai.com, extension: 1639, region: Israel
+2026-01-31 16:18:11,286 - webex_batch - INFO - Webex license Extension update for amtal: Success
+2026-01-31 16:18:11,288 - webex_batch - INFO - Processing user: strabels, email: strabels@akamai.com, extension: 1640, region: Israel
+2026-01-31 16:18:16,612 - webex_batch - INFO - Webex license Extension update for strabels: Success
+2026-01-31 16:18:16,614 - webex_batch - INFO - Processing user: msharf, email: msharf@akamai.com, extension: 1641, region: Israel
+2026-01-31 16:18:21,763 - webex_batch - INFO - Webex license Extension update for msharf: Success
+2026-01-31 16:18:21,765 - webex_batch - INFO - Processing user: osoffer, email: osoffer@akamai.com, extension: 1642, region: Israel
+2026-01-31 16:18:26,538 - webex_batch - INFO - Webex license Extension update for osoffer: Success
+2026-01-31 16:18:26,539 - webex_batch - INFO - Processing user: tdimarco, email: tdimarco@akamai.com, extension: 1082, region: France
+2026-01-31 16:18:32,708 - webex_batch - INFO - Webex license Extension update for tdimarco: Success
+2026-01-31 16:18:32,710 - webex_batch - INFO - Processing user: efishman, email: efishman@akamai.com, extension: 1643, region: Israel
+2026-01-31 16:18:38,323 - webex_batch - INFO - Webex license Extension update for efishman: Success
+2026-01-31 16:18:38,325 - webex_batch - INFO - Processing user: ibuleh, email: ibuleh@akamai.com, extension: 1644, region: Israel
+2026-01-31 16:18:43,233 - webex_batch - INFO - Webex license Extension update for ibuleh: Success
+2026-01-31 16:18:43,235 - webex_batch - INFO - Processing user: mepshtei, email: mepshtei@akamai.com, extension: 1645, region: Israel
+2026-01-31 16:18:48,841 - webex_batch - INFO - Webex license Extension update for mepshtei: Success
+2026-01-31 16:18:48,844 - webex_batch - INFO - Processing user: eguillou, email: eguillou@akamai.com, extension: 1083, region: France
+2026-01-31 16:18:48,844 - webex_batch - INFO - User eguillou is in Exclude list
+2026-01-31 16:18:48,845 - webex_batch - INFO - Processing user: gmoshkov, email: gmoshkov@akamai.com, extension: 1646, region: Israel
+2026-01-31 16:18:54,026 - webex_batch - INFO - Webex license Extension update for gmoshkov: Success
+2026-01-31 16:18:54,027 - webex_batch - INFO - Processing user: mpalatni, email: mpalatni@akamai.com, extension: 1647, region: Israel
+2026-01-31 16:18:58,825 - webex_batch - INFO - Webex license Extension update for mpalatni: Success
+2026-01-31 16:18:58,827 - webex_batch - INFO - Processing user: hlevi, email: hlevi@akamai.com, extension: 1648, region: Israel
+2026-01-31 16:19:04,168 - webex_batch - INFO - Webex license Extension update for hlevi: Success
+2026-01-31 16:19:04,169 - webex_batch - INFO - Processing user: rtzur, email: rtzur@akamai.com, extension: 1649, region: Israel
+2026-01-31 16:19:09,469 - webex_batch - INFO - Webex license Extension update for rtzur: Success
+2026-01-31 16:19:09,470 - webex_batch - INFO - Processing user: ogez, email: ogez@akamai.com, extension: 1650, region: Israel
+2026-01-31 16:19:14,902 - webex_batch - INFO - Webex license Extension update for ogez: Success
+2026-01-31 16:19:14,903 - webex_batch - INFO - Processing user: sfridman, email: sfridman@akamai.com, extension: 1651, region: Israel
+2026-01-31 16:19:19,759 - webex_batch - INFO - Webex license Extension update for sfridman: Success
+2026-01-31 16:19:19,761 - webex_batch - INFO - Processing user: oalpert, email: oalpert@akamai.com, extension: 1652, region: Israel
+2026-01-31 16:19:24,668 - webex_batch - INFO - Webex license Extension update for oalpert: Success
+2026-01-31 16:19:24,670 - webex_batch - INFO - Processing user: dtzur, email: dtzur@akamai.com, extension: 1653, region: Israel
+2026-01-31 16:19:30,200 - webex_batch - INFO - Webex license Extension update for dtzur: Success
+2026-01-31 16:19:30,204 - webex_batch - INFO - Processing user: yacohen, email: yacohen@akamai.com, extension: 1654, region: Israel
+2026-01-31 16:19:34,785 - webex_batch - INFO - Webex license Extension update for yacohen: Success
+2026-01-31 16:19:34,785 - webex_batch - INFO - Processing user: leyal, email: leyal@akamai.com, extension: 1655, region: Israel
+2026-01-31 16:19:40,388 - webex_batch - INFO - Webex license Extension update for leyal: Success
+2026-01-31 16:19:40,389 - webex_batch - INFO - Processing user: mlyan, email: mlyan@akamai.com, extension: 1656, region: Israel
+2026-01-31 16:19:45,776 - webex_batch - INFO - Webex license Extension update for mlyan: Success
+2026-01-31 16:19:45,777 - webex_batch - INFO - Processing user: usalony, email: usalony@akamai.com, extension: 1657, region: Israel
+2026-01-31 16:19:50,782 - webex_batch - INFO - Webex license Extension update for usalony: Success
+2026-01-31 16:19:50,783 - webex_batch - INFO - Processing user: guamit, email: guamit@akamai.com, extension: 1658, region: Israel
+2026-01-31 16:19:55,124 - webex_batch - INFO - Webex license Extension update for guamit: Success
+2026-01-31 16:19:55,125 - webex_batch - INFO - Processing user: jkogan, email: jkogan@akamai.com, extension: 1659, region: Israel
+2026-01-31 16:20:00,839 - webex_batch - INFO - Webex license Extension update for jkogan: Success
+2026-01-31 16:20:00,840 - webex_batch - INFO - Processing user: rburdo, email: rburdo@akamai.com, extension: 1660, region: Israel
+2026-01-31 16:20:06,121 - webex_batch - INFO - Webex license Extension update for rburdo: Success
+2026-01-31 16:20:06,122 - webex_batch - INFO - Processing user: davnerso, email: davnerso@akamai.com, extension: 1661, region: Israel
+2026-01-31 16:20:11,048 - webex_batch - INFO - Webex license Extension update for davnerso: Success
+2026-01-31 16:20:11,049 - webex_batch - INFO - Processing user: mbrownne, email: mbrownne@akamai.com, extension: 1662, region: Israel
+2026-01-31 16:20:15,932 - webex_batch - INFO - Webex license Extension update for mbrownne: Success
+2026-01-31 16:20:15,934 - webex_batch - INFO - Processing user: imanelis, email: imanelis@akamai.com, extension: 1663, region: Israel
+2026-01-31 16:20:21,331 - webex_batch - INFO - Webex license Extension update for imanelis: Success
+2026-01-31 16:20:21,333 - webex_batch - INFO - Processing user: gshalom, email: gshalom@akamai.com, extension: 1664, region: Israel
+2026-01-31 16:20:26,542 - webex_batch - INFO - Webex license Extension update for gshalom: Success
+2026-01-31 16:20:26,543 - webex_batch - INFO - Processing user: belimele, email: belimele@akamai.com, extension: 1665, region: Israel
+2026-01-31 16:20:31,410 - webex_batch - INFO - Webex license Extension update for belimele: Success
+2026-01-31 16:20:31,410 - webex_batch - INFO - Processing user: cfriedle, email: cfriedle@akamai.com, extension: 1666, region: Israel
+2026-01-31 16:20:36,382 - webex_batch - INFO - Webex license Extension update for cfriedle: Success
+2026-01-31 16:20:36,383 - webex_batch - INFO - Processing user: eaharons, email: eaharons@akamai.com, extension: 1667, region: Israel
+2026-01-31 16:20:41,458 - webex_batch - INFO - Webex license Extension update for eaharons: Success
+2026-01-31 16:20:41,462 - webex_batch - INFO - Processing user: iyamin, email: iyamin@akamai.com, extension: 1668, region: Israel
+2026-01-31 16:20:46,787 - webex_batch - INFO - Webex license Extension update for iyamin: Success
+2026-01-31 16:20:46,788 - webex_batch - INFO - Processing user: stidhar, email: stidhar@akamai.com, extension: 1669, region: Israel
+2026-01-31 16:20:52,212 - webex_batch - INFO - Webex license Extension update for stidhar: Success
+2026-01-31 16:20:52,213 - webex_batch - INFO - Processing user: ylifshit, email: ylifshit@akamai.com, extension: 1670, region: Israel
+2026-01-31 16:20:57,087 - webex_batch - INFO - Webex license Extension update for ylifshit: Success
+2026-01-31 16:20:57,088 - webex_batch - INFO - Processing user: babazak, email: babazak@akamai.com, extension: 1671, region: Israel
+2026-01-31 16:21:02,559 - webex_batch - INFO - Webex license Extension update for babazak: Success
+2026-01-31 16:21:02,560 - webex_batch - INFO - Processing user: ecirt, email: ecirt@akamai.com, extension: 1672, region: Israel
+2026-01-31 16:21:07,978 - webex_batch - INFO - Webex license Extension update for ecirt: Success
+2026-01-31 16:21:07,979 - webex_batch - INFO - Processing user: aelmakia, email: aelmakia@akamai.com, extension: 1673, region: Israel
+2026-01-31 16:21:12,825 - webex_batch - INFO - Webex license Extension update for aelmakia: Success
+2026-01-31 16:21:12,828 - webex_batch - INFO - Processing user: oavandan, email: oavandan@akamai.com, extension: 1674, region: Israel
+2026-01-31 16:21:15,116 - webex_batch - INFO - Webex license Extension update for oavandan: Failed
+2026-01-31 16:21:15,117 - webex_batch - INFO - Processing user: damsalem, email: damsalem@akamai.com, extension: 1675, region: Israel
+2026-01-31 16:21:20,267 - webex_batch - INFO - Webex license Extension update for damsalem: Success
+2026-01-31 16:21:20,268 - webex_batch - INFO - Processing user: anaveh, email: anaveh@akamai.com, extension: 1676, region: Israel
+2026-01-31 16:21:25,176 - webex_batch - INFO - Webex license Extension update for anaveh: Success
+2026-01-31 16:21:25,178 - webex_batch - INFO - Processing user: egrammel, email: egrammel@akamai.com, extension: 1677, region: Israel
+2026-01-31 16:21:29,971 - webex_batch - INFO - Webex license Extension update for egrammel: Success
+2026-01-31 16:21:29,973 - webex_batch - INFO - Processing user: apotapen, email: apotapen@akamai.com, extension: 1678, region: Israel
+2026-01-31 16:21:34,771 - webex_batch - INFO - Webex license Extension update for apotapen: Success
+2026-01-31 16:21:34,772 - webex_batch - INFO - Processing user: sitzhaki, email: sitzhaki@akamai.com, extension: 1679, region: Israel
+2026-01-31 16:21:39,118 - webex_batch - INFO - Webex license Extension update for sitzhaki: Success
+2026-01-31 16:21:39,120 - webex_batch - INFO - Processing user: nsegalco, email: nsegalco@akamai.com, extension: 1680, region: Israel
+2026-01-31 16:21:39,120 - webex_batch - INFO - User nsegalco is in Exclude list
+2026-01-31 16:21:39,121 - webex_batch - INFO - Processing user: rasulin, email: rasulin@akamai.com, extension: 1681, region: Israel
+2026-01-31 16:21:39,121 - webex_batch - INFO - User rasulin is in Exclude list
+2026-01-31 16:21:39,122 - webex_batch - INFO - Processing user: ygez, email: ygez@akamai.com, extension: 1682, region: Israel
+2026-01-31 16:21:43,511 - webex_batch - INFO - Webex license Extension update for ygez: Success
+2026-01-31 16:21:43,513 - webex_batch - INFO - Processing user: mmassard, email: mmassard@akamai.com, extension: 1084, region: France
+2026-01-31 16:21:48,317 - webex_batch - INFO - Webex license Extension update for mmassard: Success
+2026-01-31 16:21:48,319 - webex_batch - INFO - Processing user: nyaakov, email: nyaakov@akamai.com, extension: 1683, region: Israel
+2026-01-31 16:21:48,320 - webex_batch - INFO - User nyaakov is in Exclude list
+2026-01-31 16:21:48,321 - webex_batch - INFO - Processing user: ibenmosh, email: ibenmosh@akamai.com, extension: 1684, region: Israel
+2026-01-31 16:21:48,321 - webex_batch - INFO - User ibenmosh is in Exclude list
+2026-01-31 16:21:48,322 - webex_batch - INFO - Processing user: idalal, email: idalal@akamai.com, extension: 1685, region: Israel
+2026-01-31 16:21:48,322 - webex_batch - INFO - User idalal is in Exclude list
+2026-01-31 16:21:48,322 - webex_batch - INFO - Processing user: fbessard, email: fbessard@akamai.com, extension: 1085, region: France
+2026-01-31 16:21:48,323 - webex_batch - INFO - User fbessard is in Exclude list
+2026-01-31 16:21:48,323 - webex_batch - INFO - Processing user: rshemer, email: rshemer@akamai.com, extension: 1686, region: Israel
+2026-01-31 16:21:48,323 - webex_batch - INFO - User rshemer is in Exclude list
+2026-01-31 16:21:48,324 - webex_batch - INFO - Processing user: nkatz, email: nkatz@akamai.com, extension: 1687, region: Israel
+2026-01-31 16:21:48,324 - webex_batch - INFO - User nkatz is in Exclude list
+2026-01-31 16:21:48,325 - webex_batch - INFO - Processing user: dakaplan, email: dakaplan@akamai.com, extension: 1688, region: Israel
+2026-01-31 16:21:48,325 - webex_batch - INFO - User dakaplan is in Exclude list
+2026-01-31 16:21:48,326 - webex_batch - INFO - Processing user: obaryose, email: obaryose@akamai.com, extension: 1689, region: Israel
+2026-01-31 16:21:48,326 - webex_batch - INFO - User obaryose is in Exclude list
+2026-01-31 16:21:48,327 - webex_batch - INFO - Processing user: sbachar, email: sbachar@akamai.com, extension: 1690, region: Israel
+2026-01-31 16:21:53,336 - webex_batch - INFO - Webex license Extension update for sbachar: Success
+2026-01-31 16:21:53,341 - webex_batch - INFO - Processing user: ybenmosh, email: ybenmosh@akamai.com, extension: 1691, region: Israel
+2026-01-31 16:21:53,342 - webex_batch - INFO - User ybenmosh is in Exclude list
+2026-01-31 16:21:53,343 - webex_batch - INFO - Processing user: yvolloch, email: yvolloch@akamai.com, extension: 1692, region: Israel
+2026-01-31 16:21:54,552 - webex_batch - INFO - Webex license Extension update for yvolloch: Failed
+2026-01-31 16:21:54,553 - webex_batch - INFO - Processing user: rlotenbe, email: rlotenbe@akamai.com, extension: 1693, region: Israel
+2026-01-31 16:21:55,672 - webex_batch - INFO - Webex license Extension update for rlotenbe: Failed
+2026-01-31 16:21:55,674 - webex_batch - INFO - Processing user: ayosefi, email: ayosefi@akamai.com, extension: 1694, region: Israel
+2026-01-31 16:21:55,674 - webex_batch - INFO - User ayosefi is in Exclude list
+2026-01-31 16:21:55,675 - webex_batch - INFO - Processing user: npatchor, email: npatchor@akamai.com, extension: 1695, region: Israel
+2026-01-31 16:21:55,675 - webex_batch - INFO - User npatchor is in Exclude list
+2026-01-31 16:21:55,676 - webex_batch - INFO - Processing user: tdaar, email: tdaar@akamai.com, extension: 1696, region: Israel
+2026-01-31 16:22:00,315 - webex_batch - INFO - Webex license Extension update for tdaar: Success
+2026-01-31 16:22:00,315 - webex_batch - INFO - Processing user: istein, email: istein@akamai.com, extension: 1697, region: Israel
+2026-01-31 16:22:05,184 - webex_batch - INFO - Webex license Extension update for istein: Success
+2026-01-31 16:22:05,185 - webex_batch - INFO - Processing user: mmizrahi, email: mmizrahi@akamai.com, extension: 1698, region: Israel
+2026-01-31 16:22:05,185 - webex_batch - INFO - User mmizrahi is in Exclude list
+2026-01-31 16:22:05,185 - webex_batch - INFO - Batch Webex General update completed for file: israelandfrance.csv
+2026-01-31 16:31:09,329 - webex_batch - INFO - Starting batch Webex ACD update for file: israelfrwithdid.csv
+2026-01-31 16:32:36,938 - webex_batch - INFO - Starting batch Webex ACD update for file: israelfrwithdid.csv
+2026-01-31 16:32:36,940 - webex_batch - INFO - Loaded 23 rows from Excel file
+2026-01-31 16:32:36,940 - webex_batch - INFO - Processing user: aaitoume, email: aaitoume@akamai.com, extension: 1003, phone: +33156696214
+2026-01-31 16:32:43,225 - webex_batch - INFO - Webex ACD update for aaitoume: Success
+2026-01-31 16:32:43,228 - webex_batch - INFO - Processing user: bvaz, email: bvaz@akamai.com, extension: 1010, phone: +33156696208
+2026-01-31 16:32:49,172 - webex_batch - INFO - Webex ACD update for bvaz: Success
+2026-01-31 16:32:49,173 - webex_batch - INFO - Processing user: aberdin, email: aberdin@akamai.com, extension: 1011, phone: +33156696936
+2026-01-31 16:32:54,523 - webex_batch - INFO - Webex ACD update for aberdin: Success
+2026-01-31 16:32:54,524 - webex_batch - INFO - Processing user: slopata, email: slopata@akamai.com, extension: 1015, phone: +972732858764
+2026-01-31 16:32:59,604 - webex_batch - INFO - Webex ACD update for slopata: Success
+2026-01-31 16:32:59,605 - webex_batch - INFO - Processing user: sguez, email: sguez@akamai.com, extension: 1026, phone: +972732858729
+2026-01-31 16:33:04,584 - webex_batch - INFO - Webex ACD update for sguez: Success
+2026-01-31 16:33:04,585 - webex_batch - INFO - Processing user: jlharido, email: jlharido@akamai.com, extension: 1026, phone: +33156697156
+2026-01-31 16:33:10,410 - webex_batch - INFO - Webex ACD update for jlharido: Success
+2026-01-31 16:33:10,411 - webex_batch - INFO - Processing user: msanseau, email: msanseau@akamai.com, extension: 1031, phone: +33156696204
+2026-01-31 16:33:15,888 - webex_batch - INFO - Webex ACD update for msanseau: Success
+2026-01-31 16:33:15,889 - webex_batch - INFO - Processing user: amarks-b, email: amarks-b@akamai.com, extension: 1085, phone: +972732858778
+2026-01-31 16:33:20,884 - webex_batch - INFO - Webex ACD update for amarks-b: Success
+2026-01-31 16:33:20,885 - webex_batch - INFO - Processing user: aschall, email: aschall@akamai.com, extension: 1056, phone: +33156697210
+2026-01-31 16:33:26,226 - webex_batch - INFO - Webex ACD update for aschall: Success
+2026-01-31 16:33:26,228 - webex_batch - INFO - Processing user: topate, email: topate@akamai.com, extension: 1098, phone: +972733910479
+2026-01-31 16:33:31,107 - webex_batch - INFO - Webex ACD update for topate: Success
+2026-01-31 16:33:31,108 - webex_batch - INFO - Processing user: tsisserm, email: tsisserm@akamai.com, extension: 1128, phone: +972732858707
+2026-01-31 16:33:35,690 - webex_batch - INFO - Webex ACD update for tsisserm: Success
+2026-01-31 16:33:35,691 - webex_batch - INFO - Processing user: isakazi, email: isakazi@akamai.com, extension: 1129, phone: +972732858766
+2026-01-31 16:33:37,869 - webex_batch - INFO - Webex ACD update for isakazi: Failed
+2026-01-31 16:33:37,869 - webex_batch - INFO - Processing user: mcomte, email: mcomte@akamai.com, extension: 1058, phone: +33156696217
+2026-01-31 16:33:42,911 - webex_batch - INFO - Webex ACD update for mcomte: Success
+2026-01-31 16:33:42,912 - webex_batch - INFO - Processing user: toz, email: toz@akamai.com, extension: 1131, phone: +972732858791
+2026-01-31 16:33:47,599 - webex_batch - INFO - Webex ACD update for toz: Success
+2026-01-31 16:33:47,600 - webex_batch - INFO - Processing user: lavraham, email: lavraham@akamai.com, extension: 1140, phone: +972733680323
+2026-01-31 16:33:52,946 - webex_batch - INFO - Webex ACD update for lavraham: Success
+2026-01-31 16:33:52,947 - webex_batch - INFO - Processing user: ggoldbla, email: ggoldbla@akamai.com, extension: 1142, phone: +972733680364
+2026-01-31 16:33:57,795 - webex_batch - INFO - Webex ACD update for ggoldbla: Success
+2026-01-31 16:33:57,796 - webex_batch - INFO - Processing user: dbar-gil, email: dbar-gil@akamai.com, extension: 1157, phone: +972733680325
+2026-01-31 16:34:02,589 - webex_batch - INFO - Webex ACD update for dbar-gil: Success
+2026-01-31 16:34:02,590 - webex_batch - INFO - Processing user: tben-mei, email: tben-mei@akamai.com, extension: 1163, phone: +972733680329
+2026-01-31 16:34:07,276 - webex_batch - INFO - Webex ACD update for tben-mei: Success
+2026-01-31 16:34:07,277 - webex_batch - INFO - Processing user: ljacquem, email: ljacquem@akamai.com, extension: 1060, phone: +33156696941
+2026-01-31 16:34:11,676 - webex_batch - INFO - Webex ACD update for ljacquem: Success
+2026-01-31 16:34:11,678 - webex_batch - INFO - Processing user: yfralo, email: yfralo@akamai.com, extension: 1061, phone: +33156695260
+2026-01-31 16:34:16,426 - webex_batch - INFO - Webex ACD update for yfralo: Success
+2026-01-31 16:34:16,427 - webex_batch - INFO - Processing user: jbourgai, email: jbourgai@akamai.com, extension: 1062, phone: +33156696945
+2026-01-31 16:34:21,275 - webex_batch - INFO - Webex ACD update for jbourgai: Success
+2026-01-31 16:34:21,276 - webex_batch - INFO - Processing user: adefioll, email: adefioll@akamai.com, extension: 1079, phone: +33156696213
+2026-01-31 16:34:25,654 - webex_batch - INFO - Webex ACD update for adefioll: Success
+2026-01-31 16:34:25,655 - webex_batch - INFO - Processing user: eguillou, email: eguillou@akamai.com, extension: 1083, phone: +33156696205
+2026-01-31 16:34:30,772 - webex_batch - INFO - Webex ACD update for eguillou: Success
+2026-01-31 16:34:30,773 - webex_batch - INFO - Batch Webex ACD update completed for file: israelfrwithdid.csv
+2026-01-31 16:43:48,806 - webex_batch - INFO - Starting batch Webex General update for file: prague.csv
+2026-01-31 16:43:48,819 - webex_batch - INFO - Loaded 33 rows from CSV file
+2026-01-31 16:43:48,822 - webex_batch - INFO - Processing user: mponec, email: mponec@akamai.com, extension: 1001, region: Czech Republic
+2026-01-31 16:43:54,869 - webex_batch - INFO - Webex license Extension update for mponec: Success
+2026-01-31 16:43:54,873 - webex_batch - INFO - Processing user: sslusny, email: sslusny@akamai.com, extension: 1002, region: Czech Republic
+2026-01-31 16:44:00,302 - webex_batch - INFO - Webex license Extension update for sslusny: Success
+2026-01-31 16:44:00,304 - webex_batch - INFO - Processing user: mhorcick, email: mhorcick@akamai.com, extension: 1003, region: Czech Republic
+2026-01-31 16:44:05,763 - webex_batch - INFO - Webex license Extension update for mhorcick: Success
+2026-01-31 16:44:05,764 - webex_batch - INFO - Processing user: omacek, email: omacek@akamai.com, extension: 1004, region: Czech Republic
+2026-01-31 16:44:11,144 - webex_batch - INFO - Webex license Extension update for omacek: Success
+2026-01-31 16:44:11,146 - webex_batch - INFO - Processing user: ayudkovs, email: ayudkovs@akamai.com, extension: 1005, region: Czech Republic
+2026-01-31 16:44:13,497 - webex_batch - INFO - Webex license Extension update for ayudkovs: Failed
+2026-01-31 16:44:13,498 - webex_batch - INFO - Processing user: adomian, email: adomian@akamai.com, extension: 1006, region: Czech Republic
+2026-01-31 16:44:18,450 - webex_batch - INFO - Webex license Extension update for adomian: Success
+2026-01-31 16:44:18,452 - webex_batch - INFO - Processing user: psalinge, email: psalinge@akamai.com, extension: 1007, region: Czech Republic
+2026-01-31 16:44:23,823 - webex_batch - INFO - Webex license Extension update for psalinge: Success
+2026-01-31 16:44:23,824 - webex_batch - INFO - Processing user: okunc, email: okunc@akamai.com, extension: 1008, region: Czech Republic
+2026-01-31 16:44:29,365 - webex_batch - INFO - Webex license Extension update for okunc: Success
+2026-01-31 16:44:29,366 - webex_batch - INFO - Processing user: jhajas, email: jhajas@akamai.com, extension: 1009, region: Czech Republic
+2026-01-31 16:44:34,664 - webex_batch - INFO - Webex license Extension update for jhajas: Success
+2026-01-31 16:44:34,665 - webex_batch - INFO - Processing user: njenning, email: njenning@akamai.com, extension: 1010, region: Czech Republic
+2026-01-31 16:44:39,714 - webex_batch - INFO - Webex license Extension update for njenning: Success
+2026-01-31 16:44:39,716 - webex_batch - INFO - Processing user: jcihlar, email: jcihlar@akamai.com, extension: 1011, region: Czech Republic
+2026-01-31 16:44:44,903 - webex_batch - INFO - Webex license Extension update for jcihlar: Success
+2026-01-31 16:44:44,904 - webex_batch - INFO - Processing user: cbebbing, email: cbebbing@akamai.com, extension: 1012, region: Czech Republic
+2026-01-31 16:44:50,143 - webex_batch - INFO - Webex license Extension update for cbebbing: Success
+2026-01-31 16:44:50,144 - webex_batch - INFO - Processing user: mlachman, email: mlachman@akamai.com, extension: 1013, region: Czech Republic
+2026-01-31 16:44:55,712 - webex_batch - INFO - Webex license Extension update for mlachman: Success
+2026-01-31 16:44:55,714 - webex_batch - INFO - Processing user: omartine, email: omartine@akamai.com, extension: 1014, region: Czech Republic
+2026-01-31 16:45:01,290 - webex_batch - INFO - Webex license Extension update for omartine: Success
+2026-01-31 16:45:01,291 - webex_batch - INFO - Processing user: mvranek, email: mvranek@akamai.com, extension: 1015, region: Czech Republic
+2026-01-31 16:45:06,763 - webex_batch - INFO - Webex license Extension update for mvranek: Success
+2026-01-31 16:45:06,764 - webex_batch - INFO - Processing user: apilny, email: apilny@akamai.com, extension: 1016, region: Czech Republic
+2026-01-31 16:45:11,625 - webex_batch - INFO - Webex license Extension update for apilny: Success
+2026-01-31 16:45:11,626 - webex_batch - INFO - Processing user: mmichali, email: mmichali@akamai.com, extension: 1017, region: Czech Republic
+2026-01-31 16:45:16,631 - webex_batch - INFO - Webex license Extension update for mmichali: Success
+2026-01-31 16:45:16,632 - webex_batch - INFO - Processing user: plavicka, email: plavicka@akamai.com, extension: 1018, region: Czech Republic
+2026-01-31 16:45:21,737 - webex_batch - INFO - Webex license Extension update for plavicka: Success
+2026-01-31 16:45:21,738 - webex_batch - INFO - Processing user: avlasov, email: avlasov@akamai.com, extension: 1019, region: Czech Republic
+2026-01-31 16:45:26,905 - webex_batch - INFO - Webex license Extension update for avlasov: Success
+2026-01-31 16:45:26,906 - webex_batch - INFO - Processing user: jsakalos, email: jsakalos@akamai.com, extension: 1020, region: Czech Republic
+2026-01-31 16:45:32,362 - webex_batch - INFO - Webex license Extension update for jsakalos: Success
+2026-01-31 16:45:32,363 - webex_batch - INFO - Processing user: jkontrik, email: jkontrik@akamai.com, extension: 1021, region: Czech Republic
+2026-01-31 16:45:37,773 - webex_batch - INFO - Webex license Extension update for jkontrik: Success
+2026-01-31 16:45:37,775 - webex_batch - INFO - Processing user: mracek, email: mracek@akamai.com, extension: 1022, region: Czech Republic
+2026-01-31 16:45:42,648 - webex_batch - INFO - Webex license Extension update for mracek: Success
+2026-01-31 16:45:42,649 - webex_batch - INFO - Processing user: jmackovi, email: jmackovi@akamai.com, extension: 1023, region: Czech Republic
+2026-01-31 16:45:48,037 - webex_batch - INFO - Webex license Extension update for jmackovi: Success
+2026-01-31 16:45:48,038 - webex_batch - INFO - Processing user: jkoutny, email: jkoutny@akamai.com, extension: 1024, region: Czech Republic
+2026-01-31 16:45:53,325 - webex_batch - INFO - Webex license Extension update for jkoutny: Success
+2026-01-31 16:45:53,326 - webex_batch - INFO - Processing user: mjurosz, email: mjurosz@akamai.com, extension: 1025, region: Czech Republic
+2026-01-31 16:45:58,042 - webex_batch - INFO - Webex license Extension update for mjurosz: Success
+2026-01-31 16:45:58,046 - webex_batch - INFO - Processing user: mganisin, email: mganisin@akamai.com, extension: 1026, region: Czech Republic
+2026-01-31 16:46:11,124 - webex_batch - INFO - Webex license Extension update for mganisin: Failed
+2026-01-31 16:46:11,126 - webex_batch - INFO - Processing user: mkovarik, email: mkovarik@akamai.com, extension: 1027, region: Czech Republic
+2026-01-31 16:46:16,582 - webex_batch - INFO - Webex license Extension update for mkovarik: Success
+2026-01-31 16:46:16,583 - webex_batch - INFO - Processing user: jdrozdz, email: jdrozdz@akamai.com, extension: 1028, region: Czech Republic
+2026-01-31 16:46:22,060 - webex_batch - INFO - Webex license Extension update for jdrozdz: Success
+2026-01-31 16:46:22,062 - webex_batch - INFO - Processing user: sdomansk, email: sdomansk@akamai.com, extension: 1029, region: Czech Republic
+2026-01-31 16:46:27,490 - webex_batch - INFO - Webex license Extension update for sdomansk: Success
+2026-01-31 16:46:27,491 - webex_batch - INFO - Processing user: mgajdos, email: mgajdos@akamai.com, extension: 1030, region: Czech Republic
+2026-01-31 16:46:33,023 - webex_batch - INFO - Webex license Extension update for mgajdos: Success
+2026-01-31 16:46:33,024 - webex_batch - INFO - Processing user: fcap, email: fcap@akamai.com, extension: 1031, region: Czech Republic
+2026-01-31 16:46:38,311 - webex_batch - INFO - Webex license Extension update for fcap: Success
+2026-01-31 16:46:38,313 - webex_batch - INFO - Processing user: slukasik, email: slukasik@akamai.com, extension: 1032, region: Czech Republic
+2026-01-31 16:46:43,679 - webex_batch - INFO - Webex license Extension update for slukasik: Success
+2026-01-31 16:46:43,680 - webex_batch - INFO - Processing user: rzajic, email: rzajic@akamai.com, extension: 1033, region: Czech Republic
+2026-01-31 16:46:48,652 - webex_batch - INFO - Webex license Extension update for rzajic: Success
+2026-01-31 16:46:48,652 - webex_batch - INFO - Batch Webex General update completed for file: prague.csv

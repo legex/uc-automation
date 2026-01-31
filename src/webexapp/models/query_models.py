@@ -45,3 +45,13 @@ class QueryModelNumberSingle(BaseModel):
     """
     number: str
     region: str
+
+class QueryModelRPSingle(BaseModel):
+    """
+    Model for adding a single route pattern.
+    
+    Attributes:
+        routepattern (str): The route pattern to add.
+    """
+    routepattern: str
+    username: str

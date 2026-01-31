@@ -1,0 +1,338 @@
+{% extends "base.html" %}
+
+{% block title %}Webex Services - Webex CUCM Integration{% endblock %}
+
+{% block content %}
+<h1>Webex Services</h1>
+
+<div class="section">
+    <a href="/" class="btn btn-secondary" style="margin-bottom: 20px;">← Back to Home</a>
+    
+    <h2>Manage Webex User Configuration</h2>
+    <p style="color: #cccccc; margin-bottom: 30px;">Update Webex licenses, extensions, and ACD configurations for single users or batch operations.</p>
+
+    <!-- Single Webex General Update -->
+    <div class="section" style="background: rgba(0, 100, 200, 0.15);">
+        <h3 style="color: #00d4ff; margin-bottom: 15px;">☁️ Single General Update</h3>
+        <form id="webexGeneralSingleForm">
+            <div class="form-group">
+                <label for="webex_gen_username">Username *</label>
+                <input type="text" id="webex_gen_username" name="username" required placeholder="Enter username">
+            </div>
+            <div class="form-group">
+                <label for="webex_gen_extension">Extension *</label>
+                <input type="text" id="webex_gen_extension" name="extension" required placeholder="Enter extension">
+            </div>
+            <div class="form-group">
+                <label for="webex_gen_region">Region *</label>
+                <input type="text" id="webex_gen_region" name="region" required placeholder="Enter region">
+            </div>
+            <div class="form-group">
+                <label for="webex_gen_external">External Number (Optional)</label>
+                <input type="text" id="webex_gen_external" name="externalnumber" placeholder="Enter external number">
+            </div>
+            <button type="submit" class="btn btn-primary">Update Webex General</button>
+            <div id="webex_gen_single_loader" class="loader"></div>
+            <div id="webex_gen_single_result"></div>
+        </form>
+    </div>
+
+    <!-- Single Webex ACD Update -->
+    <div class="section" style="background: rgba(0, 100, 200, 0.15);">
+        <h3 style="color: #00d4ff; margin-bottom: 15px;">📞 Single ACD Update</h3>
+        <form id="webexACDSingleForm">
+            <div class="form-group">
+                <label for="webex_acd_username">Username *</label>
+                <input type="text" id="webex_acd_username" name="username" required placeholder="Enter username">
+            </div>
+            <div class="form-group">
+                <label for="webex_acd_extension">Extension *</label>
+                <input type="text" id="webex_acd_extension" name="extension" required placeholder="Enter extension">
+            </div>
+            <div class="form-group">
+                <label for="webex_acd_region">Region *</label>
+                <input type="text" id="webex_acd_region" name="region" required placeholder="Enter region">
+            </div>
+            <div class="form-group">
+                <label for="webex_acd_external">External Number *</label>
+                <input type="text" id="webex_acd_external" name="externalnumber" required placeholder="Enter external number">
+            </div>
+            <button type="submit" class="btn btn-primary">Update Webex ACD</button>
+            <div id="webex_acd_single_loader" class="loader"></div>
+            <div id="webex_acd_single_result"></div>
+        </form>
+    </div>
+
+    <!-- Remove Webex License -->
+    <div class="section" style="background: rgba(0, 100, 200, 0.15);">
+        <h3 style="color: #00d4ff; margin-bottom: 15px;">🗑️ Remove Webex License</h3>
+        <form id="removeLicenseForm">
+            <div class="form-group">
+                <label for="remove_license_email">Email *</label>
+                <input type="email" id="remove_license_email" name="email" required placeholder="Enter email address">
+            </div>
+            <button type="submit" class="btn btn-primary">Remove License</button>
+            <div id="remove_license_loader" class="loader"></div>
+            <div id="remove_license_result"></div>
+        </form>
+    </div>
+
+    <!-- Batch Webex General Update -->
+    <div class="section" style="background: rgba(0, 100, 200, 0.15);">
+        <h3 style="color: #00d4ff; margin-bottom: 15px;">📊 Batch General Update</h3>
+        <p style="color: #cccccc; margin-bottom: 15px;">Upload a CSV file to update multiple users at once.</p>
+        <form id="webexGeneralBatchForm">
+            <div class="form-group">
+                <label for="webex_gen_batch_file">Upload CSV File *</label>
+                <input type="file" id="webex_gen_batch_file" accept=".csv" required style="padding: 8px; background: rgba(0, 0, 0, 0.5);">
+            </div>
+            <button type="submit" class="btn btn-primary">Upload and Process</button>
+            <div id="webex_gen_batch_loader" class="loader"></div>
+            <div id="webex_gen_batch_result"></div>
+        </form>
+    </div>
+
+    <!-- Batch Webex ACD Update -->
+    <div class="section" style="background: rgba(0, 100, 200, 0.15);">
+        <h3 style="color: #00d4ff; margin-bottom: 15px;">📊 Batch ACD Update</h3>
+        <p style="color: #cccccc; margin-bottom: 15px;">Upload a CSV file to update multiple ACD users at once.</p>
+        <form id="webexACDBatchForm">
+            <div class="form-group">
+                <label for="webex_acd_batch_file">Upload CSV File *</label>
+                <input type="file" id="webex_acd_batch_file" accept=".csv" required style="padding: 8px; background: rgba(0, 0, 0, 0.5);">
+            </div>
+            <button type="submit" class="btn btn-primary">Upload and Process</button>
+            <div id="webex_acd_batch_loader" class="loader"></div>
+            <div id="webex_acd_batch_result"></div>
+        </form>
+    </div>
+
+    <!-- Template Downloads -->
+    <div class="section" style="background: rgba(0, 100, 200, 0.15);">
+        <h3 style="color: #00d4ff; margin-bottom: 15px;">📥 Download Templates</h3>
+        <p style="color: #cccccc; margin-bottom: 15px;">Download CSV templates for batch Webex updates.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px;">
+            <div style="background: rgba(30, 60, 114, 0.4); border: 1px solid rgba(100, 200, 255, 0.2); border-radius: 10px; padding: 20px;">
+                <h4 style="color: #00d4ff; margin-bottom: 10px;">General Update Template</h4>
+                <p style="color: #cccccc; margin-bottom: 15px; font-size: 0.9rem;">For batch general user updates</p>
+                <a href="/download/template/webex_general_update" class="btn btn-primary" style="width: 100%;">📥 Download</a>
+            </div>
+            <div style="background: rgba(30, 60, 114, 0.4); border: 1px solid rgba(100, 200, 255, 0.2); border-radius: 10px; padding: 20px;">
+                <h4 style="color: #00d4ff; margin-bottom: 10px;">ACD Update Template</h4>
+                <p style="color: #cccccc; margin-bottom: 15px; font-size: 0.9rem;">For batch ACD user updates</p>
+                <a href="/download/template/webex_acd_update" class="btn btn-primary" style="width: 100%;">📥 Download</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Webex General Single Form Handler
+    document.getElementById('webexGeneralSingleForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const loader = document.getElementById('webex_gen_single_loader');
+        const result = document.getElementById('webex_gen_single_result');
+        
+        loader.style.display = 'block';
+        result.innerHTML = '';
+        
+        const formData = {
+            username: document.getElementById('webex_gen_username').value,
+            extension: document.getElementById('webex_gen_extension').value,
+            region: document.getElementById('webex_gen_region').value,
+            externalnumber: document.getElementById('webex_gen_external').value || null
+        };
+        
+        try {
+            const response = await fetch('/updatewebexgeneral/single', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(formData)
+            });
+            const data = await response.json();
+            loader.style.display = 'none';
+            
+            if (response.ok) {
+                result.innerHTML = `<div class="alert alert-success">
+                    <strong>Success!</strong> ${data.Status || 'Webex update completed'}
+                    ${data.Detail ? '<br><small>' + JSON.stringify(data.Detail) + '</small>' : ''}
+                </div>`;
+            } else {
+                result.innerHTML = `<div class="alert alert-error">
+                    <strong>Error!</strong> ${data.detail || data.error || 'Operation failed'}
+                </div>`;
+            }
+        } catch (error) {
+            loader.style.display = 'none';
+            result.innerHTML = `<div class="alert alert-error"><strong>Error!</strong> ${error.message}</div>`;
+        }
+    });
+
+    // Webex ACD Single Form Handler
+    document.getElementById('webexACDSingleForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const loader = document.getElementById('webex_acd_single_loader');
+        const result = document.getElementById('webex_acd_single_result');
+        
+        loader.style.display = 'block';
+        result.innerHTML = '';
+        
+        const formData = {
+            username: document.getElementById('webex_acd_username').value,
+            extension: document.getElementById('webex_acd_extension').value,
+            region: document.getElementById('webex_acd_region').value,
+            externalnumber: document.getElementById('webex_acd_external').value
+        };
+        
+        try {
+            const response = await fetch('/updatewebexacd/single', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(formData)
+            });
+            const data = await response.json();
+            loader.style.display = 'none';
+            
+            if (response.ok) {
+                result.innerHTML = `<div class="alert alert-success">
+                    <strong>Success!</strong> ${data.Status || 'Webex ACD update completed'}
+                    ${data.Detail ? '<br><small>' + JSON.stringify(data.Detail) + '</small>' : ''}
+                </div>`;
+            } else {
+                result.innerHTML = `<div class="alert alert-error">
+                    <strong>Error!</strong> ${data.detail || data.error || 'Operation failed'}
+                </div>`;
+            }
+        } catch (error) {
+            loader.style.display = 'none';
+            result.innerHTML = `<div class="alert alert-error"><strong>Error!</strong> ${error.message}</div>`;
+        }
+    });
+
+    // Remove License Form Handler
+    document.getElementById('removeLicenseForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const loader = document.getElementById('remove_license_loader');
+        const result = document.getElementById('remove_license_result');
+        
+        loader.style.display = 'block';
+        result.innerHTML = '';
+        
+        const formData = new FormData();
+        formData.append('email', document.getElementById('remove_license_email').value);
+        
+        try {
+            const response = await fetch('/removewebexlicense/single', {
+                method: 'POST',
+                body: formData
+            });
+            const data = await response.json();
+            loader.style.display = 'none';
+            
+            if (response.ok) {
+                result.innerHTML = `<div class="alert alert-success">
+                    <strong>Success!</strong> ${data.Status || 'License removed successfully'}
+                    ${data.Detail ? '<br><small>' + JSON.stringify(data.Detail) + '</small>' : ''}
+                </div>`;
+            } else {
+                result.innerHTML = `<div class="alert alert-error">
+                    <strong>Error!</strong> ${data.detail || data.error || 'Operation failed'}
+                </div>`;
+            }
+        } catch (error) {
+            loader.style.display = 'none';
+            result.innerHTML = `<div class="alert alert-error"><strong>Error!</strong> ${error.message}</div>`;
+        }
+    });
+
+    // Webex General Batch Form Handler
+    document.getElementById('webexGeneralBatchForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const loader = document.getElementById('webex_gen_batch_loader');
+        const result = document.getElementById('webex_gen_batch_result');
+        const fileInput = document.getElementById('webex_gen_batch_file');
+        
+        loader.style.display = 'block';
+        result.innerHTML = '';
+        
+        const formData = new FormData();
+        formData.append('file', fileInput.files[0]);
+        const fileName = fileInput.files[0].name;
+        
+        try {
+            const response = await fetch('/updatewebexgeneral/batch', {
+                method: 'POST',
+                body: formData
+            });
+            const data = await response.json();
+            loader.style.display = 'none';
+            
+            if (response.ok) {
+                result.innerHTML = `<div class="alert alert-success">
+                    <strong>Success!</strong> ${data.Status || 'Batch operation completed'}
+                    ${data.Detail ? '<br><small>' + JSON.stringify(data.Detail) + '</small>' : ''}
+                    <br><br>
+                    <a href="/download/result/webex_general/${fileName}" 
+                       class="btn btn-primary" 
+                       style="margin-top: 10px; display: inline-block;">
+                        📥 Download Result File
+                    </a>
+                </div>`;
+            } else {
+                result.innerHTML = `<div class="alert alert-error">
+                    <strong>Error!</strong> ${data.detail || data.error || 'Operation failed'}
+                </div>`;
+            }
+        } catch (error) {
+            loader.style.display = 'none';
+            result.innerHTML = `<div class="alert alert-error"><strong>Error!</strong> ${error.message}</div>`;
+        }
+    });
+
+    // Webex ACD Batch Form Handler
+    document.getElementById('webexACDBatchForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const loader = document.getElementById('webex_acd_batch_loader');
+        const result = document.getElementById('webex_acd_batch_result');
+        const fileInput = document.getElementById('webex_acd_batch_file');
+        
+        loader.style.display = 'block';
+        result.innerHTML = '';
+        
+        const formData = new FormData();
+        formData.append('file', fileInput.files[0]);
+        const fileName = fileInput.files[0].name;
+        
+        try {
+            const response = await fetch('/updatewebexacd/batch', {
+                method: 'POST',
+                body: formData
+            });
+            const data = await response.json();
+            loader.style.display = 'none';
+            
+            if (response.ok) {
+                result.innerHTML = `<div class="alert alert-success">
+                    <strong>Success!</strong> ${data.Status || 'Batch operation completed'}
+                    ${data.Detail ? '<br><small>' + JSON.stringify(data.Detail) + '</small>' : ''}
+                    <br><br>
+                    <a href="/download/result/webex_acd/${fileName}" 
+                       class="btn btn-primary" 
+                       style="margin-top: 10px; display: inline-block;">
+                        📥 Download Result File
+                    </a>
+                </div>`;
+            } else {
+                result.innerHTML = `<div class="alert alert-error">
+                    <strong>Error!</strong> ${data.detail || data.error || 'Operation failed'}
+                </div>`;
+            }
+        } catch (error) {
+            loader.style.display = 'none';
+            result.innerHTML = `<div class="alert alert-error"><strong>Error!</strong> ${error.message}</div>`;
+        }
+    });
+</script>
+{% endblock %}

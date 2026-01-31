@@ -27,7 +27,7 @@ from src.ldapapi.updateldap import (
     )
 from src.webexapp.services.ldap_batch import batch_update_ldap, batch_update_ldap_acd
 from src.webexapp.services.webex_batch import batch_update_webex_gen, batch_update_webex_acd
-from src.webexapp.models.query_models import QueryModelLdap, QueryModelWebex, QueryModelNumberSingle
+from src.webexapp.models.query_models import QueryModelLdap, QueryModelWebex, QueryModelNumberSingle, QueryModelRPSingle
 from src.webexapp.services.rp_batch import batch_routepattern_auto
 from src.webexapp.webexbotbase import WebexbotBase
 from src.cucmapi.axlroutepattern import AXLRoutePatternOperations
@@ -40,7 +40,7 @@ from src.utils.logger import setup_logger
 load_dotenv()
 API_TOKEN = os.getenv("WEBEXBOTTOKEN")
 templates = Jinja2Templates(directory="src/webexapp/templates")
-logger = setup_logger('webapp', '/a/logs/webapp.log')
+logger = setup_logger('webapp', 'temp/a/logs/webapp.log')
 axlrp = AXLRoutePatternOperations()
 webex_mig_gen = WebexGenMigration()
 webex_acd_mig = WebexMigACD()
@@ -82,10 +82,62 @@ async def get_ui(request: Request):
     logger.info("Homepage accessed from %s", request.client.host if request.client else "unknown")
     return templates.TemplateResponse("index_new.html", {"request": request})
 
+@app.get("/ldap-services", response_class=HTMLResponse)
+async def ldap_services_page(request: Request):
+    """
+    Render the LDAP services page UI.
+    
+    Args:
+        request (Request): FastAPI request object.
+    
+    Returns:
+        HTMLResponse: The rendered ldap_services.html template.
+    """
+    return templates.TemplateResponse("ldap_services.html", {"request": request})
+
+@app.get("/webex-services", response_class=HTMLResponse)
+async def webex_services_page(request: Request):
+    """
+    Render the Webex services page UI.
+    
+    Args:
+        request (Request): FastAPI request object.
+    
+    Returns:
+        HTMLResponse: The rendered webex_services.html template.
+    """
+    return templates.TemplateResponse("webex_services.html", {"request": request})
+
+@app.get("/routepattern-services", response_class=HTMLResponse)
+async def routepattern_services_page(request: Request):
+    """
+    Render the route pattern services page UI.
+    
+    Args:
+        request (Request): FastAPI request object.
+    
+    Returns:
+        HTMLResponse: The rendered routepattern_services.html template.
+    """
+    return templates.TemplateResponse("routepattern_services.html", {"request": request})
+
+@app.get("/number-services", response_class=HTMLResponse)
+async def number_services_page(request: Request):
+    """
+    Render the number services page UI.
+    
+    Args:
+        request (Request): FastAPI request object.
+    
+    Returns:
+        HTMLResponse: The rendered number_services.html template.
+    """
+    return templates.TemplateResponse("number_services.html", {"request": request})
+
 @app.get("/single-update", response_class=HTMLResponse)
 async def single_update_page(request: Request):
     """
-    Render the single update page UI.
+    Render the single update page UI (legacy route).
     
     Args:
         request (Request): FastAPI request object.
@@ -142,11 +194,11 @@ async def download_template(template_name: str):
     """
     logger.info("Template download requested: %s", template_name)
     available_templates = {
-        "ldap_update": "template/ldap_update_template.csv",
-        "webex_general_update": "template/webex_general_update_template.csv",
-        "webex_acd_update": "template/webex_general_update_template.csv",
-        "number_add": "template/number_add_template.csv",
-        "cucm_route_pattern": "template/cucm_route_pattern_template.csv"
+        "ldap_update": "src/template/ldap_update_template.csv",
+        "webex_general_update": "src/template/webex_general_update_template.csv",
+        "webex_acd_update": "src/template/webex_general_update_template.csv",
+        "number_add": "src/template/number_add_template.csv",
+        "cucm_route_pattern": "src/template/cucm_route_pattern_template.csv"
     }
     file_path = available_templates.get(template_name)
     if not file_path or not os.path.exists(file_path):
@@ -257,7 +309,7 @@ async def download_result_file(result_type: str, filename: str):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail="Invalid result type.")
 
-    file_path = f"resultfiles/{result_prefixes[result_type]}{filename}"
+    file_path = f"src/resultfiles/{result_prefixes[result_type]}{filename}"
     if not os.path.exists(file_path):
         logger.error("Result file not found: %s", file_path)
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
@@ -633,3 +685,31 @@ async def remove_webex_license(email: str = Form(...)):
         logger.error("Error removing Webex license for %s: %s", email, str(e))
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                             detail=f"Error removing Webex license: {str(e)}") from e
+
+@app.post("/updateroutepattern/single")
+async def update_route_pattern_single(query: QueryModelRPSingle):
+    """
+    Update a single route pattern in CUCM.
+    
+    Args:
+        query (QueryModelRPSingle): Information containing route pattern and username.
+    
+    Returns:
+        dict: Status and detail message with route pattern update result.
+    """
+    logger.info("Single route pattern update requested for user: %s",
+                query.username if query else "None")
+    if query is None:
+        logger.error("No query provided for route pattern update")
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail="Query must be provided.")
+    routepattern = f"\+{query.routepattern}"
+    try:
+        logger.debug("Processing route pattern update for user: %s", query.username)
+        result = axlrp.create_routepattern(routepattern, query.username)
+        logger.info("Route pattern update completed for user: %s", query.username)
+        return {"Status": "Route pattern update initiated", "Detail": result}
+    except Exception as e:
+        logger.error("Error updating route pattern for user %s: %s", query.username, str(e))
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                            detail=f"Error updating route pattern: {str(e)}") from e

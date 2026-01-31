@@ -1,0 +1,94 @@
+2026-01-31 18:10:47,626 - rp_batch - INFO - Starting batch route pattern creation for file: cucm_rp_updategp3.csv
+2026-01-31 18:10:47,631 - rp_batch - INFO - Loaded 22 rows from CSV file
+2026-01-31 18:10:47,632 - rp_batch - INFO - Processing route pattern: 33156696214 for user: aaitoume
+2026-01-31 18:10:56,825 - rp_batch - ERROR - Error updating CUCM for route pattern 33156696214: 'NoneType' object is not subscriptable
+2026-01-31 18:10:56,828 - rp_batch - INFO - Processing route pattern: 33156696208 for user: bvaz
+2026-01-31 18:10:57,260 - rp_batch - ERROR - Error updating CUCM for route pattern 33156696208: 'NoneType' object is not subscriptable
+2026-01-31 18:10:57,261 - rp_batch - INFO - Processing route pattern: 33156696936 for user: aberdin
+2026-01-31 18:10:58,968 - rp_batch - ERROR - Error updating CUCM for route pattern 33156696936: 'NoneType' object is not subscriptable
+2026-01-31 18:10:58,968 - rp_batch - INFO - Processing route pattern: 972732858764 for user: slopata
+2026-01-31 18:10:59,380 - rp_batch - ERROR - Error updating CUCM for route pattern 972732858764: 'NoneType' object is not subscriptable
+2026-01-31 18:10:59,381 - rp_batch - INFO - Processing route pattern: 972732858729 for user: sguez
+2026-01-31 18:10:59,793 - rp_batch - ERROR - Error updating CUCM for route pattern 972732858729: 'NoneType' object is not subscriptable
+2026-01-31 18:10:59,795 - rp_batch - INFO - Processing route pattern: 33156697156 for user: jlharido
+2026-01-31 18:11:00,188 - rp_batch - ERROR - Error updating CUCM for route pattern 33156697156: 'NoneType' object is not subscriptable
+2026-01-31 18:11:00,189 - rp_batch - INFO - Processing route pattern: 33156696204 for user: msanseau
+2026-01-31 18:11:00,578 - rp_batch - ERROR - Error updating CUCM for route pattern 33156696204: 'NoneType' object is not subscriptable
+2026-01-31 18:11:00,579 - rp_batch - INFO - Processing route pattern: 972732858778 for user: amarks-b
+2026-01-31 18:11:00,988 - rp_batch - ERROR - Error updating CUCM for route pattern 972732858778: 'NoneType' object is not subscriptable
+2026-01-31 18:11:00,989 - rp_batch - INFO - Processing route pattern: 33156697210 for user: aschall
+2026-01-31 18:11:01,403 - rp_batch - ERROR - Error updating CUCM for route pattern 33156697210: 'NoneType' object is not subscriptable
+2026-01-31 18:11:01,404 - rp_batch - INFO - Processing route pattern: 972733910479 for user: topate
+2026-01-31 18:11:01,817 - rp_batch - ERROR - Error updating CUCM for route pattern 972733910479: 'NoneType' object is not subscriptable
+2026-01-31 18:11:01,818 - rp_batch - INFO - Processing route pattern: 972732858707 for user: tsisserm
+2026-01-31 18:11:02,349 - rp_batch - ERROR - Error updating CUCM for route pattern 972732858707: 'NoneType' object is not subscriptable
+2026-01-31 18:11:02,352 - rp_batch - INFO - Processing route pattern: 33156696217 for user: mcomte
+2026-01-31 18:11:02,768 - rp_batch - ERROR - Error updating CUCM for route pattern 33156696217: 'NoneType' object is not subscriptable
+2026-01-31 18:11:02,769 - rp_batch - INFO - Processing route pattern: 972732858791 for user: toz
+2026-01-31 18:11:03,173 - rp_batch - ERROR - Error updating CUCM for route pattern 972732858791: 'NoneType' object is not subscriptable
+2026-01-31 18:11:03,174 - rp_batch - INFO - Processing route pattern: 972733680323 for user: lavraham
+2026-01-31 18:11:04,142 - rp_batch - ERROR - Error updating CUCM for route pattern 972733680323: 'NoneType' object is not subscriptable
+2026-01-31 18:11:04,143 - rp_batch - INFO - Processing route pattern: 972733680364 for user: ggoldbla
+2026-01-31 18:11:04,553 - rp_batch - ERROR - Error updating CUCM for route pattern 972733680364: 'NoneType' object is not subscriptable
+2026-01-31 18:11:04,554 - rp_batch - INFO - Processing route pattern: 972733680325 for user: dbar-gil
+2026-01-31 18:11:04,966 - rp_batch - ERROR - Error updating CUCM for route pattern 972733680325: 'NoneType' object is not subscriptable
+2026-01-31 18:11:04,968 - rp_batch - INFO - Processing route pattern: 972733680329 for user: tben-mei
+2026-01-31 18:11:05,379 - rp_batch - ERROR - Error updating CUCM for route pattern 972733680329: 'NoneType' object is not subscriptable
+2026-01-31 18:11:05,380 - rp_batch - INFO - Processing route pattern: 33156696941 for user: ljacquem
+2026-01-31 18:11:06,336 - rp_batch - ERROR - Error updating CUCM for route pattern 33156696941: 'NoneType' object is not subscriptable
+2026-01-31 18:11:06,337 - rp_batch - INFO - Processing route pattern: 33156695260 for user: yfralo
+2026-01-31 18:11:07,307 - rp_batch - ERROR - Error updating CUCM for route pattern 33156695260: 'NoneType' object is not subscriptable
+2026-01-31 18:11:07,308 - rp_batch - INFO - Processing route pattern: 33156696945 for user: jbourgai
+2026-01-31 18:11:07,716 - rp_batch - ERROR - Error updating CUCM for route pattern 33156696945: 'NoneType' object is not subscriptable
+2026-01-31 18:11:07,717 - rp_batch - INFO - Processing route pattern: 33156696213 for user: adefioll
+2026-01-31 18:11:08,129 - rp_batch - ERROR - Error updating CUCM for route pattern 33156696213: 'NoneType' object is not subscriptable
+2026-01-31 18:11:08,131 - rp_batch - INFO - Processing route pattern: 33156696205 for user: eguillou
+2026-01-31 18:11:08,542 - rp_batch - ERROR - Error updating CUCM for route pattern 33156696205: 'NoneType' object is not subscriptable
+2026-01-31 18:11:08,543 - rp_batch - INFO - Batch route pattern creation completed for file: cucm_rp_updategp3.csv
+2026-01-31 18:13:52,898 - rp_batch - INFO - Starting batch route pattern creation for file: cucm_rp_updategp3.csv
+2026-01-31 18:13:52,900 - rp_batch - INFO - Loaded 22 rows from CSV file
+2026-01-31 18:13:52,900 - rp_batch - INFO - Processing route pattern: \+33156696214 for user: aaitoume
+2026-01-31 18:14:00,012 - rp_batch - INFO - Route pattern \+33156696214 - CUCM: Success, Partition: Success
+2026-01-31 18:14:00,018 - rp_batch - INFO - Processing route pattern: \+33156696208 for user: bvaz
+2026-01-31 18:14:01,639 - rp_batch - INFO - Route pattern \+33156696208 - CUCM: Success, Partition: Success
+2026-01-31 18:14:01,640 - rp_batch - INFO - Processing route pattern: \+33156696936 for user: aberdin
+2026-01-31 18:14:03,303 - rp_batch - INFO - Route pattern \+33156696936 - CUCM: Success, Partition: Success
+2026-01-31 18:14:03,304 - rp_batch - INFO - Processing route pattern: \+972732858764 for user: slopata
+2026-01-31 18:14:05,049 - rp_batch - INFO - Route pattern \+972732858764 - CUCM: Success, Partition: Success
+2026-01-31 18:14:05,051 - rp_batch - INFO - Processing route pattern: \+972732858729 for user: sguez
+2026-01-31 18:14:06,777 - rp_batch - INFO - Route pattern \+972732858729 - CUCM: Success, Partition: Success
+2026-01-31 18:14:06,778 - rp_batch - INFO - Processing route pattern: \+33156697156 for user: jlharido
+2026-01-31 18:14:08,331 - rp_batch - INFO - Route pattern \+33156697156 - CUCM: Success, Partition: Success
+2026-01-31 18:14:08,332 - rp_batch - INFO - Processing route pattern: \+33156696204 for user: msanseau
+2026-01-31 18:14:09,942 - rp_batch - INFO - Route pattern \+33156696204 - CUCM: Success, Partition: Success
+2026-01-31 18:14:09,944 - rp_batch - INFO - Processing route pattern: \+972732858778 for user: amarks-b
+2026-01-31 18:14:11,457 - rp_batch - INFO - Route pattern \+972732858778 - CUCM: Success, Partition: Success
+2026-01-31 18:14:11,458 - rp_batch - INFO - Processing route pattern: \+33156697210 for user: aschall
+2026-01-31 18:14:12,971 - rp_batch - INFO - Route pattern \+33156697210 - CUCM: Success, Partition: Success
+2026-01-31 18:14:12,972 - rp_batch - INFO - Processing route pattern: \+972733910479 for user: topate
+2026-01-31 18:14:14,550 - rp_batch - INFO - Route pattern \+972733910479 - CUCM: Success, Partition: Success
+2026-01-31 18:14:14,551 - rp_batch - INFO - Processing route pattern: \+972732858707 for user: tsisserm
+2026-01-31 18:14:14,960 - rp_batch - ERROR - Error updating CUCM for route pattern \+972732858707: 'NoneType' object is not subscriptable
+2026-01-31 18:14:14,960 - rp_batch - INFO - Processing route pattern: \+33156696217 for user: mcomte
+2026-01-31 18:14:15,376 - rp_batch - ERROR - Error updating CUCM for route pattern \+33156696217: 'NoneType' object is not subscriptable
+2026-01-31 18:14:15,377 - rp_batch - INFO - Processing route pattern: \+972732858791 for user: toz
+2026-01-31 18:14:16,915 - rp_batch - INFO - Route pattern \+972732858791 - CUCM: Success, Partition: Success
+2026-01-31 18:14:16,916 - rp_batch - INFO - Processing route pattern: \+972733680323 for user: lavraham
+2026-01-31 18:14:18,443 - rp_batch - INFO - Route pattern \+972733680323 - CUCM: Success, Partition: Success
+2026-01-31 18:14:18,444 - rp_batch - INFO - Processing route pattern: \+972733680364 for user: ggoldbla
+2026-01-31 18:14:19,943 - rp_batch - INFO - Route pattern \+972733680364 - CUCM: Success, Partition: Success
+2026-01-31 18:14:19,944 - rp_batch - INFO - Processing route pattern: \+972733680325 for user: dbar-gil
+2026-01-31 18:14:21,508 - rp_batch - INFO - Route pattern \+972733680325 - CUCM: Success, Partition: Success
+2026-01-31 18:14:21,509 - rp_batch - INFO - Processing route pattern: \+972733680329 for user: tben-mei
+2026-01-31 18:14:21,911 - rp_batch - ERROR - Error updating CUCM for route pattern \+972733680329: 'NoneType' object is not subscriptable
+2026-01-31 18:14:21,912 - rp_batch - INFO - Processing route pattern: \+33156696941 for user: ljacquem
+2026-01-31 18:14:22,345 - rp_batch - ERROR - Error updating CUCM for route pattern \+33156696941: 'NoneType' object is not subscriptable
+2026-01-31 18:14:22,347 - rp_batch - INFO - Processing route pattern: \+33156695260 for user: yfralo
+2026-01-31 18:14:22,773 - rp_batch - ERROR - Error updating CUCM for route pattern \+33156695260: 'NoneType' object is not subscriptable
+2026-01-31 18:14:22,773 - rp_batch - INFO - Processing route pattern: \+33156696945 for user: jbourgai
+2026-01-31 18:14:23,215 - rp_batch - ERROR - Error updating CUCM for route pattern \+33156696945: 'NoneType' object is not subscriptable
+2026-01-31 18:14:23,215 - rp_batch - INFO - Processing route pattern: \+33156696213 for user: adefioll
+2026-01-31 18:14:24,763 - rp_batch - INFO - Route pattern \+33156696213 - CUCM: Success, Partition: Success
+2026-01-31 18:14:24,764 - rp_batch - INFO - Processing route pattern: \+33156696205 for user: eguillou
+2026-01-31 18:14:26,357 - rp_batch - INFO - Route pattern \+33156696205 - CUCM: Success, Partition: Success
+2026-01-31 18:14:26,357 - rp_batch - INFO - Batch route pattern creation completed for file: cucm_rp_updategp3.csv

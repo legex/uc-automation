@@ -11,7 +11,7 @@ from src.cucmapi.axlop import AXLOperations
 from src.cucmapi.axlroutepattern import AXLRoutePatternOperations
 from src.utils.logger import setup_logger
 
-logger = setup_logger('rp_batch', '/a/logs/rp_batch.log')
+logger = setup_logger('rp_batch', 'temp/a/logs/rp_batch.log')
 axloperations = AXLOperations()
 axlrp = AXLRoutePatternOperations()
 
@@ -22,7 +22,7 @@ def batch_routepattern_auto(file, filename):
     logger.info("Loaded %d rows from CSV file", len(df))
     for idx, row in df.iterrows():
         logger.debug("Processing row %d", idx + 1)
-        routepattern = f"{row['ContactNumber']}"
+        routepattern = f"\+{row['ContactNumber']}"
         username = row["UserId"]
         logger.info("Processing route pattern: %s for user: %s", routepattern, username)
         try:
@@ -44,7 +44,7 @@ def batch_routepattern_auto(file, filename):
             "rp_update_status": status_partition,
         }
         pd.DataFrame([results]).to_csv(
-            f"resultfiles/rpupdateresult_{filename}",
+            f"src/resultfiles/rpupdateresult_{filename}",
             mode='a',
             header=False,
             index=False

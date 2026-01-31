@@ -42,4 +42,6 @@ extension_prefix = {
     "Brazil": "784510",
     "Seoul": "785710",
     "Austrailia": "784710",
+    "Israel": "784410",
+    "Czech Republic": "783210"
 }

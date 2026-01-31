@@ -18,10 +18,10 @@ from src.utils.logger import setup_logger
 
 load_dotenv()
 
-logger = setup_logger('axlconnection', '/a/logs/axlconnection.log')
+logger = setup_logger('axlconnection', 'temp/a/logs/axlconnection.log')
 
 DEBUG = False
-mode = "Dev"  # Change to "Dev" for development environment
+mode = "Prod"  # Change to "Dev" for development environment
 if mode == "Dev":
     AXL_USERNAME = os.getenv("DEVAXL_USERNAME")
     AXL_PASSWORD = os.getenv("DEVAXL_PASSWORD")

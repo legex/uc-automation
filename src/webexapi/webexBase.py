@@ -18,7 +18,7 @@ from src.utils.logger import setup_logger
 load_dotenv()
 
 # Initialize logger
-logger = setup_logger('webexbaseheader', '/a/logs/webexbaseheader.log')
+logger = setup_logger('webexbaseheader', 'temp/a/logs/webexbaseheader.log')
 
 # Read API token from environment
 mode = "Prod"
