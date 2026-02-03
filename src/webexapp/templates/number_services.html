@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+{% block title %}Number Services - Webex CUCM Integration{% endblock %}
+
+{% block content %}
+<h1>Number Add Services</h1>
+
+<div class="section">
+    <a href="/" class="btn btn-secondary" style="margin-bottom: 20px;">← Back to Home</a>
+    
+    <h2>Manage Phone Numbers</h2>
+    <p style="color: #cccccc; margin-bottom: 30px;">Add phone numbers to Webex locations for single entries or batch operations.</p>
+
+    <!-- Single Number Add -->
+    <div class="section" style="background: rgba(0, 100, 200, 0.15);">
+        <h3 style="color: #00d4ff; margin-bottom: 15px;">📱 Single Number Add</h3>
+        <form id="numberAddSingleForm">
+            <div class="form-group">
+                <label for="number_add_number">Phone Number *</label>
+                <input type="text" id="number_add_number" name="number" required placeholder="Enter phone number">
+            </div>
+            <div class="form-group">
+                <label for="number_add_region">Region *</label>
+                <input type="text" id="number_add_region" name="region" required placeholder="Enter region/country">
+            </div>
+            <button type="submit" class="btn btn-primary">Add Number</button>
+            <div id="number_add_single_loader" class="loader"></div>
+            <div id="number_add_single_result"></div>
+        </form>
+    </div>
+
+    <!-- Batch Number Add -->
+    <div class="section" style="background: rgba(0, 100, 200, 0.15);">
+        <h3 style="color: #00d4ff; margin-bottom: 15px;">📊 Batch Number Add</h3>
+        <p style="color: #cccccc; margin-bottom: 15px;">Upload a CSV file to add multiple phone numbers at once.</p>
+        <form id="numberAddBatchForm">
+            <div class="form-group">
+                <label for="number_add_file">Upload CSV File *</label>
+                <input type="file" id="number_add_file" accept=".csv" required style="padding: 8px; background: rgba(0, 0, 0, 0.5);">
+            </div>
+            <button type="submit" class="btn btn-primary">Upload and Process</button>
+            <div id="number_add_batch_loader" class="loader"></div>
+            <div id="number_add_batch_result"></div>
+        </form>
+    </div>
+
+    <!-- Template Download -->
+    <div class="section" style="background: rgba(0, 100, 200, 0.15);">
+        <h3 style="color: #00d4ff; margin-bottom: 15px;">📥 Download Template</h3>
+        <p style="color: #cccccc; margin-bottom: 15px;">Download the CSV template for batch number addition.</p>
+        <div style="background: rgba(30, 60, 114, 0.4); border: 1px solid rgba(100, 200, 255, 0.2); border-radius: 10px; padding: 20px;">
+            <h4 style="color: #00d4ff; margin-bottom: 10px;">Number Add Template</h4>
+            <p style="color: #cccccc; margin-bottom: 15px;">Template includes columns: Country, ContactNumber</p>
+            <a href="/download/template/number_add" class="btn btn-primary">📥 Download Template</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Single Number Add Form Handler
+    document.getElementById('numberAddSingleForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const loader = document.getElementById('number_add_single_loader');
+        const result = document.getElementById('number_add_single_result');
+        
+        loader.style.display = 'block';
+        result.innerHTML = '';
+        
+        const formData = {
+            number: document.getElementById('number_add_number').value,
+            region: document.getElementById('number_add_region').value
+        };
+        
+        try {
+            const response = await fetch('/numberaddsingle', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(formData)
+            });
+            const data = await response.json();
+            loader.style.display = 'none';
+            
+            if (response.ok) {
+                result.innerHTML = `<div class="alert alert-success">
+                    <strong>Success!</strong> ${data.Status || 'Number added successfully'}
+                </div>`;
+            } else {
+                result.innerHTML = `<div class="alert alert-error">
+                    <strong>Error!</strong> ${data.detail || data.error || 'Operation failed'}
+                </div>`;
+            }
+        } catch (error) {
+            loader.style.display = 'none';
+            result.innerHTML = `<div class="alert alert-error"><strong>Error!</strong> ${error.message}</div>`;
+        }
+    });
+
+    // Batch Number Add Form Handler
+    document.getElementById('numberAddBatchForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const loader = document.getElementById('number_add_batch_loader');
+        const result = document.getElementById('number_add_batch_result');
+        const fileInput = document.getElementById('number_add_file');
+        
+        loader.style.display = 'block';
+        result.innerHTML = '';
+        
+        const formData = new FormData();
+        formData.append('file', fileInput.files[0]);
+        const fileName = fileInput.files[0].name;
+        
+        try {
+            const response = await fetch('/numberadd', {
+                method: 'POST',
+                body: formData
+            });
+            const data = await response.json();
+            loader.style.display = 'none';
+            
+            if (response.ok) {
+                result.innerHTML = `<div class="alert alert-success">
+                    <strong>Success!</strong> ${data.Status || 'Batch operation completed'}
+                    <br><br>
+                    <a href="/download/result/number_add/${fileName}" 
+                       class="btn btn-primary" 
+                       style="margin-top: 10px; display: inline-block;">
+                        📥 Download Result File
+                    </a>
+                </div>`;
+            } else {
+                result.innerHTML = `<div class="alert alert-error">
+                    <strong>Error!</strong> ${data.detail || data.error || 'Operation failed'}
+                </div>`;
+            }
+        } catch (error) {
+            loader.style.display = 'none';
+            result.innerHTML = `<div class="alert alert-error"><strong>Error!</strong> ${error.message}</div>`;
+        }
+    });
+</script>
+{% endblock %}

@@ -83,7 +83,9 @@ class WebexGenMigration:
         if not payload:
             logger.error("User detail not found for user: %s", userid)
             return None
-
+        if payload.get("loginEnabled") is False:
+            logger.warning("User %s is disabled in Webex", email)
+            return None
         location_id = self.baseoperations.get_location_id(employee_region)
         existing_licenses = set(payload.get("licenses", []))
         licenses_ops = [{

@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+
+{% block title %}Route Pattern Services - Webex CUCM Integration{% endblock %}
+
+{% block content %}
+<h1>CUCM Route Pattern Services</h1>
+
+<div class="section">
+    <a href="/" class="btn btn-secondary" style="margin-bottom: 20px;">← Back to Home</a>
+    
+    <h2>Manage CUCM Route Patterns</h2>
+    <p style="color: #cccccc; margin-bottom: 30px;">Create and manage route patterns in CUCM for single users or batch operations.</p>
+
+    <!-- Single Route Pattern Update -->
+    <div class="section" style="background: rgba(0, 100, 200, 0.15);">
+        <h3 style="color: #00d4ff; margin-bottom: 15px;">📝 Single Route Pattern Update</h3>
+        <form id="routePatternSingleForm">
+            <div class="form-group">
+                <label for="route_pattern_username">Username *</label>
+                <input type="text" id="route_pattern_username" name="username" required placeholder="Enter username">
+            </div>
+            <div class="form-group">
+                <label for="route_pattern_number">Route Pattern *</label>
+                <input type="text" id="route_pattern_number" name="routepattern" required placeholder="Enter route pattern (e.g., 420212345678)">
+                <small style="color: #999; display: block; margin-top: 5px;">Note: The '+' prefix will be added automatically</small>
+            </div>
+            <button type="submit" class="btn btn-primary">Update Route Pattern</button>
+            <div id="route_pattern_single_loader" class="loader"></div>
+            <div id="route_pattern_single_result"></div>
+        </form>
+    </div>
+
+    <!-- Batch Route Pattern Creation -->
+    <div class="section" style="background: rgba(0, 100, 200, 0.15);">
+        <h3 style="color: #00d4ff; margin-bottom: 15px;">📊 Batch Route Pattern Creation</h3>
+        <p style="color: #cccccc; margin-bottom: 15px;">Upload a CSV file to create multiple route patterns at once.</p>
+        <form id="routePatternBatchForm">
+            <div class="form-group">
+                <label for="route_pattern_file">Upload CSV File *</label>
+                <input type="file" id="route_pattern_file" accept=".csv" required style="padding: 8px; background: rgba(0, 0, 0, 0.5);">
+            </div>
+            <button type="submit" class="btn btn-primary">Upload and Process</button>
+            <div id="route_pattern_batch_loader" class="loader"></div>
+            <div id="route_pattern_batch_result"></div>
+        </form>
+    </div>
+
+    <!-- Template Download -->
+    <div class="section" style="background: rgba(0, 100, 200, 0.15);">
+        <h3 style="color: #00d4ff; margin-bottom: 15px;">📥 Download Template</h3>
+        <p style="color: #cccccc; margin-bottom: 15px;">Download the CSV template for batch route pattern creation.</p>
+        <div style="background: rgba(30, 60, 114, 0.4); border: 1px solid rgba(100, 200, 255, 0.2); border-radius: 10px; padding: 20px;">
+            <h4 style="color: #00d4ff; margin-bottom: 10px;">Route Pattern Template</h4>
+            <p style="color: #cccccc; margin-bottom: 15px;">Template includes columns: ContactNumber, UserId</p>
+            <a href="/download/template/cucm_route_pattern" class="btn btn-primary">📥 Download Template</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Single Route Pattern Form Handler
+    document.getElementById('routePatternSingleForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const loader = document.getElementById('route_pattern_single_loader');
+        const result = document.getElementById('route_pattern_single_result');
+        
+        loader.style.display = 'block';
+        result.innerHTML = '';
+        
+        const formData = {
+            username: document.getElementById('route_pattern_username').value,
+            routepattern: document.getElementById('route_pattern_number').value
+        };
+        
+        try {
+            const response = await fetch('/updateroutepattern/single', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(formData)
+            });
+            const data = await response.json();
+            loader.style.display = 'none';
+            
+            if (response.ok) {
+                result.innerHTML = `<div class="alert alert-success">
+                    <strong>Success!</strong> ${data.Status || 'Route pattern updated successfully'}
+                    ${data.Detail ? '<br><small>' + JSON.stringify(data.Detail) + '</small>' : ''}
+                </div>`;
+            } else {
+                result.innerHTML = `<div class="alert alert-error">
+                    <strong>Error!</strong> ${data.detail || data.error || 'Operation failed'}
+                </div>`;
+            }
+        } catch (error) {
+            loader.style.display = 'none';
+            result.innerHTML = `<div class="alert alert-error"><strong>Error!</strong> ${error.message}</div>`;
+        }
+    });
+
+    // Batch Route Pattern Form Handler
+    document.getElementById('routePatternBatchForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const loader = document.getElementById('route_pattern_batch_loader');
+        const result = document.getElementById('route_pattern_batch_result');
+        const fileInput = document.getElementById('route_pattern_file');
+        
+        loader.style.display = 'block';
+        result.innerHTML = '';
+        
+        const formData = new FormData();
+        formData.append('file', fileInput.files[0]);
+        const fileName = fileInput.files[0].name;
+        
+        try {
+            const response = await fetch('/routepattern', {
+                method: 'POST',
+                body: formData
+            });
+            const data = await response.json();
+            loader.style.display = 'none';
+            
+            if (response.ok) {
+                result.innerHTML = `<div class="alert alert-success">
+                    <strong>Success!</strong> ${data.Status || 'Batch operation completed'}
+                    ${data.Detail ? '<br><small>' + JSON.stringify(data.Detail) + '</small>' : ''}
+                    <br><br>
+                    <a href="/download/result/route_pattern/${fileName}" 
+                       class="btn btn-primary" 
+                       style="margin-top: 10px; display: inline-block;">
+                        📥 Download Result File
+                    </a>
+                </div>`;
+            } else {
+                result.innerHTML = `<div class="alert alert-error">
+                    <strong>Error!</strong> ${data.detail || data.error || 'Operation failed'}
+                </div>`;
+            }
+        } catch (error) {
+            loader.style.display = 'none';
+            result.innerHTML = `<div class="alert alert-error"><strong>Error!</strong> ${error.message}</div>`;
+        }
+    });
+</script>
+{% endblock %}

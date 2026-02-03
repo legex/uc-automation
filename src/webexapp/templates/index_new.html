@@ -6,69 +6,83 @@
 <h1>Welcome to Webex CUCM Integration Dashboard</h1>
 
 <div class="section">
-    <h2>Choose Your Operation</h2>
-    <p style="color: #cccccc; margin-bottom: 30px;">Select an operation below to get started with single updates, batch updates, or template downloads.</p>
+    <h2>Choose Your Service</h2>
+    <p style="color: #cccccc; margin-bottom: 30px;">Select a service below to manage configurations, including single updates, batch operations, and templates.</p>
     
     <div class="card-grid">
-        <!-- Single Update Card -->
-        <div class="card" onclick="window.location.href='/single-update'">
-            <div class="card-icon">📝</div>
-            <h3 class="card-title">Single Update</h3>
+        <!-- LDAP Services Card -->
+        <div class="card" onclick="window.location.href='/ldap-services'">
+            <div class="card-icon">📁</div>
+            <h3 class="card-title">LDAP Services</h3>
             <p class="card-description">
-                Update individual user records for LDAP, Webex General, or Webex ACD. 
-                Perfect for quick, one-off updates to specific users.
+                Manage LDAP directory contact numbers with single updates, batch operations, 
+                and ACD configurations. Download templates included.
             </p>
         </div>
 
-        <!-- Batch Update Card -->
-        <div class="card" onclick="window.location.href='/batch-update'">
-            <div class="card-icon">📊</div>
-            <h3 class="card-title">Batch Update</h3>
+        <!-- Webex Services Card -->
+        <div class="card" onclick="window.location.href='/webex-services'">
+            <div class="card-icon">☁️</div>
+            <h3 class="card-title">Webex Services</h3>
             <p class="card-description">
-                Upload CSV files to perform bulk operations on multiple users at once. 
-                Efficient for large-scale migrations and updates.
+                Configure Webex licenses, extensions, and ACD settings. Includes general 
+                updates, license removal, and batch operations with templates.
             </p>
         </div>
 
-        <!-- Template Download Card -->
-        <div class="card" onclick="window.location.href='/templates'">
-            <div class="card-icon">📥</div>
-            <h3 class="card-title">Template Download</h3>
+        <!-- Route Pattern Services Card -->
+        <div class="card" onclick="window.location.href='/routepattern-services'">
+            <div class="card-icon">🛣️</div>
+            <h3 class="card-title">Route Pattern Services</h3>
             <p class="card-description">
-                Download CSV templates for batch operations. Templates include all 
-                required fields and formatting for successful uploads.
+                Create and manage CUCM route patterns. Single and batch creation with 
+                automated configuration and template downloads.
+            </p>
+        </div>
+
+        <!-- Number Services Card -->
+        <div class="card" onclick="window.location.href='/number-services'">
+            <div class="card-icon">📱</div>
+            <h3 class="card-title">Number Services</h3>
+            <p class="card-description">
+                Add phone numbers to Webex locations. Single number entry and batch 
+                operations with CSV template support.
             </p>
         </div>
     </div>
 </div>
 
 <div class="section">
-    <h2>Quick Stats</h2>
+    <h2>Available Services</h2>
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 20px;">
         <div style="background: rgba(0, 212, 255, 0.1); padding: 20px; border-radius: 10px; text-align: center; border: 1px solid rgba(0, 212, 255, 0.3);">
-            <div style="font-size: 2rem; color: #00d4ff; font-weight: bold;">LDAP</div>
-            <div style="color: #cccccc; margin-top: 5px;">Directory Updates</div>
+            <div style="font-size: 2rem; color: #00d4ff; font-weight: bold;">📁</div>
+            <div style="color: #00d4ff; margin-top: 5px; font-weight: 600;">LDAP</div>
+            <div style="color: #cccccc; margin-top: 5px; font-size: 0.9rem;">Directory Services</div>
         </div>
         <div style="background: rgba(0, 212, 255, 0.1); padding: 20px; border-radius: 10px; text-align: center; border: 1px solid rgba(0, 212, 255, 0.3);">
-            <div style="font-size: 2rem; color: #00d4ff; font-weight: bold;">Webex</div>
-            <div style="color: #cccccc; margin-top: 5px;">General Migration</div>
+            <div style="font-size: 2rem; color: #00d4ff; font-weight: bold;">☁️</div>
+            <div style="color: #00d4ff; margin-top: 5px; font-weight: 600;">Webex</div>
+            <div style="color: #cccccc; margin-top: 5px; font-size: 0.9rem;">Configuration Services</div>
         </div>
         <div style="background: rgba(0, 212, 255, 0.1); padding: 20px; border-radius: 10px; text-align: center; border: 1px solid rgba(0, 212, 255, 0.3);">
-            <div style="font-size: 2rem; color: #00d4ff; font-weight: bold;">ACD</div>
-            <div style="color: #cccccc; margin-top: 5px;">ACD Configuration</div>
+            <div style="font-size: 2rem; color: #00d4ff; font-weight: bold;">🛣️</div>
+            <div style="color: #00d4ff; margin-top: 5px; font-weight: 600;">Route Patterns</div>
+            <div style="color: #cccccc; margin-top: 5px; font-size: 0.9rem;">CUCM Management</div>
         </div>
         <div style="background: rgba(0, 212, 255, 0.1); padding: 20px; border-radius: 10px; text-align: center; border: 1px solid rgba(0, 212, 255, 0.3);">
-            <div style="font-size: 2rem; color: #00d4ff; font-weight: bold;">CUCM</div>
-            <div style="color: #cccccc; margin-top: 5px;">Route Patterns</div>
+            <div style="font-size: 2rem; color: #00d4ff; font-weight: bold;">📱</div>
+            <div style="color: #00d4ff; margin-top: 5px; font-weight: 600;">Numbers</div>
+            <div style="color: #cccccc; margin-top: 5px; font-size: 0.9rem;">Phone Number Services</div>
         </div>
     </div>
 </div>
-
-<div class="section">
-    <h2>System Features</h2>
-    <ul style="color: #cccccc; line-height: 2; list-style-position: inside;">
-        <li>✓ Single and batch LDAP updates with internal extensions and external numbers</li>
-        <li>✓ Webex General user license and DN migration</li>
+LDAP directory management with single and batch operations</li>
+        <li>✓ Webex user configuration including licenses, extensions, and ACD</li>
+        <li>✓ CUCM route pattern creation and management</li>
+        <li>✓ Phone number provisioning for Webex locations</li>
+        <li>✓ Integrated templates and result downloads for all services</li>
+        <li>✓ Service-grouped interface for streamlined workflows>
         <li>✓ Webex ACD (Automatic Call Distribution) configuration</li>
         <li>✓ CUCM Route Pattern automation</li>
         <li>✓ CSV template downloads for all batch operations</li>
