@@ -16,7 +16,7 @@ from src.webexapi.webexBase import WebexBase
 load_dotenv()
 
 # Initialize logger
-logger = setup_logger('numberadd', 'temp/a/logs/numberadd.log')
+logger = setup_logger('numberadd', '/a/logs/numberadd.log')
 number_by_region = {}
 # Read API token from environment
 AUTH_TOKEN = os.getenv('AUTHTOKEN')

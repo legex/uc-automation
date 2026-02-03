@@ -11,7 +11,7 @@ from src.cucmapi.axlop import AXLOperations
 from src.cucmapi.axlroutepattern import AXLRoutePatternOperations
 from src.utils.logger import setup_logger
 
-logger = setup_logger('rp_batch', 'temp/a/logs/rp_batch.log')
+logger = setup_logger('rp_batch', '/a/logs/rp_batch.log')
 axloperations = AXLOperations()
 axlrp = AXLRoutePatternOperations()
 

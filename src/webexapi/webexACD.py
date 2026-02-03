@@ -15,7 +15,7 @@ from src.webexapi.webexBase import WebexBase
 from src.webexapi.webexoperations import WebexOperation
 
 
-logger = setup_logger('webexacdmig', 'temp/a/logs/webexacdmig.log')
+logger = setup_logger('webexacdmig', '/a/logs/webexacdmig.log')
 
 WEBEX_LICENSE_ID = license_store["webexlic"]
 UCM_LICENSE_ID = license_store["ucmlic"]

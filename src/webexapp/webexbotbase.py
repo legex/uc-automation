@@ -18,7 +18,7 @@ from src.utils.logger import setup_logger
 load_dotenv()
 
 # Initialize logger
-logger = setup_logger('webexcalls', 'temp/a/logs/webexcalls.log')
+logger = setup_logger('webexcalls', '/a/logs/webexcalls.log')
 
 # Read API token from environment
 AUTH_TOKEN = os.getenv('WEBEXBOTTOKEN')

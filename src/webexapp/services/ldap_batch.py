@@ -18,7 +18,7 @@ from src.ldapapi.updateldap import (
 from src.metadata.settings import extension_prefix, exclude_list
 from src.utils.logger import setup_logger
 
-logger = setup_logger('ldapbatch', 'temp/a/logs/ldapbatch.log')
+logger = setup_logger('ldapbatch', '/a/logs/ldapbatch.log')
 
 prefixes = extension_prefix
 excluded_list = exclude_list

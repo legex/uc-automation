@@ -40,7 +40,7 @@ from src.utils.logger import setup_logger
 load_dotenv()
 API_TOKEN = os.getenv("WEBEXBOTTOKEN")
 templates = Jinja2Templates(directory="src/webexapp/templates")
-logger = setup_logger('webapp', 'temp/a/logs/webapp.log')
+logger = setup_logger('webapp', '/a/logs/webapp.log')
 axlrp = AXLRoutePatternOperations()
 webex_mig_gen = WebexGenMigration()
 webex_acd_mig = WebexMigACD()
