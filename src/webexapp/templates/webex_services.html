@@ -2,129 +2,277 @@
 
 {% block title %}Webex Services - Webex CUCM Integration{% endblock %}
 
+{% block extra_css %}
+<style>
+    .tab-container {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 30px;
+        border-bottom: 2px solid rgba(0, 212, 255, 0.3);
+    }
+    .tab-button {
+        padding: 12px 24px;
+        background: rgba(0, 100, 200, 0.2);
+        border: none;
+        border-radius: 10px 10px 0 0;
+        color: #00d4ff;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 1rem;
+        font-weight: 500;
+    }
+    .tab-button:hover {
+        background: rgba(0, 100, 200, 0.3);
+    }
+    .tab-button.active {
+        background: rgba(0, 212, 255, 0.3);
+        border-bottom: 3px solid #00d4ff;
+        color: #ffffff;
+    }
+    .tab-content {
+        display: none;
+    }
+    .tab-content.active {
+        display: block;
+    }
+    /* Sub-tab styling */
+    .sub-tab-container {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 25px;
+        margin-top: 20px;
+        border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+    }
+    .sub-tab-button {
+        padding: 10px 20px;
+        background: rgba(0, 80, 160, 0.2);
+        border: none;
+        border-radius: 8px 8px 0 0;
+        color: #5eb8ff;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 0.95rem;
+        font-weight: 400;
+    }
+    .sub-tab-button:hover {
+        background: rgba(0, 80, 160, 0.3);
+    }
+    .sub-tab-button.active {
+        background: rgba(0, 180, 255, 0.25);
+        border-bottom: 2px solid #5eb8ff;
+        color: #ffffff;
+    }
+    .sub-tab-content {
+        display: none;
+    }
+    .sub-tab-content.active {
+        display: block;
+    }
+</style>
+{% endblock %}
+
 {% block content %}
 <h1>Webex Services</h1>
 
 <div class="section">
-    <a href="/" class="btn btn-secondary" style="margin-bottom: 20px;">← Back to Home</a>
+    <a href="/api/" class="btn btn-secondary" style="margin-bottom: 20px;">← Back to Home</a>
     
     <h2>Manage Webex User Configuration</h2>
     <p style="color: #cccccc; margin-bottom: 30px;">Update Webex licenses, extensions, and ACD configurations for single users or batch operations.</p>
 
-    <!-- Single Webex General Update -->
-    <div class="section" style="background: rgba(0, 100, 200, 0.15);">
-        <h3 style="color: #00d4ff; margin-bottom: 15px;">☁️ Single General Update</h3>
-        <form id="webexGeneralSingleForm">
-            <div class="form-group">
-                <label for="webex_gen_username">Username *</label>
-                <input type="text" id="webex_gen_username" name="username" required placeholder="Enter username">
-            </div>
-            <div class="form-group">
-                <label for="webex_gen_extension">Extension *</label>
-                <input type="text" id="webex_gen_extension" name="extension" required placeholder="Enter extension">
-            </div>
-            <div class="form-group">
-                <label for="webex_gen_region">Region *</label>
-                <input type="text" id="webex_gen_region" name="region" required placeholder="Enter region">
-            </div>
-            <div class="form-group">
-                <label for="webex_gen_external">External Number (Optional)</label>
-                <input type="text" id="webex_gen_external" name="externalnumber" placeholder="Enter external number">
-            </div>
-            <button type="submit" class="btn btn-primary">Update Webex General</button>
-            <div id="webex_gen_single_loader" class="loader"></div>
-            <div id="webex_gen_single_result"></div>
-        </form>
+    <!-- Main Tab Navigation -->
+    <div class="tab-container">
+        <button class="tab-button active" onclick="switchMainTab('general')">Webex General</button>
+        <button class="tab-button" onclick="switchMainTab('acd')">Webex ACD</button>
+        <button class="tab-button" onclick="switchMainTab('license')">Remove License</button>
     </div>
 
-    <!-- Single Webex ACD Update -->
-    <div class="section" style="background: rgba(0, 100, 200, 0.15);">
-        <h3 style="color: #00d4ff; margin-bottom: 15px;">📞 Single ACD Update</h3>
-        <form id="webexACDSingleForm">
-            <div class="form-group">
-                <label for="webex_acd_username">Username *</label>
-                <input type="text" id="webex_acd_username" name="username" required placeholder="Enter username">
-            </div>
-            <div class="form-group">
-                <label for="webex_acd_extension">Extension *</label>
-                <input type="text" id="webex_acd_extension" name="extension" required placeholder="Enter extension">
-            </div>
-            <div class="form-group">
-                <label for="webex_acd_region">Region *</label>
-                <input type="text" id="webex_acd_region" name="region" required placeholder="Enter region">
-            </div>
-            <div class="form-group">
-                <label for="webex_acd_external">External Number *</label>
-                <input type="text" id="webex_acd_external" name="externalnumber" required placeholder="Enter external number">
-            </div>
-            <button type="submit" class="btn btn-primary">Update Webex ACD</button>
-            <div id="webex_acd_single_loader" class="loader"></div>
-            <div id="webex_acd_single_result"></div>
-        </form>
-    </div>
+    <!-- Webex General Tab -->
+    <div id="general-tab" class="tab-content active">
+        <!-- Sub-tab Navigation -->
+        <div class="sub-tab-container">
+            <button class="sub-tab-button active" onclick="switchSubTab('general', 'single')">Single Update</button>
+            <button class="sub-tab-button" onclick="switchSubTab('general', 'batch')">Batch Update</button>
+        </div>
 
-    <!-- Remove Webex License -->
-    <div class="section" style="background: rgba(0, 100, 200, 0.15);">
-        <h3 style="color: #00d4ff; margin-bottom: 15px;">🗑️ Remove Webex License</h3>
-        <form id="removeLicenseForm">
-            <div class="form-group">
-                <label for="remove_license_email">Email *</label>
-                <input type="email" id="remove_license_email" name="email" required placeholder="Enter email address">
+        <!-- General Single Update -->
+        <div id="general-single-tab" class="sub-tab-content active">
+            <div class="section" style="background: rgba(0, 100, 200, 0.15);">
+                <h3 style="color: #00d4ff; margin-bottom: 15px;">☁️ Single General Update</h3>
+                <form id="webexGeneralSingleForm">
+                    <div class="form-group">
+                        <label for="webex_gen_username">Username *</label>
+                        <input type="text" id="webex_gen_username" name="username" required placeholder="Enter username">
+                    </div>
+                    <div class="form-group">
+                        <label for="webex_gen_extension">Extension *</label>
+                        <input type="text" id="webex_gen_extension" name="extension" required placeholder="Enter extension">
+                    </div>
+                    <div class="form-group">
+                        <label for="webex_gen_region">Region *</label>
+                        <input type="text" id="webex_gen_region" name="region" required placeholder="Enter region">
+                    </div>
+                    <div class="form-group">
+                        <label for="webex_gen_external">External Number (Optional)</label>
+                        <input type="text" id="webex_gen_external" name="externalnumber" placeholder="Enter external number">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update Webex General</button>
+                    <div id="webex_gen_single_loader" class="loader"></div>
+                    <div id="webex_gen_single_result"></div>
+                </form>
             </div>
-            <button type="submit" class="btn btn-primary">Remove License</button>
-            <div id="remove_license_loader" class="loader"></div>
-            <div id="remove_license_result"></div>
-        </form>
-    </div>
+        </div>
 
-    <!-- Batch Webex General Update -->
-    <div class="section" style="background: rgba(0, 100, 200, 0.15);">
-        <h3 style="color: #00d4ff; margin-bottom: 15px;">📊 Batch General Update</h3>
-        <p style="color: #cccccc; margin-bottom: 15px;">Upload a CSV file to update multiple users at once.</p>
-        <form id="webexGeneralBatchForm">
-            <div class="form-group">
-                <label for="webex_gen_batch_file">Upload CSV File *</label>
-                <input type="file" id="webex_gen_batch_file" accept=".csv" required style="padding: 8px; background: rgba(0, 0, 0, 0.5);">
+        <!-- General Batch Update -->
+        <div id="general-batch-tab" class="sub-tab-content">
+            <div class="section" style="background: rgba(0, 100, 200, 0.15);">
+                <h3 style="color: #00d4ff; margin-bottom: 15px;">📊 Batch General Update</h3>
+                <p style="color: #cccccc; margin-bottom: 15px;">Upload a CSV file to update multiple users at once.</p>
+                <form id="webexGeneralBatchForm">
+                    <div class="form-group">
+                        <label for="webex_gen_batch_start_ext">Start Extension *</label>
+                        <input type="text" id="webex_gen_batch_start_ext" name="start_extension" required placeholder="Enter starting extension number">
+                    </div>
+                    <div class="form-group">
+                        <label for="webex_gen_batch_file">Upload CSV File *</label>
+                        <input type="file" id="webex_gen_batch_file" accept=".csv" required style="padding: 8px; background: rgba(0, 0, 0, 0.5);">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Upload and Process</button>
+                    <div id="webex_gen_batch_loader" class="loader"></div>
+                    <div id="webex_gen_batch_result"></div>
+                </form>
             </div>
-            <button type="submit" class="btn btn-primary">Upload and Process</button>
-            <div id="webex_gen_batch_loader" class="loader"></div>
-            <div id="webex_gen_batch_result"></div>
-        </form>
-    </div>
 
-    <!-- Batch Webex ACD Update -->
-    <div class="section" style="background: rgba(0, 100, 200, 0.15);">
-        <h3 style="color: #00d4ff; margin-bottom: 15px;">📊 Batch ACD Update</h3>
-        <p style="color: #cccccc; margin-bottom: 15px;">Upload a CSV file to update multiple ACD users at once.</p>
-        <form id="webexACDBatchForm">
-            <div class="form-group">
-                <label for="webex_acd_batch_file">Upload CSV File *</label>
-                <input type="file" id="webex_acd_batch_file" accept=".csv" required style="padding: 8px; background: rgba(0, 0, 0, 0.5);">
-            </div>
-            <button type="submit" class="btn btn-primary">Upload and Process</button>
-            <div id="webex_acd_batch_loader" class="loader"></div>
-            <div id="webex_acd_batch_result"></div>
-        </form>
-    </div>
-
-    <!-- Template Downloads -->
-    <div class="section" style="background: rgba(0, 100, 200, 0.15);">
-        <h3 style="color: #00d4ff; margin-bottom: 15px;">📥 Download Templates</h3>
-        <p style="color: #cccccc; margin-bottom: 15px;">Download CSV templates for batch Webex updates.</p>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px;">
-            <div style="background: rgba(30, 60, 114, 0.4); border: 1px solid rgba(100, 200, 255, 0.2); border-radius: 10px; padding: 20px;">
-                <h4 style="color: #00d4ff; margin-bottom: 10px;">General Update Template</h4>
-                <p style="color: #cccccc; margin-bottom: 15px; font-size: 0.9rem;">For batch general user updates</p>
-                <a href="/download/template/webex_general_update" class="btn btn-primary" style="width: 100%;">📥 Download</a>
-            </div>
-            <div style="background: rgba(30, 60, 114, 0.4); border: 1px solid rgba(100, 200, 255, 0.2); border-radius: 10px; padding: 20px;">
-                <h4 style="color: #00d4ff; margin-bottom: 10px;">ACD Update Template</h4>
-                <p style="color: #cccccc; margin-bottom: 15px; font-size: 0.9rem;">For batch ACD user updates</p>
-                <a href="/download/template/webex_acd_update" class="btn btn-primary" style="width: 100%;">📥 Download</a>
+            <!-- Template Download -->
+            <div class="section" style="background: rgba(0, 100, 200, 0.15); margin-top: 20px;">
+                <h3 style="color: #00d4ff; margin-bottom: 15px;">📥 Download Template</h3>
+                <p style="color: #cccccc; margin-bottom: 15px;">Download CSV template for batch general user updates.</p>
+                <div style="background: rgba(30, 60, 114, 0.4); border: 1px solid rgba(100, 200, 255, 0.2); border-radius: 10px; padding: 20px;">
+                    <h4 style="color: #00d4ff; margin-bottom: 10px;">General Update Template</h4>
+                    <p style="color: #cccccc; margin-bottom: 15px; font-size: 0.9rem;">Template includes columns: UserId, Email, extension, Country, ContactNumber (optional)</p>
+                    <a href="/api/download/template/webex_general_update" class="btn btn-primary" style="width: 100%;">📥 Download</a>
+                </div>
             </div>
         </div>
     </div>
+
+    <!-- Webex ACD Tab -->
+    <div id="acd-tab" class="tab-content">
+        <!-- Sub-tab Navigation -->
+        <div class="sub-tab-container">
+            <button class="sub-tab-button active" onclick="switchSubTab('acd', 'single')">Single Update</button>
+            <button class="sub-tab-button" onclick="switchSubTab('acd', 'batch')">Batch Update</button>
+        </div>
+
+        <!-- ACD Single Update -->
+        <div id="acd-single-tab" class="sub-tab-content active">
+            <div class="section" style="background: rgba(0, 100, 200, 0.15);">
+                <h3 style="color: #00d4ff; margin-bottom: 15px;">📞 Single ACD Update</h3>
+                <form id="webexACDSingleForm">
+                    <div class="form-group">
+                        <label for="webex_acd_username">Username *</label>
+                        <input type="text" id="webex_acd_username" name="username" required placeholder="Enter username">
+                    </div>
+                    <div class="form-group">
+                        <label for="webex_acd_extension">Extension *</label>
+                        <input type="text" id="webex_acd_extension" name="extension" required placeholder="Enter extension">
+                    </div>
+                    <div class="form-group">
+                        <label for="webex_acd_region">Region *</label>
+                        <input type="text" id="webex_acd_region" name="region" required placeholder="Enter region">
+                    </div>
+                    <div class="form-group">
+                        <label for="webex_acd_external">External Number *</label>
+                        <input type="text" id="webex_acd_external" name="externalnumber" required placeholder="Enter external number">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update Webex ACD</button>
+                    <div id="webex_acd_single_loader" class="loader"></div>
+                    <div id="webex_acd_single_result"></div>
+                </form>
+            </div>
+        </div>
+
+        <!-- ACD Batch Update -->
+        <div id="acd-batch-tab" class="sub-tab-content">
+            <div class="section" style="background: rgba(0, 100, 200, 0.15);">
+                <h3 style="color: #00d4ff; margin-bottom: 15px;">📊 Batch ACD Update</h3>
+                <p style="color: #cccccc; margin-bottom: 15px;">Upload a CSV file to update multiple ACD users at once.</p>
+                <form id="webexACDBatchForm">
+                    <div class="form-group">
+                        <label for="webex_acd_batch_start_ext">Start Extension *</label>
+                        <input type="text" id="webex_acd_batch_start_ext" name="start_extension" required placeholder="Enter starting extension number">
+                    </div>
+                    <div class="form-group">
+                        <label for="webex_acd_batch_file">Upload CSV File *</label>
+                        <input type="file" id="webex_acd_batch_file" accept=".csv" required style="padding: 8px; background: rgba(0, 0, 0, 0.5);">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Upload and Process</button>
+                    <div id="webex_acd_batch_loader" class="loader"></div>
+                    <div id="webex_acd_batch_result"></div>
+                </form>
+            </div>
+
+            <!-- Template Download -->
+            <div class="section" style="background: rgba(0, 100, 200, 0.15); margin-top: 20px;">
+                <h3 style="color: #00d4ff; margin-bottom: 15px;">📥 Download Template</h3>
+                <p style="color: #cccccc; margin-bottom: 15px;">Download CSV template for batch ACD user updates.</p>
+                <div style="background: rgba(30, 60, 114, 0.4); border: 1px solid rgba(100, 200, 255, 0.2); border-radius: 10px; padding: 20px;">
+                    <h4 style="color: #00d4ff; margin-bottom: 10px;">ACD Update Template</h4>
+                    <p style="color: #cccccc; margin-bottom: 15px; font-size: 0.9rem;">Template includes columns: UserId, Email, extension, Country, ContactNumber (required)</p>
+                    <a href="/api/download/template/webex_acd_update" class="btn btn-primary" style="width: 100%;">📥 Download</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Remove License Tab -->
+    <div id="license-tab" class="tab-content">
+        <div class="section" style="background: rgba(0, 100, 200, 0.15);">
+            <h3 style="color: #00d4ff; margin-bottom: 15px;">🗑️ Remove Webex License</h3>
+            <form id="removeLicenseForm">
+                <div class="form-group">
+                    <label for="remove_license_email">Email *</label>
+                    <input type="email" id="remove_license_email" name="email" required placeholder="Enter email address">
+                </div>
+                <button type="submit" class="btn btn-primary">Remove License</button>
+                <div id="remove_license_loader" class="loader"></div>
+                <div id="remove_license_result"></div>
+            </form>
+        </div>
+    </div>
 </div>
+
+<script>
+function switchMainTab(tab) {
+    // Hide all main tabs
+    document.querySelectorAll('.tab-content').forEach(content => {
+        content.classList.remove('active');
+    });
+    document.querySelectorAll('.tab-button').forEach(button => {
+        button.classList.remove('active');
+    });
+    
+    // Show selected main tab
+    document.getElementById(tab + '-tab').classList.add('active');
+    event.target.classList.add('active');
+}
+
+function switchSubTab(mainTab, subTab) {
+    const mainTabElement = document.getElementById(mainTab + '-tab');
+    
+    // Hide all sub-tabs within this main tab
+    mainTabElement.querySelectorAll('.sub-tab-content').forEach(content => {
+        content.classList.remove('active');
+    });
+    mainTabElement.querySelectorAll('.sub-tab-button').forEach(button => {
+        button.classList.remove('active');
+    });
+    
+    // Show selected sub-tab
+    document.getElementById(mainTab + '-' + subTab + '-tab').classList.add('active');
+    event.target.classList.add('active');
+}
+</script>
 {% endblock %}
 
 {% block extra_js %}
@@ -146,7 +294,7 @@
         };
         
         try {
-            const response = await fetch('/updatewebexgeneral/single', {
+            const response = await fetch('/api/updatewebexgeneral/single', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(formData)
@@ -187,7 +335,7 @@
         };
         
         try {
-            const response = await fetch('/updatewebexacd/single', {
+            const response = await fetch('/api/updatewebexacd/single', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(formData)
@@ -224,7 +372,7 @@
         formData.append('email', document.getElementById('remove_license_email').value);
         
         try {
-            const response = await fetch('/removewebexlicense/single', {
+            const response = await fetch('/api/removewebexlicense/single', {
                 method: 'POST',
                 body: formData
             });
@@ -253,16 +401,18 @@
         const loader = document.getElementById('webex_gen_batch_loader');
         const result = document.getElementById('webex_gen_batch_result');
         const fileInput = document.getElementById('webex_gen_batch_file');
+        const startExtension = document.getElementById('webex_gen_batch_start_ext').value;
         
         loader.style.display = 'block';
         result.innerHTML = '';
         
         const formData = new FormData();
         formData.append('file', fileInput.files[0]);
+        formData.append('start_extension', startExtension);
         const fileName = fileInput.files[0].name;
         
         try {
-            const response = await fetch('/updatewebexgeneral/batch', {
+            const response = await fetch('/api/updatewebexgeneral/batch', {
                 method: 'POST',
                 body: formData
             });
@@ -274,7 +424,7 @@
                     <strong>Success!</strong> ${data.Status || 'Batch operation completed'}
                     ${data.Detail ? '<br><small>' + JSON.stringify(data.Detail) + '</small>' : ''}
                     <br><br>
-                    <a href="/download/result/webex_general/${fileName}" 
+                    <a href="/api/download/result/webex_general/${fileName}" 
                        class="btn btn-primary" 
                        style="margin-top: 10px; display: inline-block;">
                         📥 Download Result File
@@ -297,16 +447,18 @@
         const loader = document.getElementById('webex_acd_batch_loader');
         const result = document.getElementById('webex_acd_batch_result');
         const fileInput = document.getElementById('webex_acd_batch_file');
+        const startExtension = document.getElementById('webex_acd_batch_start_ext').value;
         
         loader.style.display = 'block';
         result.innerHTML = '';
         
         const formData = new FormData();
         formData.append('file', fileInput.files[0]);
+        formData.append('start_extension', startExtension);
         const fileName = fileInput.files[0].name;
         
         try {
-            const response = await fetch('/updatewebexacd/batch', {
+            const response = await fetch('/api/updatewebexacd/batch', {
                 method: 'POST',
                 body: formData
             });
@@ -318,7 +470,7 @@
                     <strong>Success!</strong> ${data.Status || 'Batch operation completed'}
                     ${data.Detail ? '<br><small>' + JSON.stringify(data.Detail) + '</small>' : ''}
                     <br><br>
-                    <a href="/download/result/webex_acd/${fileName}" 
+                    <a href="/api/download/result/webex_acd/${fileName}" 
                        class="btn btn-primary" 
                        style="margin-top: 10px; display: inline-block;">
                         📥 Download Result File

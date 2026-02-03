@@ -34,11 +34,11 @@ def setup_logger(name: str, log_file: str, level=logging.INFO) -> logging.Logger
         File encoding: UTF-8
         File mode: Append ('a')
     """
-    os.makedirs(os.path.dirname(log_file), exist_ok=True)
+    os.makedirs(os.path.dirname(f"tmp/{log_file}"), exist_ok=True)
 
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
-    handler = logging.FileHandler(log_file, mode='a', encoding='utf-8')
+    handler = logging.FileHandler(f"tmp/{log_file}", mode='a', encoding='utf-8')
     handler.setFormatter(formatter)
 
     logger = logging.getLogger(name)

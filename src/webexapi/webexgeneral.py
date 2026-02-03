@@ -210,5 +210,3 @@ class WebexGenMigration:
         except Exception as e:
             logger.error("General error updating user: %s", e)
         return None
-
-
