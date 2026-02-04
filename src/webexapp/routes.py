@@ -17,7 +17,7 @@ Environment Variables Required:
 import os
 import pandas as pd
 from dotenv import load_dotenv
-from fastapi import FastAPI, Request, UploadFile, HTTPException, status, Form
+from fastapi import APIRouter, Request, UploadFile, HTTPException, status, Form
 from fastapi.responses import FileResponse, HTMLResponse
 from fastapi.templating import Jinja2Templates
 from ldapapi.updateldap import (
@@ -47,7 +47,7 @@ webex_acd_mig = WebexMigACD()
 webop = WebexOperation()
 
 #webexbot = WebexbotBase()
-app = FastAPI(
+router = APIRouter(
     title="UnifyX",
     description="Unified platform for managing CUCM and Webex user configurations, "
                 "LDAP updates, license management, and route pattern operations.",
@@ -56,7 +56,7 @@ app = FastAPI(
     redoc_url="/redoc"
 )
 # orgId = ""
-# @app.post("/roomwebhook")
+# @router.post("/roomwebhook")
 # async def room_webhook(request: Request):
 #     payload = await request.json()
 #     if payload.get("orgId") != orgId:
@@ -68,7 +68,7 @@ app = FastAPI(
 #     return {"status": "success"}
 
 
-@app.get("/", response_class=HTMLResponse)
+@router.get("/", response_class=HTMLResponse)
 async def get_ui(request: Request):
     """
     Render the main homepage UI.
@@ -82,7 +82,7 @@ async def get_ui(request: Request):
     logger.info("Homepage accessed from %s", request.client.host if request.client else "unknown")
     return templates.TemplateResponse("index_new.html", {"request": request})
 
-@app.get("/api/ldap-services", response_class=HTMLResponse)
+@router.get("/api/ldap-services", response_class=HTMLResponse)
 async def ldap_services_page(request: Request):
     """
     Render the LDAP services page UI.
@@ -95,7 +95,7 @@ async def ldap_services_page(request: Request):
     """
     return templates.TemplateResponse("ldap_services.html", {"request": request})
 
-@app.get("/api/webex-services", response_class=HTMLResponse)
+@router.get("/api/webex-services", response_class=HTMLResponse)
 async def webex_services_page(request: Request):
     """
     Render the Webex services page UI.
@@ -108,7 +108,7 @@ async def webex_services_page(request: Request):
     """
     return templates.TemplateResponse("webex_services.html", {"request": request})
 
-@app.get("/api/routepattern-services", response_class=HTMLResponse)
+@router.get("/api/routepattern-services", response_class=HTMLResponse)
 async def routepattern_services_page(request: Request):
     """
     Render the route pattern services page UI.
@@ -121,7 +121,7 @@ async def routepattern_services_page(request: Request):
     """
     return templates.TemplateResponse("routepattern_services.html", {"request": request})
 
-@app.get("/api/number-services", response_class=HTMLResponse)
+@router.get("/api/number-services", response_class=HTMLResponse)
 async def number_services_page(request: Request):
     """
     Render the number services page UI.
@@ -134,7 +134,7 @@ async def number_services_page(request: Request):
     """
     return templates.TemplateResponse("number_services.html", {"request": request})
 
-@app.get("/api/single-update", response_class=HTMLResponse)
+@router.get("/api/single-update", response_class=HTMLResponse)
 async def single_update_page(request: Request):
     """
     Render the single update page UI (legacy route).
@@ -147,7 +147,7 @@ async def single_update_page(request: Request):
     """
     return templates.TemplateResponse("single_update.html", {"request": request})
 
-@app.get("/api/batch-update", response_class=HTMLResponse)
+@router.get("/api/batch-update", response_class=HTMLResponse)
 async def batch_update_page(request: Request):
     """
     Render the batch update page UI.
@@ -160,7 +160,7 @@ async def batch_update_page(request: Request):
     """
     return templates.TemplateResponse("batch_update.html", {"request": request})
 
-@app.get("/api/templates", response_class=HTMLResponse)
+@router.get("/api/templates", response_class=HTMLResponse)
 async def templates_page(request: Request):
     """
     Render the templates download page UI.
@@ -173,7 +173,7 @@ async def templates_page(request: Request):
     """
     return templates.TemplateResponse("templates.html", {"request": request})
 
-@app.get("/api/download/template/{template_name}")
+@router.get("/api/download/template/{template_name}")
 async def download_template(template_name: str):
     """
     Download a CSV template file for batch operations.
@@ -210,7 +210,7 @@ async def download_template(template_name: str):
                         filename=os.path.basename(file_path),
                         media_type='application/octet-stream')
 
-@app.post("/api/numberadd")
+@router.post("/api/numberadd")
 async def number_add(file: UploadFile):
     """
     Add phone numbers to Webex locations from a CSV file.
@@ -249,7 +249,7 @@ async def number_add(file: UploadFile):
         logger.error("HTTPException in number add for %s: %s", file.filename, str(e))
         return {"error": str(e)}
 
-@app.post("/api/numberaddsingle")
+@router.post("/api/numberaddsingle")
 async def number_add_single(query: QueryModelNumberSingle):
     """
     Add phone numbers to Webex locations from a CSV file.
@@ -278,7 +278,7 @@ async def number_add_single(query: QueryModelNumberSingle):
         logger.error("HTTPException in number add for %s: %s", query.number, str(e))
         return {"error": str(e)}
 
-@app.get("/api/download/result/{result_type}/{filename}")
+@router.get("/api/download/result/{result_type}/{filename}")
 async def download_result_file(result_type: str, filename: str):
     """
     Download a result file from a previous batch operation.
@@ -319,7 +319,7 @@ async def download_result_file(result_type: str, filename: str):
                         filename=f"{result_prefixes[result_type]}{filename}",
                         media_type='application/octet-stream')
 
-@app.post("/api/updateldap/single")
+@router.post("/api/updateldap/single")
 async def update_ldap_numbers(query: QueryModelLdap, acd: bool = False):
     """
     Update LDAP contact numbers for a single user.
@@ -381,7 +381,7 @@ async def update_ldap_numbers(query: QueryModelLdap, acd: bool = False):
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                             detail=f"Error updating LDAP: {str(e)}") from e
 
-@app.post("/api/updateldap/batch")
+@router.post("/api/updateldap/batch")
 async def batch_update_ldap_numbers(file: UploadFile, acd: bool = Form(False)):
     """
     Batch update LDAP contact numbers from a CSV file.
@@ -438,7 +438,7 @@ async def batch_update_ldap_numbers(file: UploadFile, acd: bool = Form(False)):
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                             detail=f"Error processing file: {str(e)}") from e
 
-@app.post("/api/updatewebexgeneral/single")
+@router.post("/api/updatewebexgeneral/single")
 async def update_webex_general(query: QueryModelWebex):
     """
     Update Webex settings for a single user.
@@ -487,7 +487,7 @@ async def update_webex_general(query: QueryModelWebex):
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                             detail=f"Error updating Webex: {str(e)}") from e
 
-@app.post("/api/updatewebexgeneral/batch")
+@router.post("/api/updatewebexgeneral/batch")
 async def batch_update_webex_general(start_extension: str = None,file: UploadFile | None = None):
     """
     Batch update Webex settings from a CSV file.
@@ -537,7 +537,7 @@ async def batch_update_webex_general(start_extension: str = None,file: UploadFil
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                             detail=f"Error processing file: {str(e)}") from e
 
-@app.post("/api/updatewebexacd/single")
+@router.post("/api/updatewebexacd/single")
 async def update_webex_acd(query: QueryModelWebex):
     """
     Update Webex ACD (Automatic Call Distribution) settings for a single user.
@@ -580,7 +580,7 @@ async def update_webex_acd(query: QueryModelWebex):
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                                 detail="External number must be provided for ACD updates.")
 
-@app.post("/api/updatewebexacd/batch")
+@router.post("/api/updatewebexacd/batch")
 async def b_update_webex_acd(start_extension: str = None, file: UploadFile | None = None):
     """
     Batch update Webex ACD settings from an Excel file.
@@ -626,7 +626,7 @@ async def b_update_webex_acd(start_extension: str = None, file: UploadFile | Non
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                             detail=f"Error processing file: {str(e)}") from e
 
-@app.post("/api/routepattern")
+@router.post("/api/routepattern")
 async def create_route_pattern(file: UploadFile):
     """
     Create route patterns in CUCM from a CSV file.
@@ -667,7 +667,7 @@ async def create_route_pattern(file: UploadFile):
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                             detail=f"Error processing file: {str(e)}") from e
 
-@app.post("/api/removewebexlicense/single")
+@router.post("/api/removewebexlicense/single")
 async def remove_webex_license(email: str = Form(...)):
     """
     Remove Webex license from a single user.
@@ -696,7 +696,7 @@ async def remove_webex_license(email: str = Form(...)):
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                             detail=f"Error removing Webex license: {str(e)}") from e
 
-@app.post("/api/updateroutepattern/single")
+@router.post("/api/updateroutepattern/single")
 async def update_route_pattern_single(query: QueryModelRPSingle):
     """
     Update a single route pattern in CUCM.
