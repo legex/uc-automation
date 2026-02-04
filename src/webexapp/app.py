@@ -20,33 +20,33 @@ from dotenv import load_dotenv
 from fastapi import FastAPI, Request, UploadFile, HTTPException, status, Form
 from fastapi.responses import FileResponse, HTMLResponse
 from fastapi.templating import Jinja2Templates
-from src.ldapapi.updateldap import (
+from ldapapi.updateldap import (
     update_contacts_num,
     update_contacts_num_withDID,
     update_general_contacts_num_withDID
     )
-from src.webexapp.services.ldap_batch import batch_update_ldap, batch_update_ldap_acd
-from src.webexapp.services.webex_batch import batch_update_webex_gen, batch_update_webex_acd
-from src.webexapp.models.query_models import QueryModelLdap, QueryModelWebex, QueryModelNumberSingle, QueryModelRPSingle
-from src.webexapp.services.rp_batch import batch_routepattern_auto
-from src.webexapp.webexbotbase import WebexbotBase
-from src.cucmapi.axlroutepattern import AXLRoutePatternOperations
-from src.webexapi.webexgeneral import WebexGenMigration
-from src.webexapi.webexACD import WebexMigACD
-from src.webexapi.webexoperations import WebexOperation
-from src.webexapi.webexnumberadd import addnumbersingle, addnumberbatch
-from src.utils.logger import setup_logger
+from webexapp.services.ldap_batch import batch_update_ldap, batch_update_ldap_acd
+from webexapp.services.webex_batch import batch_update_webex_gen, batch_update_webex_acd
+from webexapp.models.query_models import QueryModelLdap, QueryModelWebex, QueryModelNumberSingle, QueryModelRPSingle
+from webexapp.services.rp_batch import batch_routepattern_auto
+#from src.webexapp.webexbotbaseunused import WebexbotBase
+from cucmapi.axlroutepattern import AXLRoutePatternOperations
+from webexapi.webexgeneral import WebexGenMigration
+from webexapi.webexACD import WebexMigACD
+from webexapi.webexoperations import WebexOperation
+from webexapi.webexnumberadd import addnumbersingle, addnumberbatch
+from utils.logger import setup_logger
 # Load environment variables from .env file
 load_dotenv()
-API_TOKEN = os.getenv("WEBEXBOTTOKEN")
-templates = Jinja2Templates(directory="src/webexapp/templates")
+# API_TOKEN = os.getenv("WEBEXBOTTOKEN")
+templates = Jinja2Templates(directory="webexapp/templates")
 logger = setup_logger('webapp', '/a/logs/webapp.log')
 axlrp = AXLRoutePatternOperations()
 webex_mig_gen = WebexGenMigration()
 webex_acd_mig = WebexMigACD()
 webop = WebexOperation()
 
-webexbot = WebexbotBase()
+#webexbot = WebexbotBase()
 app = FastAPI(
     title="UnifyX",
     description="Unified platform for managing CUCM and Webex user configurations, "
@@ -194,11 +194,11 @@ async def download_template(template_name: str):
     """
     logger.info("Template download requested: %s", template_name)
     available_templates = {
-        "ldap_update": "src/template/ldap_update_template.csv",
-        "webex_general_update": "src/template/webex_general_update_template.csv",
-        "webex_acd_update": "src/template/webex_general_update_template.csv",
-        "number_add": "src/template/number_add_template.csv",
-        "cucm_route_pattern": "src/template/cucm_route_pattern_template.csv"
+        "ldap_update": "template/ldap_update_template.csv",
+        "webex_general_update": "template/webex_general_update_template.csv",
+        "webex_acd_update": "template/webex_general_update_template.csv",
+        "number_add": "template/number_add_template.csv",
+        "cucm_route_pattern": "template/cucm_route_pattern_template.csv"
     }
     file_path = available_templates.get(template_name)
     if not file_path or not os.path.exists(file_path):
@@ -309,7 +309,7 @@ async def download_result_file(result_type: str, filename: str):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail="Invalid result type.")
 
-    file_path = f"src/resultfiles/{result_prefixes[result_type]}{filename}"
+    file_path = f"resultfiles/{result_prefixes[result_type]}{filename}"
     if not os.path.exists(file_path):
         logger.error("Result file not found: %s", file_path)
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,

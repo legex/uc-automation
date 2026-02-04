@@ -9,17 +9,17 @@ Functions:
     batch_update_webex_acd: Process ACD Webex updates from Excel.
 """
 import pandas as pd
-from src.webexapi.webexgeneral import WebexGenMigration
-from src.webexapi.webexACD import WebexMigACD
-from src.webexapi.webexoperations import WebexOperation
-from src.metadata.settings import extension_prefix, exclude_list
-from src.utils.logger import setup_logger
+from webexapi.webexgeneral import WebexGenMigration
+from webexapi.webexACD import WebexMigACD
+from webexapi.webexoperations import WebexOperation
+from metadata.settings import extension_prefix, exclude_list, resultfile_location
+from utils.logger import setup_logger
 
 logger = setup_logger('webex_batch', '/a/logs/webex_batch.log')
 
 prefixes = extension_prefix
 excluded_list = exclude_list
-
+resultpath = resultfile_location
 webex_mig_gen = WebexGenMigration()
 webex_acd_mig = WebexMigACD()
 webop = WebexOperation()
@@ -92,7 +92,7 @@ def batch_update_webex_gen(file, filename, start_extension):
             "status_on_webex": status_on_webex,
         }
         pd.DataFrame(
-            [webex_mig_result]).to_csv(f"src/resultfiles/webex_migresult_{filename}",
+            [webex_mig_result]).to_csv(f"{resultpath}/webex_migresult_{filename}",
                                        mode='a',
                                        header=False,
                                        index=False
@@ -142,7 +142,7 @@ def batch_update_webex_acd(file, filename, start_extension):
             "status_on_webex": status_on_webex
         }
         pd.DataFrame([acd_result]).to_csv(
-            f"src/resultfiles/acd_migresult_{filename}",
+            f"{resultpath}/acd_migresult_{filename}",
             mode='a',
             header=False,
             index=False

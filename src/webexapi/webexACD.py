@@ -9,10 +9,10 @@ Classes:
 import json
 import requests
 from requests import HTTPError
-from src.metadata.settings import license_store, PATCH_LIC_URL
-from src.utils.logger import setup_logger
-from src.webexapi.webexBase import WebexBase
-from src.webexapi.webexoperations import WebexOperation
+from metadata.settings import license_store, PATCH_LIC_URL
+from utils.logger import setup_logger
+from webexapi.webexBase import WebexBase
+from webexapi.webexoperations import WebexOperation
 
 
 logger = setup_logger('webexacdmig', '/a/logs/webexacdmig.log')

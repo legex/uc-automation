@@ -7,10 +7,10 @@ import json
 import requests
 from requests import HTTPError
 from dotenv import load_dotenv
-from src.metadata.settings import ACDLOCATIONS
-from src.utils.logger import setup_logger
-from src.utils.numberutility import batch_numbers_by_region
-from src.webexapi.webexBase import WebexBase
+from metadata.settings import ACDLOCATIONS
+from utils.logger import setup_logger
+from utils.numberutility import batch_numbers_by_region
+from webexapi.webexBase import WebexBase
 
 # Load environment variables from .env file
 load_dotenv()
@@ -18,10 +18,6 @@ load_dotenv()
 # Initialize logger
 logger = setup_logger('numberadd', '/a/logs/numberadd.log')
 number_by_region = {}
-# Read API token from environment
-AUTH_TOKEN = os.getenv('AUTHTOKEN')
-if not AUTH_TOKEN:
-    raise RuntimeError("AUTHTOKEN environment variable must be set")
 
 headclass = WebexBase()
 headers = headclass.build_headers()
