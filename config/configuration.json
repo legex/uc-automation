@@ -20,7 +20,7 @@
     }
   },
   "invocations": {
-    "main": "uvicorn webexapp.app:app --host 0.0.0.0 --port 8000"
+    "main": "/usr/local/akamai/bin/python3 webexapp/app.py --host 0.0.0.0 --port 8000"
   },
   "leadership-election": {
           "max-transition-seconds": 90,

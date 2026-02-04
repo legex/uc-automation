@@ -723,3 +723,7 @@ async def update_route_pattern_single(query: QueryModelRPSingle):
         logger.error("Error updating route pattern for user %s: %s", query.username, str(e))
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                             detail=f"Error updating route pattern: {str(e)}") from e
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=80)
