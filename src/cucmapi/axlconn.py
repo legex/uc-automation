@@ -60,7 +60,7 @@ class ConnectionAXL:
         Returns:
             tuple: A tuple containing (username, password).
         """
-        passfile = "/a/secrets/app/webex_token/cucm_user.opaque"
+        passfile = "/a/secrets/app/cucm_user/cucm_user.opaque"
         with open(passfile, 'r') as pf:
             axlpass = pf.read().strip()
             print("Read password from file")
