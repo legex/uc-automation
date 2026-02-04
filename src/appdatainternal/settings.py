@@ -4,10 +4,10 @@ import pandas as pd
 
 mode = "Prod"
 if mode == "Prod":
-    with open("src/metadata/acd_locations.json", 'r') as f:
+    with open("appdatainternal/acd_locations.json", 'r') as f:
         ACDLOCATIONS = json.load(f)
 else:
-    with open("src/metadata/dev_location.json", 'r') as f:
+    with open("appdatainternal/dev_location.json", 'r') as f:
         ACDLOCATIONS = json.load(f)
 
 if mode == "Prod":
@@ -22,10 +22,10 @@ else:
     }
 WEBEX_URL = "https://webexapis.com/v1/people"
 PATCH_LIC_URL = "https://webexapis.com/v1/licenses/users"
-with open("src/metadata/location.json", 'r') as f:
+with open("appdatainternal/location.json", 'r') as f:
     LOCATIONS = json.load(f)
 
-exclude_df = pd.read_csv("src/excludelist.csv")
+exclude_df = pd.read_csv("appdatainternal/excludelist.csv")
 exclude_list = exclude_df['UserId'].tolist()
 
 extension_prefix = {

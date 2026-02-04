@@ -7,7 +7,7 @@ import json
 import requests
 from requests import HTTPError
 from dotenv import load_dotenv
-from metadata.settings import ACDLOCATIONS
+from appdatainternal.settings import ACDLOCATIONS
 from utils.logger import setup_logger
 from utils.numberutility import batch_numbers_by_region
 from webexapi.webexBase import WebexBase

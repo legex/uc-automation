@@ -12,7 +12,7 @@ import json
 import requests
 from requests import HTTPError
 from dotenv import load_dotenv
-from metadata.settings import license_store, LOCATIONS, WEBEX_URL,ACDLOCATIONS
+from appdatainternal.settings import license_store, LOCATIONS, WEBEX_URL,ACDLOCATIONS
 from utils.logger import setup_logger
 from webexapi.webexBase import WebexBase
 

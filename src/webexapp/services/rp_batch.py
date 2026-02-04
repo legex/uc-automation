@@ -10,7 +10,7 @@ import pandas as pd
 from cucmapi.axlop import AXLOperations
 from cucmapi.axlroutepattern import AXLRoutePatternOperations
 from utils.logger import setup_logger
-from metadata.settings import resultfile_location
+from appdatainternal.settings import resultfile_location
 
 resultpath = resultfile_location
 logger = setup_logger('rp_batch', '/a/logs/rp_batch.log')

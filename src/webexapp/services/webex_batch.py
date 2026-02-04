@@ -12,7 +12,7 @@ import pandas as pd
 from webexapi.webexgeneral import WebexGenMigration
 from webexapi.webexACD import WebexMigACD
 from webexapi.webexoperations import WebexOperation
-from metadata.settings import extension_prefix, exclude_list, resultfile_location
+from appdatainternal.settings import extension_prefix, exclude_list, resultfile_location
 from utils.logger import setup_logger
 
 logger = setup_logger('webex_batch', '/a/logs/webex_batch.log')

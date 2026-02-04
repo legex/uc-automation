@@ -15,7 +15,7 @@ from ldapapi.updateldap import (
     update_general_contacts_num_withDID,
     update_acdcontacts_num
 )
-from metadata.settings import extension_prefix, exclude_list, resultfile_location
+from appdatainternal.settings import extension_prefix, exclude_list, resultfile_location
 from utils.logger import setup_logger
 
 logger = setup_logger('ldapbatch', '/a/logs/ldapbatch.log')
