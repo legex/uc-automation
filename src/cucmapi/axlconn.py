@@ -33,7 +33,7 @@ class ConnectionAXL:
     Attributes:
         WSDL_FILE (str): Path to the AXL API WSDL file.
     """
-    WSDL_FILE = 'src/axlsqltoolkit/schema/14.0/AXLAPI.wsdl'
+    WSDL_FILE = 'axlsqltoolkit/schema/14.0/AXLAPI.wsdl'
 
     def __init__(self):
         """
