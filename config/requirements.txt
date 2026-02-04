@@ -17,6 +17,7 @@ fastapi
 h11
 idna
 isodate
+itsdangerous
 jedi
 Jinja2
 jupyter_client

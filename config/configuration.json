@@ -14,7 +14,7 @@
   "single-sign-on": {
     "single-sign-on-enabled": true,
     "single-sign-on-header": "X-SSO-REMOTE-USER",
-    "single-sign-on-regex": "^(?!/api/).*$",
+    "single-sign-on-regex": ".*",
     "login-cookie": {
       "enabled": true
     }
