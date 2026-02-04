@@ -3,7 +3,13 @@ from fastapi.middleware.cors import CORSMiddleware
 import os
 from webexapp import routes
 
-app = FastAPI()
+app = FastAPI(
+    title="UnifyX",
+    description="Unified platform for managing CUCM and Webex user configurations, "
+                "LDAP updates, license management, and route pattern operations.",
+    version="1.0.0",
+    docs_url="/docs",
+    redoc_url="/redoc")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
