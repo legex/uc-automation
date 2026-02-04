@@ -5,6 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Webex CUCM Integration{% endblock %}</title>
     <style>
+        :root {
+            --bg-gradient-start: #0f2027;
+            --bg-gradient-mid1: #203a43;
+            --bg-gradient-mid2: #2c5364;
+            --bg-gradient-mid3: #1a1a2e;
+            --bg-gradient-end: #000000;
+            --text-primary: #ffffff;
+            --text-secondary: #cccccc;
+            --text-tertiary: #aaaaaa;
+            --accent-primary: #00d4ff;
+            --accent-secondary: #0099cc;
+            --navbar-bg: rgba(0, 100, 200, 0.15);
+            --section-bg: rgba(30, 60, 114, 0.3);
+            --border-color: rgba(100, 200, 255, 0.2);
+            --border-color-strong: rgba(100, 200, 255, 0.3);
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --hover-bg: rgba(0, 212, 255, 0.1);
+            --input-bg: rgba(0, 0, 0, 0.3);
+            --input-border: rgba(100, 200, 255, 0.3);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -13,21 +34,22 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0f2027 0%, #203a43 25%, #2c5364 50%, #1a1a2e 75%, #000000 100%);
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-mid1) 25%, var(--bg-gradient-mid2) 50%, var(--bg-gradient-mid3) 75%, var(--bg-gradient-end) 100%);
             background-attachment: fixed;
-            color: #ffffff;
+            color: var(--text-primary);
             min-height: 100vh;
             padding: 20px;
+            transition: background 0.3s ease, color 0.3s ease;
         }
 
         .navbar {
-            background: rgba(0, 100, 200, 0.15);
+            background: var(--navbar-bg);
             backdrop-filter: blur(10px);
             border-radius: 15px;
             padding: 15px 30px;
             margin-bottom: 30px;
-            border: 1px solid rgba(100, 200, 255, 0.3);
-            box-shadow: 0 8px 32px rgba(0, 100, 200, 0.2);
+            border: 1px solid var(--border-color-strong);
+            box-shadow: 0 8px 32px var(--shadow-color);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -36,7 +58,7 @@
         .navbar-brand {
             font-size: 1.5rem;
             font-weight: bold;
-            background: linear-gradient(45deg, #00d4ff, #0099cc, #ffffff);
+            background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary), var(--text-primary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-decoration: none;
@@ -46,10 +68,11 @@
             display: flex;
             gap: 20px;
             list-style: none;
+            align-items: center;
         }
 
         .nav-link {
-            color: #00d4ff;
+            color: var(--accent-primary);
             text-decoration: none;
             padding: 8px 16px;
             border-radius: 8px;
@@ -58,8 +81,8 @@
         }
 
         .nav-link:hover {
-            background: rgba(0, 212, 255, 0.1);
-            border-color: rgba(0, 212, 255, 0.3);
+            background: var(--hover-bg);
+            border-color: var(--border-color-strong);
             transform: translateY(-2px);
         }
 
@@ -70,28 +93,27 @@
 
         h1 {
             text-align: center;
-            background: linear-gradient(45deg, #00d4ff, #0099cc, #ffffff);
+            background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary), var(--text-primary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 30px;
             font-size: 2.5rem;
-            text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
         }
 
         h2 {
-            color: #00d4ff;
+            color: var(--accent-primary);
             margin-bottom: 20px;
             font-size: 1.8rem;
         }
 
         .section {
-            background: rgba(30, 60, 114, 0.3);
+            background: var(--section-bg);
             backdrop-filter: blur(10px);
             border-radius: 20px;
             padding: 30px;
             margin-bottom: 25px;
-            border: 1px solid rgba(100, 200, 255, 0.2);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 8px 32px var(--shadow-color);
         }
 
         .btn {
@@ -135,25 +157,25 @@
         label {
             display: block;
             margin-bottom: 8px;
-            color: #00d4ff;
+            color: var(--accent-primary);
             font-weight: 500;
         }
 
         input, select {
             width: 100%;
             padding: 12px;
-            border: 2px solid rgba(0, 212, 255, 0.3);
+            border: 2px solid var(--input-border);
             border-radius: 10px;
-            background: rgba(0, 0, 0, 0.3);
-            color: white;
+            background: var(--input-bg);
+            color: var(--text-primary);
             font-size: 1rem;
             transition: all 0.3s ease;
         }
 
         input:focus, select:focus {
             outline: none;
-            border-color: #00d4ff;
-            box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 15px var(--hover-bg);
         }
 
         .alert {
@@ -236,17 +258,17 @@
             text-align: center;
             margin-top: 50px;
             padding: 20px;
-            color: #666;
-            border-top: 1px solid rgba(100, 200, 255, 0.1);
+            color: var(--text-tertiary);
+            border-top: 1px solid var(--border-color);
         }
     </style>
     {% block extra_css %}{% endblock %}
 </head>
 <body>
     <nav class="navbar">
-        <a href="/api/" class="navbar-brand">🚀 Webex CUCM Integration</a>
+        <a href="/" class="navbar-brand">🚀 Webex CUCM Integration</a>
         <ul class="navbar-nav">
-            <li><a href="/api/" class="nav-link">Home</a></li>
+            <li><a href="/" class="nav-link">Home</a></li>
             <li><a href="/api/ldap-services" class="nav-link">LDAP</a></li>
             <li><a href="/api/webex-services" class="nav-link">Webex</a></li>
             <li><a href="/api/routepattern-services" class="nav-link">Route Patterns</a></li>

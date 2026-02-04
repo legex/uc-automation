@@ -1,2 +1,2 @@
-username,extension,externalnumber
-jdoe,12345,15551234567
+UserId,email,ExternalNumber,extension,Country,WebexStatus
+jdoe,jdoe@ak.com,15551234567,7894561230,US-Cam,Success

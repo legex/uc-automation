@@ -4,6 +4,34 @@
 
 {% block extra_css %}
 <style>
+    /* Breadcrumb indicator */
+    .breadcrumb-indicator {
+        background: linear-gradient(135deg, rgba(0, 100, 200, 0.3), rgba(0, 150, 255, 0.2));
+        border-left: 4px solid #00d4ff;
+        border-radius: 8px;
+        padding: 15px 20px;
+        margin-bottom: 25px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .breadcrumb-indicator .icon {
+        font-size: 1.5rem;
+    }
+    .breadcrumb-indicator .text {
+        flex: 1;
+    }
+    .breadcrumb-indicator .text strong {
+        color: #00d4ff;
+        font-size: 1.1rem;
+        display: block;
+        margin-bottom: 5px;
+    }
+    .breadcrumb-indicator .text small {
+        color: #aaaaaa;
+        font-size: 0.9rem;
+    }
+    
     .tab-container {
         display: flex;
         gap: 10px;
@@ -11,23 +39,35 @@
         border-bottom: 2px solid rgba(0, 212, 255, 0.3);
     }
     .tab-button {
-        padding: 12px 24px;
+        padding: 15px 30px;
         background: rgba(0, 100, 200, 0.2);
         border: none;
         border-radius: 10px 10px 0 0;
         color: #00d4ff;
         cursor: pointer;
         transition: all 0.3s ease;
-        font-size: 1rem;
-        font-weight: 500;
+        font-size: 1.05rem;
+        font-weight: 600;
+        position: relative;
+    }
+    .tab-button .tab-description {
+        display: block;
+        font-size: 0.75rem;
+        font-weight: 400;
+        color: #888;
+        margin-top: 3px;
     }
     .tab-button:hover {
         background: rgba(0, 100, 200, 0.3);
+        transform: translateY(-2px);
     }
     .tab-button.active {
         background: rgba(0, 212, 255, 0.3);
         border-bottom: 3px solid #00d4ff;
         color: #ffffff;
+    }
+    .tab-button.active .tab-description {
+        color: #aaddff;
     }
     .tab-content {
         display: none;
@@ -35,38 +75,85 @@
     .tab-content.active {
         display: block;
     }
+    
     /* Sub-tab styling */
     .sub-tab-container {
         display: flex;
-        gap: 8px;
+        gap: 15px;
         margin-bottom: 25px;
         margin-top: 20px;
-        border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+        padding: 15px;
+        background: rgba(0, 50, 100, 0.2);
+        border-radius: 10px;
+        border: 1px solid rgba(0, 212, 255, 0.2);
     }
     .sub-tab-button {
-        padding: 10px 20px;
-        background: rgba(0, 80, 160, 0.2);
-        border: none;
-        border-radius: 8px 8px 0 0;
+        flex: 1;
+        padding: 20px;
+        background: rgba(0, 80, 160, 0.3);
+        border: 2px solid rgba(0, 212, 255, 0.2);
+        border-radius: 10px;
         color: #5eb8ff;
         cursor: pointer;
         transition: all 0.3s ease;
-        font-size: 0.95rem;
+        font-size: 1rem;
+        font-weight: 500;
+        text-align: center;
+    }
+    .sub-tab-button .sub-icon {
+        display: block;
+        font-size: 2rem;
+        margin-bottom: 10px;
+    }
+    .sub-tab-button .sub-description {
+        display: block;
+        font-size: 0.85rem;
         font-weight: 400;
+        color: #888;
+        margin-top: 8px;
+        line-height: 1.3;
     }
     .sub-tab-button:hover {
-        background: rgba(0, 80, 160, 0.3);
+        background: rgba(0, 100, 180, 0.4);
+        border-color: #5eb8ff;
+        transform: scale(1.02);
     }
     .sub-tab-button.active {
-        background: rgba(0, 180, 255, 0.25);
-        border-bottom: 2px solid #5eb8ff;
+        background: rgba(0, 212, 255, 0.25);
+        border: 2px solid #00d4ff;
         color: #ffffff;
+        box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+    }
+    .sub-tab-button.active .sub-description {
+        color: #aaddff;
     }
     .sub-tab-content {
         display: none;
     }
     .sub-tab-content.active {
         display: block;
+    }
+    
+    /* Info box styling */
+    .info-box {
+        background: rgba(255, 200, 0, 0.1);
+        border-left: 4px solid #ffc107;
+        padding: 15px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+    }
+    .info-box .info-title {
+        color: #ffc107;
+        font-weight: 600;
+        margin-bottom: 5px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .info-box .info-text {
+        color: #ddd;
+        font-size: 0.9rem;
+        line-height: 1.5;
     }
 </style>
 {% endblock %}
@@ -75,30 +162,65 @@
 <h1>Webex Services</h1>
 
 <div class="section">
-    <a href="/api/" class="btn btn-secondary" style="margin-bottom: 20px;">← Back to Home</a>
+    <a href="/" class="btn btn-secondary" style="margin-bottom: 20px;">← Back to Home</a>
     
     <h2>Manage Webex User Configuration</h2>
     <p style="color: #cccccc; margin-bottom: 30px;">Update Webex licenses, extensions, and ACD configurations for single users or batch operations.</p>
 
+    <!-- Breadcrumb Indicator -->
+    <div class="breadcrumb-indicator" id="breadcrumb">
+        <span class="icon">📍</span>
+        <div class="text">
+            <strong id="breadcrumb-title">Step 1: Select Service Type</strong>
+            <small id="breadcrumb-description">Choose the type of Webex service you want to work with</small>
+        </div>
+    </div>
+
     <!-- Main Tab Navigation -->
     <div class="tab-container">
-        <button class="tab-button active" onclick="switchMainTab('general')">Webex General</button>
-        <button class="tab-button" onclick="switchMainTab('acd')">Webex ACD</button>
-        <button class="tab-button" onclick="switchMainTab('license')">Remove License</button>
+        <button class="tab-button active" onclick="switchMainTab('general')">
+            <span>☁️ Webex General</span>
+            <span class="tab-description">Standard user licenses & extensions</span>
+        </button>
+        <button class="tab-button" onclick="switchMainTab('acd')">
+            <span>📞 Webex ACD</span>
+            <span class="tab-description">Call center agents with external numbers</span>
+        </button>
+        <button class="tab-button" onclick="switchMainTab('license')">
+            <span>🗑️ Remove License</span>
+            <span class="tab-description">Deactivate user's Webex license</span>
+        </button>
     </div>
 
     <!-- Webex General Tab -->
     <div id="general-tab" class="tab-content active">
+        <!-- Info Box -->
+        <div class="info-box">
+            <div class="info-title">ℹ️ About Webex General Updates</div>
+            <div class="info-text">
+                Use this for standard Webex users who need basic calling features. You can update their extension numbers and regions. External numbers are optional.
+            </div>
+        </div>
+
         <!-- Sub-tab Navigation -->
         <div class="sub-tab-container">
-            <button class="sub-tab-button active" onclick="switchSubTab('general', 'single')">Single Update</button>
-            <button class="sub-tab-button" onclick="switchSubTab('general', 'batch')">Batch Update</button>
+            <button class="sub-tab-button active" onclick="switchSubTab('general', 'single')">
+                <span class="sub-icon">👤</span>
+                <strong>Single User</strong>
+                <span class="sub-description">Update one user at a time by entering their details manually</span>
+            </button>
+            <button class="sub-tab-button" onclick="switchSubTab('general', 'batch')">
+                <span class="sub-icon">📋</span>
+                <strong>Multiple Users (Batch)</strong>
+                <span class="sub-description">Upload a CSV file to update many users at once</span>
+            </button>
         </div>
 
         <!-- General Single Update -->
         <div id="general-single-tab" class="sub-tab-content active">
             <div class="section" style="background: rgba(0, 100, 200, 0.15);">
-                <h3 style="color: #00d4ff; margin-bottom: 15px;">☁️ Single General Update</h3>
+                <h3 style="color: #00d4ff; margin-bottom: 15px;">👤 Update Single User - Webex General</h3>
+                <p style="color: #aaa; margin-bottom: 20px; font-size: 0.95rem;">Fill in the user details below to update their Webex settings.</p>
                 <form id="webexGeneralSingleForm">
                     <div class="form-group">
                         <label for="webex_gen_username">Username *</label>
@@ -126,31 +248,46 @@
         <!-- General Batch Update -->
         <div id="general-batch-tab" class="sub-tab-content">
             <div class="section" style="background: rgba(0, 100, 200, 0.15);">
-                <h3 style="color: #00d4ff; margin-bottom: 15px;">📊 Batch General Update</h3>
-                <p style="color: #cccccc; margin-bottom: 15px;">Upload a CSV file to update multiple users at once.</p>
+                <h3 style="color: #00d4ff; margin-bottom: 15px;">� Update Multiple Users - Webex General</h3>
+                <p style="color: #aaa; margin-bottom: 20px; font-size: 0.95rem;">Upload a CSV file to update multiple users at once. Download the template below if you haven't already.</p>
+                
+                <div class="info-box" style="background: rgba(100, 200, 255, 0.1); border-left-color: #00d4ff;">
+                    <div class="info-title" style="color: #00d4ff;">💡 How to use Batch Update</div>
+                    <div class="info-text">
+                        <ol style="margin: 10px 0 0 20px; line-height: 1.8;">
+                            <li>Download the template file below</li>
+                            <li>Fill in your user data (UserId, Email, extension, Country, ContactNumber)</li>
+                            <li>Save the file as CSV format</li>
+                            <li>Upload the file using the form below</li>
+                        </ol>
+                    </div>
+                </div>
+
                 <form id="webexGeneralBatchForm">
                     <div class="form-group">
-                        <label for="webex_gen_batch_start_ext">Start Extension *</label>
-                        <input type="text" id="webex_gen_batch_start_ext" name="start_extension" required placeholder="Enter starting extension number">
+                        <label for="webex_gen_batch_start_ext">Start Extension Number *</label>
+                        <input type="text" id="webex_gen_batch_start_ext" name="start_extension" required placeholder="e.g., 1000">
+                        <small style="color: #999; display: block; margin-top: 5px;">This is the starting extension number for your batch</small>
                     </div>
                     <div class="form-group">
                         <label for="webex_gen_batch_file">Upload CSV File *</label>
                         <input type="file" id="webex_gen_batch_file" accept=".csv" required style="padding: 8px; background: rgba(0, 0, 0, 0.5);">
+                        <small style="color: #999; display: block; margin-top: 5px;">Only CSV files are accepted</small>
                     </div>
-                    <button type="submit" class="btn btn-primary">Upload and Process</button>
+                    <button type="submit" class="btn btn-primary" style="font-size: 1.05rem; padding: 12px 30px;">🚀 Upload and Process</button>
                     <div id="webex_gen_batch_loader" class="loader"></div>
                     <div id="webex_gen_batch_result"></div>
                 </form>
             </div>
 
             <!-- Template Download -->
-            <div class="section" style="background: rgba(0, 100, 200, 0.15); margin-top: 20px;">
-                <h3 style="color: #00d4ff; margin-bottom: 15px;">📥 Download Template</h3>
-                <p style="color: #cccccc; margin-bottom: 15px;">Download CSV template for batch general user updates.</p>
+            <div class="section" style="background: rgba(0, 150, 100, 0.15); margin-top: 20px; border: 2px solid rgba(0, 200, 100, 0.3);">
+                <h3 style="color: #00ff88; margin-bottom: 15px;">📥 Download CSV Template First</h3>
+                <p style="color: #cccccc; margin-bottom: 15px;">You must use this template format for the batch upload to work correctly.</p>
                 <div style="background: rgba(30, 60, 114, 0.4); border: 1px solid rgba(100, 200, 255, 0.2); border-radius: 10px; padding: 20px;">
-                    <h4 style="color: #00d4ff; margin-bottom: 10px;">General Update Template</h4>
-                    <p style="color: #cccccc; margin-bottom: 15px; font-size: 0.9rem;">Template includes columns: UserId, Email, extension, Country, ContactNumber (optional)</p>
-                    <a href="/api/download/template/webex_general_update" class="btn btn-primary" style="width: 100%;">📥 Download</a>
+                    <h4 style="color: #00d4ff; margin-bottom: 10px;">📄 General Update Template</h4>
+                    <p style="color: #cccccc; margin-bottom: 15px; font-size: 0.9rem;"><strong>Columns:</strong> UserId, Email, extension, Country, ContactNumber (optional)</p>
+                    <a href="/api/download/template/webex_general_update" class="btn btn-primary" style="width: 100%; font-size: 1.05rem; padding: 12px;">📥 Download Template File</a>
                 </div>
             </div>
         </div>
@@ -158,16 +295,33 @@
 
     <!-- Webex ACD Tab -->
     <div id="acd-tab" class="tab-content">
+        <!-- Info Box -->
+        <div class="info-box">
+            <div class="info-title">ℹ️ About Webex ACD Updates</div>
+            <div class="info-text">
+                Use this for call center agents or users who need ACD (Automatic Call Distribution) features. External phone numbers are REQUIRED for ACD users.
+            </div>
+        </div>
+
         <!-- Sub-tab Navigation -->
         <div class="sub-tab-container">
-            <button class="sub-tab-button active" onclick="switchSubTab('acd', 'single')">Single Update</button>
-            <button class="sub-tab-button" onclick="switchSubTab('acd', 'batch')">Batch Update</button>
+            <button class="sub-tab-button active" onclick="switchSubTab('acd', 'single')">
+                <span class="sub-icon">👤</span>
+                <strong>Single User</strong>
+                <span class="sub-description">Update one ACD agent at a time by entering their details manually</span>
+            </button>
+            <button class="sub-tab-button" onclick="switchSubTab('acd', 'batch')">
+                <span class="sub-icon">📋</span>
+                <strong>Multiple Users (Batch)</strong>
+                <span class="sub-description">Upload a CSV file to update many ACD agents at once</span>
+            </button>
         </div>
 
         <!-- ACD Single Update -->
         <div id="acd-single-tab" class="sub-tab-content active">
             <div class="section" style="background: rgba(0, 100, 200, 0.15);">
-                <h3 style="color: #00d4ff; margin-bottom: 15px;">📞 Single ACD Update</h3>
+                <h3 style="color: #00d4ff; margin-bottom: 15px;">👤 Update Single User - Webex ACD</h3>
+                <p style="color: #aaa; margin-bottom: 20px; font-size: 0.95rem;">Fill in the ACD agent details below. External number is mandatory for ACD users.</p>
                 <form id="webexACDSingleForm">
                     <div class="form-group">
                         <label for="webex_acd_username">Username *</label>
@@ -195,31 +349,47 @@
         <!-- ACD Batch Update -->
         <div id="acd-batch-tab" class="sub-tab-content">
             <div class="section" style="background: rgba(0, 100, 200, 0.15);">
-                <h3 style="color: #00d4ff; margin-bottom: 15px;">📊 Batch ACD Update</h3>
-                <p style="color: #cccccc; margin-bottom: 15px;">Upload a CSV file to update multiple ACD users at once.</p>
+                <h3 style="color: #00d4ff; margin-bottom: 15px;">� Update Multiple Users - Webex ACD</h3>
+                <p style="color: #aaa; margin-bottom: 20px; font-size: 0.95rem;">Upload a CSV file to update multiple ACD agents at once. Download the template below if you haven't already.</p>
+                
+                <div class="info-box" style="background: rgba(255, 150, 0, 0.1); border-left-color: #ff9800;">
+                    <div class="info-title" style="color: #ff9800;">⚠️ Important for ACD Batch Updates</div>
+                    <div class="info-text">
+                        <strong>External numbers are MANDATORY for all ACD users.</strong> Make sure every row in your CSV file includes a valid ContactNumber.
+                        <ol style="margin: 10px 0 0 20px; line-height: 1.8;">
+                            <li>Download the template file below</li>
+                            <li>Fill in ALL required fields including ContactNumber</li>
+                            <li>Save the file as CSV format</li>
+                            <li>Upload the file using the form below</li>
+                        </ol>
+                    </div>
+                </div>
+
                 <form id="webexACDBatchForm">
                     <div class="form-group">
-                        <label for="webex_acd_batch_start_ext">Start Extension *</label>
-                        <input type="text" id="webex_acd_batch_start_ext" name="start_extension" required placeholder="Enter starting extension number">
+                        <label for="webex_acd_batch_start_ext">Start Extension Number *</label>
+                        <input type="text" id="webex_acd_batch_start_ext" name="start_extension" required placeholder="e.g., 2000">
+                        <small style="color: #999; display: block; margin-top: 5px;">This is the starting extension number for your ACD batch</small>
                     </div>
                     <div class="form-group">
                         <label for="webex_acd_batch_file">Upload CSV File *</label>
                         <input type="file" id="webex_acd_batch_file" accept=".csv" required style="padding: 8px; background: rgba(0, 0, 0, 0.5);">
+                        <small style="color: #999; display: block; margin-top: 5px;">Only CSV files are accepted</small>
                     </div>
-                    <button type="submit" class="btn btn-primary">Upload and Process</button>
+                    <button type="submit" class="btn btn-primary" style="font-size: 1.05rem; padding: 12px 30px;">🚀 Upload and Process</button>
                     <div id="webex_acd_batch_loader" class="loader"></div>
                     <div id="webex_acd_batch_result"></div>
                 </form>
             </div>
 
             <!-- Template Download -->
-            <div class="section" style="background: rgba(0, 100, 200, 0.15); margin-top: 20px;">
-                <h3 style="color: #00d4ff; margin-bottom: 15px;">📥 Download Template</h3>
-                <p style="color: #cccccc; margin-bottom: 15px;">Download CSV template for batch ACD user updates.</p>
+            <div class="section" style="background: rgba(0, 150, 100, 0.15); margin-top: 20px; border: 2px solid rgba(0, 200, 100, 0.3);">
+                <h3 style="color: #00ff88; margin-bottom: 15px;">📥 Download CSV Template First</h3>
+                <p style="color: #cccccc; margin-bottom: 15px;">You must use this template format for the batch upload to work correctly.</p>
                 <div style="background: rgba(30, 60, 114, 0.4); border: 1px solid rgba(100, 200, 255, 0.2); border-radius: 10px; padding: 20px;">
-                    <h4 style="color: #00d4ff; margin-bottom: 10px;">ACD Update Template</h4>
-                    <p style="color: #cccccc; margin-bottom: 15px; font-size: 0.9rem;">Template includes columns: UserId, Email, extension, Country, ContactNumber (required)</p>
-                    <a href="/api/download/template/webex_acd_update" class="btn btn-primary" style="width: 100%;">📥 Download</a>
+                    <h4 style="color: #00d4ff; margin-bottom: 10px;">📄 ACD Update Template</h4>
+                    <p style="color: #cccccc; margin-bottom: 15px; font-size: 0.9rem;"><strong>Columns:</strong> UserId, Email, extension, Country, <span style="color: #ff9800; font-weight: 600;">ContactNumber (REQUIRED)</span></p>
+                    <a href="/api/download/template/webex_acd_update" class="btn btn-primary" style="width: 100%; font-size: 1.05rem; padding: 12px;">📥 Download Template File</a>
                 </div>
             </div>
         </div>
@@ -227,8 +397,16 @@
 
     <!-- Remove License Tab -->
     <div id="license-tab" class="tab-content">
+        <div class="info-box" style="background: rgba(255, 0, 0, 0.1); border-left-color: #ff3333;">
+            <div class="info-title" style="color: #ff3333;">⚠️ Warning - License Removal</div>
+            <div class="info-text">
+                <strong>This action will deactivate the user's Webex license.</strong> The user will lose access to Webex calling features. This action should only be performed when offboarding a user or removing their Webex access.
+            </div>
+        </div>
+
         <div class="section" style="background: rgba(0, 100, 200, 0.15);">
-            <h3 style="color: #00d4ff; margin-bottom: 15px;">🗑️ Remove Webex License</h3>
+            <h3 style="color: #00d4ff; margin-bottom: 15px;">🗑️ Remove Webex License from User</h3>
+            <p style="color: #aaa; margin-bottom: 20px; font-size: 0.95rem;">Enter the user's email address to remove their Webex license.</p>
             <form id="removeLicenseForm">
                 <div class="form-group">
                     <label for="remove_license_email">Email *</label>
@@ -243,6 +421,50 @@
 </div>
 
 <script>
+function updateBreadcrumb(mainTab, subTab = null) {
+    const breadcrumbTitle = document.getElementById('breadcrumb-title');
+    const breadcrumbDescription = document.getElementById('breadcrumb-description');
+    
+    const breadcrumbs = {
+        'general': {
+            title: '☁️ Webex General',
+            description: 'Standard user licenses and extensions',
+            'single': {
+                title: 'You are updating: Webex General → Single User',
+                description: 'Fill in the form below to update one user at a time'
+            },
+            'batch': {
+                title: 'You are updating: Webex General → Multiple Users (Batch)',
+                description: 'Download the template, fill it with data, and upload the CSV file'
+            }
+        },
+        'acd': {
+            title: '📞 Webex ACD',
+            description: 'Call center agents with external numbers',
+            'single': {
+                title: 'You are updating: Webex ACD → Single User',
+                description: 'Fill in the form below. External number is REQUIRED for ACD users'
+            },
+            'batch': {
+                title: 'You are updating: Webex ACD → Multiple Users (Batch)',
+                description: 'Download the template, ensure all ContactNumbers are filled, and upload the CSV file'
+            }
+        },
+        'license': {
+            title: '🗑️ Remove Webex License',
+            description: 'This will deactivate the user\'s Webex license - use with caution'
+        }
+    };
+    
+    if (subTab && breadcrumbs[mainTab][subTab]) {
+        breadcrumbTitle.textContent = breadcrumbs[mainTab][subTab].title;
+        breadcrumbDescription.textContent = breadcrumbs[mainTab][subTab].description;
+    } else {
+        breadcrumbTitle.textContent = breadcrumbs[mainTab].title;
+        breadcrumbDescription.textContent = breadcrumbs[mainTab].description;
+    }
+}
+
 function switchMainTab(tab) {
     // Hide all main tabs
     document.querySelectorAll('.tab-content').forEach(content => {
@@ -255,6 +477,9 @@ function switchMainTab(tab) {
     // Show selected main tab
     document.getElementById(tab + '-tab').classList.add('active');
     event.target.classList.add('active');
+    
+    // Update breadcrumb
+    updateBreadcrumb(tab);
 }
 
 function switchSubTab(mainTab, subTab) {
@@ -271,7 +496,15 @@ function switchSubTab(mainTab, subTab) {
     // Show selected sub-tab
     document.getElementById(mainTab + '-' + subTab + '-tab').classList.add('active');
     event.target.classList.add('active');
+    
+    // Update breadcrumb
+    updateBreadcrumb(mainTab, subTab);
 }
+
+// Initialize breadcrumb on page load
+document.addEventListener('DOMContentLoaded', function() {
+    updateBreadcrumb('general', 'single');
+});
 </script>
 {% endblock %}
 
