@@ -24,9 +24,9 @@ load_dotenv()
 logger = setup_logger('webexgeneral', '/a/logs/webexgeneral.log')
 
 # Read API token from environment
-AUTH_TOKEN = os.getenv('AUTHTOKEN')
-if not AUTH_TOKEN:
-    raise RuntimeError("AUTHTOKEN environment variable must be set")
+# AUTH_TOKEN = os.getenv('AUTHTOKEN')
+# if not AUTH_TOKEN:
+#     raise RuntimeError("AUTHTOKEN environment variable must be set")
 
 # License IDs sourced from settings metadata
 WEBEX_LICENSE_ID = license_store["webexlic"]
