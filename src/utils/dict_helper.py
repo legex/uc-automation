@@ -10,7 +10,7 @@ Functions:
 """
 import copy
 from collections import OrderedDict
-from src.utils.logger import setup_logger
+from utils.logger import setup_logger
 
 logger = setup_logger('utilslog', '/a/logs/utilslog.log')
 

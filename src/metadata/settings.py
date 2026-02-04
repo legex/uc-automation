@@ -1,3 +1,4 @@
+import os
 import json
 import pandas as pd
 
@@ -45,3 +46,12 @@ extension_prefix = {
     "Israel": "784410",
     "Czech Republic": "783210"
 }
+
+
+resultfile_path = "/tmp/resultfiles/"
+def ensure_resultfile_path(resultfile_path):
+    """Ensure the result file path exists."""
+    if not os.path.exists(resultfile_path):
+        os.makedirs(resultfile_path)
+    return resultfile_path
+resultfile_location = ensure_resultfile_path(resultfile_path)

@@ -9,20 +9,20 @@ Functions:
     batch_update_ldap_acd: Process ACD LDAP updates from CSV.
 """
 import pandas as pd
-from src.ldapapi.updateldap import (
+from ldapapi.updateldap import (
     update_contacts_num,
     update_contacts_num_withDID,
     update_general_contacts_num_withDID,
     update_acdcontacts_num
 )
-from src.metadata.settings import extension_prefix, exclude_list
-from src.utils.logger import setup_logger
+from metadata.settings import extension_prefix, exclude_list, resultfile_location
+from utils.logger import setup_logger
 
 logger = setup_logger('ldapbatch', '/a/logs/ldapbatch.log')
 
 prefixes = extension_prefix
 excluded_list = exclude_list
-
+resultpath = resultfile_location
 def batch_update_ldap(file, filename):
     """Update CUCM Extension"""
     logger.info("Starting batch LDAP update for file: %s", filename)
@@ -65,7 +65,7 @@ def batch_update_ldap(file, filename):
             "status_on_ad": status_on_ad
         }
         pd.DataFrame(
-            [ad_result]).to_csv(f"src/resultfiles/ldap_response_{filename}",
+            [ad_result]).to_csv(f"{resultpath}/ldap_response_{filename}",
                                 mode='a',
                                 header=False,
                                 index=False
@@ -115,7 +115,7 @@ def batch_update_ldap_acd(file, filename):
             "status_on_ad": status_on_ad
         }
         pd.DataFrame(
-            [ad_result]).to_csv(f"src/resultfiles/ldap_response_{filename}",
+            [ad_result]).to_csv(f"{resultpath}/ldap_response_{filename}",
                                 mode='a',
                                 header=False,
                                 index=False

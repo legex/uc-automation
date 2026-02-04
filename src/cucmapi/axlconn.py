@@ -13,23 +13,19 @@ from requests import Session
 from requests.auth import HTTPBasicAuth
 from zeep import Client, Settings
 from zeep.transports import Transport
-from src.cucmapi.debugplugin import MyLoggingPlugin
-from src.utils.logger import setup_logger
+from cucmapi.debugplugin import MyLoggingPlugin
+from utils.logger import setup_logger
 
 load_dotenv()
 
 logger = setup_logger('axlconnection', '/a/logs/axlconnection.log')
-
+CUCM_ADDRESS="uc-cma.akamai.com"
 DEBUG = False
 mode = "Prod"  # Change to "Dev" for development environment
 if mode == "Dev":
-    AXL_USERNAME = os.getenv("DEVAXL_USERNAME")
-    AXL_PASSWORD = os.getenv("DEVAXL_PASSWORD")
-    CUCM_ADDRESS = os.getenv("DEVCUCM_ADDRESS")
+    AXL_USERNAME = "administrator"
 else:
-    AXL_USERNAME = os.getenv("AXL_USERNAME")
-    AXL_PASSWORD = os.getenv("AXL_PASSWORD")
-    CUCM_ADDRESS = os.getenv("CUCM_ADDRESS")
+    AXL_USERNAME = "admin1"
 class ConnectionAXL:
     """
     Manages a connection to Cisco CUCM AXL API using the Zeep SOAP client.
@@ -46,15 +42,29 @@ class ConnectionAXL:
         self.session = Session()
         self.session.verify = False
         urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+        axl_pass = self.getcredentials()
 
         self.session.auth = HTTPBasicAuth(
             AXL_USERNAME,
-            AXL_PASSWORD
+            axl_pass
         )
 
         self._client = None
         self._service = None
         logger.info("Initialized AXL session")
+
+    def getcredentials(self):
+        """
+        Returns the CUCM AXL credentials.
+
+        Returns:
+            tuple: A tuple containing (username, password).
+        """
+        passfile = "/a/secrets/app/webex_token/cucm_user.opaque"
+        with open(passfile, 'r') as pf:
+            axlpass = pf.read().strip()
+            print("Read password from file")
+        return axlpass
 
     def _settransport(self):
         """

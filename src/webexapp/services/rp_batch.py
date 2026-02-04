@@ -7,10 +7,12 @@ Functions:
     batch_routepattern_auto: Create route patterns from CSV file.
 """
 import pandas as pd
-from src.cucmapi.axlop import AXLOperations
-from src.cucmapi.axlroutepattern import AXLRoutePatternOperations
-from src.utils.logger import setup_logger
+from cucmapi.axlop import AXLOperations
+from cucmapi.axlroutepattern import AXLRoutePatternOperations
+from utils.logger import setup_logger
+from metadata.settings import resultfile_location
 
+resultpath = resultfile_location
 logger = setup_logger('rp_batch', '/a/logs/rp_batch.log')
 axloperations = AXLOperations()
 axlrp = AXLRoutePatternOperations()
@@ -44,7 +46,7 @@ def batch_routepattern_auto(file, filename):
             "rp_update_status": status_partition,
         }
         pd.DataFrame([results]).to_csv(
-            f"src/resultfiles/rpupdateresult_{filename}",
+            f"{resultpath}/rpupdateresult_{filename}",
             mode='a',
             header=False,
             index=False

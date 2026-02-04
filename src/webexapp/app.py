@@ -20,33 +20,33 @@ from dotenv import load_dotenv
 from fastapi import FastAPI, Request, UploadFile, HTTPException, status, Form
 from fastapi.responses import FileResponse, HTMLResponse
 from fastapi.templating import Jinja2Templates
-from src.ldapapi.updateldap import (
+from ldapapi.updateldap import (
     update_contacts_num,
     update_contacts_num_withDID,
     update_general_contacts_num_withDID
     )
-from src.webexapp.services.ldap_batch import batch_update_ldap, batch_update_ldap_acd
-from src.webexapp.services.webex_batch import batch_update_webex_gen, batch_update_webex_acd
-from src.webexapp.models.query_models import QueryModelLdap, QueryModelWebex, QueryModelNumberSingle, QueryModelRPSingle
-from src.webexapp.services.rp_batch import batch_routepattern_auto
-from src.webexapp.webexbotbase import WebexbotBase
-from src.cucmapi.axlroutepattern import AXLRoutePatternOperations
-from src.webexapi.webexgeneral import WebexGenMigration
-from src.webexapi.webexACD import WebexMigACD
-from src.webexapi.webexoperations import WebexOperation
-from src.webexapi.webexnumberadd import addnumbersingle, addnumberbatch
-from src.utils.logger import setup_logger
+from webexapp.services.ldap_batch import batch_update_ldap, batch_update_ldap_acd
+from webexapp.services.webex_batch import batch_update_webex_gen, batch_update_webex_acd
+from webexapp.models.query_models import QueryModelLdap, QueryModelWebex, QueryModelNumberSingle, QueryModelRPSingle
+from webexapp.services.rp_batch import batch_routepattern_auto
+#from src.webexapp.webexbotbaseunused import WebexbotBase
+from cucmapi.axlroutepattern import AXLRoutePatternOperations
+from webexapi.webexgeneral import WebexGenMigration
+from webexapi.webexACD import WebexMigACD
+from webexapi.webexoperations import WebexOperation
+from webexapi.webexnumberadd import addnumbersingle, addnumberbatch
+from utils.logger import setup_logger
 # Load environment variables from .env file
 load_dotenv()
-API_TOKEN = os.getenv("WEBEXBOTTOKEN")
-templates = Jinja2Templates(directory="src/webexapp/templates")
+# API_TOKEN = os.getenv("WEBEXBOTTOKEN")
+templates = Jinja2Templates(directory="webexapp/templates")
 logger = setup_logger('webapp', '/a/logs/webapp.log')
 axlrp = AXLRoutePatternOperations()
 webex_mig_gen = WebexGenMigration()
 webex_acd_mig = WebexMigACD()
 webop = WebexOperation()
 
-webexbot = WebexbotBase()
+#webexbot = WebexbotBase()
 app = FastAPI(
     title="UnifyX",
     description="Unified platform for managing CUCM and Webex user configurations, "
@@ -82,7 +82,7 @@ async def get_ui(request: Request):
     logger.info("Homepage accessed from %s", request.client.host if request.client else "unknown")
     return templates.TemplateResponse("index_new.html", {"request": request})
 
-@app.get("/ldap-services", response_class=HTMLResponse)
+@app.get("/api/ldap-services", response_class=HTMLResponse)
 async def ldap_services_page(request: Request):
     """
     Render the LDAP services page UI.
@@ -95,7 +95,7 @@ async def ldap_services_page(request: Request):
     """
     return templates.TemplateResponse("ldap_services.html", {"request": request})
 
-@app.get("/webex-services", response_class=HTMLResponse)
+@app.get("/api/webex-services", response_class=HTMLResponse)
 async def webex_services_page(request: Request):
     """
     Render the Webex services page UI.
@@ -108,7 +108,7 @@ async def webex_services_page(request: Request):
     """
     return templates.TemplateResponse("webex_services.html", {"request": request})
 
-@app.get("/routepattern-services", response_class=HTMLResponse)
+@app.get("/api/routepattern-services", response_class=HTMLResponse)
 async def routepattern_services_page(request: Request):
     """
     Render the route pattern services page UI.
@@ -121,7 +121,7 @@ async def routepattern_services_page(request: Request):
     """
     return templates.TemplateResponse("routepattern_services.html", {"request": request})
 
-@app.get("/number-services", response_class=HTMLResponse)
+@app.get("/api/number-services", response_class=HTMLResponse)
 async def number_services_page(request: Request):
     """
     Render the number services page UI.
@@ -134,7 +134,7 @@ async def number_services_page(request: Request):
     """
     return templates.TemplateResponse("number_services.html", {"request": request})
 
-@app.get("/single-update", response_class=HTMLResponse)
+@app.get("/api/single-update", response_class=HTMLResponse)
 async def single_update_page(request: Request):
     """
     Render the single update page UI (legacy route).
@@ -147,7 +147,7 @@ async def single_update_page(request: Request):
     """
     return templates.TemplateResponse("single_update.html", {"request": request})
 
-@app.get("/batch-update", response_class=HTMLResponse)
+@app.get("/api/batch-update", response_class=HTMLResponse)
 async def batch_update_page(request: Request):
     """
     Render the batch update page UI.
@@ -160,7 +160,7 @@ async def batch_update_page(request: Request):
     """
     return templates.TemplateResponse("batch_update.html", {"request": request})
 
-@app.get("/templates", response_class=HTMLResponse)
+@app.get("/api/templates", response_class=HTMLResponse)
 async def templates_page(request: Request):
     """
     Render the templates download page UI.
@@ -173,7 +173,7 @@ async def templates_page(request: Request):
     """
     return templates.TemplateResponse("templates.html", {"request": request})
 
-@app.get("/download/template/{template_name}")
+@app.get("/api/download/template/{template_name}")
 async def download_template(template_name: str):
     """
     Download a CSV template file for batch operations.
@@ -194,11 +194,11 @@ async def download_template(template_name: str):
     """
     logger.info("Template download requested: %s", template_name)
     available_templates = {
-        "ldap_update": "src/template/ldap_update_template.csv",
-        "webex_general_update": "src/template/webex_general_update_template.csv",
-        "webex_acd_update": "src/template/webex_general_update_template.csv",
-        "number_add": "src/template/number_add_template.csv",
-        "cucm_route_pattern": "src/template/cucm_route_pattern_template.csv"
+        "ldap_update": "template/ldap_update_template.csv",
+        "webex_general_update": "template/webex_general_update_template.csv",
+        "webex_acd_update": "template/webex_general_update_template.csv",
+        "number_add": "template/number_add_template.csv",
+        "cucm_route_pattern": "template/cucm_route_pattern_template.csv"
     }
     file_path = available_templates.get(template_name)
     if not file_path or not os.path.exists(file_path):
@@ -210,7 +210,7 @@ async def download_template(template_name: str):
                         filename=os.path.basename(file_path),
                         media_type='application/octet-stream')
 
-@app.post("/numberadd")
+@app.post("/api/numberadd")
 async def number_add(file: UploadFile):
     """
     Add phone numbers to Webex locations from a CSV file.
@@ -249,7 +249,7 @@ async def number_add(file: UploadFile):
         logger.error("HTTPException in number add for %s: %s", file.filename, str(e))
         return {"error": str(e)}
 
-@app.post("/numberaddsingle")
+@app.post("/api/numberaddsingle")
 async def number_add_single(query: QueryModelNumberSingle):
     """
     Add phone numbers to Webex locations from a CSV file.
@@ -278,7 +278,7 @@ async def number_add_single(query: QueryModelNumberSingle):
         logger.error("HTTPException in number add for %s: %s", query.number, str(e))
         return {"error": str(e)}
 
-@app.get("/download/result/{result_type}/{filename}")
+@app.get("/api/download/result/{result_type}/{filename}")
 async def download_result_file(result_type: str, filename: str):
     """
     Download a result file from a previous batch operation.
@@ -309,7 +309,7 @@ async def download_result_file(result_type: str, filename: str):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail="Invalid result type.")
 
-    file_path = f"src/resultfiles/{result_prefixes[result_type]}{filename}"
+    file_path = f"resultfiles/{result_prefixes[result_type]}{filename}"
     if not os.path.exists(file_path):
         logger.error("Result file not found: %s", file_path)
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
@@ -319,7 +319,7 @@ async def download_result_file(result_type: str, filename: str):
                         filename=f"{result_prefixes[result_type]}{filename}",
                         media_type='application/octet-stream')
 
-@app.post("/updateldap/single")
+@app.post("/api/updateldap/single")
 async def update_ldap_numbers(query: QueryModelLdap, acd: bool = False):
     """
     Update LDAP contact numbers for a single user.
@@ -381,7 +381,7 @@ async def update_ldap_numbers(query: QueryModelLdap, acd: bool = False):
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                             detail=f"Error updating LDAP: {str(e)}") from e
 
-@app.post("/updateldap/batch")
+@app.post("/api/updateldap/batch")
 async def batch_update_ldap_numbers(file: UploadFile, acd: bool = Form(False)):
     """
     Batch update LDAP contact numbers from a CSV file.
@@ -438,7 +438,7 @@ async def batch_update_ldap_numbers(file: UploadFile, acd: bool = Form(False)):
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                             detail=f"Error processing file: {str(e)}") from e
 
-@app.post("/updatewebexgeneral/single")
+@app.post("/api/updatewebexgeneral/single")
 async def update_webex_general(query: QueryModelWebex):
     """
     Update Webex settings for a single user.
@@ -487,8 +487,8 @@ async def update_webex_general(query: QueryModelWebex):
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                             detail=f"Error updating Webex: {str(e)}") from e
 
-@app.post("/updatewebexgeneral/batch")
-async def batch_update_webex_general(file: UploadFile | None = None):
+@app.post("/api/updatewebexgeneral/batch")
+async def batch_update_webex_general(start_extension: str = None,file: UploadFile | None = None):
     """
     Batch update Webex settings from a CSV file.
     
@@ -508,6 +508,10 @@ async def batch_update_webex_general(file: UploadFile | None = None):
         logger.error("No file provided for batch Webex update")
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail="File must be provided.")
+    if start_extension is None:
+        logger.error("No start_extension provided for batch Webex update")
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail="start_extension must be provided.")
     if file.content_type != 'text/csv':
         logger.error("Invalid file type for batch Webex update: %s", file.content_type)
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
@@ -519,7 +523,10 @@ async def batch_update_webex_general(file: UploadFile | None = None):
                             detail="Uploaded file is empty")
     try:
         logger.debug("Processing batch Webex general update for file: %s", file.filename)
-        response = batch_update_webex_gen(pd.io.common.BytesIO(contents), file.filename)
+        response = batch_update_webex_gen(pd.io.common.BytesIO(contents),
+                                          file.filename,
+                                          start_extension
+                                          )
         logger.info("Batch Webex general update completed for file: %s", file.filename)
         return {"Status": "Success", "Detail": response}
     except HTTPException as e:
@@ -530,7 +537,7 @@ async def batch_update_webex_general(file: UploadFile | None = None):
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                             detail=f"Error processing file: {str(e)}") from e
 
-@app.post("/updatewebexacd/single")
+@app.post("/api/updatewebexacd/single")
 async def update_webex_acd(query: QueryModelWebex):
     """
     Update Webex ACD (Automatic Call Distribution) settings for a single user.
@@ -573,8 +580,8 @@ async def update_webex_acd(query: QueryModelWebex):
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                                 detail="External number must be provided for ACD updates.")
 
-@app.post("/updatewebexacd/batch")
-async def b_update_webex_acd(file: UploadFile | None = None):
+@app.post("/api/updatewebexacd/batch")
+async def b_update_webex_acd(start_extension: str = None, file: UploadFile | None = None):
     """
     Batch update Webex ACD settings from an Excel file.
     
@@ -593,7 +600,10 @@ async def b_update_webex_acd(file: UploadFile | None = None):
         logger.error("No file provided for batch Webex ACD update")
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail="File must be provided.")
-
+    if start_extension is None:
+        logger.error("No start_extension provided for batch Webex ACD update")
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail="start_extension must be provided.")
     if file.content_type != 'text/csv':
         logger.error("Invalid file type for batch Webex ACD update: %s", file.content_type)
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
@@ -605,7 +615,7 @@ async def b_update_webex_acd(file: UploadFile | None = None):
                             detail="Uploaded file is empty")
     try:
         logger.debug("Processing batch Webex ACD update for file: %s", file.filename)
-        response = batch_update_webex_acd(pd.io.common.BytesIO(contents), file.filename)
+        response = batch_update_webex_acd(pd.io.common.BytesIO(contents), file.filename, start_extension)
         logger.info("Batch Webex ACD update completed for file: %s", file.filename)
         return {"Status": "Success", "Detail": response}
     except HTTPException as e:
@@ -616,7 +626,7 @@ async def b_update_webex_acd(file: UploadFile | None = None):
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                             detail=f"Error processing file: {str(e)}") from e
 
-@app.post("/routepattern")
+@app.post("/api/routepattern")
 async def create_route_pattern(file: UploadFile):
     """
     Create route patterns in CUCM from a CSV file.
@@ -657,7 +667,7 @@ async def create_route_pattern(file: UploadFile):
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                             detail=f"Error processing file: {str(e)}") from e
 
-@app.post("/removewebexlicense/single")
+@app.post("/api/removewebexlicense/single")
 async def remove_webex_license(email: str = Form(...)):
     """
     Remove Webex license from a single user.
@@ -686,7 +696,7 @@ async def remove_webex_license(email: str = Form(...)):
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                             detail=f"Error removing Webex license: {str(e)}") from e
 
-@app.post("/updateroutepattern/single")
+@app.post("/api/updateroutepattern/single")
 async def update_route_pattern_single(query: QueryModelRPSingle):
     """
     Update a single route pattern in CUCM.

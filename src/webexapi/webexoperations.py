@@ -12,20 +12,15 @@ import json
 import requests
 from requests import HTTPError
 from dotenv import load_dotenv
-from src.metadata.settings import license_store, LOCATIONS, WEBEX_URL,ACDLOCATIONS
-from src.utils.logger import setup_logger
-from src.webexapi.webexBase import WebexBase
+from metadata.settings import license_store, LOCATIONS, WEBEX_URL,ACDLOCATIONS
+from utils.logger import setup_logger
+from webexapi.webexBase import WebexBase
 
 # Load environment variables from .env file
 load_dotenv()
 
 # Initialize logger
 logger = setup_logger('webexops', '/a/logs/webexops.log')
-
-# Read API token from environment
-AUTH_TOKEN = os.getenv('AUTHTOKEN')
-if not AUTH_TOKEN:
-    raise RuntimeError("AUTHTOKEN environment variable must be set")
 
 WEBEX_LICENSE_ID = license_store["webexlic"]
 UCM_LICENSE_ID = license_store["ucmlic"]

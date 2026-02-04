@@ -12,10 +12,10 @@ import json
 import requests
 from requests import HTTPError
 from dotenv import load_dotenv
-from src.metadata.settings import license_store, LOCATIONS, WEBEX_URL, PATCH_LIC_URL
-from src.utils.logger import setup_logger
-from src.webexapi.webexBase import WebexBase
-from src.webexapi.webexoperations import WebexOperation
+from metadata.settings import license_store, LOCATIONS, WEBEX_URL, PATCH_LIC_URL
+from utils.logger import setup_logger
+from webexapi.webexBase import WebexBase
+from webexapi.webexoperations import WebexOperation
 
 # Load environment variables from .env file
 load_dotenv()
@@ -210,5 +210,3 @@ class WebexGenMigration:
         except Exception as e:
             logger.error("General error updating user: %s", e)
         return None
-
-

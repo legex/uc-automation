@@ -1,0 +1,29 @@
+{
+  "platform-version": "p21.alsi22-lite",
+  "runtime-bundles": ["python3"],
+  "secrets": {
+   "app-secrets": {
+     "ssl_cert": {"format": "full_chain","latest-index-only": "true"},
+     "webex_token": {"latest-index-only": true},
+     "cucm_user": {"latest-index-only": true}
+    }
+},
+  "third-party-packages": {
+    "enabled": true
+  },
+  "single-sign-on": {
+    "single-sign-on-enabled": true,
+    "single-sign-on-header": "X-SSO-REMOTE-USER",
+    "single-sign-on-regex": "^(?!/api/).*$",
+    "login-cookie": {
+      "enabled": true
+    }
+  },
+  "invocations": {
+    "main": "uvicorn webexapp.app:app --host 0.0.0.0 --port 8000"
+  },
+  "leadership-election": {
+          "max-transition-seconds": 90,
+          "separate-staging-leader": true
+        }
+}
