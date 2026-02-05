@@ -53,3 +53,34 @@ def batch_routepattern_auto(file, filename):
             )
     logger.info("Batch route pattern creation completed for file: %s", filename)
     return "Script Run is Finished"
+
+def batch_updateroutepatterns_auto(file, filename, partition):
+    """Update Route Pattern in CUCM from CSV"""
+    logger.info("Starting batch route pattern update for file: %s", filename)
+    df = pd.read_csv(file, dtype={'PatternToUpdate': str})
+    logger.info("Loaded %d rows from CSV file", len(df))
+    for idx, row in df.iterrows():
+        logger.debug("Processing row %d", idx + 1)
+        routepattern = f"\+{row['PatternToUpdate']}"
+        logger.info("Processing route pattern: %s update partition to %s", routepattern, partition)
+        try:
+            logger.debug("Updating route pattern: %s", routepattern)
+            update_rp = axlrp.update_routepattern(routepattern, partition)
+            status_on_cucm = "Success" if update_rp else "Failed"
+            logger.info("Route pattern %s update status on CUCM: %s", routepattern, status_on_cucm)
+        except (Exception) as e:
+            logger.error(
+                "Error updating CUCM for route pattern %s: %s", routepattern, e)
+            status_on_cucm = "Error"
+        results = {
+            "routepattern": routepattern,
+            "status_on_cucm": status_on_cucm,
+        }
+        pd.DataFrame([results]).to_csv(
+            f"{resultpath}/rpupdateresult_{filename}",
+            mode='a',
+            header=False,
+            index=False
+            )
+    logger.info("Batch route pattern update completed for file: %s", filename)
+    return "Script Run is Finished"

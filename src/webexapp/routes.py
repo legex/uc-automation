@@ -28,8 +28,8 @@ from ldapapi.updateldap import (
     )
 from webexapp.services.ldap_batch import batch_update_ldap, batch_update_ldap_acd
 from webexapp.services.webex_batch import batch_update_webex_gen, batch_update_webex_acd
-from webexapp.models.query_models import QueryModelLdap, QueryModelWebex, QueryModelNumberSingle, QueryModelRPSingle
-from webexapp.services.rp_batch import batch_routepattern_auto
+from webexapp.models.query_models import QueryModelLdap, QueryModelWebex, QueryModelNumberSingle, QueryModelRPSingle, QueryModelRPUpdate
+from webexapp.services.rp_batch import batch_routepattern_auto, batch_updateroutepatterns_auto
 #from src.webexapp.webexbotbaseunused import WebexbotBase
 from cucmapi.axlroutepattern import AXLRoutePatternOperations
 from webexapi.webexgeneral import WebexGenMigration
@@ -215,7 +215,8 @@ async def download_template(template_name: str, current_user: str = Depends(allo
         "webex_general_update": "template/webex_general_update_template.csv",
         "webex_acd_update": "template/webex_general_update_template.csv",
         "number_add": "template/number_add_template.csv",
-        "cucm_route_pattern": "template/cucm_route_pattern_template.csv"
+        "cucm_route_pattern": "template/cucm_route_pattern_template.csv",
+        "cucm_route_pattern_update": "template/rp_update_template.csv"
     }
     file_path = available_templates.get(template_name)
     if not file_path or not os.path.exists(file_path):
@@ -706,14 +707,41 @@ async def remove_webex_license(email: str = Form(...), region_India: bool = Fals
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                             detail=f"Error removing Webex license: {str(e)}") from e
 
-@router.post("/api/updateroutepattern/single")
-async def update_route_pattern_single(query: QueryModelRPSingle, current_user: str = Depends(allowed_users)):
+@router.post("/api/createroutepattern/single")
+async def create_route_pattern_single(query: QueryModelRPSingle, current_user: str = Depends(allowed_users)):
     """
-    Update a single route pattern in CUCM.
+    Create a single route pattern in CUCM.
     
     Args:
         query (QueryModelRPSingle): Information containing route pattern and username.
     
+    Returns:
+        dict: Status and detail message with route pattern creation result.
+    """
+    logger.info("Single route pattern creation requested by user: %s for target user: %s",
+                current_user, query.username if query else "None")
+    if query is None:
+        logger.error("No query provided for route pattern creation by user: %s", current_user)
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail="Query must be provided.")
+    routepattern = f"\+{query.routepattern}"
+    try:
+        logger.debug("Processing route pattern creation by user: %s for target user: %s", current_user, query.username)
+        result = axlrp.create_routepattern(routepattern, query.username)
+        logger.info("Route pattern creation completed by user: %s for target user: %s", current_user, query.username)
+        return {"Status": "Route pattern creation initiated", "Detail": result}
+    except Exception as e:
+        logger.error("Error creating route pattern by user: %s for target user %s: %s", current_user, query.username, str(e))
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                            detail=f"Error creating route pattern: {str(e)}") from e
+
+@router.post("/api/updateroutepattern/single")
+async def update_route_pattern_single(query: QueryModelRPUpdate, current_user: str = Depends(allowed_users)):
+    """
+    Update a single route pattern in CUCM.
+    
+    Args:
+        query (QueryModelRPUpdate): Information containing old route pattern, new route pattern, and username.
     Returns:
         dict: Status and detail message with route pattern update result.
     """
@@ -723,13 +751,54 @@ async def update_route_pattern_single(query: QueryModelRPSingle, current_user: s
         logger.error("No query provided for route pattern update by user: %s", current_user)
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail="Query must be provided.")
-    routepattern = f"\+{query.routepattern}"
+    pattern = f"\+{query.routepattern}"
     try:
         logger.debug("Processing route pattern update by user: %s for target user: %s", current_user, query.username)
-        result = axlrp.create_routepattern(routepattern, query.username)
+        result = axlrp.update_routepattern(pattern, query.partition)
         logger.info("Route pattern update completed by user: %s for target user: %s", current_user, query.username)
         return {"Status": "Route pattern update initiated", "Detail": result}
     except Exception as e:
         logger.error("Error updating route pattern by user: %s for target user %s: %s", current_user, query.username, str(e))
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                             detail=f"Error updating route pattern: {str(e)}") from e
+
+@router.post("/api/updateroutepattern/batchupdate")
+async def batch_update_route_pattern(file: UploadFile, current_user: str = Depends(allowed_users)):
+    """
+    Batch update route patterns in CUCM from a CSV file.
+    
+    Args:
+        file (UploadFile): CSV file containing columns: RoutePattern, Partition.
+    
+    Returns:
+        dict: Status and detail message indicating completion.
+    
+    Raises:
+        HTTPException: 400 if file type is invalid or file is empty,
+                      500 if route pattern update fails.
+    """
+    logger.info("Batch route pattern update requested by user: %s with file: %s", current_user, file.filename)
+    if file.content_type != 'text/csv':
+        logger.error("Invalid file type for batch route pattern update by user: %s: %s", current_user, file.content_type)
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail="Invalid file type. Please upload a CSV file.")
+    contents = await file.read()
+    if not contents:
+        logger.error("Empty file uploaded for batch route pattern update by user: %s, file: %s", current_user, file.filename)
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail="Uploaded file is empty")
+    try:
+        logger.debug("Processing batch route pattern update by user: %s for file: %s", current_user, file.filename)
+        response = batch_updateroutepatterns_auto(
+            pd.io.common.BytesIO(contents),
+            file.filename
+            )
+        logger.info("Batch route pattern update completed by user: %s for file: %s", current_user, file.filename)
+        return {"Status": "Success", "Detail": response}
+    except HTTPException as e:
+        logger.error("HTTPException in batch route pattern update by user: %s for %s: %s", current_user, file.filename, str(e))
+        return {"error": str(e)}
+    except Exception as e:
+        logger.error("Error processing batch route pattern file by user: %s, file %s: %s", current_user, file.filename, str(e))
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                            detail=f"Error processing file: {str(e)}") from e

@@ -45,99 +45,207 @@
     <a href="/" class="btn btn-secondary" style="margin-bottom: 20px;">← Back to Home</a>
     
     <h2>Manage CUCM Route Patterns</h2>
-    <p style="color: #cccccc; margin-bottom: 30px;">Create and manage route patterns in CUCM for single users or batch operations.</p>
+    <p style="color: #cccccc; margin-bottom: 30px;">Create and update route patterns in CUCM for single users or batch operations.</p>
 
-    <!-- Tab Navigation -->
+    <!-- Main Tab Navigation -->
     <div class="tab-container">
-        <button class="tab-button active" onclick="switchTab('single')">Single Update</button>
-        <button class="tab-button" onclick="switchTab('batch')">Batch Update</button>
+        <button class="tab-button active" onclick="switchMainTab('create')">🆕 Create Route Patterns</button>
+        <button class="tab-button" onclick="switchMainTab('update')">✏️ Update Route Patterns</button>
     </div>
 
-    <!-- Single Update Tab -->
-    <div id="single-tab" class="tab-content active">
-        <div class="section" style="background: rgba(0, 100, 200, 0.15);">
-            <h3 style="color: #00d4ff; margin-bottom: 15px;">📝 Single Route Pattern Update</h3>
-            <form id="routePatternSingleForm">
-                <div class="form-group">
-                    <label for="route_pattern_username">Username *</label>
-                    <input type="text" id="route_pattern_username" name="username" required placeholder="Enter username">
+    <!-- CREATE ROUTE PATTERNS SECTION -->
+    <div id="create-tab" class="tab-content active">
+        <!-- Sub-tab Navigation for Create -->
+        <div class="tab-container" style="margin-top: 20px;">
+            <button class="tab-button active" onclick="switchSubTab('create', 'single')">Single Create</button>
+            <button class="tab-button" onclick="switchSubTab('create', 'batch')">Batch Create</button>
+        </div>
+
+        <!-- Create Single -->
+        <div id="create-single-tab" class="tab-content active">
+            <div class="section" style="background: rgba(0, 100, 200, 0.15);">
+                <h3 style="color: #00d4ff; margin-bottom: 15px;">📝 Create Single Route Pattern</h3>
+                <p style="color: #aaa; margin-bottom: 20px; font-size: 0.95rem;">Create a new route pattern for a user in CUCM.</p>
+                <form id="routePatternCreateSingleForm">
+                    <div class="form-group">
+                        <label for="create_username">Username *</label>
+                        <input type="text" id="create_username" name="username" required placeholder="Enter username">
+                    </div>
+                    <div class="form-group">
+                        <label for="create_route_pattern">Route Pattern *</label>
+                        <input type="text" id="create_route_pattern" name="routepattern" required placeholder="Enter route pattern (e.g., 420212345678)">
+                        <small style="color: #999; display: block; margin-top: 5px;">Note: The '+' prefix will be added automatically</small>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create Route Pattern</button>
+                    <div id="create_single_loader" class="loader"></div>
+                    <div id="create_single_result"></div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Create Batch -->
+        <div id="create-batch-tab" class="tab-content">
+            <div class="section" style="background: rgba(0, 100, 200, 0.15);">
+                <h3 style="color: #00d4ff; margin-bottom: 15px;">📊 Batch Route Pattern Creation</h3>
+                <p style="color: #cccccc; margin-bottom: 15px;">Upload a CSV file to create multiple route patterns at once.</p>
+                <form id="routePatternCreateBatchForm">
+                    <div class="form-group">
+                        <label for="create_batch_file">Upload CSV File *</label>
+                        <input type="file" id="create_batch_file" accept=".csv" required style="padding: 8px; background: rgba(0, 0, 0, 0.5);">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Upload and Process</button>
+                    <div id="create_batch_loader" class="loader"></div>
+                    <div id="create_batch_result"></div>
+                </form>
+            </div>
+
+            <!-- Template Download -->
+            <div class="section" style="background: rgba(0, 100, 200, 0.15); margin-top: 20px;">
+                <h3 style="color: #00d4ff; margin-bottom: 15px;">📥 Download Create Template</h3>
+                <p style="color: #cccccc; margin-bottom: 15px;">Download the CSV template for batch route pattern creation.</p>
+                <div style="background: rgba(30, 60, 114, 0.4); border: 1px solid rgba(100, 200, 255, 0.2); border-radius: 10px; padding: 20px;">
+                    <h4 style="color: #00d4ff; margin-bottom: 10px;">Route Pattern Create Template</h4>
+                    <p style="color: #cccccc; margin-bottom: 15px;">Template includes columns: ContactNumber, UserId</p>
+                    <a href="/api/download/template/cucm_route_pattern" class="btn btn-primary">📥 Download Template</a>
                 </div>
-                <div class="form-group">
-                    <label for="route_pattern_number">Route Pattern *</label>
-                    <input type="text" id="route_pattern_number" name="routepattern" required placeholder="Enter route pattern (e.g., 420212345678)">
-                    <small style="color: #999; display: block; margin-top: 5px;">Note: The '+' prefix will be added automatically</small>
-                </div>
-                <button type="submit" class="btn btn-primary">Update Route Pattern</button>
-                <div id="route_pattern_single_loader" class="loader"></div>
-                <div id="route_pattern_single_result"></div>
-            </form>
+            </div>
         </div>
     </div>
 
-    <!-- Batch Update Tab -->
-    <div id="batch-tab" class="tab-content">
-        <div class="section" style="background: rgba(0, 100, 200, 0.15);">
-            <h3 style="color: #00d4ff; margin-bottom: 15px;">📊 Batch Route Pattern Creation</h3>
-            <p style="color: #cccccc; margin-bottom: 15px;">Upload a CSV file to create multiple route patterns at once.</p>
-            <form id="routePatternBatchForm">
-                <div class="form-group">
-                    <label for="route_pattern_file">Upload CSV File *</label>
-                    <input type="file" id="route_pattern_file" accept=".csv" required style="padding: 8px; background: rgba(0, 0, 0, 0.5);">
-                </div>
-                <button type="submit" class="btn btn-primary">Upload and Process</button>
-                <div id="route_pattern_batch_loader" class="loader"></div>
-                <div id="route_pattern_batch_result"></div>
-            </form>
+    <!-- UPDATE ROUTE PATTERNS SECTION -->
+    <div id="update-tab" class="tab-content">
+        <!-- Sub-tab Navigation for Update -->
+        <div class="tab-container" style="margin-top: 20px;">
+            <button class="tab-button active" onclick="switchSubTab('update', 'single')">Single Update</button>
+            <button class="tab-button" onclick="switchSubTab('update', 'batch')">Batch Update</button>
         </div>
 
-        <!-- Template Download -->
-        <div class="section" style="background: rgba(0, 100, 200, 0.15); margin-top: 20px;">
-            <h3 style="color: #00d4ff; margin-bottom: 15px;">📥 Download Template</h3>
-            <p style="color: #cccccc; margin-bottom: 15px;">Download the CSV template for batch route pattern creation.</p>
-            <div style="background: rgba(30, 60, 114, 0.4); border: 1px solid rgba(100, 200, 255, 0.2); border-radius: 10px; padding: 20px;">
-                <h4 style="color: #00d4ff; margin-bottom: 10px;">Route Pattern Template</h4>
-                <p style="color: #cccccc; margin-bottom: 15px;">Template includes columns: ContactNumber, UserId</p>
-                <a href="/api/download/template/cucm_route_pattern" class="btn btn-primary">📥 Download Template</a>
+        <!-- Update Single -->
+        <div id="update-single-tab" class="tab-content active">
+            <div class="section" style="background: rgba(0, 100, 200, 0.15);">
+                <h3 style="color: #00d4ff; margin-bottom: 15px;">✏️ Update Single Route Pattern</h3>
+                <p style="color: #aaa; margin-bottom: 20px; font-size: 0.95rem;">Update the partition for an existing route pattern in CUCM.</p>
+                <form id="routePatternUpdateSingleForm">
+                    <div class="form-group">
+                        <label for="update_username">Username *</label>
+                        <input type="text" id="update_username" name="username" required placeholder="Enter username">
+                    </div>
+                    <div class="form-group">
+                        <label for="update_route_pattern">Route Pattern *</label>
+                        <input type="text" id="update_route_pattern" name="routepattern" required placeholder="Enter route pattern (e.g., 420212345678)">
+                        <small style="color: #999; display: block; margin-top: 5px;">Note: The '+' prefix will be added automatically</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="update_partition">Partition *</label>
+                        <input type="text" id="update_partition" name="partition" required placeholder="Enter partition name">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update Route Pattern</button>
+                    <div id="update_single_loader" class="loader"></div>
+                    <div id="update_single_result"></div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Update Batch -->
+        <div id="update-batch-tab" class="tab-content">
+            <div class="section" style="background: rgba(0, 100, 200, 0.15);">
+                <h3 style="color: #00d4ff; margin-bottom: 15px;">📊 Batch Route Pattern Update</h3>
+                <p style="color: #cccccc; margin-bottom: 15px;">Upload a CSV file to update partitions for multiple route patterns at once.</p>
+                <form id="routePatternUpdateBatchForm">
+                    <div class="form-group">
+                        <label for="update_batch_file">Upload CSV File *</label>
+                        <input type="file" id="update_batch_file" accept=".csv" required style="padding: 8px; background: rgba(0, 0, 0, 0.5);">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Upload and Process</button>
+                    <div id="update_batch_loader" class="loader"></div>
+                    <div id="update_batch_result"></div>
+                </form>
+            </div>
+
+            <!-- Template Download -->
+            <div class="section" style="background: rgba(0, 100, 200, 0.15); margin-top: 20px;">
+                <h3 style="color: #00d4ff; margin-bottom: 15px;">📥 Download Update Template</h3>
+                <p style="color: #cccccc; margin-bottom: 15px;">Download the CSV template for batch route pattern updates.</p>
+                <div style="background: rgba(30, 60, 114, 0.4); border: 1px solid rgba(100, 200, 255, 0.2); border-radius: 10px; padding: 20px;">
+                    <h4 style="color: #00d4ff; margin-bottom: 10px;">Route Pattern Update Template</h4>
+                    <p style="color: #cccccc; margin-bottom: 15px;">Template includes columns: RoutePattern, Partition</p>
+                    <a href="/api/download/template/cucm_route_pattern_update" class="btn btn-primary">📥 Download Template</a>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-function switchTab(tab) {
-    // Hide all tabs
-    document.querySelectorAll('.tab-content').forEach(content => {
+let currentMainTab = 'create';
+let currentSubTab = {
+    create: 'single',
+    update: 'single'
+};
+
+function switchMainTab(tab) {
+    currentMainTab = tab;
+    
+    // Hide all main tabs
+    document.querySelectorAll('#create-tab, #update-tab').forEach(content => {
         content.classList.remove('active');
     });
-    document.querySelectorAll('.tab-button').forEach(button => {
-        button.classList.remove('active');
-    });
     
-    // Show selected tab
+    // Remove active class from all main tab buttons
+    const mainButtons = document.querySelectorAll('.tab-container:first-of-type .tab-button');
+    mainButtons.forEach(button => button.classList.remove('active'));
+    
+    // Show selected tab and activate button
     document.getElementById(tab + '-tab').classList.add('active');
     event.target.classList.add('active');
+    
+    // Show the active sub-tab for this main tab
+    switchSubTab(tab, currentSubTab[tab]);
+}
+
+function switchSubTab(mainTab, subTab) {
+    currentSubTab[mainTab] = subTab;
+    
+    // Hide all sub-tabs for this main tab
+    const prefix = mainTab === 'create' ? 'create' : 'update';
+    document.querySelectorAll(`#${prefix}-single-tab, #${prefix}-batch-tab`).forEach(content => {
+        content.classList.remove('active');
+    });
+    
+    // Remove active class from all sub-tab buttons in this section
+    const parentTab = document.getElementById(`${mainTab}-tab`);
+    if (parentTab) {
+        const subButtons = parentTab.querySelectorAll('.tab-container .tab-button');
+        subButtons.forEach(button => button.classList.remove('active'));
+    }
+    
+    // Show selected sub-tab and activate button
+    document.getElementById(`${prefix}-${subTab}-tab`).classList.add('active');
+    if (event && event.target) {
+        event.target.classList.add('active');
+    }
 }
 </script>
 {% endblock %}
 
 {% block extra_js %}
 <script>
-    // Single Route Pattern Form Handler
-    document.getElementById('routePatternSingleForm').addEventListener('submit', async (e) => {
+    // Create Single Route Pattern Form Handler
+    document.getElementById('routePatternCreateSingleForm').addEventListener('submit', async (e) => {
         e.preventDefault();
-        const loader = document.getElementById('route_pattern_single_loader');
-        const result = document.getElementById('route_pattern_single_result');
+        const loader = document.getElementById('create_single_loader');
+        const result = document.getElementById('create_single_result');
         
         loader.style.display = 'block';
         result.innerHTML = '';
         
         const formData = {
-            username: document.getElementById('route_pattern_username').value,
-            routepattern: document.getElementById('route_pattern_number').value
+            username: document.getElementById('create_username').value,
+            routepattern: document.getElementById('create_route_pattern').value
         };
         
         try {
-            const response = await fetch('/api/updateroutepattern/single', {
+            const response = await fetch('/api/createroutepattern/single', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(formData)
@@ -147,9 +255,11 @@ function switchTab(tab) {
             
             if (response.ok) {
                 result.innerHTML = `<div class="alert alert-success">
-                    <strong>Success!</strong> ${data.Status || 'Route pattern updated successfully'}
+                    <strong>Success!</strong> ${data.Status || 'Route pattern created successfully'}
                     ${data.Detail ? '<br><small>' + JSON.stringify(data.Detail) + '</small>' : ''}
                 </div>`;
+                // Clear form
+                document.getElementById('routePatternCreateSingleForm').reset();
             } else {
                 result.innerHTML = `<div class="alert alert-error">
                     <strong>Error!</strong> ${data.detail || data.error || 'Operation failed'}
@@ -161,12 +271,12 @@ function switchTab(tab) {
         }
     });
 
-    // Batch Route Pattern Form Handler
-    document.getElementById('routePatternBatchForm').addEventListener('submit', async (e) => {
+    // Create Batch Route Pattern Form Handler
+    document.getElementById('routePatternCreateBatchForm').addEventListener('submit', async (e) => {
         e.preventDefault();
-        const loader = document.getElementById('route_pattern_batch_loader');
-        const result = document.getElementById('route_pattern_batch_result');
-        const fileInput = document.getElementById('route_pattern_file');
+        const loader = document.getElementById('create_batch_loader');
+        const result = document.getElementById('create_batch_result');
+        const fileInput = document.getElementById('create_batch_file');
         
         loader.style.display = 'block';
         result.innerHTML = '';
@@ -194,6 +304,96 @@ function switchTab(tab) {
                         📥 Download Result File
                     </a>
                 </div>`;
+                // Clear form
+                document.getElementById('routePatternCreateBatchForm').reset();
+            } else {
+                result.innerHTML = `<div class="alert alert-error">
+                    <strong>Error!</strong> ${data.detail || data.error || 'Operation failed'}
+                </div>`;
+            }
+        } catch (error) {
+            loader.style.display = 'none';
+            result.innerHTML = `<div class="alert alert-error"><strong>Error!</strong> ${error.message}</div>`;
+        }
+    });
+
+    // Update Single Route Pattern Form Handler
+    document.getElementById('routePatternUpdateSingleForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const loader = document.getElementById('update_single_loader');
+        const result = document.getElementById('update_single_result');
+        
+        loader.style.display = 'block';
+        result.innerHTML = '';
+        
+        const formData = {
+            username: document.getElementById('update_username').value,
+            routepattern: document.getElementById('update_route_pattern').value,
+            partition: document.getElementById('update_partition').value
+        };
+        
+        try {
+            const response = await fetch('/api/updateroutepattern/single', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(formData)
+            });
+            const data = await response.json();
+            loader.style.display = 'none';
+            
+            if (response.ok) {
+                result.innerHTML = `<div class="alert alert-success">
+                    <strong>Success!</strong> ${data.Status || 'Route pattern updated successfully'}
+                    ${data.Detail ? '<br><small>' + JSON.stringify(data.Detail) + '</small>' : ''}
+                </div>`;
+                // Clear form
+                document.getElementById('routePatternUpdateSingleForm').reset();
+            } else {
+                result.innerHTML = `<div class="alert alert-error">
+                    <strong>Error!</strong> ${data.detail || data.error || 'Operation failed'}
+                </div>`;
+            }
+        } catch (error) {
+            loader.style.display = 'none';
+            result.innerHTML = `<div class="alert alert-error"><strong>Error!</strong> ${error.message}</div>`;
+        }
+    });
+
+    // Update Batch Route Pattern Form Handler
+    document.getElementById('routePatternUpdateBatchForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const loader = document.getElementById('update_batch_loader');
+        const result = document.getElementById('update_batch_result');
+        const fileInput = document.getElementById('update_batch_file');
+        
+        loader.style.display = 'block';
+        result.innerHTML = '';
+        
+        const formData = new FormData();
+        formData.append('file', fileInput.files[0]);
+        const fileName = fileInput.files[0].name;
+        
+        try {
+            const response = await fetch('/api/updateroutepattern/batchupdate', {
+                method: 'POST',
+                body: formData
+            });
+            const data = await response.json();
+            loader.style.display = 'none';
+            
+            if (response.ok) {
+                result.innerHTML = `<div class="alert alert-success">
+                    <strong>Success!</strong> ${data.Status || 'Batch update completed'}
+                    ${data.Detail ? '<br><small>' + JSON.stringify(data.Detail) + '</small>' : ''}
+                    <br><br>
+                    <a href="/api/download/result/route_pattern/${fileName}" 
+                       class="btn btn-primary" 
+                       style="margin-top: 10px; display: inline-block;">
+                        📥 Download Result File
+                    </a>
+                </div>`;
+                // Clear form
+                document.getElementById('routePatternUpdateBatchForm').reset();
             } else {
                 result.innerHTML = `<div class="alert alert-error">
                     <strong>Error!</strong> ${data.detail || data.error || 'Operation failed'}

@@ -55,3 +55,14 @@ class QueryModelRPSingle(BaseModel):
     """
     routepattern: str
     username: str
+
+class QueryModelRPUpdate(BaseModel):
+    """
+    Model for updating an existing route pattern.
+    
+    Attributes:
+        routepattern (str): The route pattern to update.
+        partition (str): The partition to assign to the route pattern.
+    """
+    routepattern: str
+    partition: str
