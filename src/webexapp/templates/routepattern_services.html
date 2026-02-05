@@ -76,6 +76,13 @@
                         <input type="text" id="create_route_pattern" name="routepattern" required placeholder="Enter route pattern (e.g., 420212345678)">
                         <small style="color: #999; display: block; margin-top: 5px;">Note: The '+' prefix will be added automatically</small>
                     </div>
+                    <div class="form-group">
+                        <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                            <input type="checkbox" id="create_single_india" name="is_india" style="width: auto; cursor: pointer;">
+                            <span>India Region</span>
+                        </label>
+                        <small style="color: #999; display: block; margin-top: 5px;">Check this if creating pattern in India CUCM</small>
+                    </div>
                     <button type="submit" class="btn btn-primary">Create Route Pattern</button>
                     <div id="create_single_loader" class="loader"></div>
                     <div id="create_single_result"></div>
@@ -92,6 +99,13 @@
                     <div class="form-group">
                         <label for="create_batch_file">Upload CSV File *</label>
                         <input type="file" id="create_batch_file" accept=".csv" required style="padding: 8px; background: rgba(0, 0, 0, 0.5);">
+                    </div>
+                    <div class="form-group">
+                        <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                            <input type="checkbox" id="create_batch_india" name="is_india" style="width: auto; cursor: pointer;">
+                            <span>India Region</span>
+                        </label>
+                        <small style="color: #999; display: block; margin-top: 5px;">Check this if creating patterns in India CUCM</small>
                     </div>
                     <button type="submit" class="btn btn-primary">Upload and Process</button>
                     <div id="create_batch_loader" class="loader"></div>
@@ -127,10 +141,6 @@
                 <p style="color: #aaa; margin-bottom: 20px; font-size: 0.95rem;">Update the partition for an existing route pattern in CUCM.</p>
                 <form id="routePatternUpdateSingleForm">
                     <div class="form-group">
-                        <label for="update_username">Username *</label>
-                        <input type="text" id="update_username" name="username" required placeholder="Enter username">
-                    </div>
-                    <div class="form-group">
                         <label for="update_route_pattern">Route Pattern *</label>
                         <input type="text" id="update_route_pattern" name="routepattern" required placeholder="Enter route pattern (e.g., 420212345678)">
                         <small style="color: #999; display: block; margin-top: 5px;">Note: The '+' prefix will be added automatically</small>
@@ -138,6 +148,13 @@
                     <div class="form-group">
                         <label for="update_partition">Partition *</label>
                         <input type="text" id="update_partition" name="partition" required placeholder="Enter partition name">
+                    </div>
+                    <div class="form-group">
+                        <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                            <input type="checkbox" id="update_single_india" name="is_india" style="width: auto; cursor: pointer;">
+                            <span>India Region</span>
+                        </label>
+                        <small style="color: #999; display: block; margin-top: 5px;">Check this if updating pattern in India CUCM</small>
                     </div>
                     <button type="submit" class="btn btn-primary">Update Route Pattern</button>
                     <div id="update_single_loader" class="loader"></div>
@@ -155,6 +172,13 @@
                     <div class="form-group">
                         <label for="update_batch_file">Upload CSV File *</label>
                         <input type="file" id="update_batch_file" accept=".csv" required style="padding: 8px; background: rgba(0, 0, 0, 0.5);">
+                    </div>
+                    <div class="form-group">
+                        <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                            <input type="checkbox" id="update_batch_india" name="is_india" style="width: auto; cursor: pointer;">
+                            <span>India Region</span>
+                        </label>
+                        <small style="color: #999; display: block; margin-top: 5px;">Check this if updating patterns in India CUCM</small>
                     </div>
                     <button type="submit" class="btn btn-primary">Upload and Process</button>
                     <div id="update_batch_loader" class="loader"></div>
@@ -241,7 +265,8 @@ function switchSubTab(mainTab, subTab) {
         
         const formData = {
             username: document.getElementById('create_username').value,
-            routepattern: document.getElementById('create_route_pattern').value
+            routepattern: document.getElementById('create_route_pattern').value,
+            is_india: document.getElementById('create_single_india').checked
         };
         
         try {
@@ -283,6 +308,7 @@ function switchSubTab(mainTab, subTab) {
         
         const formData = new FormData();
         formData.append('file', fileInput.files[0]);
+        formData.append('is_india', document.getElementById('create_batch_india').checked);
         const fileName = fileInput.files[0].name;
         
         try {
@@ -327,9 +353,9 @@ function switchSubTab(mainTab, subTab) {
         result.innerHTML = '';
         
         const formData = {
-            username: document.getElementById('update_username').value,
             routepattern: document.getElementById('update_route_pattern').value,
-            partition: document.getElementById('update_partition').value
+            partition: document.getElementById('update_partition').value,
+            is_india: document.getElementById('update_single_india').checked
         };
         
         try {
@@ -371,6 +397,7 @@ function switchSubTab(mainTab, subTab) {
         
         const formData = new FormData();
         formData.append('file', fileInput.files[0]);
+        formData.append('is_india', document.getElementById('update_batch_india').checked);
         const fileName = fileInput.files[0].name;
         
         try {

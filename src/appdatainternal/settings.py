@@ -2,6 +2,10 @@ import os
 import json
 import pandas as pd
 
+
+with open("appdatainternal/cucm.json", 'r') as f:
+    CUCM_ADDRESSES = json.load(f)
+
 mode = "Prod"
 if mode == "Prod":
     with open("appdatainternal/acd_locations.json", 'r') as f:

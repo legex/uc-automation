@@ -32,6 +32,7 @@ from webexapp.models.query_models import QueryModelLdap, QueryModelWebex, QueryM
 from webexapp.services.rp_batch import batch_routepattern_auto, batch_updateroutepatterns_auto
 #from src.webexapp.webexbotbaseunused import WebexbotBase
 from cucmapi.axlroutepattern import AXLRoutePatternOperations
+from cucmapi.axlconn import ConnectionAXL
 from webexapi.webexgeneral import WebexGenMigration
 from webexapi.webexACD import WebexMigACD
 from webexapi.webexoperations import WebexOperation
@@ -637,7 +638,7 @@ async def b_update_webex_acd(file: UploadFile | None = None, current_user: str =
                             detail=f"Error processing file: {str(e)}") from e
 
 @router.post("/api/routepattern")
-async def create_route_pattern(file: UploadFile, current_user: str = Depends(allowed_users)):
+async def create_route_pattern(file: UploadFile, is_india: bool = False, current_user: str = Depends(allowed_users)):
     """
     Create route patterns in CUCM from a CSV file.
     
@@ -661,11 +662,14 @@ async def create_route_pattern(file: UploadFile, current_user: str = Depends(all
         logger.error("Empty file uploaded for route pattern creation by user: %s, file: %s", current_user, file.filename)
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail="Uploaded file is empty")
+    axlconn = ConnectionAXL()
+    service = axlconn.service(is_india)
     try:
         logger.debug("Processing route pattern creation by user: %s for file: %s", current_user, file.filename)
         response = batch_routepattern_auto(
             pd.io.common.BytesIO(contents),
-            file.filename
+            file.filename,
+            service
             )
         logger.info("Route pattern creation completed by user: %s for file: %s", current_user, file.filename)
         return {"Status": "Success", "Detail": response}
@@ -708,7 +712,7 @@ async def remove_webex_license(email: str = Form(...), region_India: bool = Fals
                             detail=f"Error removing Webex license: {str(e)}") from e
 
 @router.post("/api/createroutepattern/single")
-async def create_route_pattern_single(query: QueryModelRPSingle, current_user: str = Depends(allowed_users)):
+async def create_route_pattern_single(query: QueryModelRPSingle, is_india: bool = False, current_user: str = Depends(allowed_users)):
     """
     Create a single route pattern in CUCM.
     
@@ -724,6 +728,9 @@ async def create_route_pattern_single(query: QueryModelRPSingle, current_user: s
         logger.error("No query provided for route pattern creation by user: %s", current_user)
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail="Query must be provided.")
+    
+    axlconn = ConnectionAXL()
+    service = axlconn.service(is_india)
     routepattern = f"\+{query.routepattern}"
     try:
         logger.debug("Processing route pattern creation by user: %s for target user: %s", current_user, query.username)
@@ -736,7 +743,7 @@ async def create_route_pattern_single(query: QueryModelRPSingle, current_user: s
                             detail=f"Error creating route pattern: {str(e)}") from e
 
 @router.post("/api/updateroutepattern/single")
-async def update_route_pattern_single(query: QueryModelRPUpdate, current_user: str = Depends(allowed_users)):
+async def update_route_pattern_single(query: QueryModelRPUpdate, is_india: bool = False, current_user: str = Depends(allowed_users)):
     """
     Update a single route pattern in CUCM.
     
@@ -752,9 +759,11 @@ async def update_route_pattern_single(query: QueryModelRPUpdate, current_user: s
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail="Query must be provided.")
     pattern = f"\+{query.routepattern}"
+    axlconn = ConnectionAXL()
+    service = axlconn.service(is_india)
     try:
         logger.debug("Processing route pattern update by user: %s for target user: %s", current_user, query.username)
-        result = axlrp.update_routepattern(pattern, query.partition)
+        result = axlrp.update_routepattern(pattern, query.partition, service=service)
         logger.info("Route pattern update completed by user: %s for target user: %s", current_user, query.username)
         return {"Status": "Route pattern update initiated", "Detail": result}
     except Exception as e:
@@ -763,7 +772,7 @@ async def update_route_pattern_single(query: QueryModelRPUpdate, current_user: s
                             detail=f"Error updating route pattern: {str(e)}") from e
 
 @router.post("/api/updateroutepattern/batchupdate")
-async def batch_update_route_pattern(file: UploadFile, current_user: str = Depends(allowed_users)):
+async def batch_update_route_pattern(file: UploadFile, is_india: bool = False, current_user: str = Depends(allowed_users)):
     """
     Batch update route patterns in CUCM from a CSV file.
     
@@ -782,6 +791,8 @@ async def batch_update_route_pattern(file: UploadFile, current_user: str = Depen
         logger.error("Invalid file type for batch route pattern update by user: %s: %s", current_user, file.content_type)
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail="Invalid file type. Please upload a CSV file.")
+    axlconn = ConnectionAXL()
+    service = axlconn.service(is_india)
     contents = await file.read()
     if not contents:
         logger.error("Empty file uploaded for batch route pattern update by user: %s, file: %s", current_user, file.filename)
@@ -791,7 +802,8 @@ async def batch_update_route_pattern(file: UploadFile, current_user: str = Depen
         logger.debug("Processing batch route pattern update by user: %s for file: %s", current_user, file.filename)
         response = batch_updateroutepatterns_auto(
             pd.io.common.BytesIO(contents),
-            file.filename
+            file.filename,
+            service
             )
         logger.info("Batch route pattern update completed by user: %s for file: %s", current_user, file.filename)
         return {"Status": "Success", "Detail": response}

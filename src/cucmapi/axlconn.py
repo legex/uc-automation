@@ -15,11 +15,11 @@ from zeep import Client, Settings
 from zeep.transports import Transport
 from cucmapi.debugplugin import MyLoggingPlugin
 from utils.logger import setup_logger
+from appdatainternal.settings import CUCM_ADDRESSES
 
 load_dotenv()
 
 logger = setup_logger('axlconnection', '/a/logs/axlconnection.log')
-CUCM_ADDRESS="uc-cma.akamai.com"
 DEBUG = False
 mode = "Prod"  # Change to "Dev" for development environment
 if mode == "Dev":
@@ -120,19 +120,32 @@ class ConnectionAXL:
             logger.debug("Zeep client created")
         return self._client
 
-    def service(self):
+    def service(self, is_india=False):
         """
         Returns the AXL API service binding to perform API calls.
+        
+        Note: This creates a new service binding each time to ensure the correct
+        CUCM endpoint (US or India) is used based on the is_india parameter.
+        Services are lightweight and the overhead is minimal compared to
+        maintaining region-specific cached instances.
+
+        Args:
+            is_india (bool): If True, connect to India CUCM; otherwise US CUCM.
 
         Returns:
             ServiceProxy: Zeep service proxy to interact with AXL.
         """
-        if not self._service:
-            logger.info("Creating AXL service binding")
-            client = self._clientcreate()
-            self._service = client.create_service(
-                '{http://www.cisco.com/AXLAPIService/}AXLAPIBinding',
-                f'https://{CUCM_ADDRESS}:8443/axl/'
-            )
-            logger.debug("AXL service binding created")
-        return self._service
+        if is_india:
+            logger.info("Creating AXL service binding for India CUCM")
+            ucm_address = CUCM_ADDRESSES["india"]
+        else:
+            logger.info("Creating AXL service binding for US CUCM")
+            ucm_address = CUCM_ADDRESSES["us"]
+        
+        client = self._clientcreate()
+        service = client.create_service(
+            '{http://www.cisco.com/AXLAPIService/}AXLAPIBinding',
+            f'https://{ucm_address}:8443/axl/'
+        )
+        logger.debug("AXL service binding created for %s", ucm_address)
+        return service

@@ -17,7 +17,9 @@ logger = setup_logger('rp_batch', '/a/logs/rp_batch.log')
 axloperations = AXLOperations()
 axlrp = AXLRoutePatternOperations()
 
-def batch_routepattern_auto(file, filename):
+def batch_routepattern_auto(file, filename, service):
+    if not service:
+        logger.debug("No service provided to batch_routepattern_auto")
     """Create Route Pattern in CUCM from CSV"""
     logger.info("Starting batch route pattern creation for file: %s", filename)
     df = pd.read_csv(file, dtype={'ContactNumber': str})
@@ -29,7 +31,7 @@ def batch_routepattern_auto(file, filename):
         logger.info("Processing route pattern: %s for user: %s", routepattern, username)
         try:
             logger.debug("Updating line partition for route pattern: %s", routepattern)
-            update_partition = axlrp.update_line(routepattern)
+            update_partition = axlrp.update_line(routepattern, service=service)
             logger.debug("Creating route pattern: %s", routepattern)
             update_rp = axlrp.create_routepattern(routepattern, username)
             status_on_cucm = "Success" if update_rp else "Failed"
@@ -54,8 +56,10 @@ def batch_routepattern_auto(file, filename):
     logger.info("Batch route pattern creation completed for file: %s", filename)
     return "Script Run is Finished"
 
-def batch_updateroutepatterns_auto(file, filename, partition):
+def batch_updateroutepatterns_auto(file, filename, partition, service):
     """Update Route Pattern in CUCM from CSV"""
+    if not service:
+        logger.debug("No service provided to batch_updateroutepatterns_auto")
     logger.info("Starting batch route pattern update for file: %s", filename)
     df = pd.read_csv(file, dtype={'PatternToUpdate': str})
     logger.info("Loaded %d rows from CSV file", len(df))
@@ -65,7 +69,7 @@ def batch_updateroutepatterns_auto(file, filename, partition):
         logger.info("Processing route pattern: %s update partition to %s", routepattern, partition)
         try:
             logger.debug("Updating route pattern: %s", routepattern)
-            update_rp = axlrp.update_routepattern(routepattern, partition)
+            update_rp = axlrp.update_routepattern(routepattern, partition, service=service)
             status_on_cucm = "Success" if update_rp else "Failed"
             logger.info("Route pattern %s update status on CUCM: %s", routepattern, status_on_cucm)
         except (Exception) as e:

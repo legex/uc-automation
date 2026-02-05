@@ -43,35 +43,37 @@ class AXLOperations:
             username (str): CUCM user ID.
             pattern (str): New directory number (DN) pattern to apply.
         """
-        axlclient = ConnectionAXL()
-        self.service = axlclient.service()
 
     def get_user_display_name(self,
-                              username: str):
+                              username: str, service=None):
         """
         Retrieve the user's full display name (first + middle + last).
 
         Returns:
             str or None: Full display name if user exists, else None.
         """
+        if not service:
+            logger.debug("No service provided")
         try:
-            user = self.service.getUser(userid=username[3:])['return'].user
+            user = service.getUser(userid=username[3:])['return'].user
             return f"{user.firstName} {user.middleName + ' ' if user.middleName else ''}{user.lastName}"
         except Fault as e:
             logger.error("Zeep error: Could not fetch user %s: %s", username, e)
             return None
 
     def get_device(self,
-                   username: str):
+                   username: str, service=None):
         """
         Get the CSF device (softphone) line configuration for the user.
 
         Returns:
             object or None: Lines object if found, otherwise None.
         """
+        if not service:
+            logger.debug("No service provided")
         print(f'username as observed in get_device {username}')
         try:
-            user_details = self.service.getPhone(name=username)['return'].phone
+            user_details = service.getPhone(name=username)['return'].phone
             return user_details
         except Fault as e:
             logger.error("Zeep error: Failed to get CSF device for %s: %s", username, e)
@@ -79,7 +81,7 @@ class AXLOperations:
 
     def get_line(self,
                  pattern: str,
-                 route_partition: str):
+                 route_partition: str, service=None):
         """
         Fetch the line configuration for a given pattern and partition.
 
@@ -90,8 +92,10 @@ class AXLOperations:
         Returns:
             dict or None: Line details if found, else None.
         """
+        if not service:
+            logger.debug("No service provided")
         try:
-            return self.service.getLine(pattern=pattern,
+            return service.getLine(pattern=pattern,
                                         routePartitionName=route_partition
                                         )['return']
         except Fault:
@@ -102,7 +106,7 @@ class AXLOperations:
                     username: str,
                     new_pattern: str,
                     old_pattern: str,
-                    route_partition: str):
+                    route_partition: str, service=None):
         """
         Update an existing line to use the new pattern and update display name.
 
@@ -113,8 +117,10 @@ class AXLOperations:
         Returns:
             dict or None: Update response if successful, otherwise None.
         """
+        if not service:
+            logger.debug("No service provided")
         print(f'username as observed in update_line {username}')
-        line_data = self.get_line(old_pattern, route_partition)
+        line_data = self.get_line(old_pattern, route_partition, service=service)
         if not line_data:
             logger.warning("No line data found for pattern: %s", old_pattern)
             sys.exit(1)
@@ -122,7 +128,7 @@ class AXLOperations:
         line_serialized = serialize_object(line_data)
         line_dict = clean_axl_dict(line_serialized)['line']
 
-        display_name = self.get_user_display_name(username)
+        display_name = self.get_user_display_name(username, service=service)
         if display_name:
             line_dict['alertingName'] = display_name
             line_dict['asciiAlertingName'] = display_name
@@ -132,14 +138,14 @@ class AXLOperations:
 
         try:
             logger.info("Updating line from %s to %s", old_pattern, new_pattern)
-            return self.service.updateLine(**slinedict)['return']
+            return service.updateLine(**slinedict)['return']
         except Fault as e:
             logger.error("Failed to update line: %s", e)
             return f"error: {e}"
 
     def add_line(self,
                  new_pattern: str,
-                 routepartition: str):
+                 routepartition: str, service=None):
         """
         Add a new line with the specified pattern and route partition.
 
@@ -149,6 +155,8 @@ class AXLOperations:
         Returns:
             dict or None: Add line response if successful, else None.
         """
+        if not service:
+            logger.debug("No service provided")
         basic_lineconfig = {
             'pattern': new_pattern,
             'routePartitionName': routepartition,
@@ -156,17 +164,19 @@ class AXLOperations:
             'usage': 'Device',
         }
         try:
-            return self.service.addLine(line=basic_lineconfig)
+            return service.addLine(line=basic_lineconfig)
         except Fault as e:
             logger.error("Failed to add line '%s': %s", new_pattern, e)
             return None
 
     def update_csf_phone_lines(self,
                                username: str,
-                               new_pattern: str):
+                               new_pattern: str, service=None):
         """Method to update phone lines and return clean lines with updated details"""
         print(f'username as observed in update_csf_phone_lines {username}')
-        lines = self.get_device(username)
+        if not service:
+            logger.debug("No service provided")
+        lines = self.get_device(username, service=service)
         if not lines:
             logger.error("No CSF device found for user: %s", username)
             return None
@@ -191,7 +201,7 @@ class AXLOperations:
                         new_pattern,
                         routepartition
                     )
-                    self.add_line(new_pattern, routepartition)
+                    self.add_line(new_pattern, routepartition, service=service)
                 else:
                     logger.info("Line with pattern '%s' already exists in partition '%s'",
                                 new_pattern,
@@ -199,7 +209,7 @@ class AXLOperations:
                 updated_partitions.add(routepartition)
 
             if not updated and old_pattern != new_pattern:
-                self.update_line(username, new_pattern, old_pattern, routepartition)
+                self.update_line(username, new_pattern, old_pattern, routepartition, service=service)
                 line['dirn']['pattern'] = new_pattern
                 updated = True
             else:
@@ -215,15 +225,17 @@ class AXLOperations:
         return clean_lines
 
 
-    def update_all_devices(self, username: str, clean_lines: str, new_pattern: str):
+    def update_all_devices(self, username: str, clean_lines: str, new_pattern: str, service=None):
         """ Method to update all relevant devices"""
         print(f'username as observed in update_all_devices {username}')
         device_types = ['CSF', 'TCT-', 'BOT-']
+        if not service:
+            logger.debug("No service provided")
 
         all_results = {}
         for prefix in device_types:
             device_name = f"{prefix}{username.upper()}"
-            phone = self.get_device(device_name)
+            phone = self.get_device(device_name, service=service)
             #print("here is phone: ", phone)
             #print(f'username as observed with {prefix} {device_name}')
             if phone:
@@ -236,7 +248,7 @@ class AXLOperations:
                     lines_to_use = clean_lines
                 try:
                     logger.info("Updating %s device for user: %s", device_name, username)
-                    result = self.service.updatePhone(name=device_name, lines=lines_to_use)
+                    result = service.updatePhone(name=device_name, lines=lines_to_use)
                     all_results[device_name] = result
                 except Fault as e:
                     logger.error("Zeep error while updating phone for user %s: %s", username, e)
@@ -252,14 +264,16 @@ class AXLOperations:
 
     def update_phone(self,
                      username: str,
-                     new_pattern: str):
+                     new_pattern: str, service=None):
         """Function call for updating lines"""
+        if not service:
+            logger.debug("No service provided")
         logger.info("Starting updatePhone for user: %s with new DN: %s",
                     username,
                     new_pattern)
         #print(f'username as observed in update_phone {username}')
 
-        clean_lines = self.update_csf_phone_lines(f"CSF{username.upper()}", new_pattern)
+        clean_lines = self.update_csf_phone_lines(f"CSF{username.upper()}", new_pattern, service=service)
         if not clean_lines:
             return None
-        return self.update_all_devices(username, clean_lines, new_pattern)
+        return self.update_all_devices(username, clean_lines, new_pattern, service=service)
