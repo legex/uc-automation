@@ -232,7 +232,12 @@
                     </div>
                     <div class="form-group">
                         <label for="webex_gen_region">Region *</label>
-                        <input type="text" id="webex_gen_region" name="region" required placeholder="Enter region">
+                        <select id="webex_gen_region" name="region" required>
+                            <option value="">Select a region</option>
+                            {% for region in regions %}
+                            <option value="{{ region }}">{{ region }}</option>
+                            {% endfor %}
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="webex_gen_external">External Number (Optional)</label>
@@ -264,11 +269,6 @@
                 </div>
 
                 <form id="webexGeneralBatchForm">
-                    <div class="form-group">
-                        <label for="webex_gen_batch_start_ext">Start Extension Number *</label>
-                        <input type="text" id="webex_gen_batch_start_ext" name="start_extension" required placeholder="e.g., 1000">
-                        <small style="color: #999; display: block; margin-top: 5px;">This is the starting extension number for your batch</small>
-                    </div>
                     <div class="form-group">
                         <label for="webex_gen_batch_file">Upload CSV File *</label>
                         <input type="file" id="webex_gen_batch_file" accept=".csv" required style="padding: 8px; background: rgba(0, 0, 0, 0.5);">
@@ -333,7 +333,12 @@
                     </div>
                     <div class="form-group">
                         <label for="webex_acd_region">Region *</label>
-                        <input type="text" id="webex_acd_region" name="region" required placeholder="Enter region">
+                        <select id="webex_acd_region" name="region" required>
+                            <option value="">Select a region</option>
+                            {% for region in regions %}
+                            <option value="{{ region }}">{{ region }}</option>
+                            {% endfor %}
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="webex_acd_external">External Number *</label>
@@ -366,11 +371,6 @@
                 </div>
 
                 <form id="webexACDBatchForm">
-                    <div class="form-group">
-                        <label for="webex_acd_batch_start_ext">Start Extension Number *</label>
-                        <input type="text" id="webex_acd_batch_start_ext" name="start_extension" required placeholder="e.g., 2000">
-                        <small style="color: #999; display: block; margin-top: 5px;">This is the starting extension number for your ACD batch</small>
-                    </div>
                     <div class="form-group">
                         <label for="webex_acd_batch_file">Upload CSV File *</label>
                         <input type="file" id="webex_acd_batch_file" accept=".csv" required style="padding: 8px; background: rgba(0, 0, 0, 0.5);">
@@ -634,14 +634,12 @@ document.addEventListener('DOMContentLoaded', function() {
         const loader = document.getElementById('webex_gen_batch_loader');
         const result = document.getElementById('webex_gen_batch_result');
         const fileInput = document.getElementById('webex_gen_batch_file');
-        const startExtension = document.getElementById('webex_gen_batch_start_ext').value;
         
         loader.style.display = 'block';
         result.innerHTML = '';
         
         const formData = new FormData();
         formData.append('file', fileInput.files[0]);
-        formData.append('start_extension', startExtension);
         const fileName = fileInput.files[0].name;
         
         try {
@@ -680,14 +678,12 @@ document.addEventListener('DOMContentLoaded', function() {
         const loader = document.getElementById('webex_acd_batch_loader');
         const result = document.getElementById('webex_acd_batch_result');
         const fileInput = document.getElementById('webex_acd_batch_file');
-        const startExtension = document.getElementById('webex_acd_batch_start_ext').value;
         
         loader.style.display = 'block';
         result.innerHTML = '';
         
         const formData = new FormData();
         formData.append('file', fileInput.files[0]);
-        formData.append('start_extension', startExtension);
         const fileName = fileInput.files[0].name;
         
         try {

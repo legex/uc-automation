@@ -64,7 +64,12 @@
                 </div>
                 <div class="form-group">
                     <label for="number_add_region">Region *</label>
-                    <input type="text" id="number_add_region" name="region" required placeholder="Enter region/country">
+                    <select id="number_add_region" name="region" required>
+                        <option value="">Select a region</option>
+                        {% for region in regions %}
+                        <option value="{{ region }}">{{ region }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
                 <button type="submit" class="btn btn-primary">Add Number</button>
                 <div id="number_add_single_loader" class="loader"></div>

@@ -15,6 +15,7 @@ Environment Variables Required:
     (Other tokens loaded from .env via submodules)
 """
 import os
+import json
 import pandas as pd
 from dotenv import load_dotenv
 from fastapi import APIRouter, Request, UploadFile, HTTPException, status, Form, Depends
@@ -36,11 +37,16 @@ from webexapi.webexACD import WebexMigACD
 from webexapi.webexoperations import WebexOperation
 from webexapi.webexnumberadd import addnumbersingle, addnumberbatch
 from utils.logger import setup_logger
-from appdatainternal.settings import allowed_users_list
+from appdatainternal.settings import allowed_users_list, ACDLOCATIONS
 allowed_users_list = allowed_users_list
 # Load environment variables from .env file
 load_dotenv()
 # API_TOKEN = os.getenv("WEBEXBOTTOKEN")
+
+# Load regions from acd_locations.json
+
+regions_list = sorted(ACDLOCATIONS.keys())
+
 templates = Jinja2Templates(directory="webexapp/templates")
 logger = setup_logger('webapp', '/a/logs/webapp.log')
 axlrp = AXLRoutePatternOperations()
@@ -117,7 +123,7 @@ async def webex_services_page(request: Request, current_user: str = Depends(allo
     Returns:
         HTMLResponse: The rendered webex_services.html template.
     """
-    return templates.TemplateResponse("webex_services.html", {"request": request, "current_user": current_user})
+    return templates.TemplateResponse("webex_services.html", {"request": request, "current_user": current_user, "regions": regions_list})
 
 @router.get("/api/routepattern-services", response_class=HTMLResponse)
 async def routepattern_services_page(request: Request, current_user: str = Depends(allowed_users)):
@@ -143,7 +149,7 @@ async def number_services_page(request: Request, current_user: str = Depends(all
     Returns:
         HTMLResponse: The rendered number_services.html template.
     """
-    return templates.TemplateResponse("number_services.html", {"request": request, "current_user": current_user})
+    return templates.TemplateResponse("number_services.html", {"request": request, "current_user": current_user, "regions": regions_list})
 
 @router.get("/api/single-update", response_class=HTMLResponse)
 async def single_update_page(request: Request, current_user: str = Depends(allowed_users)):
@@ -499,7 +505,7 @@ async def update_webex_general(query: QueryModelWebex, current_user: str = Depen
                             detail=f"Error updating Webex: {str(e)}") from e
 
 @router.post("/api/updatewebexgeneral/batch")
-async def batch_update_webex_general(start_extension: str = None, file: UploadFile | None = None, current_user: str = Depends(allowed_users)):
+async def batch_update_webex_general(file: UploadFile | None = None, current_user: str = Depends(allowed_users)):
     """
     Batch update Webex settings from a CSV file.
     
@@ -519,10 +525,7 @@ async def batch_update_webex_general(start_extension: str = None, file: UploadFi
         logger.error("No file provided for batch Webex update by user: %s", current_user)
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail="File must be provided.")
-    if start_extension is None:
-        logger.error("No start_extension provided for batch Webex update by user: %s", current_user)
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
-                            detail="start_extension must be provided.")
+
     if file.content_type != 'text/csv':
         logger.error("Invalid file type for batch Webex update by user: %s: %s", current_user, file.content_type)
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
@@ -535,8 +538,7 @@ async def batch_update_webex_general(start_extension: str = None, file: UploadFi
     try:
         logger.debug("Processing batch Webex general update by user: %s for file: %s", current_user, file.filename)
         response = batch_update_webex_gen(pd.io.common.BytesIO(contents),
-                                          file.filename,
-                                          start_extension
+                                          file.filename
                                           )
         logger.info("Batch Webex general update completed by user: %s for file: %s", current_user, file.filename)
         return {"Status": "Success", "Detail": response}
@@ -592,7 +594,7 @@ async def update_webex_acd(query: QueryModelWebex, current_user: str = Depends(a
                                 detail="External number must be provided for ACD updates.")
 
 @router.post("/api/updatewebexacd/batch")
-async def b_update_webex_acd(start_extension: str = None, file: UploadFile | None = None, current_user: str = Depends(allowed_users)):
+async def b_update_webex_acd(file: UploadFile | None = None, current_user: str = Depends(allowed_users)):
     """
     Batch update Webex ACD settings from an Excel file.
     
@@ -611,10 +613,6 @@ async def b_update_webex_acd(start_extension: str = None, file: UploadFile | Non
         logger.error("No file provided for batch Webex ACD update by user: %s", current_user)
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail="File must be provided.")
-    if start_extension is None:
-        logger.error("No start_extension provided for batch Webex ACD update by user: %s", current_user)
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
-                            detail="start_extension must be provided.")
     if file.content_type != 'text/csv':
         logger.error("Invalid file type for batch Webex ACD update by user: %s: %s", current_user, file.content_type)
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
@@ -626,7 +624,7 @@ async def b_update_webex_acd(start_extension: str = None, file: UploadFile | Non
                             detail="Uploaded file is empty")
     try:
         logger.debug("Processing batch Webex ACD update by user: %s for file: %s", current_user, file.filename)
-        response = batch_update_webex_acd(pd.io.common.BytesIO(contents), file.filename, start_extension)
+        response = batch_update_webex_acd(pd.io.common.BytesIO(contents), file.filename)
         logger.info("Batch Webex ACD update completed by user: %s for file: %s", current_user, file.filename)
         return {"Status": "Success", "Detail": response}
     except HTTPException as e:

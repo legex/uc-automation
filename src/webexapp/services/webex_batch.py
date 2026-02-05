@@ -24,7 +24,7 @@ webex_mig_gen = WebexGenMigration()
 webex_acd_mig = WebexMigACD()
 webop = WebexOperation()
 
-def batch_update_webex_gen(file, filename, start_extension):
+def batch_update_webex_gen(file, filename):
     """Update Webex Extension"""
     logger.info("Starting batch Webex General update for file: %s", filename)
     df = pd.read_csv(file, dtype=str, na_filter=True, keep_default_na=True)
@@ -35,12 +35,11 @@ def batch_update_webex_gen(file, filename, start_extension):
     
     # Now safe to strip (no NaN left)
     df['ContactNumber'] = df['ContactNumber'].replace('', None)
-    firstextension = start_extension
     for idx, row in df.iterrows():
         logger.debug("Processing row %d", idx + 1)
         username = row['UserId']
         phonenumber = row["ContactNumber"]
-        extension = firstextension
+        extension = row['extension']
         region = row['Country']
         ad_num = prefixes[region]+extension
         email = row["Email"]
@@ -97,23 +96,21 @@ def batch_update_webex_gen(file, filename, start_extension):
                                        header=False,
                                        index=False
                                        )
-        firstextension = str(int(firstextension) + 1)
     logger.info("Batch Webex General update completed for file: %s", filename)
     return "Script Run is Finished"
 
-def batch_update_webex_acd(file, filename, start_extension):
+def batch_update_webex_acd(file, filename):
     """Update Webex Extension"""
     logger.info("Starting batch Webex ACD update for file: %s", filename)
     df = pd.read_csv(file, dtype={'extension': str, 'ContactNumber': str})
     logger.info("Loaded %d rows from Excel file", len(df))
-    first_extension = start_extension
     for idx, row in df.iterrows():
         logger.debug("Processing row %d", idx + 1)
         username = row['UserId']
         phonenumber = "+" + row['ContactNumber']
-        extension = first_extension
+        extension = row['extension']
         region = row['Country']
-        ad_num = prefixes[region]+first_extension
+        ad_num = prefixes[region]+extension
         email = row["Email"]
         logger.info("Processing user: %s, email: %s, extension: %s, phone: %s", username, email, extension, phonenumber)
 
@@ -147,6 +144,5 @@ def batch_update_webex_acd(file, filename, start_extension):
             header=False,
             index=False
             )
-        first_extension = str(int(first_extension) + 1)
     logger.info("Batch Webex ACD update completed for file: %s", filename)
     return "Script Run is Finished"
