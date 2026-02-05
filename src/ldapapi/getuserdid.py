@@ -6,8 +6,6 @@ from Active Directory via LDAP queries.
 Functions:
     user_details: Fetch user contact and DID information from LDAP.
 """
-import os
-from dotenv import load_dotenv
 import ldap3
 from pprint import pprint
 from ldap3 import (Server,
@@ -20,11 +18,11 @@ from requests.auth import HTTPBasicAuth
 from urllib3 import disable_warnings
 from urllib3.exceptions import InsecureRequestWarning
 import json
+from appdatainternal.settings import LDAP_USERNAME, SERVER, LDAP_PASSWORD
 
-load_dotenv()
-SERVER = os.getenv('LDAP_SERVER')
-LDAP_USERNAME = os.getenv('LDAPUSER')
-LDAP_PASSWORD = os.getenv('LDAPPASS')
+ADSERVER = SERVER
+ADLDAP_USERNAME = LDAP_USERNAME
+ADLDAP_PASSWORD = LDAP_PASSWORD
 def user_details(userid):
 	"""
 	Retrieve detailed user information from Active Directory.
@@ -49,9 +47,9 @@ def user_details(userid):
 		ConnectionError: If LDAP connection fails.
 	"""
 	try:
-		server = Server(SERVER, get_info=ALL)
-		conn = Connection(server, user=LDAP_USERNAME, password=LDAP_PASSWORD, authentication=NTLM)
-		server_uri = f'ldaps://{SERVER}'
+		server = Server(ADSERVER, get_info=ALL)
+		conn = Connection(server, user=ADLDAP_USERNAME, password=ADLDAP_PASSWORD, authentication=NTLM)
+		server_uri = f'ldaps://{ADSERVER}'
 		search_base = 'dc=corp,dc=akamai,dc=com'
 		attrs = ['*']
 		# Using ldap3

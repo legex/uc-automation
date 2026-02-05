@@ -16,3 +16,5 @@ src/webexapp/webex_token_renewalcode.py
 src/webexapp/webexbotbaseunused.py
 src/webexapp/webexurlexpunused.py
 src/response.json
+ldap_user.txt
+webex_token.txt

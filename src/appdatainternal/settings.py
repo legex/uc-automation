@@ -56,4 +56,12 @@ def ensure_resultfile_path(resultfile_path):
     return resultfile_path
 resultfile_location = ensure_resultfile_path(resultfile_path)
 
-allowed_users_list = ['abshukla', 'risaxen', 'raksingh', 'sshrutik']
+
+
+SERVER = "wauth.corp.akamai.com:636"
+LDAP_USERNAME = "akamai.com\\svc_tmt_account"
+ldapsecretfile = "/a/secrets/app/ldap_user/ldap_user.opaque"
+with open(ldapsecretfile, 'r') as f:
+    LDAP_PASSWORD = f.read().strip()
+
+allowed_users_list = ['abshukla', 'risaxen', 'raksingh', 'sshrutik', 'nvemula', 'emontero', 'ratiwar', 'rpangira', 'rasahu', 'akalpath']

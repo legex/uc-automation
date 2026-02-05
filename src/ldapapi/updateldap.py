@@ -23,11 +23,11 @@ from requests import Session
 from requests.auth import HTTPBasicAuth
 from urllib3 import disable_warnings
 from urllib3.exceptions import InsecureRequestWarning
+from appdatainternal.settings import LDAP_USERNAME, SERVER, LDAP_PASSWORD
 
-load_dotenv()
-SERVER = os.getenv('LDAP_SERVER')
-LDAP_USERNAME = os.getenv('LDAPUSER')
-LDAP_PASSWORD = os.getenv('LDAPPASS')
+ADSERVER = SERVER
+ADLDAP_USERNAME = LDAP_USERNAME
+ADLDAP_PASSWORD = LDAP_PASSWORD
 def update_contacts_num_withDID(userid, internal_extension,
 								external_number
 								):
@@ -52,17 +52,17 @@ def update_contacts_num_withDID(userid, internal_extension,
 		Exception: For other errors during the update process.
 	"""
 	try:
-		server = Server(SERVER, get_info=ALL)
-		conn = Connection(server, user=LDAP_USERNAME, password=LDAP_PASSWORD, authentication=NTLM)
-		server_uri = f'ldaps://{SERVER}'
+		server = Server(ADSERVER, get_info=ALL)
+		conn = Connection(server, user=ADLDAP_USERNAME, password=ADLDAP_PASSWORD, authentication=NTLM)
+		server_uri = f'ldaps://{ADSERVER}'
 		search_base = 'dc=corp,dc=akamai,dc=com'
 		attrs = ['*']
 		# Using ldap3
 		server = ldap3.Server(server_uri)
 
 		with ldap3.Connection(server,
-							user=LDAP_USERNAME,
-							password=LDAP_PASSWORD,
+							user=ADLDAP_USERNAME,
+							password=ADLDAP_PASSWORD,
 							authentication=NTLM) as conn:
 		#use a outpout to confirm if a user exists
 			a=conn.search(search_base, f'(&(objectcategory=user)(samaccountname={userid})(!(|(userAccountControl=514)(employeeNumber=88888)(userAccountControl=66050))))',attributes=['sAMAccountName','employeeNumber','cn', 'givenName','telephonenumber','department','division','othertelephone','distinguishedname','objectguid','akaLegalLastName','akaLegalFirstName'])
@@ -111,17 +111,17 @@ def update_contacts_num(userid, internal_extension):
 		Exception: For other errors during the update process.
 	"""
 	try:
-		server = Server(SERVER, get_info=ALL)
-		conn = Connection(server, user=LDAP_USERNAME, password=LDAP_PASSWORD, authentication=NTLM)
-		server_uri = f'ldaps://{SERVER}'
+		server = Server(ADSERVER, get_info=ALL)
+		conn = Connection(server, user=ADLDAP_USERNAME, password=ADLDAP_PASSWORD, authentication=NTLM)
+		server_uri = f'ldaps://{ADSERVER}'
 		search_base = 'dc=corp,dc=akamai,dc=com'
 		attrs = ['*']
 		# Using ldap3
 		server = ldap3.Server(server_uri)
 
 		with ldap3.Connection(server,
-							user=LDAP_USERNAME,
-							password=LDAP_PASSWORD,
+							user=ADLDAP_USERNAME,
+							password=ADLDAP_PASSWORD,
 							authentication=NTLM) as conn:
 		#use a outpout to confirm if a user exists
 			a=conn.search(search_base, f'(&(objectcategory=user)(samaccountname={userid})(!(|(userAccountControl=514)(employeeNumber=88888)(userAccountControl=66050))))',attributes=['sAMAccountName','employeeNumber','cn', 'givenName','telephonenumber','department','division','othertelephone','distinguishedname','objectguid','akaLegalLastName','akaLegalFirstName'])
@@ -164,17 +164,17 @@ def update_acdcontacts_num(userid, internal_extension):
 		Exception: For other errors during the update process.
 	"""
 	try:
-		server = Server(SERVER, get_info=ALL)
-		conn = Connection(server, user=LDAP_USERNAME, password=LDAP_PASSWORD, authentication=NTLM)
-		server_uri = f'ldaps://{SERVER}'
+		server = Server(ADSERVER, get_info=ALL)
+		conn = Connection(server, user=ADLDAP_USERNAME, password=ADLDAP_PASSWORD, authentication=NTLM)
+		server_uri = f'ldaps://{ADSERVER}'
 		search_base = 'dc=corp,dc=akamai,dc=com'
 		attrs = ['*']
 		# Using ldap3
 		server = ldap3.Server(server_uri)
 
 		with ldap3.Connection(server,
-							user=LDAP_USERNAME,
-							password=LDAP_PASSWORD,
+							user=ADLDAP_USERNAME,
+							password=ADLDAP_PASSWORD,
 							authentication=NTLM) as conn:
 		#use a outpout to confirm if a user exists
 			a=conn.search(search_base, f'(&(objectcategory=user)(samaccountname={userid})(!(|(userAccountControl=514)(employeeNumber=88888)(userAccountControl=66050))))',attributes=['sAMAccountName','employeeNumber','cn', 'givenName','telephonenumber','department','division','othertelephone','distinguishedname','objectguid','akaLegalLastName','akaLegalFirstName'])
@@ -220,17 +220,17 @@ def update_general_contacts_num_withDID(userid,external_number, internal_extensi
 		Exception: For other errors during the update process.
 	"""
 	try:
-		server = Server(SERVER, get_info=ALL)
-		conn = Connection(server, user=LDAP_USERNAME, password=LDAP_PASSWORD, authentication=NTLM)
-		server_uri = f'ldaps://{SERVER}'
+		server = Server(ADSERVER, get_info=ALL)
+		conn = Connection(server, user=ADLDAP_USERNAME, password=ADLDAP_PASSWORD, authentication=NTLM)
+		server_uri = f'ldaps://{ADSERVER}'
 		search_base = 'dc=corp,dc=akamai,dc=com'
 		attrs = ['*']
 		# Using ldap3
 		server = ldap3.Server(server_uri)
 
 		with ldap3.Connection(server,
-							user=LDAP_USERNAME,
-							password=LDAP_PASSWORD,
+							user=ADLDAP_USERNAME,
+							password=ADLDAP_PASSWORD,
 							authentication=NTLM) as conn:
 		#use a outpout to confirm if a user exists
 			a=conn.search(search_base, f'(&(objectcategory=user)(samaccountname={userid})(!(|(userAccountControl=514)(employeeNumber=88888)(userAccountControl=66050))))',attributes=['sAMAccountName','employeeNumber','cn', 'givenName','telephonenumber','department','division','othertelephone','distinguishedname','objectguid','akaLegalLastName','akaLegalFirstName'])

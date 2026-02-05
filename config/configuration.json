@@ -5,7 +5,8 @@
    "app-secrets": {
      "ssl_cert": {"format": "full_chain","latest-index-only": "true"},
      "webex_token": {"latest-index-only": true},
-     "cucm_user": {"latest-index-only": true}
+     "cucm_user": {"latest-index-only": true},
+     "ldap_user": {"latest-index-only": true}
     }
 },
   "third-party-packages": {
