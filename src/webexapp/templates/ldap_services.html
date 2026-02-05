@@ -60,15 +60,16 @@
             <form id="ldapSingleForm">
                 <div class="form-group">
                     <label for="ldap_username">Username *</label>
-                    <input type="text" id="ldap_username" name="username" required placeholder="Enter username">
+                    <input type="text" id="ldap_username" name="username" required placeholder="Enter username only (not email)">
                 </div>
                 <div class="form-group">
                     <label for="ldap_extension">Extension *</label>
-                    <input type="text" id="ldap_extension" name="extension" required placeholder="Enter extension">
+                    <input type="text" id="ldap_extension" name="extension" required placeholder="10 digit extension starting with 78" pattern="78[0-9]{8}" title="Extension must be exactly 10 digits starting with 78" maxlength="10">
+                    <small style="color: #999; display: block; margin-top: 5px;">Must be exactly 10 digits starting with 78</small>
                 </div>
                 <div class="form-group">
-                    <label for="ldap_external">External Number (Optional)</label>
-                    <input type="text" id="ldap_external" name="externalnumber" placeholder="Enter external number">
+                    <label for="ldap_external">External Number / DID (Optional)</label>
+                    <input type="text" id="ldap_external" name="externalnumber" placeholder="Enter external number / DID">
                 </div>
                 <div class="form-group">
                     <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
@@ -142,6 +143,15 @@ function switchTab(tab) {
         e.preventDefault();
         const loader = document.getElementById('ldap_single_loader');
         const result = document.getElementById('ldap_single_result');
+        
+        // Validate extension
+        const extension = document.getElementById('ldap_extension').value;
+        if (extension.length !== 10 || !extension.startsWith('78')) {
+            result.innerHTML = `<div class="alert alert-error">
+                <strong>Validation Error!</strong> Extension must be exactly 10 digits starting with 78
+            </div>`;
+            return;
+        }
         
         loader.style.display = 'block';
         result.innerHTML = '';

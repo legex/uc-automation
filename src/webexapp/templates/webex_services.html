@@ -223,12 +223,13 @@
                 <p style="color: #aaa; margin-bottom: 20px; font-size: 0.95rem;">Fill in the user details below to update their Webex settings.</p>
                 <form id="webexGeneralSingleForm">
                     <div class="form-group">
-                        <label for="webex_gen_username">Username *</label>
-                        <input type="text" id="webex_gen_username" name="username" required placeholder="Enter username">
+                        <label for="webex_gen_username">User Email *</label>
+                        <input type="email" id="webex_gen_username" name="username" required placeholder="Enter user email address">
                     </div>
                     <div class="form-group">
-                        <label for="webex_gen_extension">Extension *</label>
-                        <input type="text" id="webex_gen_extension" name="extension" required placeholder="Enter extension">
+                        <label for="webex_gen_extension">Extension (Last 4 digits) *</label>
+                        <input type="text" id="webex_gen_extension" name="extension" required placeholder="4 digit extension" pattern="[0-9]{4}" title="Extension must be exactly 4 digits" maxlength="4" minlength="4">
+                        <small style="color: #999; display: block; margin-top: 5px;">Must be exactly 4 digits</small>
                     </div>
                     <div class="form-group">
                         <label for="webex_gen_region">Region *</label>
@@ -240,8 +241,8 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="webex_gen_external">External Number (Optional)</label>
-                        <input type="text" id="webex_gen_external" name="externalnumber" placeholder="Enter external number">
+                        <label for="webex_gen_external">External Number / DID (Optional)</label>
+                        <input type="text" id="webex_gen_external" name="externalnumber" placeholder="Enter external number / DID">
                     </div>
                     <button type="submit" class="btn btn-primary">Update Webex General</button>
                     <div id="webex_gen_single_loader" class="loader"></div>
@@ -324,12 +325,13 @@
                 <p style="color: #aaa; margin-bottom: 20px; font-size: 0.95rem;">Fill in the ACD agent details below. External number is mandatory for ACD users.</p>
                 <form id="webexACDSingleForm">
                     <div class="form-group">
-                        <label for="webex_acd_username">Username *</label>
-                        <input type="text" id="webex_acd_username" name="username" required placeholder="Enter username">
+                        <label for="webex_acd_username">User Email *</label>
+                        <input type="email" id="webex_acd_username" name="username" required placeholder="Enter user email address">
                     </div>
                     <div class="form-group">
-                        <label for="webex_acd_extension">Extension *</label>
-                        <input type="text" id="webex_acd_extension" name="extension" required placeholder="Enter extension">
+                        <label for="webex_acd_extension">Extension (Last 4 digits) *</label>
+                        <input type="text" id="webex_acd_extension" name="extension" required placeholder="4 digit extension" pattern="[0-9]{4}" title="Extension must be exactly 4 digits" maxlength="4" minlength="4">
+                        <small style="color: #999; display: block; margin-top: 5px;">Must be exactly 4 digits</small>
                     </div>
                     <div class="form-group">
                         <label for="webex_acd_region">Region *</label>
@@ -341,8 +343,8 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="webex_acd_external">External Number *</label>
-                        <input type="text" id="webex_acd_external" name="externalnumber" required placeholder="Enter external number">
+                        <label for="webex_acd_external">External Number / DID *</label>
+                        <input type="text" id="webex_acd_external" name="externalnumber" required placeholder="Enter external number / DID">
                     </div>
                     <button type="submit" class="btn btn-primary">Update Webex ACD</button>
                     <div id="webex_acd_single_loader" class="loader"></div>
@@ -516,6 +518,15 @@ document.addEventListener('DOMContentLoaded', function() {
         const loader = document.getElementById('webex_gen_single_loader');
         const result = document.getElementById('webex_gen_single_result');
         
+        // Validate extension
+        const extension = document.getElementById('webex_gen_extension').value;
+        if (extension.length !== 4 || !/^[0-9]{4}$/.test(extension)) {
+            result.innerHTML = `<div class="alert alert-error">
+                <strong>Validation Error!</strong> Extension must be exactly 4 digits
+            </div>`;
+            return;
+        }
+        
         loader.style.display = 'block';
         result.innerHTML = '';
         
@@ -556,6 +567,15 @@ document.addEventListener('DOMContentLoaded', function() {
         e.preventDefault();
         const loader = document.getElementById('webex_acd_single_loader');
         const result = document.getElementById('webex_acd_single_result');
+        
+        // Validate extension
+        const extension = document.getElementById('webex_acd_extension').value;
+        if (extension.length !== 4 || !/^[0-9]{4}$/.test(extension)) {
+            result.innerHTML = `<div class="alert alert-error">
+                <strong>Validation Error!</strong> Extension must be exactly 4 digits
+            </div>`;
+            return;
+        }
         
         loader.style.display = 'block';
         result.innerHTML = '';
