@@ -91,7 +91,7 @@ async def get_ui(request: Request, current_user: str = Depends(allowed_users)):
         HTMLResponse: The rendered index_new.html template.
     """
     logger.info("Homepage accessed by user: %s from %s", current_user, request.client.host if request.client else "unknown")
-    return templates.TemplateResponse("index_new.html", {"request": request})
+    return templates.TemplateResponse("index_new.html", {"request": request, "current_user": current_user})
 
 @router.get("/api/ldap-services", response_class=HTMLResponse)
 async def ldap_services_page(request: Request, current_user: str = Depends(allowed_users)):
@@ -104,7 +104,7 @@ async def ldap_services_page(request: Request, current_user: str = Depends(allow
     Returns:
         HTMLResponse: The rendered ldap_services.html template.
     """
-    return templates.TemplateResponse("ldap_services.html", {"request": request})
+    return templates.TemplateResponse("ldap_services.html", {"request": request, "current_user": current_user})
 
 @router.get("/api/webex-services", response_class=HTMLResponse)
 async def webex_services_page(request: Request, current_user: str = Depends(allowed_users)):
@@ -117,7 +117,7 @@ async def webex_services_page(request: Request, current_user: str = Depends(allo
     Returns:
         HTMLResponse: The rendered webex_services.html template.
     """
-    return templates.TemplateResponse("webex_services.html", {"request": request})
+    return templates.TemplateResponse("webex_services.html", {"request": request, "current_user": current_user})
 
 @router.get("/api/routepattern-services", response_class=HTMLResponse)
 async def routepattern_services_page(request: Request, current_user: str = Depends(allowed_users)):
@@ -130,7 +130,7 @@ async def routepattern_services_page(request: Request, current_user: str = Depen
     Returns:
         HTMLResponse: The rendered routepattern_services.html template.
     """
-    return templates.TemplateResponse("routepattern_services.html", {"request": request})
+    return templates.TemplateResponse("routepattern_services.html", {"request": request, "current_user": current_user})
 
 @router.get("/api/number-services", response_class=HTMLResponse)
 async def number_services_page(request: Request, current_user: str = Depends(allowed_users)):
@@ -143,7 +143,7 @@ async def number_services_page(request: Request, current_user: str = Depends(all
     Returns:
         HTMLResponse: The rendered number_services.html template.
     """
-    return templates.TemplateResponse("number_services.html", {"request": request})
+    return templates.TemplateResponse("number_services.html", {"request": request, "current_user": current_user})
 
 @router.get("/api/single-update", response_class=HTMLResponse)
 async def single_update_page(request: Request, current_user: str = Depends(allowed_users)):
@@ -156,7 +156,7 @@ async def single_update_page(request: Request, current_user: str = Depends(allow
     Returns:
         HTMLResponse: The rendered single_update.html template.
     """
-    return templates.TemplateResponse("single_update.html", {"request": request})
+    return templates.TemplateResponse("single_update.html", {"request": request, "current_user": current_user})
 
 @router.get("/api/batch-update", response_class=HTMLResponse)
 async def batch_update_page(request: Request, current_user: str = Depends(allowed_users)):
@@ -169,7 +169,7 @@ async def batch_update_page(request: Request, current_user: str = Depends(allowe
     Returns:
         HTMLResponse: The rendered batch_update.html template.
     """
-    return templates.TemplateResponse("batch_update.html", {"request": request})
+    return templates.TemplateResponse("batch_update.html", {"request": request, "current_user": current_user})
 
 @router.get("/api/templates", response_class=HTMLResponse)
 async def templates_page(request: Request, current_user: str = Depends(allowed_users)):
@@ -182,7 +182,7 @@ async def templates_page(request: Request, current_user: str = Depends(allowed_u
     Returns:
         HTMLResponse: The rendered templates.html template.
     """
-    return templates.TemplateResponse("templates.html", {"request": request})
+    return templates.TemplateResponse("templates.html", {"request": request, "current_user": current_user})
 
 @router.get("/api/download/template/{template_name}")
 async def download_template(template_name: str, current_user: str = Depends(allowed_users)):

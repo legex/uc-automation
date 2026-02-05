@@ -56,4 +56,4 @@ def ensure_resultfile_path(resultfile_path):
     return resultfile_path
 resultfile_location = ensure_resultfile_path(resultfile_path)
 
-allowed_users_list = ['abshukla', 'risaxen']
+allowed_users_list = ['abshukla', 'risaxen', 'raksingh', 'sshrutik']
