@@ -11,13 +11,9 @@ import os
 import json
 import requests
 from requests import HTTPError
-from dotenv import load_dotenv
-from appdatainternal.settings import license_store, LOCATIONS, WEBEX_URL,ACDLOCATIONS
+from appdatainternal.settings import license_store, LOCATIONS, WEBEX_URL,ACDLOCATIONS, profileid_blr
 from utils.logger import setup_logger
 from webexapi.webexBase import WebexBase
-
-# Load environment variables from .env file
-load_dotenv()
 
 # Initialize logger
 logger = setup_logger('webexops', '/a/logs/webexops.log')
@@ -200,8 +196,27 @@ class WebexOperation:
         except Exception as e:
             logger.error("General error updating user: %s", e)
         return None
+    
+    def update_calling_behavior(self, userid, profileid_blr):
+        if not profileid_blr:
+            logger.error("Profile ID for calling behavior is not provided.")
+            return None
+        url=f'https://webexapis.com/v1/people/{userid}/features/callingBehavior'
+        payload = json.dumps({"profileId":profileid_blr})
+        try:
+            resp = requests.put(url,
+                                headers=self.headers,
+                                data=payload,
+                                timeout=30)
+            resp.raise_for_status()
+            return resp.json()
+        except requests.HTTPError as e:
+            logger.error("HTTP error updating calling behavior: %s", e)
+        except Exception as e:
+            logger.error("General error updating calling behavior: %s", e)
+        return None 
 
-    def remove_webex_license(self, email: str):
+    def remove_webex_license(self, email: str, region_India: bool = False):
 
         userid = self.query_user_id_by_email(email)
         if not userid:
@@ -253,4 +268,9 @@ class WebexOperation:
             logger.error("HTTP error updating user: %s", e)
         except Exception as e:
             logger.error("General error updating user: %s", e)
+        if region_India:
+            try:
+                self.update_calling_behavior(userid, profileid_blr)
+            except Exception as e:
+                logger.error("Error updating calling behavior for India region: %s", e)
         return None

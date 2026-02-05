@@ -677,12 +677,13 @@ async def create_route_pattern(file: UploadFile, current_user: str = Depends(all
                             detail=f"Error processing file: {str(e)}") from e
 
 @router.post("/api/removewebexlicense/single")
-async def remove_webex_license(email: str = Form(...), current_user: str = Depends(allowed_users)):
+async def remove_webex_license(email: str = Form(...), region_India: bool = False, current_user: str = Depends(allowed_users)):
     """
     Remove Webex license from a single user.
     
     Args:
         email (str): Email address of the user whose Webex license should be removed.
+        region_India (bool): Flag indicating if the user is in the India region.
     
     Returns:
         dict: Status and detail message with license removal result.
@@ -697,7 +698,7 @@ async def remove_webex_license(email: str = Form(...), current_user: str = Depen
                             detail="Email must be provided.")
     try:
         logger.debug("Processing Webex license removal by user: %s for: %s", current_user, email)
-        result = webop.remove_webex_license(email)
+        result = webop.remove_webex_license(email, region_India)
         logger.info("Webex license removal completed by user: %s for: %s", current_user, email)
         return {"Status": "Webex license removal initiated", "Detail": result}
     except Exception as e:

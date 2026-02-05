@@ -414,6 +414,13 @@
                     <label for="remove_license_email">Email *</label>
                     <input type="email" id="remove_license_email" name="email" required placeholder="Enter email address">
                 </div>
+                <div class="form-group">
+                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                        <input type="checkbox" id="region_india_checkbox" name="region_India" style="width: auto; cursor: pointer;">
+                        <span>India Region</span>
+                    </label>
+                    <small style="color: #999; display: block; margin-top: 5px;">Check this if the user is in India region</small>
+                </div>
                 <button type="submit" class="btn btn-primary">Remove License</button>
                 <div id="remove_license_loader" class="loader"></div>
                 <div id="remove_license_result"></div>
@@ -623,6 +630,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const formData = new FormData();
         formData.append('email', document.getElementById('remove_license_email').value);
+        formData.append('region_India', document.getElementById('region_india_checkbox').checked);
         
         try {
             const response = await fetch('/api/removewebexlicense/single', {
