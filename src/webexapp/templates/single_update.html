@@ -289,13 +289,18 @@
             const data = await response.json();
             loader.style.display = 'none';
             
-            if (response.ok) {
+            // Check if Status is "Success" or contains error info
+            const isSuccess = data.Status && data.Status === "Success";
+            
+            if (response.ok && isSuccess) {
                 result.innerHTML = `<div class="alert alert-success">
                     <strong>Success!</strong> ${data.Status || 'Number added successfully'}
+                    ${data.Detail ? '<br><small>' + JSON.stringify(data.Detail) + '</small>' : ''}
                 </div>`;
             } else {
                 result.innerHTML = `<div class="alert alert-error">
-                    <strong>Error!</strong> ${data.detail || data.error || 'Operation failed'}
+                    <strong>Error!</strong> ${data.Status || data.detail || data.error || 'Operation failed'}
+                    ${data.Detail ? '<br><small>' + JSON.stringify(data.Detail) + '</small>' : ''}
                 </div>`;
             }
         } catch (error) {

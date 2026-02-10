@@ -88,7 +88,7 @@ def addnumbersingle(number: str, region: str):
         logger.warning("No location ID found for region: %s", region)
         return None
     numberpayload = {
-            "phoneNumbers": [number],
+            "phoneNumbers": [f"+{number}"],
             "numberType": "DID",
             "state": "ACTIVE"
         }
@@ -100,10 +100,10 @@ def addnumbersingle(number: str, region: str):
                             timeout=30)
         logger.info("Status for %s: %s", region, resp.status_code)
         print(resp.text)
-        return resp.json()
+        return {"result": resp.json(), "status_code": resp.status_code}
     except HTTPError as e:
         logger.error("HTTP error updating Number: %s", e)
-        return None
+        return {"result": None, "error": str(e)}
     except Exception as e:
         logger.error("General error updating Number: %s", e)
-        return None
+        return {"result": None, "error": str(e)}

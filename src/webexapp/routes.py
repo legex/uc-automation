@@ -278,9 +278,13 @@ async def number_add_single(query: QueryModelNumberSingle, current_user: str = D
                             detail="Query must be provided.")
     try:
         logger.debug("Processing number add by user: %s for Number: %s", current_user, query.number)
-        addnumbersingle(query.number, query.region)
+        response = addnumbersingle(query.number, query.region)
+        if not response.get("result", None):
+            logger.error("Number add failed for user: %s, number: %s, region: %s, response: %s",
+                         current_user, query.number, query.region, response)
+            return {"Status": response.get("error", "Unknown Error"), "Detail": response}
         logger.info("Single number add completed successfully by user: %s for number: %s", current_user, query.number)
-        return {"Status": "Success"}
+        return {"Status": "Success", "Detail": response["result"]}
     except HTTPException as e:
         logger.error("HTTPException in number add by user: %s for %s: %s", current_user, query.number, str(e))
         return {"error": str(e)}
