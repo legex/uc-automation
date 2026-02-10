@@ -58,7 +58,7 @@ def batch_update_webex_gen(file, filename):
                         region
                     )
                     print(webex_results)
-                    status_on_webex = "Success" if webex_results else "Failed"
+                    status_on_webex = "Success" if webex_results["result"] else "Failed"
                     logger.info("Webex ACD update for %s: %s", username, status_on_webex)
                 except Exception as e:
                     logger.error(
@@ -72,7 +72,7 @@ def batch_update_webex_gen(file, filename):
                         extension,
                         region
                     )
-                    status_on_webex = "Success" if webex_results else "Failed"
+                    status_on_webex = "Success" if webex_results["result"] else "Failed"
                     logger.info("Webex license Extension update for %s: %s", username, status_on_webex)
                 except (Exception) as e:
                     logger.error("Error updating Webex Extension for %s: %s", username, e)
@@ -122,7 +122,7 @@ def batch_update_webex_acd(file, filename):
                 extension,
                 region
             )
-            status_on_webex = "Success" if webex_results else "Failed"
+            status_on_webex = "Success" if webex_results["result"] else "Failed"
             logger.info("Webex ACD update for %s: %s", username, status_on_webex)
         except (Exception) as e:
             logger.error("Error updating CUCM for %s: %s", username, e)

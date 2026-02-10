@@ -122,12 +122,13 @@ class WebexGenMigration:
                                 data=json.dumps(patch_payload),
                                 timeout=30)
             resp.raise_for_status()
-            return resp.json()
+            return {"result": resp.json(), "error": None}
         except HTTPError as e:
             logger.error("HTTP error updating user: %s", e)
+            return {"result": None, "error": str(e)}
         except Exception as e:
             logger.error("General error updating user: %s", e)
-        return None
+            return {"result": None, "error": str(e)}
 
     def patch_dn(self, email: str, extension: str, employee_region: str):
         """
@@ -204,9 +205,10 @@ class WebexGenMigration:
                                 data=json.dumps(patch_payload),
                                 timeout=30)
             resp.raise_for_status()
-            return resp.json()
+            return {"result": resp.json(), "error": None}
         except HTTPError as e:
             logger.error("HTTP error updating user: %s", e)
+            return {"result": None, "error": str(e)}
         except Exception as e:
             logger.error("General error updating user: %s", e)
-        return None
+            return {"result": None, "error": str(e)}

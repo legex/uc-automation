@@ -475,8 +475,11 @@ async def update_webex_general(query: QueryModelWebex, current_user: str = Depen
                 query.extension,
                 query.region
                 )
+            if not webex_results.get("result", None):
+                logger.warning("Webex ACD update returned no results for user: %s, target user: %s", current_user, query.username)
+                return {"Status": "Webex ACD update failed", "Detail": webex_results.get("error", "Unknown error")}
             logger.info("Webex update with DID completed by user: %s for target user: %s", current_user, query.username)
-            return {"Status": "Webex update initiated", "Detail": webex_results}
+            return {"Status": "Webex update initiated", "Detail": webex_results["result"]}
         except Exception as e:
             logger.error("Error updating Webex with DID by user: %s for target user %s: %s", current_user, query.username, str(e))
             raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -487,8 +490,11 @@ async def update_webex_general(query: QueryModelWebex, current_user: str = Depen
             query.extension,
             query.region
             )
+        if not webex_results.get("result", None):
+            logger.warning("Webex ACD update returned no results for user: %s, target user: %s", current_user, query.username)
+            return {"Status": "Webex ACD update failed", "Detail": webex_results.get("error", "Unknown error")}
         logger.info("Webex update completed by user: %s for target user: %s", current_user, query.username)
-        return {"Status": "Webex update initiated", "Detail": webex_results}
+        return {"Status": "Webex update initiated", "Detail": webex_results["result"]}
     except Exception as e:
         logger.error("Error updating Webex by user: %s for target user %s: %s", current_user, query.username, str(e))
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -572,8 +578,11 @@ async def update_webex_acd(query: QueryModelWebex, current_user: str = Depends(a
                     query.extension,
                     query.region
                     )
+                if not webex_results.get("result", None):
+                    logger.warning("Webex ACD update returned no results for user: %s, target user: %s", current_user, query.username)
+                    return {"Status": "Webex ACD update failed", "Detail": webex_results.get("error", "Unknown error")}
                 logger.info("Webex ACD update completed by user: %s for target user: %s", current_user, query.username)
-                return {"Status": "Webex ACD update initiated", "Detail": webex_results}
+                return {"Status": "Webex ACD update initiated", "Detail": webex_results["result"]}
             except Exception as e:
                 logger.error("Error updating Webex ACD by user: %s for target user %s: %s", current_user, query.username, str(e))
                 raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
