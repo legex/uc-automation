@@ -75,7 +75,7 @@ router = APIRouter()
 #     return {"status": "success"}
 
 @router.get("/", response_class=HTMLResponse)
-async def get_ui(request: Request, current_user: str = Depends(get_current_user())):
+async def get_ui(request: Request, current_user: str = Depends(get_current_user)):
     """
     Render the main homepage UI.
     
@@ -89,7 +89,7 @@ async def get_ui(request: Request, current_user: str = Depends(get_current_user(
     return templates.TemplateResponse("index_new.html", {"request": request, "current_user": current_user})
 
 @router.get("/api/ldap-services", response_class=HTMLResponse)
-async def ldap_services_page(request: Request, current_user: str = Depends(get_current_user())):
+async def ldap_services_page(request: Request, current_user: str = Depends(get_current_user)):
     """
     Render the LDAP services page UI.
     
@@ -102,7 +102,7 @@ async def ldap_services_page(request: Request, current_user: str = Depends(get_c
     return templates.TemplateResponse("ldap_services.html", {"request": request, "current_user": current_user})
 
 @router.get("/api/webex-services", response_class=HTMLResponse)
-async def webex_services_page(request: Request, current_user: str = Depends(get_current_user())):
+async def webex_services_page(request: Request, current_user: str = Depends(get_current_user)):
     """
     Render the Webex services page UI.
     
@@ -115,7 +115,7 @@ async def webex_services_page(request: Request, current_user: str = Depends(get_
     return templates.TemplateResponse("webex_services.html", {"request": request, "current_user": current_user, "regions": regions_list})
 
 @router.get("/api/routepattern-services", response_class=HTMLResponse)
-async def routepattern_services_page(request: Request, current_user: str = Depends(get_current_user())):
+async def routepattern_services_page(request: Request, current_user: str = Depends(get_current_user)):
     """
     Render the route pattern services page UI.
     
@@ -128,7 +128,7 @@ async def routepattern_services_page(request: Request, current_user: str = Depen
     return templates.TemplateResponse("routepattern_services.html", {"request": request, "current_user": current_user})
 
 @router.get("/api/number-services", response_class=HTMLResponse)
-async def number_services_page(request: Request, current_user: str = Depends(get_current_user())):
+async def number_services_page(request: Request, current_user: str = Depends(get_current_user)):
     """
     Render the number services page UI.
     
@@ -154,7 +154,7 @@ async def single_update_page(request: Request, current_user: str = Depends(admin
     return templates.TemplateResponse("single_update.html", {"request": request, "current_user": current_user})
 
 @router.get("/api/batch-update", response_class=HTMLResponse)
-async def batch_update_page(request: Request, current_user: str = Depends(get_current_user())):
+async def batch_update_page(request: Request, current_user: str = Depends(get_current_user)):
     """
     Render the batch update page UI.
     
@@ -167,7 +167,7 @@ async def batch_update_page(request: Request, current_user: str = Depends(get_cu
     return templates.TemplateResponse("batch_update.html", {"request": request, "current_user": current_user})
 
 @router.get("/api/templates", response_class=HTMLResponse)
-async def templates_page(request: Request, current_user: str = Depends(get_current_user())):
+async def templates_page(request: Request, current_user: str = Depends(get_current_user)):
     """
     Render the templates download page UI.
     
