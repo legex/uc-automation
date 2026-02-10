@@ -71,3 +71,11 @@ with open(ldapsecretfile, 'r') as f:
 profileid_blr = "Y2lzY29zcGFyazovL3VzL0NBTExJTkdfUFJPRklMRS9iNTQyYWY1ZS0wMzkzLTQ0MjQtODI2OC1jYzdjYjI0ZGVkMDk"
 
 allowed_users_list = ['abshukla', 'risaxen', 'raksingh', 'sshrutik', 'nvemula', 'emontero', 'ratiwar', 'rpangira', 'rasahu', 'akalpath']
+rbac_roles = {
+    "admin": ["abshukla", "risaxen", "raksingh",
+              "sshrutik", "nvemula", "emontero",
+              "ratiwar", "rpangira", "rasahu",
+              "akalpath"],
+    "viewer": ["dforeste"],
+    "user": []
+}

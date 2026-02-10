@@ -38,8 +38,13 @@ from webexapi.webexACD import WebexMigACD
 from webexapi.webexoperations import WebexOperation
 from webexapi.webexnumberadd import addnumbersingle, addnumberbatch
 from utils.logger import setup_logger
-from appdatainternal.settings import allowed_users_list, ACDLOCATIONS
-allowed_users_list = allowed_users_list
+from utils.auth_helper import RoleChecker, get_current_user
+from appdatainternal.settings import ACDLOCATIONS
+
+admin_required = RoleChecker(["admin"])
+viewer_required = RoleChecker(["viewer"])
+user_required = RoleChecker(["user"])
+
 # Load environment variables from .env file
 load_dotenv()
 # API_TOKEN = os.getenv("WEBEXBOTTOKEN")
@@ -68,26 +73,9 @@ router = APIRouter()
 #     if room_id:
 #         webexbot.send_message(room_id, "Hello! Welcome to the Webex Room.")
 #     return {"status": "success"}
-USERNAME_HEADER = "X-SSO-REMOTE-USER"
-def get_current_user(request: Request):
-    # Placeholder for user authentication logic
-    # In a real application, implement proper authentication here
-    username = request.headers.get(USERNAME_HEADER)
-    if not username:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
-                            detail="Unauthorized: No user information found.")
-    norm_username = username.strip().lower()
-    return norm_username
-
-def allowed_users(current_user: str = Depends(get_current_user)):
-    if current_user not in allowed_users_list:
-        logger.warning("Unauthorized access attempt by user: %s", current_user)
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN,
-                            detail="Forbidden: You don't have access to this resource.")
-    return current_user
 
 @router.get("/", response_class=HTMLResponse)
-async def get_ui(request: Request, current_user: str = Depends(allowed_users)):
+async def get_ui(request: Request, current_user: str = Depends(get_current_user())):
     """
     Render the main homepage UI.
     
@@ -101,7 +89,7 @@ async def get_ui(request: Request, current_user: str = Depends(allowed_users)):
     return templates.TemplateResponse("index_new.html", {"request": request, "current_user": current_user})
 
 @router.get("/api/ldap-services", response_class=HTMLResponse)
-async def ldap_services_page(request: Request, current_user: str = Depends(allowed_users)):
+async def ldap_services_page(request: Request, current_user: str = Depends(get_current_user())):
     """
     Render the LDAP services page UI.
     
@@ -114,7 +102,7 @@ async def ldap_services_page(request: Request, current_user: str = Depends(allow
     return templates.TemplateResponse("ldap_services.html", {"request": request, "current_user": current_user})
 
 @router.get("/api/webex-services", response_class=HTMLResponse)
-async def webex_services_page(request: Request, current_user: str = Depends(allowed_users)):
+async def webex_services_page(request: Request, current_user: str = Depends(get_current_user())):
     """
     Render the Webex services page UI.
     
@@ -127,7 +115,7 @@ async def webex_services_page(request: Request, current_user: str = Depends(allo
     return templates.TemplateResponse("webex_services.html", {"request": request, "current_user": current_user, "regions": regions_list})
 
 @router.get("/api/routepattern-services", response_class=HTMLResponse)
-async def routepattern_services_page(request: Request, current_user: str = Depends(allowed_users)):
+async def routepattern_services_page(request: Request, current_user: str = Depends(get_current_user())):
     """
     Render the route pattern services page UI.
     
@@ -140,7 +128,7 @@ async def routepattern_services_page(request: Request, current_user: str = Depen
     return templates.TemplateResponse("routepattern_services.html", {"request": request, "current_user": current_user})
 
 @router.get("/api/number-services", response_class=HTMLResponse)
-async def number_services_page(request: Request, current_user: str = Depends(allowed_users)):
+async def number_services_page(request: Request, current_user: str = Depends(get_current_user())):
     """
     Render the number services page UI.
     
@@ -153,7 +141,7 @@ async def number_services_page(request: Request, current_user: str = Depends(all
     return templates.TemplateResponse("number_services.html", {"request": request, "current_user": current_user, "regions": regions_list})
 
 @router.get("/api/single-update", response_class=HTMLResponse)
-async def single_update_page(request: Request, current_user: str = Depends(allowed_users)):
+async def single_update_page(request: Request, current_user: str = Depends(admin_required)):
     """
     Render the single update page UI (legacy route).
     
@@ -166,7 +154,7 @@ async def single_update_page(request: Request, current_user: str = Depends(allow
     return templates.TemplateResponse("single_update.html", {"request": request, "current_user": current_user})
 
 @router.get("/api/batch-update", response_class=HTMLResponse)
-async def batch_update_page(request: Request, current_user: str = Depends(allowed_users)):
+async def batch_update_page(request: Request, current_user: str = Depends(get_current_user())):
     """
     Render the batch update page UI.
     
@@ -179,7 +167,7 @@ async def batch_update_page(request: Request, current_user: str = Depends(allowe
     return templates.TemplateResponse("batch_update.html", {"request": request, "current_user": current_user})
 
 @router.get("/api/templates", response_class=HTMLResponse)
-async def templates_page(request: Request, current_user: str = Depends(allowed_users)):
+async def templates_page(request: Request, current_user: str = Depends(get_current_user())):
     """
     Render the templates download page UI.
     
@@ -192,7 +180,7 @@ async def templates_page(request: Request, current_user: str = Depends(allowed_u
     return templates.TemplateResponse("templates.html", {"request": request, "current_user": current_user})
 
 @router.get("/api/download/template/{template_name}")
-async def download_template(template_name: str, current_user: str = Depends(allowed_users)):
+async def download_template(template_name: str, current_user: str = Depends(admin_required)):
     """
     Download a CSV template file for batch operations.
     
@@ -230,7 +218,7 @@ async def download_template(template_name: str, current_user: str = Depends(allo
                         media_type='application/octet-stream')
 
 @router.post("/api/numberadd")
-async def number_add(file: UploadFile, current_user: str = Depends(allowed_users)):
+async def number_add(file: UploadFile, current_user: str = Depends(admin_required)):
     """
     Add phone numbers to Webex locations from a CSV file.
     
@@ -269,7 +257,7 @@ async def number_add(file: UploadFile, current_user: str = Depends(allowed_users
         return {"error": str(e)}
 
 @router.post("/api/numberaddsingle")
-async def number_add_single(query: QueryModelNumberSingle, current_user: str = Depends(allowed_users)):
+async def number_add_single(query: QueryModelNumberSingle, current_user: str = Depends(admin_required)):
     """
     Add phone numbers to Webex locations from a CSV file.
     
@@ -298,7 +286,7 @@ async def number_add_single(query: QueryModelNumberSingle, current_user: str = D
         return {"error": str(e)}
 
 @router.get("/api/download/result/{result_type}/{filename}")
-async def download_result_file(result_type: str, filename: str, current_user: str = Depends(allowed_users)):
+async def download_result_file(result_type: str, filename: str, current_user: str = Depends(admin_required)):
     """
     Download a result file from a previous batch operation.
     
@@ -339,7 +327,7 @@ async def download_result_file(result_type: str, filename: str, current_user: st
                         media_type='application/octet-stream')
 
 @router.post("/api/updateldap/single")
-async def update_ldap_numbers(query: QueryModelLdap, acd: bool = False, current_user: str = Depends(allowed_users)):
+async def update_ldap_numbers(query: QueryModelLdap, acd: bool = False, current_user: str = Depends(admin_required)):
     """
     Update LDAP contact numbers for a single user.
     
@@ -401,7 +389,7 @@ async def update_ldap_numbers(query: QueryModelLdap, acd: bool = False, current_
                             detail=f"Error updating LDAP: {str(e)}") from e
 
 @router.post("/api/updateldap/batch")
-async def batch_update_ldap_numbers(file: UploadFile, acd: bool = Form(False), current_user: str = Depends(allowed_users)):
+async def batch_update_ldap_numbers(file: UploadFile, acd: bool = Form(False), current_user: str = Depends(admin_required)):
     """
     Batch update LDAP contact numbers from a CSV file.
     
@@ -458,7 +446,7 @@ async def batch_update_ldap_numbers(file: UploadFile, acd: bool = Form(False), c
                             detail=f"Error processing file: {str(e)}") from e
 
 @router.post("/api/updatewebexgeneral/single")
-async def update_webex_general(query: QueryModelWebex, current_user: str = Depends(allowed_users)):
+async def update_webex_general(query: QueryModelWebex, current_user: str = Depends(admin_required)):
     """
     Update Webex settings for a single user.
     
@@ -507,7 +495,7 @@ async def update_webex_general(query: QueryModelWebex, current_user: str = Depen
                             detail=f"Error updating Webex: {str(e)}") from e
 
 @router.post("/api/updatewebexgeneral/batch")
-async def batch_update_webex_general(file: UploadFile | None = None, current_user: str = Depends(allowed_users)):
+async def batch_update_webex_general(file: UploadFile | None = None, current_user: str = Depends(admin_required)):
     """
     Batch update Webex settings from a CSV file.
     
@@ -553,7 +541,7 @@ async def batch_update_webex_general(file: UploadFile | None = None, current_use
                             detail=f"Error processing file: {str(e)}") from e
 
 @router.post("/api/updatewebexacd/single")
-async def update_webex_acd(query: QueryModelWebex, current_user: str = Depends(allowed_users)):
+async def update_webex_acd(query: QueryModelWebex, current_user: str = Depends(admin_required)):
     """
     Update Webex ACD (Automatic Call Distribution) settings for a single user.
     
@@ -596,7 +584,7 @@ async def update_webex_acd(query: QueryModelWebex, current_user: str = Depends(a
                                 detail="External number must be provided for ACD updates.")
 
 @router.post("/api/updatewebexacd/batch")
-async def b_update_webex_acd(file: UploadFile | None = None, current_user: str = Depends(allowed_users)):
+async def b_update_webex_acd(file: UploadFile | None = None, current_user: str = Depends(admin_required)):
     """
     Batch update Webex ACD settings from an Excel file.
     
@@ -638,7 +626,7 @@ async def b_update_webex_acd(file: UploadFile | None = None, current_user: str =
                             detail=f"Error processing file: {str(e)}") from e
 
 @router.post("/api/routepattern")
-async def create_route_pattern(file: UploadFile, is_india: bool = False, current_user: str = Depends(allowed_users)):
+async def create_route_pattern(file: UploadFile, is_india: bool = False, current_user: str = Depends(admin_required)):
     """
     Create route patterns in CUCM from a CSV file.
     
@@ -682,7 +670,7 @@ async def create_route_pattern(file: UploadFile, is_india: bool = False, current
                             detail=f"Error processing file: {str(e)}") from e
 
 @router.post("/api/removewebexlicense/single")
-async def remove_webex_license(email: str = Form(...), region_India: bool = False, current_user: str = Depends(allowed_users)):
+async def remove_webex_license(email: str = Form(...), region_India: bool = False, current_user: str = Depends(admin_required)):
     """
     Remove Webex license from a single user.
     
@@ -712,7 +700,7 @@ async def remove_webex_license(email: str = Form(...), region_India: bool = Fals
                             detail=f"Error removing Webex license: {str(e)}") from e
 
 @router.post("/api/createroutepattern/single")
-async def create_route_pattern_single(query: QueryModelRPSingle, is_india: bool = False, current_user: str = Depends(allowed_users)):
+async def create_route_pattern_single(query: QueryModelRPSingle, is_india: bool = False, current_user: str = Depends(admin_required)):
     """
     Create a single route pattern in CUCM.
     
@@ -743,7 +731,7 @@ async def create_route_pattern_single(query: QueryModelRPSingle, is_india: bool 
                             detail=f"Error creating route pattern: {str(e)}") from e
 
 @router.post("/api/updateroutepattern/single")
-async def update_route_pattern_single(query: QueryModelRPUpdate, is_india: bool = False, current_user: str = Depends(allowed_users)):
+async def update_route_pattern_single(query: QueryModelRPUpdate, is_india: bool = False, current_user: str = Depends(admin_required)):
     """
     Update a single route pattern in CUCM.
     
@@ -772,7 +760,7 @@ async def update_route_pattern_single(query: QueryModelRPUpdate, is_india: bool 
                             detail=f"Error updating route pattern: {str(e)}") from e
 
 @router.post("/api/updateroutepattern/batchupdate")
-async def batch_update_route_pattern(file: UploadFile, is_india: bool = False, current_user: str = Depends(allowed_users)):
+async def batch_update_route_pattern(file: UploadFile, is_india: bool = False, current_user: str = Depends(admin_required)):
     """
     Batch update route patterns in CUCM from a CSV file.
     
