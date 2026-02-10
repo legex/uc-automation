@@ -208,7 +208,17 @@
             });
             const data = await response.json();
             loader.style.display = 'none';
-            result.innerHTML = `<div class="alert alert-success">${data.Status || JSON.stringify(data)}</div>`;
+            
+            // Check if Status contains 'failed' or 'error'
+            const isFailure = data.Status && (data.Status.toLowerCase().includes('failed') || data.Status.toLowerCase().includes('error'));
+            
+            if (response.ok && !isFailure) {
+                result.innerHTML = `<div class="alert alert-success">${data.Status || JSON.stringify(data)}</div>`;
+            } else {
+                result.innerHTML = `<div class="alert alert-error">Error: ${data.Status || data.detail || data.error || 'Operation failed'}
+                    ${data.Detail ? '<br><small>' + data.Detail + '</small>' : ''}
+                </div>`;
+            }
         } catch (error) {
             loader.style.display = 'none';
             result.innerHTML = `<div class="alert alert-error">Error: ${error.message}</div>`;
@@ -239,7 +249,17 @@
             });
             const data = await response.json();
             loader.style.display = 'none';
-            result.innerHTML = `<div class="alert alert-success">${data.Status || JSON.stringify(data)}</div>`;
+            
+            // Check if Status contains 'failed' or 'error'
+            const isFailure = data.Status && (data.Status.toLowerCase().includes('failed') || data.Status.toLowerCase().includes('error'));
+            
+            if (response.ok && !isFailure) {
+                result.innerHTML = `<div class="alert alert-success">${data.Status || JSON.stringify(data)}</div>`;
+            } else {
+                result.innerHTML = `<div class="alert alert-error">Error: ${data.Status || data.detail || data.error || 'Operation failed'}
+                    ${data.Detail ? '<br><small>' + data.Detail + '</small>' : ''}
+                </div>`;
+            }
         } catch (error) {
             loader.style.display = 'none';
             result.innerHTML = `<div class="alert alert-error">Error: ${error.message}</div>`;

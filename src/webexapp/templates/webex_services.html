@@ -553,14 +553,18 @@ document.addEventListener('DOMContentLoaded', function() {
             const data = await response.json();
             loader.style.display = 'none';
             
-            if (response.ok) {
+            // Check if Status contains 'failed' or 'error'
+            const isFailure = data.Status && (data.Status.toLowerCase().includes('failed') || data.Status.toLowerCase().includes('error'));
+            
+            if (response.ok && !isFailure) {
                 result.innerHTML = `<div class="alert alert-success">
                     <strong>Success!</strong> ${data.Status || 'Webex update completed'}
                     ${data.Detail ? '<br><small>' + JSON.stringify(data.Detail) + '</small>' : ''}
                 </div>`;
             } else {
                 result.innerHTML = `<div class="alert alert-error">
-                    <strong>Error!</strong> ${data.detail || data.error || 'Operation failed'}
+                    <strong>Error!</strong> ${data.Status || data.detail || data.error || 'Operation failed'}
+                    ${data.Detail ? '<br><small>' + data.Detail + '</small>' : ''}
                 </div>`;
             }
         } catch (error) {
@@ -603,14 +607,18 @@ document.addEventListener('DOMContentLoaded', function() {
             const data = await response.json();
             loader.style.display = 'none';
             
-            if (response.ok) {
+            // Check if Status contains 'failed' or 'error'
+            const isFailure = data.Status && (data.Status.toLowerCase().includes('failed') || data.Status.toLowerCase().includes('error'));
+            
+            if (response.ok && !isFailure) {
                 result.innerHTML = `<div class="alert alert-success">
                     <strong>Success!</strong> ${data.Status || 'Webex ACD update completed'}
                     ${data.Detail ? '<br><small>' + JSON.stringify(data.Detail) + '</small>' : ''}
                 </div>`;
             } else {
                 result.innerHTML = `<div class="alert alert-error">
-                    <strong>Error!</strong> ${data.detail || data.error || 'Operation failed'}
+                    <strong>Error!</strong> ${data.Status || data.detail || data.error || 'Operation failed'}
+                    ${data.Detail ? '<br><small>' + data.Detail + '</small>' : ''}
                 </div>`;
             }
         } catch (error) {
