@@ -38,7 +38,7 @@ extension_prefix = {
     "Japan": "785310",
     "Poland": "784810",
     "Singapore": "785510",
-    "US - Cambridge": "785810",
+    "US": "785810",
     "India": "783910",
     "Canada": "785610",
     "Malaysia": "784610",
