@@ -39,7 +39,7 @@ from webexapi.webexoperations import WebexOperation
 from webexapi.webexnumberadd import addnumbersingle, addnumberbatch
 from utils.logger import setup_logger
 from utils.auth_helper import RoleChecker, get_current_user
-from appdatainternal.settings import ACDLOCATIONS
+from appdatainternal.settings import ACDLOCATIONS, resultfile_location
 
 admin_required = RoleChecker(["admin"])
 viewer_required = RoleChecker(["viewer"])
@@ -246,7 +246,7 @@ async def number_add(file: UploadFile, current_user: str = Depends(admin_require
         response = addnumberbatch(pd.io.common.BytesIO(contents))
         pd.DataFrame(
             [response]
-            ).to_csv(f"resultfiles/numberadd_response_{file.filename}",
+            ).to_csv(os.path.join(resultfile_location, f"numberadd_response_{file.filename}"),
                      mode='a',
                      header=False,
                      index=False)
@@ -320,7 +320,7 @@ async def download_result_file(result_type: str, filename: str, current_user: st
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail="Invalid result type.")
 
-    file_path = f"resultfiles/{result_prefixes[result_type]}{filename}"
+    file_path = os.path.join(resultfile_location, f"{result_prefixes[result_type]}{filename}")
     if not os.path.exists(file_path):
         logger.error("Result file not found by user: %s: %s", current_user, file_path)
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
