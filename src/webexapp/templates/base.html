@@ -261,6 +261,129 @@
             color: var(--text-tertiary);
             border-top: 1px solid var(--border-color);
         }
+
+        /* Error Modal Styles */
+        .error-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(5px);
+            z-index: 9999;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .error-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, rgba(30, 60, 114, 0.95), rgba(20, 40, 70, 0.95));
+            border: 2px solid rgba(255, 50, 50, 0.6);
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(255, 0, 0, 0.3);
+            z-index: 10000;
+            animation: slideDown 0.3s ease;
+        }
+
+        .error-modal-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(255, 50, 50, 0.3);
+        }
+
+        .error-modal-icon {
+            font-size: 2.5rem;
+            margin-right: 15px;
+        }
+
+        .error-modal-title {
+            font-size: 1.5rem;
+            color: #ff6666;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .error-modal-content {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 50, 50, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+            color: #ffcccc;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            word-wrap: break-word;
+        }
+
+        .error-modal-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+        }
+
+        .error-modal-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .error-modal-btn-copy {
+            background: linear-gradient(135deg, #0099cc, #00d4ff);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 153, 204, 0.4);
+        }
+
+        .error-modal-btn-copy:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 212, 255, 0.6);
+        }
+
+        .error-modal-btn-copy.copied {
+            background: linear-gradient(135deg, #00c851, #00ff88);
+        }
+
+        .error-modal-btn-ok {
+            background: linear-gradient(135deg, #ff6b6b, #ff4444);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 68, 68, 0.4);
+        }
+
+        .error-modal-btn-ok:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 68, 68, 0.6);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translate(-50%, -60%);
+                opacity: 0;
+            }
+            to {
+                transform: translate(-50%, -50%);
+                opacity: 1;
+            }
+        }
     </style>
     {% block extra_css %}{% endblock %}
 </head>
@@ -287,6 +410,101 @@
         <p>&copy; 2025 Webex CUCM Integration Dashboard. All rights reserved.</p>
         <p style="margin-top: 10px; font-weight: 600; color: var(--accent-primary);">Developed by UC Engineering</p>
     </div>
+
+    <!-- Error Modal -->
+    <div class="error-modal-overlay" id="errorModalOverlay">
+        <div class="error-modal">
+            <div class="error-modal-header">
+                <div class="error-modal-icon">❌</div>
+                <h3 class="error-modal-title">Error Occurred</h3>
+            </div>
+            <div class="error-modal-content" id="errorModalContent">
+                <!-- Error message will be inserted here -->
+            </div>
+            <div class="error-modal-buttons">
+                <button class="error-modal-btn error-modal-btn-copy" id="errorCopyBtn" onclick="copyErrorToClipboard()">
+                    📋 Copy Error
+                </button>
+                <button class="error-modal-btn error-modal-btn-ok" onclick="closeErrorModal()">
+                    OK
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global function to show error modal
+        function showErrorModal(errorMessage) {
+            const modal = document.getElementById('errorModalOverlay');
+            const content = document.getElementById('errorModalContent');
+            content.textContent = errorMessage;
+            modal.style.display = 'block';
+            
+            // Reset copy button state
+            const copyBtn = document.getElementById('errorCopyBtn');
+            copyBtn.textContent = '📋 Copy Error';
+            copyBtn.classList.remove('copied');
+        }
+
+        // Function to close error modal
+        function closeErrorModal() {
+            const modal = document.getElementById('errorModalOverlay');
+            modal.style.display = 'none';
+        }
+
+        // Function to copy error to clipboard
+        async function copyErrorToClipboard() {
+            const content = document.getElementById('errorModalContent');
+            const copyBtn = document.getElementById('errorCopyBtn');
+            
+            try {
+                await navigator.clipboard.writeText(content.textContent);
+                copyBtn.textContent = '✅ Copied!';
+                copyBtn.classList.add('copied');
+                
+                // Reset button after 2 seconds
+                setTimeout(() => {
+                    copyBtn.textContent = '📋 Copy Error';
+                    copyBtn.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = content.textContent;
+                textArea.style.position = 'fixed';
+                textArea.style.left = '-999999px';
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    copyBtn.textContent = '✅ Copied!';
+                    copyBtn.classList.add('copied');
+                    setTimeout(() => {
+                        copyBtn.textContent = '📋 Copy Error';
+                        copyBtn.classList.remove('copied');
+                    }, 2000);
+                } catch (err) {
+                    alert('Failed to copy error message');
+                }
+                document.body.removeChild(textArea);
+            }
+        }
+
+        // Close modal when clicking outside of it
+        document.addEventListener('click', function(event) {
+            const modal = document.getElementById('errorModalOverlay');
+            if (event.target === modal) {
+                closeErrorModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeErrorModal();
+            }
+        });
+    </script>
 
     {% block extra_js %}{% endblock %}
 </body>

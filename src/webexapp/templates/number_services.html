@@ -158,14 +158,12 @@ function switchTab(tab) {
                     ${data.Detail ? '<br><small>' + JSON.stringify(data.Detail) + '</small>' : ''}
                 </div>`;
             } else {
-                result.innerHTML = `<div class="alert alert-error">
-                    <strong>Error!</strong> ${data.Status || data.detail || data.error || 'Operation failed'}
-                    ${data.Detail ? '<br><small>' + JSON.stringify(data.Detail) + '</small>' : ''}
-                </div>`;
+                const errorMsg = `${data.Status || data.detail || data.error || 'Operation failed'}${data.Detail ? '\n\nDetails: ' + JSON.stringify(data.Detail) : ''}`;
+                showErrorModal(errorMsg);
             }
         } catch (error) {
             loader.style.display = 'none';
-            result.innerHTML = `<div class="alert alert-error"><strong>Error!</strong> ${error.message}</div>`;
+            showErrorModal(error.message);
         }
     });
 
@@ -202,13 +200,11 @@ function switchTab(tab) {
                     </a>
                 </div>`;
             } else {
-                result.innerHTML = `<div class="alert alert-error">
-                    <strong>Error!</strong> ${data.detail || data.error || 'Operation failed'}
-                </div>`;
+                showErrorModal(data.detail || data.error || 'Operation failed');
             }
         } catch (error) {
             loader.style.display = 'none';
-            result.innerHTML = `<div class="alert alert-error"><strong>Error!</strong> ${error.message}</div>`;
+            showErrorModal(error.message);
         }
     });
 </script>

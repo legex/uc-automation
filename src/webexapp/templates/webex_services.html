@@ -528,9 +528,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Validate extension
         const extension = document.getElementById('webex_gen_extension').value;
         if (extension.length !== 4 || !/^[0-9]{4}$/.test(extension)) {
-            result.innerHTML = `<div class="alert alert-error">
-                <strong>Validation Error!</strong> Extension must be exactly 4 digits
-            </div>`;
+            showErrorModal('Validation Error: Extension must be exactly 4 digits');
             return;
         }
         
@@ -562,14 +560,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     ${data.Detail ? '<br><small>' + JSON.stringify(data.Detail) + '</small>' : ''}
                 </div>`;
             } else {
-                result.innerHTML = `<div class="alert alert-error">
-                    <strong>Error!</strong> ${data.Status || data.detail || data.error || 'Operation failed'}
-                    ${data.Detail ? '<br><small>' + data.Detail + '</small>' : ''}
-                </div>`;
+                const errorMsg = `${data.Status || data.detail || data.error || 'Operation failed'}${data.Detail ? '\n\nDetails: ' + data.Detail : ''}`;
+                showErrorModal(errorMsg);
             }
         } catch (error) {
             loader.style.display = 'none';
-            result.innerHTML = `<div class="alert alert-error"><strong>Error!</strong> ${error.message}</div>`;
+            showErrorModal(error.message);
         }
     });
 
@@ -582,9 +578,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Validate extension
         const extension = document.getElementById('webex_acd_extension').value;
         if (extension.length !== 4 || !/^[0-9]{4}$/.test(extension)) {
-            result.innerHTML = `<div class="alert alert-error">
-                <strong>Validation Error!</strong> Extension must be exactly 4 digits
-            </div>`;
+            showErrorModal('Validation Error: Extension must be exactly 4 digits');
             return;
         }
         
@@ -616,14 +610,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     ${data.Detail ? '<br><small>' + JSON.stringify(data.Detail) + '</small>' : ''}
                 </div>`;
             } else {
-                result.innerHTML = `<div class="alert alert-error">
-                    <strong>Error!</strong> ${data.Status || data.detail || data.error || 'Operation failed'}
-                    ${data.Detail ? '<br><small>' + data.Detail + '</small>' : ''}
-                </div>`;
+                const errorMsg = `${data.Status || data.detail || data.error || 'Operation failed'}${data.Detail ? '\n\nDetails: ' + data.Detail : ''}`;
+                showErrorModal(errorMsg);
             }
         } catch (error) {
             loader.style.display = 'none';
-            result.innerHTML = `<div class="alert alert-error"><strong>Error!</strong> ${error.message}</div>`;
+            showErrorModal(error.message);
         }
     });
 
@@ -654,13 +646,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     ${data.Detail ? '<br><small>' + JSON.stringify(data.Detail) + '</small>' : ''}
                 </div>`;
             } else {
-                result.innerHTML = `<div class="alert alert-error">
-                    <strong>Error!</strong> ${data.detail || data.error || 'Operation failed'}
-                </div>`;
+                showErrorModal(data.detail || data.error || 'Operation failed');
             }
         } catch (error) {
             loader.style.display = 'none';
-            result.innerHTML = `<div class="alert alert-error"><strong>Error!</strong> ${error.message}</div>`;
+            showErrorModal(error.message);
         }
     });
 
@@ -698,13 +688,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     </a>
                 </div>`;
             } else {
-                result.innerHTML = `<div class="alert alert-error">
-                    <strong>Error!</strong> ${data.detail || data.error || 'Operation failed'}
-                </div>`;
+                showErrorModal(data.detail || data.error || 'Operation failed');
             }
         } catch (error) {
             loader.style.display = 'none';
-            result.innerHTML = `<div class="alert alert-error"><strong>Error!</strong> ${error.message}</div>`;
+            showErrorModal(error.message);
         }
     });
 
@@ -742,13 +730,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     </a>
                 </div>`;
             } else {
-                result.innerHTML = `<div class="alert alert-error">
-                    <strong>Error!</strong> ${data.detail || data.error || 'Operation failed'}
-                </div>`;
+                showErrorModal(data.detail || data.error || 'Operation failed');
             }
         } catch (error) {
             loader.style.display = 'none';
-            result.innerHTML = `<div class="alert alert-error"><strong>Error!</strong> ${error.message}</div>`;
+            showErrorModal(error.message);
         }
     });
 </script>

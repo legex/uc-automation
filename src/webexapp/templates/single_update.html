@@ -180,7 +180,7 @@
             result.innerHTML = `<div class="alert alert-success">${data.Status || JSON.stringify(data)}</div>`;
         } catch (error) {
             loader.style.display = 'none';
-            result.innerHTML = `<div class="alert alert-error">Error: ${error.message}</div>`;
+            showErrorModal(error.message);
         }
     });
 
@@ -215,13 +215,12 @@
             if (response.ok && !isFailure) {
                 result.innerHTML = `<div class="alert alert-success">${data.Status || JSON.stringify(data)}</div>`;
             } else {
-                result.innerHTML = `<div class="alert alert-error">Error: ${data.Status || data.detail || data.error || 'Operation failed'}
-                    ${data.Detail ? '<br><small>' + data.Detail + '</small>' : ''}
-                </div>`;
+                const errorMsg = `${data.Status || data.detail || data.error || 'Operation failed'}${data.Detail ? '\n\nDetails: ' + data.Detail : ''}`;
+                showErrorModal(errorMsg);
             }
         } catch (error) {
             loader.style.display = 'none';
-            result.innerHTML = `<div class="alert alert-error">Error: ${error.message}</div>`;
+            showErrorModal(error.message);
         }
     });
 
@@ -256,13 +255,12 @@
             if (response.ok && !isFailure) {
                 result.innerHTML = `<div class="alert alert-success">${data.Status || JSON.stringify(data)}</div>`;
             } else {
-                result.innerHTML = `<div class="alert alert-error">Error: ${data.Status || data.detail || data.error || 'Operation failed'}
-                    ${data.Detail ? '<br><small>' + data.Detail + '</small>' : ''}
-                </div>`;
+                const errorMsg = `${data.Status || data.detail || data.error || 'Operation failed'}${data.Detail ? '\n\nDetails: ' + data.Detail : ''}`;
+                showErrorModal(errorMsg);
             }
         } catch (error) {
             loader.style.display = 'none';
-            result.innerHTML = `<div class="alert alert-error">Error: ${error.message}</div>`;
+            showErrorModal(error.message);
         }
     });
 
@@ -298,16 +296,12 @@
                     ${data.Detail ? '<br><small>' + JSON.stringify(data.Detail) + '</small>' : ''}
                 </div>`;
             } else {
-                result.innerHTML = `<div class="alert alert-error">
-                    <strong>Error!</strong> ${data.Status || data.detail || data.error || 'Operation failed'}
-                    ${data.Detail ? '<br><small>' + JSON.stringify(data.Detail) + '</small>' : ''}
-                </div>`;
+                const errorMsg = `${data.Status || data.detail || data.error || 'Operation failed'}${data.Detail ? '\n\nDetails: ' + JSON.stringify(data.Detail) : ''}`;
+                showErrorModal(errorMsg);
             }
         } catch (error) {
             loader.style.display = 'none';
-            result.innerHTML = `<div class="alert alert-error">
-                <strong>Error!</strong> ${error.message}
-            </div>`;
+            showErrorModal(error.message);
         }
     });
 
@@ -340,15 +334,11 @@
                     ${data.Detail ? '<br><small>' + JSON.stringify(data.Detail) + '</small>' : ''}
                 </div>`;
             } else {
-                result.innerHTML = `<div class="alert alert-error">
-                    <strong>Error!</strong> ${data.detail || data.error || 'Operation failed'}
-                </div>`;
+                showErrorModal(data.detail || data.error || 'Operation failed');
             }
         } catch (error) {
             loader.style.display = 'none';
-            result.innerHTML = `<div class="alert alert-error">
-                <strong>Error!</strong> ${error.message}
-            </div>`;
+            showErrorModal(error.message);
         }
     });
 
@@ -378,15 +368,11 @@
                     ${data.Detail ? '<br><small>' + JSON.stringify(data.Detail) + '</small>' : ''}
                 </div>`;
             } else {
-                result.innerHTML = `<div class="alert alert-error">
-                    <strong>Error!</strong> ${data.detail || data.error || 'Operation failed'}
-                </div>`;
+                showErrorModal(data.detail || data.error || 'Operation failed');
             }
         } catch (error) {
             loader.style.display = 'none';
-            result.innerHTML = `<div class="alert alert-error">
-                <strong>Error!</strong> ${error.message}
-            </div>`;
+            showErrorModal(error.message);
         }
     });
 </script>

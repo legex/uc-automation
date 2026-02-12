@@ -147,9 +147,7 @@ function switchTab(tab) {
         // Validate extension
         const extension = document.getElementById('ldap_extension').value;
         if (extension.length !== 10 || !extension.startsWith('78')) {
-            result.innerHTML = `<div class="alert alert-error">
-                <strong>Validation Error!</strong> Extension must be exactly 10 digits starting with 78
-            </div>`;
+            showErrorModal('Validation Error: Extension must be exactly 10 digits starting with 78');
             return;
         }
         
@@ -184,13 +182,11 @@ function switchTab(tab) {
                     <strong>Success!</strong> ${data.Status || 'LDAP update completed'}
                 </div>`;
             } else {
-                result.innerHTML = `<div class="alert alert-error">
-                    <strong>Error!</strong> ${data.detail || data.error || 'Operation failed'}
-                </div>`;
+                showErrorModal(data.detail || data.error || 'Operation failed');
             }
         } catch (error) {
             loader.style.display = 'none';
-            result.innerHTML = `<div class="alert alert-error"><strong>Error!</strong> ${error.message}</div>`;
+            showErrorModal(error.message);
         }
     });
 
@@ -233,13 +229,11 @@ function switchTab(tab) {
                     </a>
                 </div>`;
             } else {
-                result.innerHTML = `<div class="alert alert-error">
-                    <strong>Error!</strong> ${data.detail || data.error || 'Operation failed'}
-                </div>`;
+                showErrorModal(data.detail || data.error || 'Operation failed');
             }
         } catch (error) {
             loader.style.display = 'none';
-            result.innerHTML = `<div class="alert alert-error"><strong>Error!</strong> ${error.message}</div>`;
+            showErrorModal(error.message);
         }
     });
 </script>
