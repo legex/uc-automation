@@ -54,9 +54,9 @@ extension_prefix = {
     "Australia": "784710",
     "Netherlands": "784310",
     "Denmark": "785410",
-    "Ireland": "784910"
+    "Ireland": "784910",
+    "Switzerland": "783610"
 }
-
 
 resultfile_path = "/tmp/resultfiles/"
 def ensure_resultfile_path(resultfile_path):
