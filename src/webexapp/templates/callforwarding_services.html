@@ -1,0 +1,219 @@
+{% extends "base.html" %}
+
+{% block title %}Update Call Forwarding - Webex CUCM Integration{% endblock %}
+
+{% block extra_css %}
+<style>
+    .tab-container {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 30px;
+        border-bottom: 2px solid rgba(0, 212, 255, 0.3);
+    }
+    .tab-button {
+        padding: 12px 24px;
+        background: rgba(0, 100, 200, 0.2);
+        border: none;
+        border-radius: 10px 10px 0 0;
+        color: #00d4ff;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 1rem;
+        font-weight: 500;
+    }
+    .tab-button:hover {
+        background: rgba(0, 100, 200, 0.3);
+    }
+    .tab-button.active {
+        background: rgba(0, 212, 255, 0.3);
+        border-bottom: 3px solid #00d4ff;
+        color: #ffffff;
+    }
+    .tab-content {
+        display: none;
+    }
+    .tab-content.active {
+        display: block;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<h1>Update Call Forwarding</h1>
+
+<div class="section">
+    <a href="/" class="btn btn-secondary" style="margin-bottom: 20px;">← Back to Home</a>
+    
+    <h2>Manage Call Forwarding Settings</h2>
+    <p style="color: #cccccc; margin-bottom: 30px;">Configure call forwarding settings for CUCM users.</p>
+
+    <!-- Tab Navigation -->
+    <div class="tab-container">
+        <button class="tab-button active" onclick="switchTab('single')">Single Update</button>
+        <button class="tab-button" onclick="switchTab('batch')">Batch Update</button>
+    </div>
+
+    <!-- Single Update Tab -->
+    <div id="single-tab" class="tab-content active">
+        <div class="section" style="background: rgba(0, 100, 200, 0.15);">
+            <h3 style="color: #00d4ff; margin-bottom: 15px;">📞 Single Call Forwarding Update</h3>
+            <p style="color: #cccccc; margin-bottom: 15px;">Update call forwarding settings for a single user.</p>
+            <form id="callForwardingSingleForm">
+                <div class="form-group">
+                    <label for="cf_username">Username *</label>
+                    <input type="text" id="cf_username" name="username" required placeholder="Enter username">
+                </div>
+                <div class="form-group">
+                    <label for="cf_linenumber">Line Number *</label>
+                    <input type="text" id="cf_linenumber" name="linenumber" required placeholder="Enter line number">
+                </div>
+                <div class="form-group">
+                    <label for="cf_forwardingnumber">Forwarding Number *</label>
+                    <input type="text" id="cf_forwardingnumber" name="forwardingnumber" required placeholder="Enter forwarding number">
+                </div>
+                <button type="submit" class="btn btn-primary">Update Call Forwarding</button>
+                <div id="cf_single_loader" class="loader"></div>
+                <div id="cf_single_result"></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Batch Update Tab -->
+    <div id="batch-tab" class="tab-content">
+        <div class="section" style="background: rgba(0, 100, 200, 0.15);">
+            <h3 style="color: #00d4ff; margin-bottom: 15px;">📊 Batch Call Forwarding Update</h3>
+            <p style="color: #cccccc; margin-bottom: 15px;">Upload a CSV file to update call forwarding for multiple users.</p>
+            <form id="callForwardingBatchForm">
+                <div class="form-group">
+                    <label for="cf_batch_file">Upload CSV File *</label>
+                    <input type="file" id="cf_batch_file" accept=".csv" required style="padding: 8px; background: rgba(0, 0, 0, 0.5);">
+                </div>
+                <button type="submit" class="btn btn-primary">Upload and Process</button>
+                <div id="cf_batch_loader" class="loader"></div>
+                <div id="cf_batch_result"></div>
+            </form>
+        </div>
+
+        <!-- Template Download -->
+        <div class="section" style="background: rgba(0, 100, 200, 0.15); margin-top: 20px;">
+            <h3 style="color: #00d4ff; margin-bottom: 15px;">📥 Download Template</h3>
+            <p style="color: #cccccc; margin-bottom: 15px;">Download the CSV template for batch call forwarding updates.</p>
+            <a href="/api/download/template/call_forwarding" class="btn btn-primary">Download CSV Template</a>
+        </div>
+    </div>
+</div>
+
+<!-- Information Section -->
+<div class="section">
+    <h2>ℹ️ Information</h2>
+    <h3 style="color: #00d4ff; margin-top: 20px;">Single Update</h3>
+    <ul style="color: #cccccc; line-height: 1.8;">
+        <li>• Enter the username of the CUCM user</li>
+        <li>• Provide the line number to update</li>
+        <li>• Specify the forwarding number to configure</li>
+        <li>• Click "Update Call Forwarding" to apply changes</li>
+    </ul>
+    <h3 style="color: #00d4ff; margin-top: 20px;">Batch Update</h3>
+    <ul style="color: #cccccc; line-height: 1.8;">
+        <li>• Download the CSV template first</li>
+        <li>• Fill in the required columns: Username, LineNumber, ForwardingNumber</li>
+        <li>• Upload the completed CSV file</li>
+        <li>• Results will be available for download after processing</li>
+    </ul>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Tab switching function
+    function switchTab(tabName) {
+        const tabs = document.querySelectorAll('.tab-content');
+        const buttons = document.querySelectorAll('.tab-button');
+        
+        tabs.forEach(tab => tab.classList.remove('active'));
+        buttons.forEach(btn => btn.classList.remove('active'));
+        
+        document.getElementById(tabName + '-tab').classList.add('active');
+        event.target.classList.add('active');
+    }
+
+    // Single Call Forwarding Update Form Handler
+    document.getElementById('callForwardingSingleForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const loader = document.getElementById('cf_single_loader');
+        const result = document.getElementById('cf_single_result');
+        
+        loader.style.display = 'block';
+        result.innerHTML = '';
+        
+        const formData = {
+            username: document.getElementById('cf_username').value,
+            linenumber: document.getElementById('cf_linenumber').value,
+            forwardingnumber: document.getElementById('cf_forwardingnumber').value
+        };
+        
+        try {
+            const response = await fetch('/api/updatecallforwarding/single', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(formData)
+            });
+            const data = await response.json();
+            loader.style.display = 'none';
+            
+            if (response.ok) {
+                result.innerHTML = `<div class="alert alert-success">
+                    <strong>Success!</strong> ${data.Status || 'Call forwarding updated successfully'}
+                    ${data.Detail ? '<br><small>' + JSON.stringify(data.Detail) + '</small>' : ''}
+                </div>`;
+            } else {
+                showErrorModal(data.detail || data.error || 'Operation failed');
+            }
+        } catch (error) {
+            loader.style.display = 'none';
+            showErrorModal(error.message);
+        }
+    });
+
+    // Batch Call Forwarding Update Form Handler
+    document.getElementById('callForwardingBatchForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const loader = document.getElementById('cf_batch_loader');
+        const result = document.getElementById('cf_batch_result');
+        const fileInput = document.getElementById('cf_batch_file');
+        
+        loader.style.display = 'block';
+        result.innerHTML = '';
+        
+        const formData = new FormData();
+        formData.append('file', fileInput.files[0]);
+        const fileName = fileInput.files[0].name;
+        
+        try {
+            const response = await fetch('/api/updatecallforwarding/batch', {
+                method: 'POST',
+                body: formData
+            });
+            const data = await response.json();
+            loader.style.display = 'none';
+            
+            if (response.ok) {
+                result.innerHTML = `<div class="alert alert-success">
+                    <strong>Success!</strong> ${data.Status || 'Batch operation completed'}
+                    <br><br>
+                    <a href="/api/download/result/call_forwarding/${fileName}" 
+                       class="btn btn-primary" 
+                       style="margin-top: 10px; display: inline-block;">
+                        📥 Download Result File
+                    </a>
+                </div>`;
+            } else {
+                showErrorModal(data.detail || data.error || 'Operation failed');
+            }
+        } catch (error) {
+            loader.style.display = 'none';
+            showErrorModal(error.message);
+        }
+    });
+</script>
+{% endblock %}

@@ -1,7 +1,9 @@
 import os
 import json
+from dotenv import load_dotenv
 import pandas as pd
 
+load_dotenv()
 
 with open("appdatainternal/cucm.json", 'r') as f:
     CUCM_ADDRESSES = json.load(f)
@@ -58,15 +60,20 @@ extension_prefix = {
     "Switzerland": "783610"
 }
 
-resultfile_path = "/tmp/resultfiles/"
+
 def ensure_resultfile_path(resultfile_path):
     """Ensure the result file path exists."""
     if not os.path.exists(resultfile_path):
         os.makedirs(resultfile_path)
     return resultfile_path
+
+
+if mode == "prod":
+    resultfile_path = "tmp/resultfiles"
+else:
+    resultfile_path = "/tmp/resultfiles/"
+
 resultfile_location = ensure_resultfile_path(resultfile_path)
-
-
 
 SERVER = "wauth.corp.akamai.com:636"
 LDAP_USERNAME = "akamai.com\\svc_tmt_account"

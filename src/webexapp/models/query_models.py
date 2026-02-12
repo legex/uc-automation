@@ -66,3 +66,15 @@ class QueryModelRPUpdate(BaseModel):
     """
     routepattern: str
     partition: str
+
+class QueryModelCallForward(BaseModel):
+    """
+    Model for updating call forwarding settings for a user.
+    
+    Attributes:
+        linenumber (str): The line number in Webex to update call forwarding settings.
+        forwardingnumber (str): The phone number to forward calls to.
+        forwardingtype (str): The type of call forwarding (e.g., "Always", "Busy", "NoAnswer").
+    """
+    linenumber: str
+    forwardingnumber: str

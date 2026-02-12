@@ -28,7 +28,12 @@ from ldapapi.updateldap import (
     )
 from webexapp.services.ldap_batch import batch_update_ldap, batch_update_ldap_acd
 from webexapp.services.webex_batch import batch_update_webex_gen, batch_update_webex_acd
-from webexapp.models.query_models import QueryModelLdap, QueryModelWebex, QueryModelNumberSingle, QueryModelRPSingle, QueryModelRPUpdate
+from webexapp.models.query_models import (
+    QueryModelLdap, QueryModelWebex,
+    QueryModelNumberSingle, QueryModelRPSingle,
+    QueryModelRPUpdate,
+    QueryModelCallForward
+    )
 from webexapp.services.rp_batch import batch_routepattern_auto, batch_updateroutepatterns_auto
 #from src.webexapp.webexbotbaseunused import WebexbotBase
 from cucmapi.axlroutepattern import AXLRoutePatternOperations
@@ -139,6 +144,19 @@ async def number_services_page(request: Request, current_user: str = Depends(get
         HTMLResponse: The rendered number_services.html template.
     """
     return templates.TemplateResponse("number_services.html", {"request": request, "current_user": current_user, "regions": regions_list})
+
+@router.get("/api/callforwarding-services", response_class=HTMLResponse)
+async def callforwarding_services_page(request: Request, current_user: str = Depends(get_current_user)):
+    """
+    Render the call forwarding services page UI.
+    
+    Args:
+        request (Request): FastAPI request object.
+    
+    Returns:
+        HTMLResponse: The rendered callforwarding_services.html template.
+    """
+    return templates.TemplateResponse("callforwarding_services.html", {"request": request, "current_user": current_user})
 
 @router.get("/api/single-update", response_class=HTMLResponse)
 async def single_update_page(request: Request, current_user: str = Depends(admin_required)):
@@ -815,3 +833,38 @@ async def batch_update_route_pattern(file: UploadFile, is_india: bool = False, c
         logger.error("Error processing batch route pattern file by user: %s, file %s: %s", current_user, file.filename, str(e))
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                             detail=f"Error processing file: {str(e)}") from e
+
+@router.post("/api/updatecallforwarding/single")
+async def update_call_forwarding_single(query: QueryModelCallForward, current_user: str = Depends(admin_required)):
+    """
+    Update call forwarding settings for a single user.
+    
+    Args:
+        query (QueryModelCallForward): Information containing username, forwarding number, and forwarding type.
+    Returns:
+        dict: Status and detail message with call forwarding update result.
+    """
+    logger.info("Single call forwarding update requested by user: %s for target user: %s",
+                current_user, query.username if query else "None")
+    axlconn = ConnectionAXL()
+    service = axlconn.service(is_india=False) # Assuming call forwarding updates are not region-specific, adjust if needed
+    if query is None:
+        logger.error("No query provided for call forwarding update by user: %s", current_user)
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail="Query must be provided.")
+    try:
+        logger.debug("Processing call forwarding update by user: %s for target user: %s", current_user, query.username)
+        result = axlrp.update_callforwarding(query.linenumber, query.forwardingnumber, service)
+        if not result:
+            logger.warning("Call forwarding update returned no results for user: %s, target user: %s", current_user, query.username) 
+            return {"Status": "Call forwarding update failed", "Detail": "No response from CUCM"}
+        logger.info("Call forwarding update completed by user: %s for target user: %s", current_user, query.username)
+        return {"Status": "Call forwarding update initiated", "Detail": result}
+    except Exception as e:
+        logger.error("Error updating call forwarding by user: %s for target user %s: %s", current_user, query.username, str(e))
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                            detail=f"Error updating call forwarding: {str(e)}") from e
+    
+@router.post("/api/updatecallforwarding/batch")
+async def batch_update_call_forwarding(file: UploadFile, current_user: str = Depends(admin_required)):
+    pass

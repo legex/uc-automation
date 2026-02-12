@@ -221,3 +221,34 @@ class AXLRoutePatternOperations:
         except Fault as e:
             logger.error("Failed to update route pattern: %s", e)
             return None
+
+    def update_callforwarding(self, pattern, destination_pattern, service=None):
+
+        """
+        Update call forwarding settings for a given route pattern.
+
+        Args:
+            pattern (str): The route pattern to update.
+            destination_pattern (str): The new destination pattern for call forwarding.
+        Returns:
+            dict or None: Response from CUCM if successful, else None.
+        """
+        if not service:
+            logger.debug("No service provided")
+        routerpattern = {
+        'pattern': f'+{pattern}',
+        'routePartitionName' : "PT-Global-Internal",
+        'callForwardAll': {
+            'forwardDestination': f"+{destination_pattern}",
+            'forwardToVoiceMail': 'false',
+            'callingSearchSpaceName': 'None'
+        }
+        }
+        try:
+            logger.info("Updating call forwarding for route pattern %s ", pattern)
+            response = service.updateLine(**routerpattern)['return']
+            logger.info("Call forwarding for route pattern %s updated successfully", pattern)
+            return response
+        except Fault as e:
+            logger.error("Failed to update call forwarding for route pattern: %s", e)
+            return None
