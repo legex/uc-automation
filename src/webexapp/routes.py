@@ -835,36 +835,60 @@ async def batch_update_route_pattern(file: UploadFile, is_india: bool = False, c
                             detail=f"Error processing file: {str(e)}") from e
 
 @router.post("/api/updatecallforwarding/single")
-async def update_call_forwarding_single(query: QueryModelCallForward, current_user: str = Depends(admin_required)):
+async def update_call_forwarding_single(query: QueryModelCallForward, is_india = False, current_user: str = Depends(admin_required)):
     """
     Update call forwarding settings for a single user.
     
     Args:
-        query (QueryModelCallForward): Information containing username, forwarding number, and forwarding type.
+        query (QueryModelCallForward): Information containing line number, forwarding number, and forwarding type.
     Returns:
         dict: Status and detail message with call forwarding update result.
     """
-    logger.info("Single call forwarding update requested by user: %s for target user: %s",
-                current_user, query.username if query else "None")
+    logger.info("Single call forwarding update requested by user: %s for target line: %s",
+                current_user, query.linenumber if query else "None")
     axlconn = ConnectionAXL()
-    service = axlconn.service(is_india=False) # Assuming call forwarding updates are not region-specific, adjust if needed
+    service = axlconn.service(is_india=is_india) # Assuming call forwarding updates are not region-specific, adjust if needed
     if query is None:
         logger.error("No query provided for call forwarding update by user: %s", current_user)
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail="Query must be provided.")
     try:
-        logger.debug("Processing call forwarding update by user: %s for target user: %s", current_user, query.username)
+        logger.debug("Processing call forwarding update by user: %s for target line: %s", current_user, query.linenumber)
         result = axlrp.update_callforwarding(query.linenumber, query.forwardingnumber, service)
         if not result:
-            logger.warning("Call forwarding update returned no results for user: %s, target user: %s", current_user, query.username) 
+            logger.warning("Call forwarding update returned no results for user: %s, target line: %s", current_user, query.linenumber) 
             return {"Status": "Call forwarding update failed", "Detail": "No response from CUCM"}
-        logger.info("Call forwarding update completed by user: %s for target user: %s", current_user, query.username)
+        logger.info("Call forwarding update completed by user: %s for target line: %s", current_user, query.linenumber)
         return {"Status": "Call forwarding update initiated", "Detail": result}
     except Exception as e:
-        logger.error("Error updating call forwarding by user: %s for target user %s: %s", current_user, query.username, str(e))
+        logger.error("Error updating call forwarding by user: %s for target line %s: %s", current_user, query.linenumber, str(e))
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                             detail=f"Error updating call forwarding: {str(e)}") from e
     
 @router.post("/api/updatecallforwarding/batch")
 async def batch_update_call_forwarding(file: UploadFile, current_user: str = Depends(admin_required)):
     pass
+
+@router.get("/api/linedetails")
+def get_line_details(line_number: str, is_india: bool = False):
+    """
+    Retrieve line details from CUCM for a given line number.
+    
+    Args:
+        line_number (str): The line number to retrieve details for.
+        is_india (bool): Flag indicating if the CUCM instance is in India region.
+    
+    Returns:
+        dict: Line details retrieved from CUCM.
+    """
+    axlconn = ConnectionAXL()
+    service = axlconn.service(is_india)
+    try:
+        line_details = axlrp.get_line(line_number, service)
+        logger.info("Successfully retrieved line details for line number: %s", line_details)
+        return line_details
+    except Exception as e:
+        logger.error("Error retrieving line details for line number %s: %s", line_number, str(e))
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                            detail=f"Error retrieving line details: {str(e)}") from e
+    

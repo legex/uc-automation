@@ -3,3 +3,872 @@
 2026-02-13 17:10:51,544 - webapp - INFO - Homepage accessed by user: abshukla from 127.0.0.1
 2026-02-13 17:10:55,422 - webapp - INFO - Homepage accessed by user: abshukla from 127.0.0.1
 2026-02-13 17:10:58,822 - webapp - INFO - Homepage accessed by user: abshukla from 127.0.0.1
+2026-02-13 17:21:58,463 - webapp - INFO - Homepage accessed by user: abshukla from 127.0.0.1
+2026-02-13 17:24:07,039 - webapp - INFO - Homepage accessed by user: abshukla from 127.0.0.1
+2026-02-13 17:25:38,671 - webapp - INFO - Single call forwarding update requested by user: abshukla for target line: 8046859439
+2026-02-13 17:25:39,206 - webapp - ERROR - Error updating call forwarding by user: abshukla for target line 8046859439: {http://www.cisco.com/AXL/API/14.0}XCallForwardAll() got an unexpected keyword argument 'forwardDestination'. Signature: `forwardToVoiceMail: {http://www.cisco.com/AXL/API/14.0}boolean, callingSearchSpaceName: {http://www.cisco.com/AXL/API/14.0}XFkType, secondaryCallingSearchSpaceName: {http://www.cisco.com/AXL/API/14.0}XFkType, destination: {http://www.cisco.com/AXL/API/14.0}String50`
+2026-02-13 17:27:05,859 - webapp - INFO - Single call forwarding update requested by user: abshukla for target line: 8046859439
+2026-02-13 17:27:18,792 - webapp - WARNING - Call forwarding update returned no results for user: abshukla, target line: 8046859439
+2026-02-13 17:34:18,421 - webapp - INFO - Homepage accessed by user: abshukla from 127.0.0.1
+2026-02-13 17:35:14,977 - webapp - INFO - Successfully retrieved line details for line number: None
+2026-02-13 17:36:17,625 - webapp - INFO - Successfully retrieved line details for line number: None
+2026-02-13 17:36:26,299 - webapp - INFO - Successfully retrieved line details for line number: None
+2026-02-13 17:39:11,833 - webapp - INFO - Successfully retrieved line details for line number: None
+2026-02-13 17:41:08,754 - webapp - INFO - Successfully retrieved line details for line number: None
+2026-02-13 17:41:38,740 - webapp - INFO - Successfully retrieved line details for line number: None
+2026-02-13 17:42:06,264 - webapp - INFO - Successfully retrieved line details for line number: None
+2026-02-13 17:44:51,728 - webapp - INFO - Successfully retrieved line details for line number: None
+2026-02-13 17:46:07,270 - webapp - INFO - Successfully retrieved line details for line number: None
+2026-02-13 17:47:16,737 - webapp - INFO - Successfully retrieved line details for line number: None
+2026-02-13 17:48:14,721 - webapp - INFO - Successfully retrieved line details for line number: {
+    'name': 'CSFABSHUKLA',
+    'description': 'Abhishek Shukla',
+    'product': 'Cisco Unified Client Services Framework',
+    'model': 'Cisco Unified Client Services Framework',
+    'class': 'Phone',
+    'protocol': 'SIP',
+    'protocolSide': 'User',
+    'callingSearchSpaceName': {
+        '_value_1': 'CSS-Global-Device',
+        'uuid': '{0C691033-F361-24F1-4CA7-6C668BB057A8}'
+    },
+    'devicePoolName': {
+        '_value_1': 'DP-Jabber',
+        'uuid': '{DC99D4B1-2565-BF7B-4B10-EEE82C3535A4}'
+    },
+    'commonDeviceConfigName': {
+        '_value_1': None,
+        'uuid': None
+    },
+    'commonPhoneConfigName': {
+        '_value_1': 'Standard Common Phone Profile',
+        'uuid': '{AC243D17-98B4-4118-8FEB-5FF2E1B781AC}'
+    },
+    'networkLocation': 'Use System Default',
+    'locationName': {
+        '_value_1': 'Hub_None',
+        'uuid': '{29C5C1C4-8871-4D1E-8394-0B9181E8C54D}'
+    },
+    'mediaResourceListName': {
+        '_value_1': 'MRGL_All',
+        'uuid': '{1E04833B-F937-CE4E-D953-9DE8EB3580D3}'
+    },
+    'networkHoldMohAudioSourceId': None,
+    'userHoldMohAudioSourceId': None,
+    'automatedAlternateRoutingCssName': {
+        '_value_1': None,
+        'uuid': None
+    },
+    'aarNeighborhoodName': {
+        '_value_1': None,
+        'uuid': None
+    },
+    'loadInformation': {
+        '_value_1': None,
+        'special': 'false'
+    },
+    'vendorConfig': None,
+    'versionStamp': '{1768405531-69E58980-A6BA-4DBB-9946-B9C9C9576BF6}',
+    'traceFlag': 'false',
+    'mlppDomainId': None,
+    'mlppIndicationStatus': 'Off',
+    'preemption': 'Disabled',
+    'useTrustedRelayPoint': 'Default',
+    'retryVideoCallAsAudio': 'true',
+    'securityProfileName': {
+        '_value_1': 'Cisco Unified Client Services Framework - Standard SIP Non-Secure Profile',
+        'uuid': '{C6085E14-A32C-4C5E-A3D1-8DAF60D81594}'
+    },
+    'sipProfileName': {
+        '_value_1': 'Standard SIP Profile',
+        'uuid': '{FCBC7581-4D8D-48F3-917E-00B09FB39213}'
+    },
+    'cgpnTransformationCssName': {
+        '_value_1': None,
+        'uuid': None
+    },
+    'useDevicePoolCgpnTransformCss': 'true',
+    'geoLocationName': {
+        '_value_1': None,
+        'uuid': None
+    },
+    'geoLocationFilterName': {
+        '_value_1': None,
+        'uuid': None
+    },
+    'sendGeoLocation': 'false',
+    'lines': {
+        'line': [
+            {
+                'index': 2,
+                'label': None,
+                'display': 'Abhishek Shukla',
+                'dirn': {
+                    'pattern': '\\+918046859439',
+                    'routePartitionName': {
+                        '_value_1': 'PT-Global-Internal',
+                        'uuid': '{4A77D1B8-BFE9-D06B-0288-5BB255635BB8}'
+                    },
+                    'uuid': '{8BAC4A1D-17B3-00C4-295B-F36C1F9F41F2}'
+                },
+                'ringSetting': 'Ring',
+                'consecutiveRingSetting': 'Use System Default',
+                'ringSettingIdlePickupAlert': None,
+                'ringSettingActivePickupAlert': None,
+                'displayAscii': 'Abhishek Shukla',
+                'e164Mask': None,
+                'dialPlanWizardId': None,
+                'mwlPolicy': 'Use System Policy',
+                'maxNumCalls': 2,
+                'busyTrigger': 1,
+                'callInfoDisplay': {
+                    'callerName': 'true',
+                    'callerNumber': 'false',
+                    'redirectedNumber': 'false',
+                    'dialedNumber': 'true'
+                },
+                'recordingProfileName': {
+                    '_value_1': None,
+                    'uuid': None
+                },
+                'monitoringCssName': {
+                    '_value_1': None,
+                    'uuid': None
+                },
+                'recordingFlag': 'Call Recording Disabled',
+                'audibleMwi': 'Default',
+                'speedDial': None,
+                'partitionUsage': 'General',
+                'associatedEndusers': None,
+                'missedCallLogging': 'true',
+                'recordingMediaSource': 'Gateway Preferred',
+                'ctiid': None,
+                'uuid': '{BEF13120-5228-4EF5-E695-947C97B5DF33}'
+            },
+            {
+                'index': 1,
+                'label': None,
+                'display': 'Abhishek Shukla',
+                'dirn': {
+                    'pattern': '\\+918046001529',
+                    'routePartitionName': {
+                        '_value_1': 'PT-Hidden',
+                        'uuid': '{2EA9908A-CC19-2371-6B6F-E866EC227606}'
+                    },
+                    'uuid': '{A64550F2-E1F7-8DC4-F3CF-4B73E7EC1B73}'
+                },
+                'ringSetting': 'Ring',
+                'consecutiveRingSetting': 'Use System Default',
+                'ringSettingIdlePickupAlert': None,
+                'ringSettingActivePickupAlert': None,
+                'displayAscii': 'Abhishek Shukla',
+                'e164Mask': None,
+                'dialPlanWizardId': None,
+                'mwlPolicy': 'Use System Policy',
+                'maxNumCalls': 2,
+                'busyTrigger': 1,
+                'callInfoDisplay': {
+                    'callerName': 'true',
+                    'callerNumber': 'false',
+                    'redirectedNumber': 'false',
+                    'dialedNumber': 'true'
+                },
+                'recordingProfileName': {
+                    '_value_1': None,
+                    'uuid': None
+                },
+                'monitoringCssName': {
+                    '_value_1': 'CSS-Global-Device',
+                    'uuid': '0c691033-f361-24f1-4ca7-6c668bb057a8'
+                },
+                'recordingFlag': 'Call Recording Disabled',
+                'audibleMwi': 'Default',
+                'speedDial': None,
+                'partitionUsage': 'General',
+                'associatedEndusers': None,
+                'missedCallLogging': 'true',
+                'recordingMediaSource': 'Gateway Preferred',
+                'ctiid': None,
+                'uuid': '{FEC726FA-401F-FFA4-5519-6387226CFDDA}'
+            },
+            {
+                'index': 3,
+                'label': None,
+                'display': None,
+                'dirn': {
+                    'pattern': '\\+827079144960',
+                    'routePartitionName': {
+                        '_value_1': 'PT-Global-Internal',
+                        'uuid': '{4A77D1B8-BFE9-D06B-0288-5BB255635BB8}'
+                    },
+                    'uuid': '{544931A7-A5EB-8C5B-4DF5-F5D48C942070}'
+                },
+                'ringSetting': 'Use System Default',
+                'consecutiveRingSetting': 'Use System Default',
+                'ringSettingIdlePickupAlert': 'Use System Default',
+                'ringSettingActivePickupAlert': 'Use System Default',
+                'displayAscii': None,
+                'e164Mask': None,
+                'dialPlanWizardId': None,
+                'mwlPolicy': 'Use System Policy',
+                'maxNumCalls': 6,
+                'busyTrigger': 2,
+                'callInfoDisplay': {
+                    'callerName': 'true',
+                    'callerNumber': 'false',
+                    'redirectedNumber': 'false',
+                    'dialedNumber': 'true'
+                },
+                'recordingProfileName': {
+                    '_value_1': None,
+                    'uuid': None
+                },
+                'monitoringCssName': {
+                    '_value_1': None,
+                    'uuid': None
+                },
+                'recordingFlag': 'Call Recording Disabled',
+                'audibleMwi': 'Default',
+                'speedDial': None,
+                'partitionUsage': 'General',
+                'associatedEndusers': None,
+                'missedCallLogging': 'true',
+                'recordingMediaSource': 'Gateway Preferred',
+                'ctiid': None,
+                'uuid': '{6C105746-2FDC-55F5-80C9-3C2AF8DAFF7D}'
+            }
+        ],
+        'lineIdentifier': None
+    },
+    'numberOfButtons': 8,
+    'phoneTemplateName': {
+        '_value_1': 'Standard Client Services Framework',
+        'uuid': '{8E1A10FA-A52C-4435-A4EC-540D266C8C37}'
+    },
+    'speeddials': None,
+    'busyLampFields': None,
+    'primaryPhoneName': {
+        '_value_1': None,
+        'uuid': None
+    },
+    'ringSettingIdleBlfAudibleAlert': 'Default',
+    'ringSettingBusyBlfAudibleAlert': 'Default',
+    'blfDirectedCallParks': None,
+    'addOnModules': None,
+    'userLocale': None,
+    'networkLocale': None,
+    'idleTimeout': None,
+    'authenticationUrl': None,
+    'directoryUrl': None,
+    'idleUrl': None,
+    'informationUrl': None,
+    'messagesUrl': None,
+    'proxyServerUrl': None,
+    'servicesUrl': None,
+    'services': None,
+    'softkeyTemplateName': {
+        '_value_1': None,
+        'uuid': None
+    },
+    'loginUserId': None,
+    'defaultProfileName': {
+        '_value_1': None,
+        'uuid': None
+    },
+    'enableExtensionMobility': 'false',
+    'currentProfileName': {
+        '_value_1': None,
+        'uuid': None
+    },
+    'loginTime': None,
+    'loginDuration': None,
+    'currentConfig': {
+        'userHoldMohAudioSourceId': None,
+        'phoneTemplateName': {
+            '_value_1': 'Standard Client Services Framework',
+            'uuid': '{8E1A10FA-A52C-4435-A4EC-540D266C8C37}'
+        },
+        'mlppDomainId': None,
+        'mlppIndicationStatus': 'Off',
+        'preemption': 'Disabled',
+        'softkeyTemplateName': {
+            '_value_1': None,
+            'uuid': None
+        },
+        'ignorePresentationIndicators': 'false',
+        'singleButtonBarge': 'Default',
+        'joinAcrossLines': 'Off',
+        'callInfoPrivacyStatus': 'Default',
+        'dndStatus': None,
+        'dndRingSetting': None,
+        'dndOption': 'Ringer Off',
+        'alwaysUsePrimeLine': 'Default',
+        'alwaysUsePrimeLineForVoiceMessage': 'Default',
+        'emccCallingSearchSpaceName': {
+            '_value_1': None,
+            'uuid': ''
+        },
+        'deviceName': None,
+        'model': None,
+        'product': None,
+        'deviceProtocol': None,
+        'class': None,
+        'addressMode': None,
+        'allowAutoConfig': None,
+        'remoteSrstOption': None,
+        'remoteSrstIp': None,
+        'remoteSrstPort': None,
+        'remoteSipSrstIp': None,
+        'remoteSipSrstPort': None,
+        'geolocationInfo': None,
+        'remoteLocationName': None
+    },
+    'singleButtonBarge': 'Default',
+    'joinAcrossLines': 'Off',
+    'builtInBridgeStatus': 'On',
+    'callInfoPrivacyStatus': 'Default',
+    'hlogStatus': 'On',
+    'ownerUserName': {
+        '_value_1': 'abshukla',
+        'uuid': '4ab91f0a-1e9e-e066-4451-951c17b7b970'
+    },
+    'ignorePresentationIndicators': 'false',
+    'packetCaptureMode': 'None',
+    'packetCaptureDuration': 0,
+    'subscribeCallingSearchSpaceName': {
+        '_value_1': None,
+        'uuid': None
+    },
+    'rerouteCallingSearchSpaceName': {
+        '_value_1': None,
+        'uuid': None
+    },
+    'allowCtiControlFlag': 'true',
+    'presenceGroupName': {
+        '_value_1': 'Standard Presence group',
+        'uuid': '{AD243D17-98B4-4118-8FEB-5FF2E1B781AC}'
+    },
+    'unattendedPort': 'false',
+    'requireDtmfReception': 'false',
+    'rfc2833Disabled': 'false',
+    'certificateOperation': 'No Pending Operation',
+    'authenticationMode': None,
+    'keySize': None,
+    'keyOrder': None,
+    'ecKeySize': None,
+    'authenticationString': None,
+    'certificateStatus': 'None',
+    'upgradeFinishTime': None,
+    'deviceMobilityMode': 'Default',
+    'roamingDevicePoolName': {
+        '_value_1': None,
+        'uuid': None
+    },
+    'remoteDevice': 'false',
+    'dndOption': 'Ringer Off',
+    'dndRingSetting': None,
+    'dndStatus': 'false',
+    'isActive': 'true',
+    'isDualMode': 'false',
+    'mobilityUserIdName': {
+        '_value_1': None,
+        'uuid': None
+    },
+    'phoneSuite': 'Default',
+    'phoneServiceDisplay': 'Default',
+    'isProtected': 'false',
+    'mtpRequired': 'false',
+    'mtpPreferedCodec': '711ulaw',
+    'dialRulesName': {
+        '_value_1': None,
+        'uuid': None
+    },
+    'sshUserId': None,
+    'sshPwd': None,
+    'digestUser': None,
+    'outboundCallRollover': 'No Rollover',
+    'hotlineDevice': 'false',
+    'secureInformationUrl': None,
+    'secureDirectoryUrl': None,
+    'secureMessageUrl': None,
+    'secureServicesUrl': None,
+    'secureAuthenticationUrl': None,
+    'secureIdleUrl': None,
+    'alwaysUsePrimeLine': 'Default',
+    'alwaysUsePrimeLineForVoiceMessage': 'Default',
+    'featureControlPolicy': {
+        '_value_1': None,
+        'uuid': None
+    },
+    'deviceTrustMode': 'Not Trusted',
+    'earlyOfferSupportForVoiceCall': None,
+    'requireThirdPartyRegistration': None,
+    'blockIncomingCallsWhenRoaming': None,
+    'homeNetworkId': None,
+    'AllowPresentationSharingUsingBfcp': None,
+    'confidentialAccess': {
+        'confidentialAccessMode': None,
+        'confidentialAccessLevel': -1
+    },
+    'requireOffPremiseLocation': 'false',
+    'allowiXApplicableMedia': None,
+    'cgpnIngressDN': {
+        '_value_1': None,
+        'uuid': None
+    },
+    'useDevicePoolCgpnIngressDN': 'true',
+    'msisdn': None,
+    'enableCallRoutingToRdWhenNoneIsActive': 'false',
+    'wifiHotspotProfile': {
+        '_value_1': None,
+        'uuid': None
+    },
+    'wirelessLanProfileGroup': {
+        '_value_1': None,
+        'uuid': None
+    },
+    'elinGroup': {
+        '_value_1': None,
+        'uuid': None
+    },
+    'enableActivationID': 'false',
+    'activationIDStatus': None,
+    'mraServiceDomain': {
+        '_value_1': None,
+        'uuid': None
+    },
+    'allowMraMode': 'false',
+    'ctiid': 11586,
+    'uuid': '{475CD6E0-1B0A-B623-7BCA-AD9C1F4C7D01}'
+}
+2026-02-13 17:48:58,581 - webapp - INFO - Successfully retrieved line details for line number: {
+    'line': {
+        'pattern': '\\+918046859439',
+        'description': None,
+        'usage': 'Device',
+        'routePartitionName': {
+            '_value_1': 'PT-Global-Internal',
+            'uuid': '{4A77D1B8-BFE9-D06B-0288-5BB255635BB8}'
+        },
+        'aarNeighborhoodName': {
+            '_value_1': None,
+            'uuid': None
+        },
+        'aarDestinationMask': None,
+        'aarKeepCallHistory': 'true',
+        'aarVoiceMailEnabled': 'false',
+        'callForwardAll': {
+            'forwardToVoiceMail': 'false',
+            'callingSearchSpaceName': {
+                '_value_1': None,
+                'uuid': ''
+            },
+            'secondaryCallingSearchSpaceName': {
+                '_value_1': None,
+                'uuid': ''
+            },
+            'destination': None
+        },
+        'callForwardBusy': {
+            'forwardToVoiceMail': 'false',
+            'callingSearchSpaceName': {
+                '_value_1': None,
+                'uuid': ''
+            },
+            'destination': None
+        },
+        'callForwardBusyInt': {
+            'forwardToVoiceMail': 'false',
+            'callingSearchSpaceName': {
+                '_value_1': None,
+                'uuid': ''
+            },
+            'destination': None
+        },
+        'callForwardNoAnswer': {
+            'forwardToVoiceMail': 'false',
+            'callingSearchSpaceName': {
+                '_value_1': None,
+                'uuid': ''
+            },
+            'destination': None,
+            'duration': None
+        },
+        'callForwardNoAnswerInt': {
+            'forwardToVoiceMail': 'false',
+            'callingSearchSpaceName': {
+                '_value_1': None,
+                'uuid': ''
+            },
+            'destination': None,
+            'duration': None
+        },
+        'callForwardNoCoverage': {
+            'forwardToVoiceMail': 'false',
+            'callingSearchSpaceName': {
+                '_value_1': None,
+                'uuid': ''
+            },
+            'destination': None
+        },
+        'callForwardNoCoverageInt': {
+            'forwardToVoiceMail': 'false',
+            'callingSearchSpaceName': {
+                '_value_1': None,
+                'uuid': ''
+            },
+            'destination': None
+        },
+        'callForwardOnFailure': {
+            'forwardToVoiceMail': 'false',
+            'callingSearchSpaceName': {
+                '_value_1': None,
+                'uuid': ''
+            },
+            'destination': None
+        },
+        'callForwardAlternateParty': {
+            'forwardToVoiceMail': None,
+            'callingSearchSpaceName': {
+                '_value_1': None,
+                'uuid': ''
+            },
+            'destination': None,
+            'duration': None
+        },
+        'callForwardNotRegistered': {
+            'forwardToVoiceMail': 'false',
+            'callingSearchSpaceName': {
+                '_value_1': None,
+                'uuid': ''
+            },
+            'destination': None
+        },
+        'callForwardNotRegisteredInt': {
+            'forwardToVoiceMail': 'false',
+            'callingSearchSpaceName': {
+                '_value_1': None,
+                'uuid': ''
+            },
+            'destination': None
+        },
+        'callPickupGroupName': {
+            '_value_1': None,
+            'uuid': ''
+        },
+        'autoAnswer': 'Auto Answer Off',
+        'networkHoldMohAudioSourceId': None,
+        'userHoldMohAudioSourceId': None,
+        'callingIdPresentationWhenDiverted': 'Default',
+        'alertingName': None,
+        'asciiAlertingName': None,
+        'presenceGroupName': {
+            '_value_1': 'Standard Presence group',
+            'uuid': '{AD243D17-98B4-4118-8FEB-5FF2E1B781AC}'
+        },
+        'shareLineAppearanceCssName': {
+            '_value_1': None,
+            'uuid': None
+        },
+        'voiceMailProfileName': {
+            '_value_1': None,
+            'uuid': None
+        },
+        'patternPrecedence': 'Default',
+        'releaseClause': 'No Error',
+        'hrDuration': None,
+        'hrInterval': None,
+        'cfaCssPolicy': 'Use System Default',
+        'defaultActivatedDeviceName': {
+            '_value_1': None,
+            'uuid': None
+        },
+        'parkMonForwardNoRetrieveDn': None,
+        'parkMonForwardNoRetrieveIntDn': None,
+        'parkMonForwardNoRetrieveVmEnabled': 'false',
+        'parkMonForwardNoRetrieveIntVmEnabled': 'false',
+        'parkMonForwardNoRetrieveCssName': {
+            '_value_1': None,
+            'uuid': None
+        },
+        'parkMonForwardNoRetrieveIntCssName': {
+            '_value_1': None,
+            'uuid': None
+        },
+        'parkMonReversionTimer': None,
+        'partyEntranceTone': 'Default',
+        'directoryURIs': None,
+        'allowCtiControlFlag': 'true',
+        'rejectAnonymousCall': 'false',
+        'patternUrgency': 'false',
+        'confidentialAccess': {
+            'confidentialAccessMode': None,
+            'confidentialAccessLevel': -1
+        },
+        'externalCallControlProfile': {
+            '_value_1': None,
+            'uuid': None
+        },
+        'enterpriseAltNum': {
+            'numMask': None,
+            'isUrgent': 'f',
+            'addLocalRoutePartition': 'f',
+            'routePartition': {
+                '_value_1': None,
+                'uuid': None
+            },
+            'advertiseGloballyIls': 'f'
+        },
+        'e164AltNum': {
+            'numMask': None,
+            'isUrgent': 'f',
+            'addLocalRoutePartition': 'f',
+            'routePartition': {
+                '_value_1': None,
+                'uuid': None
+            },
+            'advertiseGloballyIls': 'f'
+        },
+        'pstnFailover': None,
+        'callControlAgentProfile': None,
+        'associatedDevices': {
+            'device': [
+                'CSFABSHUKLA'
+            ]
+        },
+        'useEnterpriseAltNum': 'false',
+        'useE164AltNum': 'false',
+        'active': 'true',
+        'externalPresentationInfo': {
+            'presentationInfo': {
+                'externalPresentationNumber': None,
+                'externalPresentationName': None
+            },
+            'isAnonymous': None
+        },
+        'uuid': '{8BAC4A1D-17B3-00C4-295B-F36C1F9F41F2}'
+    }
+}
+2026-02-13 17:50:43,063 - webapp - INFO - Homepage accessed by user: abshukla from 127.0.0.1
+2026-02-13 17:50:51,310 - webapp - INFO - Single call forwarding update requested by user: abshukla for target line: 8046859439
+2026-02-13 17:50:53,453 - webapp - WARNING - Call forwarding update returned no results for user: abshukla, target line: 8046859439
+2026-02-13 17:52:34,712 - webapp - INFO - Single call forwarding update requested by user: abshukla for target line: 8046859439
+2026-02-13 17:52:37,217 - webapp - WARNING - Call forwarding update returned no results for user: abshukla, target line: 8046859439
+2026-02-13 18:02:33,909 - webapp - INFO - Successfully retrieved line details for line number: {
+    'line': {
+        'pattern': '\\+918046859439',
+        'description': None,
+        'usage': 'Device',
+        'routePartitionName': {
+            '_value_1': 'PT-Global-Internal',
+            'uuid': '{4A77D1B8-BFE9-D06B-0288-5BB255635BB8}'
+        },
+        'aarNeighborhoodName': {
+            '_value_1': None,
+            'uuid': None
+        },
+        'aarDestinationMask': None,
+        'aarKeepCallHistory': 'true',
+        'aarVoiceMailEnabled': 'false',
+        'callForwardAll': {
+            'forwardToVoiceMail': 'false',
+            'callingSearchSpaceName': {
+                '_value_1': None,
+                'uuid': ''
+            },
+            'secondaryCallingSearchSpaceName': {
+                '_value_1': None,
+                'uuid': ''
+            },
+            'destination': '+18572274124'
+        },
+        'callForwardBusy': {
+            'forwardToVoiceMail': 'false',
+            'callingSearchSpaceName': {
+                '_value_1': None,
+                'uuid': ''
+            },
+            'destination': None
+        },
+        'callForwardBusyInt': {
+            'forwardToVoiceMail': 'false',
+            'callingSearchSpaceName': {
+                '_value_1': None,
+                'uuid': ''
+            },
+            'destination': None
+        },
+        'callForwardNoAnswer': {
+            'forwardToVoiceMail': 'false',
+            'callingSearchSpaceName': {
+                '_value_1': None,
+                'uuid': ''
+            },
+            'destination': None,
+            'duration': None
+        },
+        'callForwardNoAnswerInt': {
+            'forwardToVoiceMail': 'false',
+            'callingSearchSpaceName': {
+                '_value_1': None,
+                'uuid': ''
+            },
+            'destination': None,
+            'duration': None
+        },
+        'callForwardNoCoverage': {
+            'forwardToVoiceMail': 'false',
+            'callingSearchSpaceName': {
+                '_value_1': None,
+                'uuid': ''
+            },
+            'destination': None
+        },
+        'callForwardNoCoverageInt': {
+            'forwardToVoiceMail': 'false',
+            'callingSearchSpaceName': {
+                '_value_1': None,
+                'uuid': ''
+            },
+            'destination': None
+        },
+        'callForwardOnFailure': {
+            'forwardToVoiceMail': 'false',
+            'callingSearchSpaceName': {
+                '_value_1': None,
+                'uuid': ''
+            },
+            'destination': None
+        },
+        'callForwardAlternateParty': {
+            'forwardToVoiceMail': None,
+            'callingSearchSpaceName': {
+                '_value_1': None,
+                'uuid': ''
+            },
+            'destination': None,
+            'duration': None
+        },
+        'callForwardNotRegistered': {
+            'forwardToVoiceMail': 'false',
+            'callingSearchSpaceName': {
+                '_value_1': None,
+                'uuid': ''
+            },
+            'destination': None
+        },
+        'callForwardNotRegisteredInt': {
+            'forwardToVoiceMail': 'false',
+            'callingSearchSpaceName': {
+                '_value_1': None,
+                'uuid': ''
+            },
+            'destination': None
+        },
+        'callPickupGroupName': {
+            '_value_1': None,
+            'uuid': ''
+        },
+        'autoAnswer': 'Auto Answer Off',
+        'networkHoldMohAudioSourceId': None,
+        'userHoldMohAudioSourceId': None,
+        'callingIdPresentationWhenDiverted': 'Default',
+        'alertingName': None,
+        'asciiAlertingName': None,
+        'presenceGroupName': {
+            '_value_1': 'Standard Presence group',
+            'uuid': '{AD243D17-98B4-4118-8FEB-5FF2E1B781AC}'
+        },
+        'shareLineAppearanceCssName': {
+            '_value_1': None,
+            'uuid': None
+        },
+        'voiceMailProfileName': {
+            '_value_1': None,
+            'uuid': None
+        },
+        'patternPrecedence': 'Default',
+        'releaseClause': 'No Error',
+        'hrDuration': None,
+        'hrInterval': None,
+        'cfaCssPolicy': 'Use System Default',
+        'defaultActivatedDeviceName': {
+            '_value_1': None,
+            'uuid': None
+        },
+        'parkMonForwardNoRetrieveDn': None,
+        'parkMonForwardNoRetrieveIntDn': None,
+        'parkMonForwardNoRetrieveVmEnabled': 'false',
+        'parkMonForwardNoRetrieveIntVmEnabled': 'false',
+        'parkMonForwardNoRetrieveCssName': {
+            '_value_1': None,
+            'uuid': None
+        },
+        'parkMonForwardNoRetrieveIntCssName': {
+            '_value_1': None,
+            'uuid': None
+        },
+        'parkMonReversionTimer': None,
+        'partyEntranceTone': 'Default',
+        'directoryURIs': None,
+        'allowCtiControlFlag': 'true',
+        'rejectAnonymousCall': 'false',
+        'patternUrgency': 'false',
+        'confidentialAccess': {
+            'confidentialAccessMode': None,
+            'confidentialAccessLevel': -1
+        },
+        'externalCallControlProfile': {
+            '_value_1': None,
+            'uuid': None
+        },
+        'enterpriseAltNum': {
+            'numMask': None,
+            'isUrgent': 'f',
+            'addLocalRoutePartition': 'f',
+            'routePartition': {
+                '_value_1': None,
+                'uuid': None
+            },
+            'advertiseGloballyIls': 'f'
+        },
+        'e164AltNum': {
+            'numMask': None,
+            'isUrgent': 'f',
+            'addLocalRoutePartition': 'f',
+            'routePartition': {
+                '_value_1': None,
+                'uuid': None
+            },
+            'advertiseGloballyIls': 'f'
+        },
+        'pstnFailover': None,
+        'callControlAgentProfile': None,
+        'associatedDevices': {
+            'device': [
+                'CSFABSHUKLA'
+            ]
+        },
+        'useEnterpriseAltNum': 'false',
+        'useE164AltNum': 'false',
+        'active': 'true',
+        'externalPresentationInfo': {
+            'presentationInfo': {
+                'externalPresentationNumber': None,
+                'externalPresentationName': None
+            },
+            'isAnonymous': None
+        },
+        'uuid': '{8BAC4A1D-17B3-00C4-295B-F36C1F9F41F2}'
+    }
+}
+2026-02-13 18:58:24,362 - webapp - INFO - Single call forwarding update requested by user: abshukla for target line: 8046859439
+2026-02-13 18:58:28,726 - webapp - WARNING - Call forwarding update returned no results for user: abshukla, target line: 8046859439
+2026-02-13 18:58:44,702 - webapp - INFO - Single call forwarding update requested by user: abshukla for target line: 918046859439
+2026-02-13 18:58:45,886 - webapp - WARNING - Call forwarding update returned no results for user: abshukla, target line: 918046859439
+2026-02-13 18:59:19,154 - webapp - INFO - Single call forwarding update requested by user: abshukla for target line: 918046859439
+2026-02-13 18:59:20,504 - webapp - WARNING - Call forwarding update returned no results for user: abshukla, target line: 918046859439
+2026-02-13 19:00:53,475 - webapp - INFO - Single call forwarding update requested by user: abshukla for target line: 918046859439
+2026-02-13 19:00:55,326 - webapp - INFO - Call forwarding update completed by user: abshukla for target line: 918046859439
+2026-02-13 19:18:21,329 - webapp - INFO - Homepage accessed by user: abshukla from 127.0.0.1
+2026-02-13 19:18:32,147 - webapp - INFO - Homepage accessed by user: abshukla from 127.0.0.1

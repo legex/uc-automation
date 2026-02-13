@@ -236,12 +236,10 @@ class AXLRoutePatternOperations:
         if not service:
             logger.debug("No service provided")
         routerpattern = {
-        'pattern': f'+{pattern}',
+        'pattern': f'\+{pattern}',
         'routePartitionName' : "PT-Global-Internal",
         'callForwardAll': {
-            'forwardDestination': f"+{destination_pattern}",
-            'forwardToVoiceMail': 'false',
-            'callingSearchSpaceName': 'None'
+            'destination': f"+{destination_pattern}"
         }
         }
         try:
