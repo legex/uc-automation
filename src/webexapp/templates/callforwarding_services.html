@@ -90,6 +90,12 @@
                     <label for="cf_batch_file">Upload CSV File *</label>
                     <input type="file" id="cf_batch_file" accept=".csv" required style="padding: 8px; background: rgba(0, 0, 0, 0.5);">
                 </div>
+                <div class="form-group">
+                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                        <input type="checkbox" id="cf_batch_is_india" name="is_india" style="width: auto;">
+                        <span>India Region</span>
+                    </label>
+                </div>
                 <button type="submit" class="btn btn-primary">Upload and Process</button>
                 <div id="cf_batch_loader" class="loader"></div>
                 <div id="cf_batch_result"></div>
@@ -100,7 +106,7 @@
         <div class="section" style="background: rgba(0, 100, 200, 0.15); margin-top: 20px;">
             <h3 style="color: #00d4ff; margin-bottom: 15px;">📥 Download Template</h3>
             <p style="color: #cccccc; margin-bottom: 15px;">Download the CSV template for batch call forwarding updates.</p>
-            <a href="/api/download/template/call_forwarding" class="btn btn-primary">Download CSV Template</a>
+            <a href="/api/download/template/call_forwarding_update" class="btn btn-primary">Download CSV Template</a>
         </div>
     </div>
 </div>
@@ -190,9 +196,10 @@
         const formData = new FormData();
         formData.append('file', fileInput.files[0]);
         const fileName = fileInput.files[0].name;
+        const isIndia = document.getElementById('cf_batch_is_india').checked;
         
         try {
-            const response = await fetch('/api/updatecallforwarding/batch', {
+            const response = await fetch(`/api/updatecallforwarding/batch?is_india=${isIndia}`, {
                 method: 'POST',
                 body: formData
             });

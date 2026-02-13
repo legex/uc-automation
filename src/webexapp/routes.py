@@ -34,7 +34,7 @@ from webexapp.models.query_models import (
     QueryModelRPUpdate,
     QueryModelCallForward
     )
-from webexapp.services.rp_batch import batch_routepattern_auto, batch_updateroutepatterns_auto
+from webexapp.services.rp_batch import batch_routepattern_auto, batch_updateroutepatterns_auto, batch_updatecallforwarding_auto
 #from src.webexapp.webexbotbaseunused import WebexbotBase
 from cucmapi.axlroutepattern import AXLRoutePatternOperations
 from cucmapi.axlconn import ConnectionAXL
@@ -223,7 +223,8 @@ async def download_template(template_name: str, current_user: str = Depends(admi
         "webex_acd_update": "template/webex_general_update_template.csv",
         "number_add": "template/number_add_template.csv",
         "cucm_route_pattern": "template/cucm_route_pattern_template.csv",
-        "cucm_route_pattern_update": "template/rp_update_template.csv"
+        "cucm_route_pattern_update": "template/rp_update_template.csv",
+        "call_forwarding_update": "template/call_forwarding_update_template.csv"
     }
     file_path = available_templates.get(template_name)
     if not file_path or not os.path.exists(file_path):
@@ -330,7 +331,8 @@ async def download_result_file(result_type: str, filename: str, current_user: st
         "webex_general": "webex_migresult_",
         "webex_acd": "acd_migresult_",
         "number_add": "numberadd_response_",
-        "route_pattern": "rpupdateresult_"
+        "route_pattern": "rpupdateresult_",
+        "call_forwarding": "callforwarding_result_"
     }
 
     if result_type not in result_prefixes:
@@ -866,9 +868,37 @@ async def update_call_forwarding_single(query: QueryModelCallForward, is_india =
                             detail=f"Error updating call forwarding: {str(e)}") from e
     
 @router.post("/api/updatecallforwarding/batch")
-async def batch_update_call_forwarding(file: UploadFile, current_user: str = Depends(admin_required)):
-    pass
+async def batch_update_call_forwarding(file: UploadFile, is_india: bool = False, current_user: str = Depends(admin_required)):
+    logger.info("Batch call forwarding update requested by user: %s with file: %s", current_user, file.filename)
+    if file.content_type != 'text/csv':
+        logger.error("Invalid file type for batch call forwarding update by user: %s: %s", current_user, file.content_type)
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail="Invalid file type. Please upload a CSV file.")
+    contents = await file.read()
+    if not contents:
+        logger.error("Empty file uploaded for batch call forwarding update by user: %s, file: %s", current_user, file.filename)
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail="Uploaded file is empty")
+    axlconn = ConnectionAXL()
+    service = axlconn.service(is_india=is_india) # Assuming call forwarding updates are not region-specific, adjust if needed
+    try:
+        logger.debug("Processing batch call forwarding update by user: %s for file: %s", current_user, file.filename)
+        response = batch_updatecallforwarding_auto(
+            pd.io.common.BytesIO(contents),
+            file.filename,
+            service
+            )
+        logger.info("Batch call forwarding update completed by user: %s for file: %s", current_user, file.filename)
+        return {"Status": "Success", "Detail": response}
+    except HTTPException as e:
+        logger.error("HTTPException in batch call forwarding update by user: %s for %s: %s", current_user, file.filename, str(e))
+        return {"error": str(e)}
+    except Exception as e:
+        logger.error("Error processing batch call forwarding file by user: %s, file %s: %s", current_user, file.filename, str(e))
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                            detail=f"Error processing file: {str(e)}") from e
 
+#Hidden API for retrieving line details, not exposed in the frontend
 @router.get("/api/linedetails")
 def get_line_details(line_number: str, is_india: bool = False):
     """
@@ -891,4 +921,3 @@ def get_line_details(line_number: str, is_india: bool = False):
         logger.error("Error retrieving line details for line number %s: %s", line_number, str(e))
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                             detail=f"Error retrieving line details: {str(e)}") from e
-    

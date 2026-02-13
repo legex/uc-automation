@@ -88,3 +88,39 @@ def batch_updateroutepatterns_auto(file, filename, partition, service):
             )
     logger.info("Batch route pattern update completed for file: %s", filename)
     return "Script Run is Finished"
+
+
+def batch_updatecallforwarding_auto(file, filename, service):
+    """Update Call Forwarding for Route Pattern in CUCM from CSV"""
+    if not service:
+        logger.debug("No service provided to batch_updatecallforwarding_auto")
+    logger.info("Starting batch call forwarding update for file: %s", filename)
+    df = pd.read_csv(file, dtype={'PatternToUpdate': str, 'DestinationPattern': str})
+    logger.info("Loaded %d rows from CSV file", len(df))
+    for idx, row in df.iterrows():
+        logger.debug("Processing row %d", idx + 1)
+        routepattern = f"\+{row['PatternToUpdate']}"
+        destination_pattern = f"+{row['DestinationPattern']}"
+        logger.info("Processing route pattern: %s update call forwarding to destination: %s", routepattern, destination_pattern)
+        try:
+            logger.debug("Updating call forwarding for route pattern: %s", routepattern)
+            update_rp = axlrp.update_callforwarding(routepattern, destination_pattern, service=service)
+            status_on_cucm = "Success" if update_rp else "Failed"
+            logger.info("Call forwarding update for route pattern %s on CUCM: %s", routepattern, status_on_cucm)
+        except (Exception) as e:
+            logger.error(
+                "Error updating call forwarding on CUCM for route pattern %s: %s", routepattern, e)
+            status_on_cucm = "Error"
+        results = {
+            "routepattern": routepattern,
+            "destination_pattern": destination_pattern,
+            "status_on_cucm": status_on_cucm,
+        }
+        pd.DataFrame([results]).to_csv(
+            f"{resultpath}/callforwarding_result_{filename}",
+            mode='a',
+            header=False,
+            index=False
+            )
+    logger.info("Batch call forwarding update completed for file: %s", filename)
+    return "Script Run is Finished"
