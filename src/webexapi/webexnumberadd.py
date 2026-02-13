@@ -11,7 +11,7 @@ from appdatainternal.settings import ACDLOCATIONS
 from utils.logger import setup_logger
 from utils.numberutility import batch_numbers_by_region
 from webexapi.webexBase import WebexBase
-from webexapi.webexoperations import WebexOperations
+from webexapi.webexoperations import WebexOperation
 
 # Load environment variables from .env file
 load_dotenv()
@@ -21,7 +21,7 @@ logger = setup_logger('numberadd', '/a/logs/numberadd.log')
 number_by_region = {}
 
 headclass = WebexBase()
-webex_ops = WebexOperations(headclass.build_headers())
+webex_ops = WebexOperation()
 headers = headclass.build_headers()
 
 def get_location_id(employee_region: str) -> str | None:
