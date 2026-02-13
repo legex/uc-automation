@@ -9,16 +9,17 @@ Classes:
 import json
 import requests
 from requests import HTTPError
-from appdatainternal.settings import license_store, PATCH_LIC_URL
+from appdatainternal.config import get_webex_license_config, get_webex_urls
 from utils.logger import setup_logger
 from webexapi.webexBase import WebexBase
 from webexapi.webexoperations import WebexOperation
 
 
 logger = setup_logger('webexacdmig', '/a/logs/webexacdmig.log')
-
+license_store = get_webex_license_config()
 WEBEX_LICENSE_ID = license_store["webexlic"]
 UCM_LICENSE_ID = license_store["ucmlic"]
+webexurls = get_webex_urls()
 
 class WebexMigACD:
     def __init__(self):
@@ -103,7 +104,7 @@ class WebexMigACD:
             "licenses": licenses_ops
         }
         print(patch_payload)
-        url = PATCH_LIC_URL
+        url = webexurls["PATCH_LIC_URL"]
         try:
             resp = requests.patch(url,
                                 headers=self.headers,

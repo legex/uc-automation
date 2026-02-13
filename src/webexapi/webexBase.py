@@ -12,6 +12,7 @@ import requests
 from abc import ABC
 from requests import HTTPError
 from dotenv import load_dotenv
+from appdatainternal.config import get_webex_token
 from utils.logger import setup_logger
 
 # Load environment variables from .env file
@@ -19,33 +20,11 @@ load_dotenv()
 
 # Initialize logger
 logger = setup_logger('webexbaseheader', '/a/logs/webexbaseheader.log')
-tokenfile = "/a/secrets/app/webex_token/webex_token.opaque"
-# Read API token from environment
-mode = "Prod"
-# if mode == "Prod":
-#     AUTH_TOKEN = os.getenv('AUTHTOKEN')
-# else:
-#     AUTH_TOKEN = os.getenv('AUTHTOKEN_DEV')
-# if not AUTH_TOKEN:
-#     raise RuntimeError("AUTHTOKEN environment variable must be set")
-
 class WebexBase(ABC):
     def __init__(self):
-        self.AUTH_TOKEN = self.get_token()
+        self.AUTH_TOKEN = get_webex_token()
         if not self.AUTH_TOKEN:
             raise RuntimeError("Webex API token could not be retrieved")
-
-    def get_token(self) -> str:
-        """
-        Retrieve the Webex API token.
-
-        Returns:
-            str: The Webex API token.
-        """
-        with open(tokenfile, 'r') as tf:
-            token = tf.read().strip()
-            print("Read Webex token from file")
-        return token
 
     def build_headers(self) -> dict:
         """

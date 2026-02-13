@@ -18,11 +18,12 @@ from requests.auth import HTTPBasicAuth
 from urllib3 import disable_warnings
 from urllib3.exceptions import InsecureRequestWarning
 import json
-from appdatainternal.settings import LDAP_USERNAME, SERVER, LDAP_PASSWORD
+from appdatainternal.config import get_ldap_creds
 
-ADSERVER = SERVER
-ADLDAP_USERNAME = LDAP_USERNAME
-ADLDAP_PASSWORD = LDAP_PASSWORD
+ldap_creds = get_ldap_creds()
+ADSERVER = ldap_creds["SERVER"]
+ADLDAP_USERNAME = ldap_creds["LDAP_USERNAME"]
+ADLDAP_PASSWORD = ldap_creds["LDAP_PASSWORD"]
 def user_details(userid):
 	"""
 	Retrieve detailed user information from Active Directory.

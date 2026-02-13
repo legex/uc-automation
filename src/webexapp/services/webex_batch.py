@@ -12,14 +12,15 @@ import pandas as pd
 from webexapi.webexgeneral import WebexGenMigration
 from webexapi.webexACD import WebexMigACD
 from webexapi.webexoperations import WebexOperation
-from appdatainternal.settings import extension_prefix, exclude_list, resultfile_location
+from appdatainternal.settings import exclude_list
+from appdatainternal.config import get_resultfile_location, get_locations_config
 from utils.logger import setup_logger
 
 logger = setup_logger('webex_batch', '/a/logs/webex_batch.log')
 
-prefixes = extension_prefix
+location_config = get_locations_config()
 excluded_list = exclude_list
-resultpath = resultfile_location
+resultpath = get_resultfile_location()
 webex_mig_gen = WebexGenMigration()
 webex_acd_mig = WebexMigACD()
 webop = WebexOperation()
@@ -41,7 +42,7 @@ def batch_update_webex_gen(file, filename):
         phonenumber = row["ContactNumber"]
         extension = row['extension']
         region = row['Country']
-        ad_num = prefixes[region]+extension
+        ad_num = location_config[region]['prefix']+extension
         email = row["Email"]
         status_on_webex = ""
         logger.info("Processing user: %s, email: %s, extension: %s, region: %s", username, email, extension, region)
@@ -113,7 +114,7 @@ def batch_update_webex_acd(file, filename):
         phonenumber = row['ContactNumber']
         extension = row['extension'].strip()
         region = row['Country'].strip()
-        ad_num = prefixes[region]+extension
+        ad_num = location_config[region]['prefix']+extension
         email = row["Email"].strip()
         logger.info("Processing user: %s, email: %s, extension: %s, phone: %s", username, email, extension, phonenumber)
         if phonenumber is not None and phonenumber.lower() != 'none':

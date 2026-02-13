@@ -15,14 +15,14 @@ from ldapapi.updateldap import (
     update_general_contacts_num_withDID,
     update_acdcontacts_num
 )
-from appdatainternal.settings import extension_prefix, exclude_list, resultfile_location
+from appdatainternal.settings import exclude_list
+from appdatainternal.config import get_resultfile_location
 from utils.logger import setup_logger
 
 logger = setup_logger('ldapbatch', '/a/logs/ldapbatch.log')
 
-prefixes = extension_prefix
 excluded_list = exclude_list
-resultpath = resultfile_location
+resultpath = get_resultfile_location()
 def batch_update_ldap(file, filename):
     """Update CUCM Extension"""
     logger.info("Starting batch LDAP update for file: %s", filename)

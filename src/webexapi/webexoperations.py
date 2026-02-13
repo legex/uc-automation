@@ -11,16 +11,20 @@ import os
 import json
 import requests
 from requests import HTTPError
-from appdatainternal.settings import license_store, LOCATIONS, WEBEX_URL,ACDLOCATIONS, profileid_blr
+from appdatainternal.config import get_webex_license_config, get_webex_urls, get_locations_config
+from appdatainternal.settings import  LOCATIONS, profileid_blr
 from utils.logger import setup_logger
 from webexapi.webexBase import WebexBase
 
 # Initialize logger
 logger = setup_logger('webexops', '/a/logs/webexops.log')
 
+license_store = get_webex_license_config()
 WEBEX_LICENSE_ID = license_store["webexlic"]
 UCM_LICENSE_ID = license_store["ucmlic"]
-
+webexurls = get_webex_urls()
+WEBEX_URL = webexurls["WEBEX_URL"]
+ACDLOCATIONS = get_locations_config()
 class WebexOperation:
 
     def __init__(self):
@@ -122,8 +126,8 @@ class WebexOperation:
         Logs:
             - Warning if no match is found.
         """
-        if ACDLOCATIONS[employee_region]:
-            return ACDLOCATIONS[employee_region]
+        if ACDLOCATIONS[employee_region]['id']:
+            return ACDLOCATIONS[employee_region]['id']
         return None
 
     def get_location_id_acd(self, employee_region: str) -> str | None:
@@ -140,7 +144,7 @@ class WebexOperation:
         Logs:
             - Warning if no match is found.
         """
-        if ACDLOCATIONS[employee_region]:
+        if ACDLOCATIONS[employee_region]['id']:
             return ACDLOCATIONS[employee_region]
         return None
     def removelicense(self, email: str):

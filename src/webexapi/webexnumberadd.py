@@ -7,7 +7,7 @@ import json
 import requests
 from requests import HTTPError
 from dotenv import load_dotenv
-from appdatainternal.settings import ACDLOCATIONS
+from appdatainternal.config import get_locations_config
 from utils.logger import setup_logger
 from utils.numberutility import batch_numbers_by_region
 from webexapi.webexBase import WebexBase
@@ -19,7 +19,7 @@ load_dotenv()
 # Initialize logger
 logger = setup_logger('numberadd', '/a/logs/numberadd.log')
 number_by_region = {}
-
+ACDLOCATIONS = get_locations_config()
 headclass = WebexBase()
 webex_ops = WebexOperation()
 headers = headclass.build_headers()
@@ -38,8 +38,8 @@ def get_location_id(employee_region: str) -> str | None:
     Logs:
         - Warning if no match is found.
     """
-    if ACDLOCATIONS[employee_region]:
-        return ACDLOCATIONS[employee_region]
+    if ACDLOCATIONS[employee_region]['id']:
+        return ACDLOCATIONS[employee_region]['id']
     return None
 
 def addnumberbatch(numbercsv):

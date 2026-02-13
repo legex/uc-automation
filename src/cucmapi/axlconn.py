@@ -15,17 +15,15 @@ from zeep import Client, Settings
 from zeep.transports import Transport
 from cucmapi.debugplugin import MyLoggingPlugin
 from utils.logger import setup_logger
-from appdatainternal.settings import CUCM_ADDRESSES
-
+from appdatainternal.config import get_cucm_credentials, cucm_servers
+from appdatainternal.environment import get_env_config
+env = get_env_config()
 load_dotenv()
 
+axl_creds = get_cucm_credentials()
+CUCM_ADDRESSES = cucm_servers()
 logger = setup_logger('axlconnection', '/a/logs/axlconnection.log')
 DEBUG = False
-mode = "Prod"  # Change to "Dev" for development environment
-if mode == "Dev":
-    AXL_USERNAME = "administrator"
-else:
-    AXL_USERNAME = "admin1"
 class ConnectionAXL:
     """
     Manages a connection to Cisco CUCM AXL API using the Zeep SOAP client.
@@ -42,11 +40,9 @@ class ConnectionAXL:
         self.session = Session()
         self.session.verify = False
         urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-        axl_pass = self.getcredentials()
-
         self.session.auth = HTTPBasicAuth(
-            AXL_USERNAME,
-            axl_pass
+            axl_creds["AXL_USERNAME"],
+            axl_creds["AXL_PASSWORD"]
         )
 
         self._client = None

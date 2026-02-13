@@ -1,16 +1,22 @@
 from typing import List
 from fastapi import Depends, HTTPException, Request, status
 from appdatainternal.settings import rbac_roles
+from appdatainternal.config import get_env_config
 
+env = get_env_config()
 USERNAME_HEADER = "X-SSO-REMOTE-USER"
 def get_current_user(request: Request):
     # Placeholder for user authentication logic
     # In a real application, implement proper authentication here
-    username = request.headers.get(USERNAME_HEADER)
-    if not username:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
-                            detail="Unauthorized: No user information found.")
-    norm_username = username.strip().lower()
+    if env == "PROD" or env == "STAG":
+        username = request.headers.get(USERNAME_HEADER)
+        if not username:
+            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
+                                detail="Unauthorized: No user information found.")
+        norm_username = username.strip().lower()
+    else:
+        # For non-PROD environments, use a default test user or environment variable
+        norm_username = "abshukla"
     return norm_username
 
 class RoleChecker:

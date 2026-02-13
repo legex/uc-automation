@@ -7,31 +7,22 @@ of UCM licenses, along with location and extension configuration.
 Classes:
     WebexGenMigration: Manages general Webex user license and calling configuration.
 """
-import os
 import json
 import requests
 from requests import HTTPError
-from dotenv import load_dotenv
-from appdatainternal.settings import license_store, LOCATIONS, WEBEX_URL, PATCH_LIC_URL
+from appdatainternal.config import get_webex_license_config, get_webex_urls
 from utils.logger import setup_logger
 from webexapi.webexBase import WebexBase
 from webexapi.webexoperations import WebexOperation
 
-# Load environment variables from .env file
-load_dotenv()
 
 # Initialize logger
 logger = setup_logger('webexgeneral', '/a/logs/webexgeneral.log')
 
-# Read API token from environment
-# AUTH_TOKEN = os.getenv('AUTHTOKEN')
-# if not AUTH_TOKEN:
-#     raise RuntimeError("AUTHTOKEN environment variable must be set")
-
-# License IDs sourced from settings metadata
+license_store = get_webex_license_config()
 WEBEX_LICENSE_ID = license_store["webexlic"]
 UCM_LICENSE_ID = license_store["ucmlic"]
-
+webexurls = get_webex_urls()
 class WebexGenMigration:
     def __init__(self):
         headclass = WebexBase()
@@ -116,7 +107,7 @@ class WebexGenMigration:
         }
 
         try:
-            url = PATCH_LIC_URL
+            url = webexurls["PATCH_LIC_URL"]
             resp = requests.patch(url,
                                 headers=self.headers,
                                 data=json.dumps(patch_payload),
@@ -199,7 +190,7 @@ class WebexGenMigration:
         }
         print(patch_payload)
         try:
-            url = PATCH_LIC_URL
+            url = webexurls["PATCH_LIC_URL"]
             resp = requests.patch(url,
                                 headers=self.headers,
                                 data=json.dumps(patch_payload),

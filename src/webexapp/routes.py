@@ -44,18 +44,18 @@ from webexapi.webexoperations import WebexOperation
 from webexapi.webexnumberadd import addnumbersingle, addnumberbatch
 from utils.logger import setup_logger
 from utils.auth_helper import RoleChecker, get_current_user
-from appdatainternal.settings import ACDLOCATIONS, resultfile_location
+from appdatainternal.config import get_locations_config, get_resultfile_location
 
 admin_required = RoleChecker(["admin"])
 viewer_required = RoleChecker(["viewer"])
 user_required = RoleChecker(["user"])
-
+resultfile_location = get_resultfile_location()
 # Load environment variables from .env file
 load_dotenv()
 # API_TOKEN = os.getenv("WEBEXBOTTOKEN")
 
 # Load regions from acd_locations.json
-
+ACDLOCATIONS = get_locations_config()
 regions_list = sorted(ACDLOCATIONS.keys())
 
 templates = Jinja2Templates(directory="webexapp/templates")
