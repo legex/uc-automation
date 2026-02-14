@@ -78,3 +78,16 @@ class QueryModelCallForward(BaseModel):
     """
     linenumber: str
     forwardingnumber: str
+
+class QueryModelVirtualLine(BaseModel):
+    """
+    Model for creating a virtual line in Webex.
+    
+    Attributes:
+        userid (str): The user ID in Webex to assign the virtual line to.
+        phone_number (str): The phone number to assign to the virtual line.
+        region (str): The region associated with the virtual line.
+    """
+    email: str
+    phone_number: str
+    region: str

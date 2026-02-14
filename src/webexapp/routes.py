@@ -32,7 +32,8 @@ from webexapp.models.query_models import (
     QueryModelLdap, QueryModelWebex,
     QueryModelNumberSingle, QueryModelRPSingle,
     QueryModelRPUpdate,
-    QueryModelCallForward
+    QueryModelCallForward,
+    QueryModelVirtualLine
     )
 from webexapp.services.rp_batch import batch_routepattern_auto, batch_updateroutepatterns_auto, batch_updatecallforwarding_auto
 #from src.webexapp.webexbotbaseunused import WebexbotBase
@@ -41,7 +42,7 @@ from cucmapi.axlconn import ConnectionAXL
 from webexapi.webexgeneral import WebexGenMigration
 from webexapi.webexACD import WebexMigACD
 from webexapi.webexoperations import WebexOperation
-from webexapi.webexnumberadd import addnumbersingle, addnumberbatch
+from webexapi.webexnumberadd import addnumbersingle, addnumberbatch, assign_virtual_line_to_user
 from utils.logger import setup_logger
 from utils.auth_helper import RoleChecker, get_current_user
 from appdatainternal.config import get_locations_config, get_resultfile_location
@@ -921,3 +922,33 @@ def get_line_details(line_number: str, is_india: bool = False):
         logger.error("Error retrieving line details for line number %s: %s", line_number, str(e))
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                             detail=f"Error retrieving line details: {str(e)}") from e
+
+@router.post("/api/assignvirtualline/single")
+async def assign_virtual_line_single(query: QueryModelVirtualLine, current_user: str = Depends(admin_required)):
+    """
+    Assign a virtual line to a user in CUCM.
+    
+    Args:
+        query (QueryModelVirtualLine): Information containing email, phone number, and region.
+    
+    Returns:
+        dict: Status and detail message with virtual line assignment result.
+    """
+    logger.info("Single virtual line assignment requested by user: %s for target user: %s",
+                current_user, query.email if query else "None")
+    if query is None:
+        logger.error("No query provided for virtual line assignment by user: %s", current_user)
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail="Query must be provided.")
+    try:
+        logger.debug("Processing virtual line assignment by user: %s for target user: %s", current_user, query.email)
+        result = assign_virtual_line_to_user(query.email, query.phone_number, query.region)
+        if not result["result"]:
+            logger.warning("Virtual line assignment returned no results for user: %s, target user: %s", current_user, query.email) 
+            return {"Status": "Virtual line assignment failed", "Detail": result.get("error", "No response from Webex")}
+        logger.info("Virtual line assignment completed by user: %s for target user: %s", current_user, query.email)
+        return {"Status": "Virtual line assignment initiated", "Detail": result["result"]}
+    except Exception as e:
+        logger.error("Error assigning virtual line by user: %s for target user %s: %s", current_user, query.email, str(e))
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                            detail=f"Error assigning virtual line: {str(e)}") from e

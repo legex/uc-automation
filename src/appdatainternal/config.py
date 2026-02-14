@@ -95,7 +95,7 @@ def get_webex_token():
             token = tf.read().strip()
             print("Read Webex token from file")
     else:
-        token = os.environ.get("AUTHTOKEN", None)
+        token = os.environ.get("INTEGRATIONTOKEN", None)
     return token
 
 def get_webex_urls():

@@ -3,3 +3,40 @@
 2026-02-13 21:17:01,945 - webapp - INFO - Template downloaded successfully by user: abshukla, template: call_forwarding_update
 2026-02-13 21:18:25,949 - webapp - INFO - Homepage accessed by user: abshukla from 127.0.0.1
 2026-02-13 21:18:34,895 - webapp - INFO - Homepage accessed by user: abshukla from 127.0.0.1
+2026-02-14 12:36:42,943 - webapp - INFO - Homepage accessed by user: abshukla from 127.0.0.1
+2026-02-14 12:39:26,046 - webapp - INFO - Single virtual line assignment requested by user: abshukla for target user: abshukla@akamai.com
+2026-02-14 12:39:26,046 - webapp - ERROR - Error assigning virtual line by user: abshukla for target user abshukla@akamai.com: 'WebexOperation' object has no attribute 'get_user_by_email'
+2026-02-14 12:40:30,535 - webapp - INFO - Single virtual line assignment requested by user: abshukla for target user: abshukla@akamai.com
+2026-02-14 12:40:32,794 - webapp - WARNING - Virtual line assignment returned no results for user: abshukla, target user: abshukla@akamai.com
+2026-02-14 12:42:42,686 - webapp - INFO - Single virtual line assignment requested by user: abshukla for target user: abshukla@akamai.com
+2026-02-14 12:42:45,092 - webapp - ERROR - Error assigning virtual line by user: abshukla for target user abshukla@akamai.com: 'NoneType' object has no attribute 'get'
+2026-02-14 12:46:24,211 - webapp - INFO - Single virtual line assignment requested by user: abshukla for target user: abshukla@kaamai.com
+2026-02-14 12:46:25,572 - webapp - WARNING - Virtual line assignment returned no results for user: abshukla, target user: abshukla@kaamai.com
+2026-02-14 12:46:50,705 - webapp - INFO - Single virtual line assignment requested by user: abshukla for target user: abshukla@akamai.com
+2026-02-14 12:46:54,822 - webapp - ERROR - Error assigning virtual line by user: abshukla for target user abshukla@akamai.com: 'WebexOperation' object has no attribute 'get_user_by_email'
+2026-02-14 12:48:21,057 - webapp - INFO - Single virtual line assignment requested by user: abshukla for target user: abshukla@akamai.com
+2026-02-14 12:48:25,178 - webapp - WARNING - Virtual line assignment returned no results for user: abshukla, target user: abshukla@akamai.com
+2026-02-14 12:51:52,929 - webapp - INFO - Single virtual line assignment requested by user: abshukla for target user: abshuka@akamai.com
+2026-02-14 12:51:54,256 - webapp - WARNING - Virtual line assignment returned no results for user: abshukla, target user: abshuka@akamai.com
+2026-02-14 12:52:23,691 - webapp - INFO - Single virtual line assignment requested by user: abshukla for target user: abshukla@akamai.com
+2026-02-14 12:52:27,935 - webapp - ERROR - Error assigning virtual line by user: abshukla for target user abshukla@akamai.com: name 'user_id' is not defined
+2026-02-14 12:53:48,946 - webapp - INFO - Single virtual line assignment requested by user: abshukla for target user: abshukla@akamai.com
+2026-02-14 12:53:55,791 - webapp - WARNING - Virtual line assignment returned no results for user: abshukla, target user: abshukla@akamai.com
+2026-02-14 12:55:23,862 - webapp - INFO - Single virtual line assignment requested by user: abshukla for target user: abshukla@akamai.com
+2026-02-14 12:55:30,755 - webapp - WARNING - Virtual line assignment returned no results for user: abshukla, target user: abshukla@akamai.com
+2026-02-14 12:57:02,410 - webapp - INFO - Single virtual line assignment requested by user: abshukla for target user: abshukla@akamai.com
+2026-02-14 12:57:09,451 - webapp - WARNING - Virtual line assignment returned no results for user: abshukla, target user: abshukla@akamai.com
+2026-02-14 12:59:23,206 - webapp - INFO - Single virtual line assignment requested by user: abshukla for target user: abshukla@akamai.com
+2026-02-14 12:59:30,815 - webapp - WARNING - Virtual line assignment returned no results for user: abshukla, target user: abshukla@akamai.com
+2026-02-14 13:00:34,685 - webapp - INFO - Single virtual line assignment requested by user: abshukla for target user: abshukla@akamai.com
+2026-02-14 13:00:41,791 - webapp - WARNING - Virtual line assignment returned no results for user: abshukla, target user: abshukla@akamai.com
+2026-02-14 13:02:40,973 - webapp - INFO - Single virtual line assignment requested by user: abshukla for target user: abshukla@akamai.com
+2026-02-14 13:02:48,287 - webapp - WARNING - Virtual line assignment returned no results for user: abshukla, target user: abshukla@akamai.com
+2026-02-14 13:06:38,981 - webapp - INFO - Single virtual line assignment requested by user: abshukla for target user: abshukla@akamai.com
+2026-02-14 13:06:46,551 - webapp - WARNING - Virtual line assignment returned no results for user: abshukla, target user: abshukla@akamai.com
+2026-02-14 13:09:03,840 - webapp - INFO - Single virtual line assignment requested by user: abshukla for target user: abshukla@akamai.com
+2026-02-14 13:09:11,108 - webapp - WARNING - Virtual line assignment returned no results for user: abshukla, target user: abshukla@akamai.com
+2026-02-14 13:10:02,873 - webapp - INFO - Single virtual line assignment requested by user: abshukla for target user: abshukla@akamai.com
+2026-02-14 13:10:10,448 - webapp - WARNING - Virtual line assignment returned no results for user: abshukla, target user: abshukla@akamai.com
+2026-02-14 13:13:45,186 - webapp - INFO - Single virtual line assignment requested by user: abshukla for target user: abshukla@akamai.com
+2026-02-14 13:13:52,950 - webapp - INFO - Virtual line assignment completed by user: abshukla for target user: abshukla@akamai.com

@@ -110,7 +110,7 @@ def addnumbersingle(number: str, region: str):
         logger.error("General error updating Number: %s", e)
         return {"result": None, "error": str(e)}
 
-def create_virtual_line(email, phone_number, region):
+def create_virtual_line(userid, phone_number, region):
     """
     Create a virtual line in Webex for a user based on their email.
     
@@ -133,12 +133,7 @@ def create_virtual_line(email, phone_number, region):
         - Error on HTTP or general exceptions
     """
     url = "https://webexapis.com/v1/telephony/config/virtualLines"
-
-    user_id = webex_ops.get_user_by_email(email)
-    if not user_id:
-        logger.error("User ID not found for email: %s", email)
-        return None
-    user_info = webex_ops.get_person(user_id)
+    user_info = webex_ops.get_person(userid)
     location_id = get_location_id(region)
     if not location_id:
         logger.warning("No location ID found for region: %s", region)
@@ -148,18 +143,46 @@ def create_virtual_line(email, phone_number, region):
         "firstName": user_info.get("firstName", "Unknown"),
         "lastName": user_info.get("lastName", "Unknown"),
         "displayName": user_info.get("displayName", "Unknown"),
-        "phoneNumber": phone_number,
+        "extension": phone_number,
         "locationId": location_id
     }
     try:
         resp = requests.post(url, headers=headers, data=json.dumps(payload), timeout=30)
         resp.raise_for_status()
-        logger.info("Virtual line created successfully for email: %s", email)
+        logger.info("Virtual line created successfully for user ID: %s", user_info.get("displayName", "Unknown"))
         return resp.json()
     except HTTPError as e:
-        logger.error("HTTP error creating virtual line for email %s: %s", email, e)
+        logger.error("HTTP error creating virtual line for user ID %s: %s", user_info.get("displayName", "Unknown"), e)
     except Exception as e:
-        logger.error("General error creating virtual line for email %s: %s", email, e)
+        logger.error("General error creating virtual line for user ID %s: %s", user_info.get("displayName", "Unknown"), e)
+    return None
+
+def get_current_assignments(userid):
+    """
+    Retrieve the current virtual line assignments for a user based on their user ID.
+    
+    Args:
+        userid (str): User's ID to check assignments for.
+    
+    Returns:
+        dict | None: JSON response containing current assignments if successful,
+                     otherwise None.
+    
+    Logs:
+        - Error if user ID is not found
+        - Info on successful retrieval
+        - Error on HTTP or general exceptions
+    """
+    url = f"https://webexapis.com/v1/telephony/config/people/{userid}/applications/members"
+    try:
+        resp = requests.get(url, headers=headers, timeout=30)
+        resp.raise_for_status()
+        logger.info("Current assignments retrieved successfully for user ID: %s", userid)
+        return resp.json()
+    except HTTPError as e:
+        logger.error("HTTP error retrieving assignments for user ID %s: %s", userid, e)
+    except Exception as e:
+        logger.error("General error retrieving assignments for user ID %s: %s", userid, e)
     return None
 
 def assign_virtual_line_to_user(email, phone_number, region):
@@ -191,34 +214,51 @@ def assign_virtual_line_to_user(email, phone_number, region):
         - Info on successful assignment
         - Error on HTTP or general exceptions
     """
-    user_id = webex_ops.get_user_by_email(email)
+    user_id = webex_ops.query_user_id_by_email(email)
     if not user_id:
         logger.error("User ID not found for email: %s", email)
         return None
-    line_create = create_virtual_line(email, phone_number, region)
+    line_create = create_virtual_line(user_id, phone_number, region)
     if not line_create:
         logger.error("Failed to create virtual line for email: %s", email)
         return None
+    curr_members = get_current_assignments(user_id)
+    if not curr_members:
+        logger.warning("No current assignments found for email: %s", email)
     line_id = line_create.get("id")
-    url = f"https://webexapis.com/v1/people/{user_id}/virtualLines"
-    payload = {"members":
-               [
-                   {
-                    "id": line_id,
-                    "port": 2,
-                    "primaryOwner": "false",
-                    "lineType": "SHARED_CALL_APPEARANCE",
-                    "allowCallDeclineEnabled": "true"
+    update_members = []
+    if curr_members and 'members' in curr_members:
+        for member in curr_members['members']:
+            update_members.append(
+                {
+                    "id": member['id'],
+                    "port": member['port'],
+                    "primaryOwner": member['primaryOwner'],
+                    "lineType": member['lineType'],
+                    "lineWeight": member.get('lineWeight', 1),
+                    "allowCallDeclineEnabled": member['allowCallDeclineEnabled']
                     }
-                ]
-            }
+                    )
+    update_members.append({
+                "id": line_id,
+                "port": 2,
+                "primaryOwner": "False",
+                "lineType": "SHARED_CALL_APPEARANCE",
+                "lineWeight": 1,
+                "allowCallDeclineEnabled": "True"
+                })
+
+    url = f"https://webexapis.com/v1/telephony/config/people/{user_id}/applications/members"
+    payload = {"members": update_members}
     try:
         resp = requests.put(url, headers=headers, data=json.dumps(payload), timeout=30)
-        resp.raise_for_status()
-        logger.info("Virtual line assigned successfully to email: %s", email)
-        return resp.json()
+        if resp.status_code in [200, 204]:
+            logger.info("Virtual line assigned successfully to email: %s", email)
+            return {"result": resp.status_code, "error": None}
     except HTTPError as e:
         logger.error("HTTP error assigning virtual line to email %s: %s", email, e)
+        return {"result": None, "error": str(e)}
     except Exception as e:
         logger.error("General error assigning virtual line to email %s: %s", email, e)
-    return None
+        return {"result": None, "error": str(e)}
+
