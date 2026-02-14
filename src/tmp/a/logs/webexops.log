@@ -1,4 +1,0 @@
-2026-02-14 12:40:32,793 - webexops - ERROR - HTTP error when querying user by email: 401 Client Error: Unauthorized for url: https://webexapis.com/v1/people?email=abshukla%40akamai.com
-2026-02-14 12:42:45,090 - webexops - ERROR - HTTP error in get_person: 404 Client Error: Not Found for url: https://webexapis.com/v1/people/abshukla@akamai.com?callingData=true
-2026-02-14 12:46:25,570 - webexops - ERROR - No user found for email: abshukla@kaamai.com
-2026-02-14 12:51:54,254 - webexops - ERROR - No user found for email: abshuka@akamai.com
