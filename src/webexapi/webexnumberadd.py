@@ -149,6 +149,7 @@ def create_virtual_line(userid, phone_number, region):
     try:
         resp = requests.post(url, headers=headers, data=json.dumps(payload), timeout=30)
         resp.raise_for_status()
+        print(resp.text)
         logger.info("Virtual line created successfully for user ID: %s", user_info.get("displayName", "Unknown"))
         return resp.json()
     except HTTPError as e:

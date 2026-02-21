@@ -258,3 +258,62 @@ def update_general_contacts_num_withDID(userid,external_number, internal_extensi
 	except Exception as e:
 		print(f"Error encountered: {e}")
 		return False
+	
+
+def update_general_contacts_num_with_multiple_DID(userid,external_number, internal_extension, other_external_number):
+	"""
+	Update LDAP general contact with extension and external number.
+	
+	This function updates three LDAP attributes for general users:
+	- telephoneNumber: Set to the internal_extension
+	- AKA-phoneExtension: Cleared (set to empty)
+	- otherTelephone: Set to the external_number
+	
+	Args:
+		userid (str): The sAMAccountName of the user in Active Directory.
+		external_number (str): The external/DID phone number.
+		internal_extension (str): The internal phone extension number.
+	
+	Returns:
+		bool: True if update successful, False if an error occurs.
+	
+	Raises:
+		ConnectionError: If LDAP connection fails.
+		Exception: For other errors during the update process.
+	"""
+	try:
+		server = Server(ADSERVER, get_info=ALL)
+		conn = Connection(server, user=ADLDAP_USERNAME, password=ADLDAP_PASSWORD, authentication=NTLM)
+		server_uri = f'ldaps://{ADSERVER}'
+		search_base = 'dc=corp,dc=akamai,dc=com'
+		attrs = ['*']
+		# Using ldap3
+		server = ldap3.Server(server_uri)
+
+		with ldap3.Connection(server,
+							user=ADLDAP_USERNAME,
+							password=ADLDAP_PASSWORD,
+							authentication=NTLM) as conn:
+		#use a outpout to confirm if a user exists
+			a=conn.search(search_base, f'(&(objectcategory=user)(samaccountname={userid})(!(|(userAccountControl=514)(employeeNumber=88888)(userAccountControl=66050))))',attributes=['sAMAccountName','employeeNumber','cn', 'givenName','telephonenumber','department','division','othertelephone','distinguishedname','objectguid','akaLegalLastName','akaLegalFirstName'])
+					#=conn.search(search_base, '	(&(objectcategory=user)(employeenumber=*)(!(|(userAccountControl=514)(employeeNumber=88888)(userAccountControl=66050))))',attributes=['department'])
+			pprint(conn.entries)
+			a=conn.entries[0]		
+			#print('ldap_writer_telephonefield try block')
+
+
+			user_id =a.sAMAccountName[0]
+			dnc= a.distinguishedName[0]
+			employee_badge_number= a.employeeNumber[0]
+			conn.bind()
+			conn.modify(dnc,{'telephoneNumber': [(ldap3.MODIFY_REPLACE, [external_number])]})
+			conn.modify(dnc,{'AKA-phoneExtension': [(ldap3.MODIFY_REPLACE, [internal_extension])]})
+			conn.modify(dnc,{'otherTelephone': [(ldap3.MODIFY_REPLACE, [other_external_number])]})
+			conn.unbind()
+			return True
+	except ConnectionError as er:
+		print(f'Error encountered as {er}')
+		return False
+	except Exception as e:
+		print(f"Error encountered: {e}")
+		return False

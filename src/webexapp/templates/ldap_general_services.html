@@ -30,6 +30,7 @@
                 <div class="form-group"><label for="ldap_username">Username *</label><input type="text" id="ldap_username" required></div>
                 <div class="form-group"><label for="ldap_extension">Extension *</label><input type="text" id="ldap_extension" required></div>
                 <div class="form-group"><label for="ldap_external">External Number / DID (Optional)</label><input type="text" id="ldap_external"></div>
+                <div class="form-group"><label for="ldap_other_external">Other External Number / DID (Optional)</label><input type="text" id="ldap_other_external"></div>
                 <button type="submit" class="btn btn-primary">Update LDAP</button>
                 <div id="ldap_single_loader" class="loader"></div><div id="ldap_single_result"></div>
             </form>
@@ -45,7 +46,7 @@
                 <div id="ldap_batch_loader" class="loader"></div><div id="ldap_batch_result"></div>
             </form>
         </div>
-        <div class="section" style="background: rgba(0, 100, 200, 0.15); margin-top:20px;"><a href="/api/download/template/ldap_update" class="btn btn-primary">📥 Download Template</a></div>
+        <div class="section" style="background: rgba(0, 100, 200, 0.15); margin-top:20px;"><p style="color:#cccccc; margin-bottom:10px;">Template purpose: CSV format for LDAP general batch updates with username, extension, and optional DID.</p><a href="/api/download/template/ldap_update" class="btn btn-primary">📥 Download Template</a></div>
     </div>
 </div>
 <script>
@@ -55,7 +56,7 @@ function switchTab(tab, button){document.querySelectorAll('.tab-content').forEac
 
 {% block extra_js %}
 <script>
-document.getElementById('ldapSingleForm').addEventListener('submit', async (e)=>{e.preventDefault();const loader=document.getElementById('ldap_single_loader');const result=document.getElementById('ldap_single_result');loader.style.display='block';result.innerHTML='';const requestBody={username:document.getElementById('ldap_username').value,extension:document.getElementById('ldap_extension').value};const external=document.getElementById('ldap_external').value;if(external){requestBody.externalnumber=external;}try{const response=await fetch('/api/updateldap/single',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(requestBody)});const data=await response.json();loader.style.display='none';if(response.ok){result.innerHTML=`<div class="alert alert-success"><strong>Success!</strong> ${data.Status || 'LDAP update completed'}</div>`;}else{showErrorModal(data.detail||data.error||'Operation failed');}}catch(error){loader.style.display='none';showErrorModal(error.message);}});
+document.getElementById('ldapSingleForm').addEventListener('submit', async (e)=>{e.preventDefault();const loader=document.getElementById('ldap_single_loader');const result=document.getElementById('ldap_single_result');loader.style.display='block';result.innerHTML='';const requestBody={username:document.getElementById('ldap_username').value,extension:document.getElementById('ldap_extension').value};const external=document.getElementById('ldap_external').value;const otherExternal=document.getElementById('ldap_other_external').value;if(external){requestBody.externalnumber=external;}if(otherExternal){requestBody.other_externalnumber=otherExternal;}try{const response=await fetch('/api/updateldap/single',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(requestBody)});const data=await response.json();loader.style.display='none';if(response.ok){result.innerHTML=`<div class="alert alert-success"><strong>Success!</strong> ${data.Status || 'LDAP update completed'}</div>`;}else{showErrorModal(data.detail||data.error||'Operation failed');}}catch(error){loader.style.display='none';showErrorModal(error.message);}});
 document.getElementById('ldapBatchForm').addEventListener('submit', async (e)=>{e.preventDefault();const loader=document.getElementById('ldap_batch_loader');const result=document.getElementById('ldap_batch_result');const fileInput=document.getElementById('ldap_batch_file');loader.style.display='block';result.innerHTML='';const formData=new FormData();formData.append('file',fileInput.files[0]);const fileName=fileInput.files[0].name;try{const response=await fetch('/api/updateldap/batch',{method:'POST',body:formData});const data=await response.json();loader.style.display='none';if(response.ok){result.innerHTML=`<div class="alert alert-success"><strong>Success!</strong> ${data.Status || 'Batch operation completed'}<br><br><a href="/api/download/result/ldap/${fileName}" class="btn btn-primary" style="margin-top:10px;display:inline-block;">📥 Download Result File</a></div>`;}else{showErrorModal(data.detail||data.error||'Operation failed');}}catch(error){loader.style.display='none';showErrorModal(error.message);}});
 </script>
 {% endblock %}

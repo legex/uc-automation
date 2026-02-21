@@ -24,7 +24,8 @@ from fastapi.templating import Jinja2Templates
 from ldapapi.updateldap import (
     update_contacts_num,
     update_contacts_num_withDID,
-    update_general_contacts_num_withDID
+    update_general_contacts_num_withDID,
+    update_general_contacts_num_with_multiple_DID
     )
 from webexapp.services.ldap_batch import batch_update_ldap, batch_update_ldap_acd
 from webexapp.services.webex_batch import batch_update_webex_gen, batch_update_webex_acd
@@ -436,7 +437,7 @@ async def update_ldap_numbers(query: QueryModelLdap, acd: bool = False, current_
         acd (bool): If True, update as ACD contact; otherwise general contact.
     
     Returns:
-        dict: Status message indicating LDAP update initiated.
+        dict: Status message indicating LDAP update Completed.
     
     Raises:
         HTTPException: 400 if query is invalid, 500 if LDAP update fails.
@@ -449,23 +450,59 @@ async def update_ldap_numbers(query: QueryModelLdap, acd: bool = False, current_
                             detail="Query must be provided.")
     extension = query.extension
     if acd:
-        try:
-            update_contacts_num_withDID(
-                query.username,
-                internal_extension=extension,
-                external_number=query.externalnumber
-                )
-            logger.info("LDAP update with DID completed by user: %s for ACD user: %s, %s",
-                        current_user, query.username, query.externalnumber)
-            return {"Status": "LDAP update initiated"}
-        except Exception as e:
-            logger.error("Error updating LDAP with DID by user: %s for ACD user %s: %s",
-                            current_user, query.username, str(e))
-            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                                detail=f"Error updating LDAP with DID: {str(e)}") from e
+        if query.externalnumber and query.other_externalnumber:
+            logger.debug("LDAP update with multiple DIDs by user: %s for ACD user: %s", current_user, query.username)
+            try:
+                update_general_contacts_num_with_multiple_DID(
+                    query.username,
+                    external_number=query.externalnumber,
+                    internal_extension=extension,
+                    other_external_number=query.other_externalnumber
+                    )
+                logger.info("LDAP update with multiple DIDs completed by user: %s for ACD user: %s, %s",
+                            current_user, query.username, query.externalnumber)
+                return {"Status": "LDAP update Completed"}
+            except Exception as e:
+                logger.error("Error updating LDAP with multiple DIDs by user: %s for ACD user %s: %s",
+                                current_user, query.username, str(e))
+                raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                                    detail=f"Error updating LDAP with multiple DIDs: {str(e)}") from e
+        else:
+            logger.debug("LDAP update with single DID by user: %s for ACD user: %s", current_user, query.username)
+            try:
+                update_contacts_num_withDID(
+                    query.username,
+                    internal_extension=extension,
+                    external_number=query.externalnumber
+                    )
+                logger.info("LDAP update with DID completed by user: %s for ACD user: %s, %s",
+                            current_user, query.username, query.externalnumber)
+                return {"Status": "LDAP update Completed"}
+            except Exception as e:
+                logger.error("Error updating LDAP with DID by user: %s for ACD user %s: %s",
+                                current_user, query.username, str(e))
+                raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                                    detail=f"Error updating LDAP with DID: {str(e)}") from e
     if query.externalnumber:
         externalnumber = query.externalnumber
         logger.debug("LDAP update with external number by user: %s for target user: %s", current_user, query.username)
+        if query.other_externalnumber:
+            logger.debug("LDAP update with multiple DIDs by user: %s for general user: %s", current_user, query.username)
+            try:
+                update_general_contacts_num_with_multiple_DID(
+                    query.username,
+                    external_number=externalnumber,
+                    internal_extension=extension,
+                    other_external_number=query.other_externalnumber
+                    )
+                logger.info("LDAP update with multiple DIDs completed by user: %s for general user: %s, %s",
+                            current_user, query.username, externalnumber)
+                return {"Status": "LDAP update Completed"}
+            except Exception as e:
+                logger.error("Error updating LDAP with multiple DIDs by user: %s for general user %s: %s",
+                                current_user, query.username, str(e))
+                raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                                    detail=f"Error updating LDAP with multiple DIDs: {str(e)}") from e
         try:
             update_general_contacts_num_withDID(
                 query.username,
@@ -473,7 +510,7 @@ async def update_ldap_numbers(query: QueryModelLdap, acd: bool = False, current_
                 internal_extension=extension
                 )
             logger.info("LDAP update with DID completed by user: %s for general user: %s", current_user, query.username)
-            return {"Status": "LDAP update initiated"}
+            return {"Status": "LDAP update Completed"}
         except Exception as e:
             logger.error("Error updating LDAP by user: %s for general user %s: %s", current_user, query.username, str(e))
             raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -481,7 +518,7 @@ async def update_ldap_numbers(query: QueryModelLdap, acd: bool = False, current_
     try:
         update_contacts_num(query.username, internal_extension=extension)
         logger.info("LDAP update completed by user: %s for target user: %s", current_user, query.username)
-        return {"Status": "LDAP update initiated"}
+        return {"Status": "LDAP update Completed"}
     except Exception as e:
         logger.error("Error updating LDAP by user: %s for target user %s: %s", current_user, query.username, str(e))
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -578,7 +615,7 @@ async def update_webex_general(query: QueryModelWebex, current_user: str = Depen
                 logger.warning("Webex ACD update returned no results for user: %s, target user: %s", current_user, query.username)
                 return {"Status": "Webex ACD update failed", "Detail": webex_results.get("error", "Unknown error")}
             logger.info("Webex update with DID completed by user: %s for target user: %s", current_user, query.username)
-            return {"Status": "Webex update initiated", "Detail": webex_results["result"]}
+            return {"Status": "Webex update completed", "Detail": webex_results["result"]}
         except Exception as e:
             logger.error("Error updating Webex with DID by user: %s for target user %s: %s", current_user, query.username, str(e))
             raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -593,7 +630,7 @@ async def update_webex_general(query: QueryModelWebex, current_user: str = Depen
             logger.warning("Webex ACD update returned no results for user: %s, target user: %s", current_user, query.username)
             return {"Status": "Webex ACD update failed", "Detail": webex_results.get("error", "Unknown error")}
         logger.info("Webex update completed by user: %s for target user: %s", current_user, query.username)
-        return {"Status": "Webex update initiated", "Detail": webex_results["result"]}
+        return {"Status": "Webex update completed", "Detail": webex_results["result"]}
     except Exception as e:
         logger.error("Error updating Webex by user: %s for target user %s: %s", current_user, query.username, str(e))
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -681,7 +718,7 @@ async def update_webex_acd(query: QueryModelWebex, current_user: str = Depends(a
                     logger.warning("Webex ACD update returned no results for user: %s, target user: %s", current_user, query.username)
                     return {"Status": "Webex ACD update failed", "Detail": webex_results.get("error", "Unknown error")}
                 logger.info("Webex ACD update completed by user: %s for target user: %s", current_user, query.username)
-                return {"Status": "Webex ACD update initiated", "Detail": webex_results["result"]}
+                return {"Status": "Webex ACD update Completed", "Detail": webex_results["result"]}
             except Exception as e:
                 logger.error("Error updating Webex ACD by user: %s for target user %s: %s", current_user, query.username, str(e))
                 raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -801,7 +838,7 @@ async def remove_webex_license(email: str = Form(...), region_India: bool = Fals
         logger.debug("Processing Webex license removal by user: %s for: %s", current_user, email)
         result = webop.remove_webex_license(email, region_India)
         logger.info("Webex license removal completed by user: %s for: %s", current_user, email)
-        return {"Status": "Webex license removal initiated", "Detail": result}
+        return {"Status": "Webex license removal Completed", "Detail": result}
     except Exception as e:
         logger.error("Error removing Webex license by user: %s for %s: %s", current_user, email, str(e))
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -832,7 +869,7 @@ async def updateline_createpattern(query: QueryModelRPSingle, is_india: bool = F
         logger.debug("Processing route pattern creation by user: %s for target user: %s", current_user, query.username)
         result = axlrp.create_routepattern(routepattern, query.username, service=service)
         logger.info("Route pattern creation completed by user: %s for target user: %s", current_user, query.username)
-        return {"Status": "Route pattern creation initiated", "Detail": result}
+        return {"Status": "Route pattern creation Completed", "Detail": result}
     except Exception as e:
         logger.error("Error creating route pattern by user: %s for target user %s: %s", current_user, query.username, str(e))
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -861,7 +898,7 @@ async def update_route_pattern_single(query: QueryModelRPUpdate, is_india: bool 
         logger.debug("Processing route pattern update by user: %s for target user: %s", current_user, query.username)
         result = axlrp.update_routepattern(pattern, query.partition, service=service)
         logger.info("Route pattern update completed by user: %s for target user: %s", current_user, query.username)
-        return {"Status": "Route pattern update initiated", "Detail": result}
+        return {"Status": "Route pattern update Completed", "Detail": result}
     except Exception as e:
         logger.error("Error updating route pattern by user: %s for target user %s: %s", current_user, query.username, str(e))
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -936,7 +973,7 @@ async def update_call_forwarding_single(query: QueryModelCallForward, is_india =
             logger.warning("Call forwarding update returned no results for user: %s, target line: %s", current_user, query.linenumber) 
             return {"Status": "Call forwarding update failed", "Detail": "No response from CUCM"}
         logger.info("Call forwarding update completed by user: %s for target line: %s", current_user, query.linenumber)
-        return {"Status": "Call forwarding update initiated", "Detail": result}
+        return {"Status": "Call forwarding update Completed", "Detail": result}
     except Exception as e:
         logger.error("Error updating call forwarding by user: %s for target line %s: %s", current_user, query.linenumber, str(e))
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -997,7 +1034,7 @@ async def assign_virtual_line_single(query: QueryModelVirtualLine, current_user:
             logger.warning("Virtual line assignment returned no results for user: %s, target user: %s", current_user, query.email) 
             return {"Status": "Virtual line assignment failed", "Detail": result.get("error", "No response from Webex")}
         logger.info("Virtual line assignment completed by user: %s for target user: %s", current_user, query.email)
-        return {"Status": "Virtual line assignment initiated", "Detail": result["result"]}
+        return {"Status": "Virtual line assignment Completed", "Detail": result["result"]}
     except Exception as e:
         logger.error("Error assigning virtual line by user: %s for target user %s: %s", current_user, query.email, str(e))
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -1065,8 +1102,11 @@ async def create_new_route_pattern(query: QueryModelRPSingle, is_india: bool = F
     try:
         logger.debug("Processing route pattern creation (new method) by user: %s for target user: %s", current_user, query.username)
         result = axlrp.create_routepattern(routepattern, query.username, service=service)
+        if not result:
+            logger.warning("Route pattern creation (new method) returned no results for user: %s, target user: %s", current_user, query.username) 
+            return {"Status": "Route pattern creation failed", "Detail": "No response from CUCM"}
         logger.info("Route pattern creation (new method) completed by user: %s for target user: %s", current_user, query.username)
-        return {"Status": "Route pattern creation initiated", "Detail": result}
+        return {"Status": "Route pattern creation Completed", "Detail": result}
     except Exception as e:
         logger.error("Error creating route pattern (new method) by user: %s for target user %s: %s", current_user, query.username, str(e))
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,

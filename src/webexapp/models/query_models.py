@@ -18,6 +18,7 @@ class QueryModelLdap(BaseModel):
     username: str
     extension: str
     externalnumber: str | None = None
+    other_externalnumber: str | None = None
 
 class QueryModelWebex(BaseModel):
     """

@@ -90,30 +90,26 @@ def batch_update_ldap_acd(file, filename):
         extension = row['extension']
         externalnumber = row.get('ExternalNumber', None)
         logger.info("Processing user: %s, extension: %s, external: %s", username, extension, externalnumber)
-        if username not in excluded_list:
-            if externalnumber:
-                try:
-                    logger.debug("Updating LDAP with DID for user: %s", username)
-                    ad_result = update_contacts_num_withDID(
-                        username, extension, externalnumber)
-                    status_on_ad = "Success" if ad_result else "Failed"
-                    logger.info("LDAP update with DID for %s: %s", username, status_on_ad)
-                except (Exception) as e:
-                    logger.error(
-                        "Error updating AD with DID for %s: %s", username, e)
-                    status_on_ad = "Error"
-            else:
-                try:
-                    logger.debug("Updating LDAP without DID for user: %s", username)
-                    ad_result = update_acdcontacts_num(username, extension)
-                    status_on_ad = "Success" if ad_result else "Failed"
-                    logger.info("LDAP update for %s: %s", username, status_on_ad)
-                except (Exception) as e:
-                    logger.error("Error updating AD for %s: %s", username, e)
-                    status_on_ad = "Error"
+        if externalnumber:
+            try:
+                logger.debug("Updating LDAP with DID for user: %s", username)
+                ad_result = update_contacts_num_withDID(
+                    username, extension, externalnumber)
+                status_on_ad = "Success" if ad_result else "Failed"
+                logger.info("LDAP update with DID for %s: %s", username, status_on_ad)
+            except (Exception) as e:
+                logger.error(
+                    "Error updating AD with DID for %s: %s", username, e)
+                status_on_ad = "Error"
         else:
-            logger.info("User %s is in Exclude list", username)
-            status_on_ad = "Skipped"
+            try:
+                logger.debug("Updating LDAP without DID for user: %s", username)
+                ad_result = update_acdcontacts_num(username, extension)
+                status_on_ad = "Success" if ad_result else "Failed"
+                logger.info("LDAP update for %s: %s", username, status_on_ad)
+            except (Exception) as e:
+                logger.error("Error updating AD for %s: %s", username, e)
+                status_on_ad = "Error"
         ad_result = {
             "username": username,
             "extension": extension,
