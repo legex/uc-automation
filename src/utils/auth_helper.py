@@ -25,6 +25,13 @@ class RoleChecker:
 
     def __call__(self, user: str = Depends(get_current_user)):
         user_roles = [role for role, users in rbac_roles.items() if user in users]
+        if env == "STAG":
+            if user != "abshukla":
+                raise HTTPException(
+                    status_code=403,
+                    detail="Operation not permitted in STAG environment"
+                )
+            return user
         if not any(role in user_roles for role in self.allowed_roles):
             raise HTTPException(
                 status_code=403,
