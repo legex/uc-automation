@@ -46,5 +46,7 @@
     "Switzerland": {"id":"8eff4170-95f1-4d33-885b-9bdc293fa74c",
                     "prefix": "783610"},
     "Demo": {"id":"1459ff38-b1e6-4a07-a340-4804e3b06c18",
-                "prefix": "000000"}
+                "prefix": "000000"},
+    "Belgium": {"id":"f768f327-c9e8-4ebd-ac63-53e8f6d8370f",
+                "prefix": "783110"}
 }
