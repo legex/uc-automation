@@ -108,6 +108,16 @@ async def ldap_services_page(request: Request, current_user: str = Depends(get_c
     """
     return templates.TemplateResponse("ldap_services.html", {"request": request, "current_user": current_user})
 
+@router.get("/api/ldap-general-services", response_class=HTMLResponse)
+async def ldap_general_services_page(request: Request, current_user: str = Depends(get_current_user)):
+    """Render the LDAP general services page UI."""
+    return templates.TemplateResponse("ldap_general_services.html", {"request": request, "current_user": current_user})
+
+@router.get("/api/ldap-acd-services", response_class=HTMLResponse)
+async def ldap_acd_services_page(request: Request, current_user: str = Depends(get_current_user)):
+    """Render the LDAP ACD services page UI."""
+    return templates.TemplateResponse("ldap_acd_services.html", {"request": request, "current_user": current_user})
+
 @router.get("/api/webex-services", response_class=HTMLResponse)
 async def webex_services_page(request: Request, current_user: str = Depends(get_current_user)):
     """
@@ -120,6 +130,21 @@ async def webex_services_page(request: Request, current_user: str = Depends(get_
         HTMLResponse: The rendered webex_services.html template.
     """
     return templates.TemplateResponse("webex_services.html", {"request": request, "current_user": current_user, "regions": regions_list})
+
+@router.get("/api/webex-general-services", response_class=HTMLResponse)
+async def webex_general_services_page(request: Request, current_user: str = Depends(get_current_user)):
+    """Render the Webex general services page UI."""
+    return templates.TemplateResponse("webex_general_services.html", {"request": request, "current_user": current_user, "regions": regions_list})
+
+@router.get("/api/webex-acd-services", response_class=HTMLResponse)
+async def webex_acd_services_page(request: Request, current_user: str = Depends(get_current_user)):
+    """Render the Webex ACD services page UI."""
+    return templates.TemplateResponse("webex_acd_services.html", {"request": request, "current_user": current_user, "regions": regions_list})
+
+@router.get("/api/webex-license-services", response_class=HTMLResponse)
+async def webex_license_services_page(request: Request, current_user: str = Depends(get_current_user)):
+    """Render the Webex license removal page UI."""
+    return templates.TemplateResponse("webex_license_services.html", {"request": request, "current_user": current_user})
 
 @router.get("/api/routepattern-services", response_class=HTMLResponse)
 async def routepattern_services_page(request: Request, current_user: str = Depends(get_current_user)):
@@ -134,6 +159,26 @@ async def routepattern_services_page(request: Request, current_user: str = Depen
     """
     return templates.TemplateResponse("routepattern_services.html", {"request": request, "current_user": current_user})
 
+@router.get("/api/routepattern-create-services", response_class=HTMLResponse)
+async def routepattern_create_services_page(request: Request, current_user: str = Depends(get_current_user)):
+    """Render the route pattern create services page UI."""
+    return templates.TemplateResponse("routepattern_create_services.html", {"request": request, "current_user": current_user})
+
+@router.get("/api/routepattern-update-services", response_class=HTMLResponse)
+async def routepattern_update_services_page(request: Request, current_user: str = Depends(get_current_user)):
+    """Render the route pattern update services page UI."""
+    return templates.TemplateResponse("routepattern_update_services.html", {"request": request, "current_user": current_user})
+
+@router.get("/api/routepattern-create-hide-partition-services", response_class=HTMLResponse)
+async def routepattern_create_hide_partition_services_page(request: Request, current_user: str = Depends(get_current_user)):
+    """Render the route pattern create hide partition services page UI."""
+    return templates.TemplateResponse("routepattern_create_hide_partition_services.html", {"request": request, "current_user": current_user})
+
+@router.get("/api/routepattern-create-new-services", response_class=HTMLResponse)
+async def routepattern_create_new_services_page(request: Request, current_user: str = Depends(get_current_user)):
+    """Render the route pattern create new services page UI."""
+    return templates.TemplateResponse("routepattern_create_new_services.html", {"request": request, "current_user": current_user})
+
 @router.get("/api/number-services", response_class=HTMLResponse)
 async def number_services_page(request: Request, current_user: str = Depends(get_current_user)):
     """
@@ -146,6 +191,32 @@ async def number_services_page(request: Request, current_user: str = Depends(get
         HTMLResponse: The rendered number_services.html template.
     """
     return templates.TemplateResponse("number_services.html", {"request": request, "current_user": current_user, "regions": regions_list})
+
+@router.get("/api/numberadd-services", response_class=HTMLResponse)
+async def number_add_services_page(request: Request, current_user: str = Depends(get_current_user)):
+    """
+    Render the number add services page UI.
+
+    Args:
+        request (Request): FastAPI request object.
+
+    Returns:
+        HTMLResponse: The rendered number_add_services.html template.
+    """
+    return templates.TemplateResponse("number_add_services.html", {"request": request, "current_user": current_user, "regions": regions_list})
+
+@router.get("/api/virtual-line-services", response_class=HTMLResponse)
+async def virtual_line_services_page(request: Request, current_user: str = Depends(get_current_user)):
+    """
+    Render the virtual line services page UI.
+
+    Args:
+        request (Request): FastAPI request object.
+
+    Returns:
+        HTMLResponse: The rendered virtual_line_services.html template.
+    """
+    return templates.TemplateResponse("virtual_line_services.html", {"request": request, "current_user": current_user, "regions": regions_list})
 
 @router.get("/api/callforwarding-services", response_class=HTMLResponse)
 async def callforwarding_services_page(request: Request, current_user: str = Depends(get_current_user)):
@@ -663,9 +734,9 @@ async def b_update_webex_acd(file: UploadFile | None = None, current_user: str =
                             detail=f"Error processing file: {str(e)}") from e
 
 @router.post("/api/routepattern")
-async def create_route_pattern(file: UploadFile, is_india: bool = False, current_user: str = Depends(admin_required)):
+async def update_line_create_route_pattern(file: UploadFile, is_india: bool = False, current_user: str = Depends(admin_required)):
     """
-    Create route patterns in CUCM from a CSV file.
+    Update route patterns in CUCM from a CSV file.
     
     Args:
         file (UploadFile): CSV file containing columns: ContactNumber and UserId.
@@ -675,31 +746,31 @@ async def create_route_pattern(file: UploadFile, is_india: bool = False, current
     
     Raises:
         HTTPException: 400 if file type is invalid or file is empty,
-                      500 if route pattern creation fails.
+                      500 if route pattern update fails.
     """
-    logger.info("Route pattern creation requested by user: %s with file: %s", current_user, file.filename)
+    logger.info("Route pattern update requested by user: %s with file: %s", current_user, file.filename)
     if file.content_type != 'text/csv':
-        logger.error("Invalid file type for route pattern creation by user: %s: %s", current_user, file.content_type)
+        logger.error("Invalid file type for route pattern update by user: %s: %s", current_user, file.content_type)
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail="Invalid file type. Please upload a CSV file.")
     contents = await file.read()
     if not contents:
-        logger.error("Empty file uploaded for route pattern creation by user: %s, file: %s", current_user, file.filename)
+        logger.error("Empty file uploaded for route pattern update by user: %s, file: %s", current_user, file.filename)
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail="Uploaded file is empty")
     axlconn = ConnectionAXL()
     service = axlconn.service(is_india)
     try:
-        logger.debug("Processing route pattern creation by user: %s for file: %s", current_user, file.filename)
+        logger.debug("Processing route pattern update by user: %s for file: %s", current_user, file.filename)
         response = batch_routepattern_auto(
             pd.io.common.BytesIO(contents),
             file.filename,
             service
             )
-        logger.info("Route pattern creation completed by user: %s for file: %s", current_user, file.filename)
+        logger.info("Route pattern update completed by user: %s for file: %s", current_user, file.filename)
         return {"Status": "Success", "Detail": response}
     except HTTPException as e:
-        logger.error("HTTPException in route pattern creation by user: %s for %s: %s", current_user, file.filename, str(e))
+        logger.error("HTTPException in route pattern update by user: %s for %s: %s", current_user, file.filename, str(e))
         return {"error": str(e)}
     except Exception as e:
         logger.error("Error processing route pattern file by user: %s, file %s: %s", current_user, file.filename, str(e))
@@ -737,7 +808,7 @@ async def remove_webex_license(email: str = Form(...), region_India: bool = Fals
                             detail=f"Error removing Webex license: {str(e)}") from e
 
 @router.post("/api/createroutepattern/single")
-async def create_route_pattern_single(query: QueryModelRPSingle, is_india: bool = False, current_user: str = Depends(admin_required)):
+async def updateline_createpattern(query: QueryModelRPSingle, is_india: bool = False, current_user: str = Depends(admin_required)):
     """
     Create a single route pattern in CUCM.
     
@@ -970,33 +1041,8 @@ async def batch_virtual_line_route(file: UploadFile, current_user: str = Depends
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                             detail=f"Error processing file: {str(e)}") from e
     
-#Hidden API for retrieving line details, not exposed in the frontend
-@router.get("/api/linedetails")
-def get_line_details(line_number: str, is_india: bool = False):
-    """
-    Retrieve line details from CUCM for a given line number.
-    
-    Args:
-        line_number (str): The line number to retrieve details for.
-        is_india (bool): Flag indicating if the CUCM instance is in India region.
-    
-    Returns:
-        dict: Line details retrieved from CUCM.
-    """
-    axlconn = ConnectionAXL()
-    service = axlconn.service(is_india)
-    try:
-        line_details = axlrp.get_line(line_number, service)
-        logger.info("Successfully retrieved line details for line number: %s", line_details)
-        return line_details
-    except Exception as e:
-        logger.error("Error retrieving line details for line number %s: %s", line_number, str(e))
-        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                            detail=f"Error retrieving line details: {str(e)}") from e
-
-
-@router.post("/api/createroutepattern/new")
-async def create_route_pattern_new(query: QueryModelRPSingle, is_india: bool = False, current_user: str = Depends(admin_required)):
+@router.post("/api/createnewpattern/newsingle")
+async def create_new_route_pattern(query: QueryModelRPSingle, is_india: bool = False, current_user: str = Depends(admin_required)):
     """
     Create a single route pattern in CUCM using the new method.
     
@@ -1025,3 +1071,27 @@ async def create_route_pattern_new(query: QueryModelRPSingle, is_india: bool = F
         logger.error("Error creating route pattern (new method) by user: %s for target user %s: %s", current_user, query.username, str(e))
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                             detail=f"Error creating route pattern: {str(e)}") from e
+
+#Hidden API for retrieving line details, not exposed in the frontend
+@router.get("/api/linedetails")
+def get_line_details(line_number: str, is_india: bool = False):
+    """
+    Retrieve line details from CUCM for a given line number.
+    
+    Args:
+        line_number (str): The line number to retrieve details for.
+        is_india (bool): Flag indicating if the CUCM instance is in India region.
+    
+    Returns:
+        dict: Line details retrieved from CUCM.
+    """
+    axlconn = ConnectionAXL()
+    service = axlconn.service(is_india)
+    try:
+        line_details = axlrp.get_line(line_number, service)
+        logger.info("Successfully retrieved line details for line number: %s", line_details)
+        return line_details
+    except Exception as e:
+        logger.error("Error retrieving line details for line number %s: %s", line_number, str(e))
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                            detail=f"Error retrieving line details: {str(e)}") from e

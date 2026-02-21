@@ -1,0 +1,213 @@
+{% extends "base.html" %}
+
+{% block title %}Assign Virtual Line - Webex CUCM Integration{% endblock %}
+
+{% block extra_css %}
+<style>
+    .tab-container {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 30px;
+        border-bottom: 2px solid rgba(0, 212, 255, 0.3);
+    }
+    .tab-button {
+        padding: 12px 24px;
+        background: rgba(0, 100, 200, 0.2);
+        border: none;
+        border-radius: 10px 10px 0 0;
+        color: #00d4ff;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 1rem;
+        font-weight: 500;
+    }
+    .tab-button:hover {
+        background: rgba(0, 100, 200, 0.3);
+    }
+    .tab-button.active {
+        background: rgba(0, 212, 255, 0.3);
+        border-bottom: 3px solid #00d4ff;
+        color: #ffffff;
+    }
+    .tab-content {
+        display: none;
+    }
+    .tab-content.active {
+        display: block;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<h1>Assign Virtual Line</h1>
+
+<div class="section">
+    <a href="/api/number-services" class="btn btn-secondary" style="margin-bottom: 20px;">← Back to Number Management</a>
+
+    <div style="background: rgba(0, 100, 200, 0.2); border-left: 4px solid #00d4ff; border-radius: 8px; padding: 12px 16px; margin-bottom: 20px; color: #cccccc;">
+        🏠 <a href="/" style="color: #00d4ff; text-decoration: none;">Home</a>
+        <span style="margin: 0 8px; color: #aaaaaa;">›</span>
+        <a href="/api/number-services" style="color: #00d4ff; text-decoration: none;">Number Management</a>
+        <span style="margin: 0 8px; color: #aaaaaa;">›</span>
+        <strong style="color: #ffffff;">Assign Virtual Line</strong>
+    </div>
+
+    <h2>Manage Virtual Line Operations</h2>
+    <p style="color: #cccccc; margin-bottom: 30px;">Use this dedicated page for virtual line workflows only.</p>
+
+    <div class="tab-container">
+        <button class="tab-button active" onclick="switchTab('single', this)">Single Update</button>
+        <button class="tab-button" onclick="switchTab('batch', this)">Batch Update</button>
+    </div>
+
+    <div id="single-tab" class="tab-content active">
+        <div class="section" style="background: rgba(0, 100, 200, 0.15);">
+            <h3 style="color: #00d4ff; margin-bottom: 15px;">🔗 Assign Virtual Line (Single)</h3>
+            <form id="virtualLineSingleForm">
+                <div class="form-group">
+                    <label for="vl_email">Email *</label>
+                    <input type="email" id="vl_email" name="email" required placeholder="Enter user email">
+                </div>
+                <div class="form-group">
+                    <label for="vl_phone_number">Phone Number *</label>
+                    <input type="text" id="vl_phone_number" name="phone_number" required placeholder="Enter phone number">
+                </div>
+                <div class="form-group">
+                    <label for="vl_region">Region *</label>
+                    <select id="vl_region" name="region" required>
+                        <option value="">Select a region</option>
+                        {% for region in regions %}
+                        <option value="{{ region }}">{{ region }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Assign Virtual Line</button>
+                <div id="vl_single_loader" class="loader"></div>
+                <div id="vl_single_result"></div>
+            </form>
+        </div>
+    </div>
+
+    <div id="batch-tab" class="tab-content">
+        <div class="section" style="background: rgba(0, 100, 200, 0.15);">
+            <h3 style="color: #00d4ff; margin-bottom: 15px;">🔗 Assign Virtual Line (Batch)</h3>
+            <p style="color: #cccccc; margin-bottom: 15px;">Upload a CSV file to assign virtual lines to multiple users at once.</p>
+            <form id="virtualLineBatchForm">
+                <div class="form-group">
+                    <label for="vl_batch_file">Upload CSV File *</label>
+                    <input type="file" id="vl_batch_file" accept=".csv" required style="padding: 8px; background: rgba(0, 0, 0, 0.5);">
+                </div>
+                <button type="submit" class="btn btn-primary">Upload and Process</button>
+                <div id="vl_batch_loader" class="loader"></div>
+                <div id="vl_batch_result"></div>
+            </form>
+        </div>
+
+        <div class="section" style="background: rgba(0, 100, 200, 0.15); margin-top: 20px;">
+            <h3 style="color: #00d4ff; margin-bottom: 15px;">📥 Download Virtual Line Template</h3>
+            <p style="color: #cccccc; margin-bottom: 15px;">Download the CSV template for batch virtual line assignment.</p>
+            <div style="background: rgba(30, 60, 114, 0.4); border: 1px solid rgba(100, 200, 255, 0.2); border-radius: 10px; padding: 20px;">
+                <h4 style="color: #00d4ff; margin-bottom: 10px;">Virtual Line Template</h4>
+                <p style="color: #cccccc; margin-bottom: 15px;">Template includes columns: Email, PhoneNumber, Region</p>
+                <a href="/api/download/template/virtual_lines" class="btn btn-primary">📥 Download Template</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function switchTab(tab, buttonElement) {
+    document.querySelectorAll('.tab-content').forEach(content => {
+        content.classList.remove('active');
+    });
+    document.querySelectorAll('.tab-button').forEach(button => {
+        button.classList.remove('active');
+    });
+
+    document.getElementById(tab + '-tab').classList.add('active');
+    buttonElement.classList.add('active');
+}
+</script>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.getElementById('virtualLineSingleForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const loader = document.getElementById('vl_single_loader');
+        const result = document.getElementById('vl_single_result');
+        loader.style.display = 'block';
+        result.innerHTML = '';
+
+        const formData = {
+            email: document.getElementById('vl_email').value,
+            phone_number: document.getElementById('vl_phone_number').value,
+            region: document.getElementById('vl_region').value
+        };
+
+        try {
+            const response = await fetch('/api/assignvirtualline/single', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(formData)
+            });
+            const data = await response.json();
+            loader.style.display = 'none';
+
+            const isSuccess = data.Status && data.Status === "Virtual line assignment initiated";
+            if (response.ok && isSuccess) {
+                result.innerHTML = `<div class="alert alert-success">
+                    <strong>Success!</strong> ${data.Status || 'Virtual line assigned successfully'}
+                    ${data.Detail ? '<br><small>' + JSON.stringify(data.Detail) + '</small>' : ''}
+                </div>`;
+            } else {
+                const errorMsg = `${data.Status || data.detail || data.error || 'Operation failed'}${data.Detail ? '\n\nDetails: ' + JSON.stringify(data.Detail) : ''}`;
+                showErrorModal(errorMsg);
+            }
+        } catch (error) {
+            loader.style.display = 'none';
+            showErrorModal(error.message);
+        }
+    });
+
+    document.getElementById('virtualLineBatchForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const loader = document.getElementById('vl_batch_loader');
+        const result = document.getElementById('vl_batch_result');
+        const fileInput = document.getElementById('vl_batch_file');
+
+        loader.style.display = 'block';
+        result.innerHTML = '';
+
+        const formData = new FormData();
+        formData.append('file', fileInput.files[0]);
+        const fileName = fileInput.files[0].name;
+
+        try {
+            const response = await fetch('/api/assignvirtualline/batch', {
+                method: 'POST',
+                body: formData
+            });
+            const data = await response.json();
+            loader.style.display = 'none';
+
+            if (response.ok) {
+                result.innerHTML = `<div class="alert alert-success">
+                    <strong>Success!</strong> ${data.Status || 'Batch operation completed'}
+                    <br><br>
+                    <a href="/api/download/result/virtual_line/${fileName}"
+                       class="btn btn-primary"
+                       style="margin-top: 10px; display: inline-block;">
+                        📥 Download Result File
+                    </a>
+                </div>`;
+            } else {
+                showErrorModal(data.detail || data.error || 'Operation failed');
+            }
+        } catch (error) {
+            loader.style.display = 'none';
+            showErrorModal(error.message);
+        }
+    });
+</script>
+{% endblock %}

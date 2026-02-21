@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Create Route Patterns - Webex CUCM Integration{% endblock %}
+
+{% block content %}
+<h1>Create Route Patterns</h1>
+
+<div class="section">
+    <a href="/api/routepattern-services" class="btn btn-secondary" style="margin-bottom: 20px;">← Back to Route Pattern Services</a>
+
+    <h2>Select Route Pattern Creation Method</h2>
+    <p style="color: #cccccc; margin-bottom: 30px;">Choose one dedicated page to avoid accidental operations across different workflows.</p>
+
+    <div class="card-grid">
+        <div class="card" onclick="window.location.href='/api/routepattern-create-hide-partition-services'">
+            <div class="card-icon">🪶</div>
+            <h3 class="card-title">Update Line & Create Pattern</h3>
+            <p class="card-description">
+                Move an existing DN to the hidden partition and create a new route pattern for that DN. Batch and single operations available.
+            </p>
+        </div>
+
+        <div class="card" onclick="window.location.href='/api/routepattern-create-new-services'">
+            <div class="card-icon">🆕</div>
+            <h3 class="card-title">Create New Route Pattern</h3>
+            <p class="card-description">
+                Create pure new route patterns in CUCM with single and batch operations. No DN movement to hidden partition.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

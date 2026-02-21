@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Remove Webex License - Webex CUCM Integration{% endblock %}
+
+{% block content %}
+<h1>Remove Webex License</h1>
+<div class="section">
+    <a href="/api/webex-services" class="btn btn-secondary" style="margin-bottom: 20px;">← Back to Webex Services</a>
+    <div style="background: rgba(0, 100, 200, 0.2); border-left: 4px solid #00d4ff; border-radius: 8px; padding: 12px 16px; margin-bottom: 20px; color: #cccccc;">🏠 <a href="/" style="color:#00d4ff;text-decoration:none;">Home</a> <span style="margin:0 8px;color:#aaaaaa;">›</span> <a href="/api/webex-services" style="color:#00d4ff;text-decoration:none;">Webex Services</a> <span style="margin:0 8px;color:#aaaaaa;">›</span> <strong style="color:#fff;">Remove License</strong></div>
+
+    <div class="section" style="background: rgba(0, 100, 200, 0.15);">
+        <h3 style="color:#00d4ff; margin-bottom:15px;">🗑️ Remove Webex License from User</h3>
+        <form id="removeLicenseForm">
+            <div class="form-group"><label for="remove_license_email">Email *</label><input type="email" id="remove_license_email" required></div>
+            <div class="form-group"><label style="display:flex;align-items:center;gap:10px;cursor:pointer;"><input type="checkbox" id="region_india_checkbox" style="width:auto;cursor:pointer;"><span>India Region</span></label></div>
+            <button type="submit" class="btn btn-primary">Remove License</button>
+            <div id="remove_license_loader" class="loader"></div><div id="remove_license_result"></div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.getElementById('removeLicenseForm').addEventListener('submit', async (e)=>{e.preventDefault();const loader=document.getElementById('remove_license_loader');const result=document.getElementById('remove_license_result');loader.style.display='block';result.innerHTML='';const formData=new FormData();formData.append('email',document.getElementById('remove_license_email').value);formData.append('region_India',document.getElementById('region_india_checkbox').checked);try{const response=await fetch('/api/removewebexlicense/single',{method:'POST',body:formData});const data=await response.json();loader.style.display='none';if(response.ok){result.innerHTML=`<div class="alert alert-success"><strong>Success!</strong> ${data.Status || 'License removed successfully'}</div>`;}else{showErrorModal(data.detail||data.error||'Operation failed');}}catch(error){loader.style.display='none';showErrorModal(error.message);}});
+</script>
+{% endblock %}

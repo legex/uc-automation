@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block title %}Update Line & Create Pattern - Webex CUCM Integration{% endblock %}
+
+{% block extra_css %}
+<style>
+    .tab-container { display: flex; gap: 10px; margin-bottom: 30px; border-bottom: 2px solid rgba(0, 212, 255, 0.3); }
+    .tab-button { padding: 12px 24px; background: rgba(0, 100, 200, 0.2); border: none; border-radius: 10px 10px 0 0; color: #00d4ff; cursor: pointer; }
+    .tab-button.active { background: rgba(0, 212, 255, 0.3); border-bottom: 3px solid #00d4ff; color: #ffffff; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+</style>
+{% endblock %}
+
+{% block content %}
+<h1>Update Line & Create Pattern</h1>
+<div class="section">
+    <a href="/api/routepattern-create-services" class="btn btn-secondary" style="margin-bottom: 20px;">← Back to Create Methods</a>
+    <div style="background: rgba(0, 100, 200, 0.2); border-left: 4px solid #00d4ff; border-radius: 8px; padding: 12px 16px; margin-bottom: 20px; color: #cccccc;">🏠 <a href="/" style="color:#00d4ff;text-decoration:none;">Home</a> <span style="margin:0 8px;color:#aaaaaa;">›</span> <a href="/api/routepattern-services" style="color:#00d4ff;text-decoration:none;">Route Pattern Services</a> <span style="margin:0 8px;color:#aaaaaa;">›</span> <a href="/api/routepattern-create-services" style="color:#00d4ff;text-decoration:none;">Create</a> <span style="margin:0 8px;color:#aaaaaa;">›</span> <strong style="color:#fff;">Update Line & Create Pattern</strong></div>
+
+    <div class="tab-container">
+        <button class="tab-button active" onclick="switchTab('single', this)">Single</button>
+        <button class="tab-button" onclick="switchTab('batch', this)">Batch</button>
+    </div>
+
+    <div id="single-tab" class="tab-content active">
+        <div class="section" style="background: rgba(0, 100, 200, 0.15);">
+            <div style="background: rgba(0, 150, 255, 0.12); border-left: 4px solid #00d4ff; border-radius: 8px; padding: 12px 14px; margin-bottom: 16px; color: #e8e8e8;">
+                <strong style="color: #00d4ff;">Single Operation:</strong>
+                Move an existing DN to the hidden partition and create a new route pattern for that DN.
+            </div>
+            <form id="routePatternCreateSingleForm">
+                <div class="form-group">
+                    <label for="create_username">Username *</label>
+                    <input type="text" id="create_username" required>
+                </div>
+                <div class="form-group">
+                    <label for="create_route_pattern">Route Pattern *</label>
+                    <input type="text" id="create_route_pattern" required>
+                </div>
+                <div class="form-group">
+                    <label style="display:flex;align-items:center;gap:10px;cursor:pointer;">
+                        <input type="checkbox" id="create_single_india" style="width:auto;cursor:pointer;">
+                        <span>India Region</span>
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary">Update Line & Create Pattern</button>
+                <div id="create_single_loader" class="loader"></div>
+                <div id="create_single_result"></div>
+            </form>
+        </div>
+    </div>
+
+    <div id="batch-tab" class="tab-content">
+        <div class="section" style="background: rgba(0, 100, 200, 0.15);">
+            <div style="background: rgba(255, 193, 7, 0.12); border-left: 4px solid #ffc107; border-radius: 8px; padding: 12px 14px; margin-bottom: 16px; color: #e8e8e8;">
+                <strong style="color: #ffc107;">Batch Operation:</strong>
+                Moves existing DNs to the hidden partition and creates new route patterns for each DN.
+            </div>
+            <form id="routePatternCreateBatchForm">
+                <div class="form-group">
+                    <label for="create_batch_file">Upload CSV File *</label>
+                    <input type="file" id="create_batch_file" accept=".csv" required style="padding:8px;background:rgba(0,0,0,0.5);">
+                </div>
+                <div class="form-group">
+                    <label style="display:flex;align-items:center;gap:10px;cursor:pointer;">
+                        <input type="checkbox" id="create_batch_india" style="width:auto;cursor:pointer;">
+                        <span>India Region</span>
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary">Upload and Process</button>
+                <div id="create_batch_loader" class="loader"></div>
+                <div id="create_batch_result"></div>
+            </form>
+        </div>
+        <div class="section" style="background: rgba(0, 100, 200, 0.15); margin-top:20px;">
+            <a href="/api/download/template/cucm_route_pattern" class="btn btn-primary">📥 Download Template</a>
+        </div>
+    </div>
+</div>
+<script>
+function switchTab(tab, button){document.querySelectorAll('.tab-content').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.tab-button').forEach(x=>x.classList.remove('active'));document.getElementById(tab+'-tab').classList.add('active');button.classList.add('active');}
+</script>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.getElementById('routePatternCreateSingleForm').addEventListener('submit', async (e)=>{e.preventDefault();const loader=document.getElementById('create_single_loader');const result=document.getElementById('create_single_result');loader.style.display='block';result.innerHTML='';const formData={username:document.getElementById('create_username').value,routepattern:document.getElementById('create_route_pattern').value,is_india:document.getElementById('create_single_india').checked};try{const response=await fetch('/api/createroutepattern/single',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(formData)});const data=await response.json();loader.style.display='none';if(response.ok){result.innerHTML=`<div class="alert alert-success"><strong>Success!</strong> ${data.Status || 'Operation completed successfully'}</div>`;}else{showErrorModal(data.detail||data.error||'Operation failed');}}catch(error){loader.style.display='none';showErrorModal(error.message);}});
+
+document.getElementById('routePatternCreateBatchForm').addEventListener('submit', async (e)=>{e.preventDefault();const loader=document.getElementById('create_batch_loader');const result=document.getElementById('create_batch_result');const fileInput=document.getElementById('create_batch_file');loader.style.display='block';result.innerHTML='';const formData=new FormData();formData.append('file',fileInput.files[0]);formData.append('is_india',document.getElementById('create_batch_india').checked);const fileName=fileInput.files[0].name;try{const response=await fetch('/api/routepattern',{method:'POST',body:formData});const data=await response.json();loader.style.display='none';if(response.ok){result.innerHTML=`<div class="alert alert-success"><strong>Success!</strong> ${data.Status || 'Batch operation completed'}<br><br><a href="/api/download/result/route_pattern/${fileName}" class="btn btn-primary" style="margin-top:10px;display:inline-block;">📥 Download Result File</a></div>`;}else{showErrorModal(data.detail||data.error||'Operation failed');}}catch(error){loader.style.display='none';showErrorModal(error.message);}});
+</script>
+{% endblock %}

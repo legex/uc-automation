@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}LDAP General Update - Webex CUCM Integration{% endblock %}
+
+{% block extra_css %}
+<style>
+    .tab-container { display: flex; gap: 10px; margin-bottom: 30px; border-bottom: 2px solid rgba(0, 212, 255, 0.3); }
+    .tab-button { padding: 12px 24px; background: rgba(0, 100, 200, 0.2); border: none; border-radius: 10px 10px 0 0; color: #00d4ff; cursor: pointer; }
+    .tab-button.active { background: rgba(0, 212, 255, 0.3); border-bottom: 3px solid #00d4ff; color: #ffffff; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+</style>
+{% endblock %}
+
+{% block content %}
+<h1>LDAP General Update</h1>
+<div class="section">
+    <a href="/api/ldap-services" class="btn btn-secondary" style="margin-bottom: 20px;">← Back to LDAP Services</a>
+    <div style="background: rgba(0, 100, 200, 0.2); border-left: 4px solid #00d4ff; border-radius: 8px; padding: 12px 16px; margin-bottom: 20px; color: #cccccc;">🏠 <a href="/" style="color: #00d4ff; text-decoration:none;">Home</a> <span style="margin:0 8px;color:#aaaaaa;">›</span> <a href="/api/ldap-services" style="color:#00d4ff;text-decoration:none;">LDAP Services</a> <span style="margin:0 8px;color:#aaaaaa;">›</span> <strong style="color:#fff;">General</strong></div>
+
+    <div class="tab-container">
+        <button class="tab-button active" onclick="switchTab('single', this)">Single Update</button>
+        <button class="tab-button" onclick="switchTab('batch', this)">Batch Update</button>
+    </div>
+
+    <div id="single-tab" class="tab-content active">
+        <div class="section" style="background: rgba(0, 100, 200, 0.15);">
+            <h3 style="color:#00d4ff; margin-bottom: 15px;">📝 Single User Update</h3>
+            <form id="ldapSingleForm">
+                <div class="form-group"><label for="ldap_username">Username *</label><input type="text" id="ldap_username" required></div>
+                <div class="form-group"><label for="ldap_extension">Extension *</label><input type="text" id="ldap_extension" required></div>
+                <div class="form-group"><label for="ldap_external">External Number / DID (Optional)</label><input type="text" id="ldap_external"></div>
+                <button type="submit" class="btn btn-primary">Update LDAP</button>
+                <div id="ldap_single_loader" class="loader"></div><div id="ldap_single_result"></div>
+            </form>
+        </div>
+    </div>
+
+    <div id="batch-tab" class="tab-content">
+        <div class="section" style="background: rgba(0, 100, 200, 0.15);">
+            <h3 style="color:#00d4ff; margin-bottom: 15px;">📊 Batch Update</h3>
+            <form id="ldapBatchForm">
+                <div class="form-group"><label for="ldap_batch_file">Upload CSV File *</label><input type="file" id="ldap_batch_file" accept=".csv" required style="padding:8px;background:rgba(0,0,0,0.5);"></div>
+                <button type="submit" class="btn btn-primary">Upload and Process</button>
+                <div id="ldap_batch_loader" class="loader"></div><div id="ldap_batch_result"></div>
+            </form>
+        </div>
+        <div class="section" style="background: rgba(0, 100, 200, 0.15); margin-top:20px;"><a href="/api/download/template/ldap_update" class="btn btn-primary">📥 Download Template</a></div>
+    </div>
+</div>
+<script>
+function switchTab(tab, button){document.querySelectorAll('.tab-content').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.tab-button').forEach(x=>x.classList.remove('active'));document.getElementById(tab+'-tab').classList.add('active');button.classList.add('active');}
+</script>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.getElementById('ldapSingleForm').addEventListener('submit', async (e)=>{e.preventDefault();const loader=document.getElementById('ldap_single_loader');const result=document.getElementById('ldap_single_result');loader.style.display='block';result.innerHTML='';const requestBody={username:document.getElementById('ldap_username').value,extension:document.getElementById('ldap_extension').value};const external=document.getElementById('ldap_external').value;if(external){requestBody.externalnumber=external;}try{const response=await fetch('/api/updateldap/single',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(requestBody)});const data=await response.json();loader.style.display='none';if(response.ok){result.innerHTML=`<div class="alert alert-success"><strong>Success!</strong> ${data.Status || 'LDAP update completed'}</div>`;}else{showErrorModal(data.detail||data.error||'Operation failed');}}catch(error){loader.style.display='none';showErrorModal(error.message);}});
+document.getElementById('ldapBatchForm').addEventListener('submit', async (e)=>{e.preventDefault();const loader=document.getElementById('ldap_batch_loader');const result=document.getElementById('ldap_batch_result');const fileInput=document.getElementById('ldap_batch_file');loader.style.display='block';result.innerHTML='';const formData=new FormData();formData.append('file',fileInput.files[0]);const fileName=fileInput.files[0].name;try{const response=await fetch('/api/updateldap/batch',{method:'POST',body:formData});const data=await response.json();loader.style.display='none';if(response.ok){result.innerHTML=`<div class="alert alert-success"><strong>Success!</strong> ${data.Status || 'Batch operation completed'}<br><br><a href="/api/download/result/ldap/${fileName}" class="btn btn-primary" style="margin-top:10px;display:inline-block;">📥 Download Result File</a></div>`;}else{showErrorModal(data.detail||data.error||'Operation failed');}}catch(error){loader.style.display='none';showErrorModal(error.message);}});
+</script>
+{% endblock %}
