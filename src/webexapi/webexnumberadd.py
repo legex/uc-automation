@@ -143,7 +143,7 @@ def create_virtual_line(userid, phone_number, region):
         "firstName": user_info.get("firstName", "Unknown"),
         "lastName": user_info.get("lastName", "Unknown"),
         "displayName": user_info.get("displayName", "Unknown"),
-        "extension": phone_number,
+        "phoneNumber": f"+{phone_number}",
         "locationId": location_id
     }
     try:
@@ -241,7 +241,7 @@ def assign_virtual_line_to_user(email, phone_number, region):
                     )
     update_members.append({
                 "id": line_id,
-                "port": 2,
+                "port": len(update_members) + 1,  # Assign to the next available port
                 "primaryOwner": "False",
                 "lineType": "SHARED_CALL_APPEARANCE",
                 "lineWeight": 1,
@@ -261,4 +261,3 @@ def assign_virtual_line_to_user(email, phone_number, region):
     except Exception as e:
         logger.error("General error assigning virtual line to email %s: %s", email, e)
         return {"result": None, "error": str(e)}
-

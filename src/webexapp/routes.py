@@ -36,6 +36,7 @@ from webexapp.models.query_models import (
     QueryModelVirtualLine
     )
 from webexapp.services.rp_batch import batch_routepattern_auto, batch_updateroutepatterns_auto, batch_updatecallforwarding_auto
+from webexapp.services.webex_virtualline_batch import batch_assign_virtual_line
 #from src.webexapp.webexbotbaseunused import WebexbotBase
 from cucmapi.axlroutepattern import AXLRoutePatternOperations
 from cucmapi.axlconn import ConnectionAXL
@@ -225,7 +226,8 @@ async def download_template(template_name: str, current_user: str = Depends(admi
         "number_add": "template/number_add_template.csv",
         "cucm_route_pattern": "template/cucm_route_pattern_template.csv",
         "cucm_route_pattern_update": "template/rp_update_template.csv",
-        "call_forwarding_update": "template/call_forwarding_update_template.csv"
+        "call_forwarding_update": "template/call_forwarding_update_template.csv",
+        "virtual_lines": "template/virtual_line_assignment_template.csv"
     }
     file_path = available_templates.get(template_name)
     if not file_path or not os.path.exists(file_path):
@@ -333,7 +335,8 @@ async def download_result_file(result_type: str, filename: str, current_user: st
         "webex_acd": "acd_migresult_",
         "number_add": "numberadd_response_",
         "route_pattern": "rpupdateresult_",
-        "call_forwarding": "callforwarding_result_"
+        "call_forwarding": "callforwarding_result_",
+        "virtual_line": "virtual_line_result_"
     }
 
     if result_type not in result_prefixes:
@@ -756,7 +759,7 @@ async def create_route_pattern_single(query: QueryModelRPSingle, is_india: bool 
     routepattern = f"\+{query.routepattern}"
     try:
         logger.debug("Processing route pattern creation by user: %s for target user: %s", current_user, query.username)
-        result = axlrp.create_routepattern(routepattern, query.username)
+        result = axlrp.create_routepattern(routepattern, query.username, service=service)
         logger.info("Route pattern creation completed by user: %s for target user: %s", current_user, query.username)
         return {"Status": "Route pattern creation initiated", "Detail": result}
     except Exception as e:
@@ -881,7 +884,7 @@ async def batch_update_call_forwarding(file: UploadFile, is_india: bool = False,
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail="Uploaded file is empty")
     axlconn = ConnectionAXL()
-    service = axlconn.service(is_india=is_india) # Assuming call forwarding updates are not region-specific, adjust if needed
+    service = axlconn.service(is_india=is_india)
     try:
         logger.debug("Processing batch call forwarding update by user: %s for file: %s", current_user, file.filename)
         response = batch_updatecallforwarding_auto(
@@ -898,30 +901,6 @@ async def batch_update_call_forwarding(file: UploadFile, is_india: bool = False,
         logger.error("Error processing batch call forwarding file by user: %s, file %s: %s", current_user, file.filename, str(e))
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                             detail=f"Error processing file: {str(e)}") from e
-
-#Hidden API for retrieving line details, not exposed in the frontend
-@router.get("/api/linedetails")
-def get_line_details(line_number: str, is_india: bool = False):
-    """
-    Retrieve line details from CUCM for a given line number.
-    
-    Args:
-        line_number (str): The line number to retrieve details for.
-        is_india (bool): Flag indicating if the CUCM instance is in India region.
-    
-    Returns:
-        dict: Line details retrieved from CUCM.
-    """
-    axlconn = ConnectionAXL()
-    service = axlconn.service(is_india)
-    try:
-        line_details = axlrp.get_line(line_number, service)
-        logger.info("Successfully retrieved line details for line number: %s", line_details)
-        return line_details
-    except Exception as e:
-        logger.error("Error retrieving line details for line number %s: %s", line_number, str(e))
-        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                            detail=f"Error retrieving line details: {str(e)}") from e
 
 @router.post("/api/assignvirtualline/single")
 async def assign_virtual_line_single(query: QueryModelVirtualLine, current_user: str = Depends(admin_required)):
@@ -952,3 +931,65 @@ async def assign_virtual_line_single(query: QueryModelVirtualLine, current_user:
         logger.error("Error assigning virtual line by user: %s for target user %s: %s", current_user, query.email, str(e))
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                             detail=f"Error assigning virtual line: {str(e)}") from e
+
+@router.post("/api/assignvirtualline/batch")
+async def batch_virtual_line_route(file: UploadFile, current_user: str = Depends(admin_required)):
+    """
+    Batch assign virtual lines to users from a CSV file.
+    
+    Args:
+        file (UploadFile): CSV file containing columns: Email, PhoneNumber, and Region.
+    
+    Returns:
+        dict: Status and detail message indicating completion.
+    
+    Raises:
+        HTTPException: 400 if file type is invalid or file is empty,
+                      500 if virtual line assignment fails.
+    """
+    logger.info("Batch virtual line assignment requested by user: %s with file: %s", current_user, file.filename)
+    if file.content_type != 'text/csv':
+        logger.error("Invalid file type for batch virtual line assignment by user: %s: %s", current_user, file.content_type)
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail="Invalid file type. Please upload a CSV file.")
+    contents = await file.read()
+    if not contents:
+        logger.error("Empty file uploaded for batch virtual line assignment by user: %s, file: %s", current_user, file.filename)
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail="Uploaded file is empty")
+    try:
+        logger.debug("Processing batch virtual line assignment by user: %s for file: %s", current_user, file.filename)
+        response = batch_assign_virtual_line(pd.io.common.BytesIO(contents), file.filename)
+        logger.info("Batch virtual line assignment completed by user: %s for file: %s", current_user, file.filename)
+        return {"Status": "Success", "Detail": response}
+    except HTTPException as e:
+        logger.error("HTTPException in batch virtual line assignment by user: %s for %s: %s", current_user, file.filename, str(e))
+        return {"error": str(e)}
+    except Exception as e:
+        logger.error("Error processing batch virtual line assignment file by user: %s, file %s: %s", current_user, file.filename, str(e))
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                            detail=f"Error processing file: {str(e)}") from e
+    
+#Hidden API for retrieving line details, not exposed in the frontend
+@router.get("/api/linedetails")
+def get_line_details(line_number: str, is_india: bool = False):
+    """
+    Retrieve line details from CUCM for a given line number.
+    
+    Args:
+        line_number (str): The line number to retrieve details for.
+        is_india (bool): Flag indicating if the CUCM instance is in India region.
+    
+    Returns:
+        dict: Line details retrieved from CUCM.
+    """
+    axlconn = ConnectionAXL()
+    service = axlconn.service(is_india)
+    try:
+        line_details = axlrp.get_line(line_number, service)
+        logger.info("Successfully retrieved line details for line number: %s", line_details)
+        return line_details
+    except Exception as e:
+        logger.error("Error retrieving line details for line number %s: %s", line_number, str(e))
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                            detail=f"Error retrieving line details: {str(e)}") from e
