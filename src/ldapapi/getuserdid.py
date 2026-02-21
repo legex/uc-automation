@@ -57,8 +57,8 @@ def user_details(userid):
 		server = ldap3.Server(server_uri)
 
 		with ldap3.Connection(server,
-							user=LDAP_USERNAME,
-							password=LDAP_PASSWORD,
+							user=ADLDAP_USERNAME,
+							password=ADLDAP_PASSWORD,
 							authentication=NTLM) as conn:
 			conn.search(search_base, f'(&(objectcategory=user)(samaccountname={userid})(!(|(userAccountControl=514)(employeeNumber=88888)(userAccountControl=66050))))',attributes=['sAMAccountName','employeeNumber','cn', 'givenName','telephonenumber','department','division','othertelephone','distinguishedname','objectguid','akaLegalLastName','akaLegalFirstName', 'co'])
 					#=conn.search(search_base, '	(&(objectcategory=user)(employeenumber=*)(!(|(userAccountControl=514)(employeeNumber=88888)(userAccountControl=66050))))',attributes=['department'])

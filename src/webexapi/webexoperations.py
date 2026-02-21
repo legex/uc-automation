@@ -145,7 +145,7 @@ class WebexOperation:
             - Warning if no match is found.
         """
         if ACDLOCATIONS[employee_region]['id']:
-            return ACDLOCATIONS[employee_region]
+            return ACDLOCATIONS[employee_region]['id']
         return None
     def removelicense(self, email: str):
 

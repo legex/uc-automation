@@ -33,7 +33,7 @@ def batch_routepattern_auto(file, filename, service):
             logger.debug("Updating line partition for route pattern: %s", routepattern)
             update_partition = axlrp.update_line(routepattern, service=service)
             logger.debug("Creating route pattern: %s", routepattern)
-            update_rp = axlrp.create_routepattern(routepattern, username)
+            update_rp = axlrp.create_routepattern(routepattern, username, service=service)
             status_on_cucm = "Success" if update_rp else "Failed"
             status_partition = "Success" if update_partition else "Failed"
             logger.info("Route pattern %s - CUCM: %s, Partition: %s", routepattern, status_on_cucm, status_partition)

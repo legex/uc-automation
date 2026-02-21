@@ -10,7 +10,7 @@ load_dotenv()
 ENV = get_env_config()
 print(f"Application environment set to: {ENV}")
 def get_webex_license_config():
-    if ENV == "PROD" or ENV == "STAG":
+    if ENV == "PROD" or ENV == "STAG" or ENV == "LOCAL":
         license_store = {
             "ucmlic": "Y2lzY29zcGFyazovL3VzL0xJQ0VOU0UvYTM3NDkzMTUtYWUwOS00YTUyLTgwNmMtMmMzMjIyZmE3YzJjOlVDUFJFTV9jMzMyOWQzMi0xNmVkLTQxNDUtOTUyNS02M2FjYjRiMzFiMjA",
             "webexlic": "Y2lzY29zcGFyazovL3VzL0xJQ0VOU0UvYTM3NDkzMTUtYWUwOS00YTUyLTgwNmMtMmMzMjIyZmE3YzJjOkJDU1REXzFhNGRhOTZiLTNmYWUtNGVlYi1hZDYwLWFkNTA3MTE4NzFkMA"
@@ -51,7 +51,7 @@ def get_resultfile_location():
     if ENV == "PROD" or ENV == "STAG":
         resultfile_path = "tmp/resultfiles"
     else:
-        resultfile_path = "/tmp/resultfiles/"
+        resultfile_path = "tmp/resultfiles/"
     def ensure_resultfile_path(resultfile_path):
         """Ensure the result file path exists."""
         if not os.path.exists(resultfile_path):

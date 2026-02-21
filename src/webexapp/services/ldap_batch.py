@@ -26,8 +26,13 @@ resultpath = get_resultfile_location()
 def batch_update_ldap(file, filename):
     """Update CUCM Extension"""
     logger.info("Starting batch LDAP update for file: %s", filename)
-    df = pd.read_csv(file, dtype={'extension': str})
+    df = pd.read_csv(file, dtype=str, na_filter=True, keep_default_na=True)
     logger.info("Loaded %d rows from CSV file", len(df))
+    df['ExternalNumber'] = df['ExternalNumber'].where(
+        pd.notna(df['ExternalNumber']), None  # NaN → None
+    )
+    # Now safe to strip (no NaN left)
+    df['ExternalNumber'] = df['ExternalNumber'].replace('', None)
     status_on_ad = ""
     for idx, row in df.iterrows():
         logger.debug("Processing row %d", idx + 1)
@@ -36,7 +41,7 @@ def batch_update_ldap(file, filename):
         externalnumber = row.get('ExternalNumber', None)
         logger.info("Processing user: %s, extension: %s, external: %s", username, extension, externalnumber)
         if username not in excluded_list:
-            if externalnumber:
+            if externalnumber is not None and externalnumber.lower() != 'none':
                 try:
                     logger.debug("Updating LDAP with DID for user: %s", username)
                     ad_result = update_general_contacts_num_withDID(

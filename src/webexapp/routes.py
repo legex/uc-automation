@@ -499,7 +499,7 @@ async def update_webex_general(query: QueryModelWebex, current_user: str = Depen
         try:
             webex_results = webex_acd_mig.patch_dn_acd(
                 query.username,
-                query.externalnumber,
+                f"+{query.externalnumber}",
                 query.extension,
                 query.region
                 )
@@ -602,7 +602,7 @@ async def update_webex_acd(query: QueryModelWebex, current_user: str = Depends(a
             try:
                 webex_results = webex_acd_mig.patch_dn_acd(
                     query.username,
-                    query.externalnumber,
+                    f"+{query.externalnumber}",
                     query.extension,
                     query.region
                     )
@@ -993,3 +993,35 @@ def get_line_details(line_number: str, is_india: bool = False):
         logger.error("Error retrieving line details for line number %s: %s", line_number, str(e))
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                             detail=f"Error retrieving line details: {str(e)}") from e
+
+
+@router.post("/api/createroutepattern/new")
+async def create_route_pattern_new(query: QueryModelRPSingle, is_india: bool = False, current_user: str = Depends(admin_required)):
+    """
+    Create a single route pattern in CUCM using the new method.
+    
+    Args:
+        query (QueryModelRPSingle): Information containing route pattern and username.
+    
+    Returns:
+        dict: Status and detail message with route pattern creation result.
+    """
+    logger.info("Single route pattern creation (new method) requested by user: %s for target user: %s",
+                current_user, query.username if query else "None")
+    if query is None:
+        logger.error("No query provided for route pattern creation by user: %s", current_user)
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail="Query must be provided.")
+    
+    axlconn = ConnectionAXL()
+    service = axlconn.service(is_india)
+    routepattern = f"\+{query.routepattern}"
+    try:
+        logger.debug("Processing route pattern creation (new method) by user: %s for target user: %s", current_user, query.username)
+        result = axlrp.create_routepattern(routepattern, query.username, service=service)
+        logger.info("Route pattern creation (new method) completed by user: %s for target user: %s", current_user, query.username)
+        return {"Status": "Route pattern creation initiated", "Detail": result}
+    except Exception as e:
+        logger.error("Error creating route pattern (new method) by user: %s for target user %s: %s", current_user, query.username, str(e))
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                            detail=f"Error creating route pattern: {str(e)}") from e
