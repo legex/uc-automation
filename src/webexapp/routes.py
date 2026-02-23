@@ -22,6 +22,7 @@ from fastapi import APIRouter, Request, UploadFile, HTTPException, status, Form,
 from fastapi.responses import FileResponse, HTMLResponse
 from fastapi.templating import Jinja2Templates
 from ldapapi.updateldap import (
+    update_acdcontacts_num,
     update_contacts_num,
     update_contacts_num_withDID,
     update_general_contacts_num_withDID,
@@ -471,7 +472,7 @@ async def update_ldap_numbers(query: QueryModelLdap, acd: bool = False, current_
                                 current_user, query.username, str(e))
                 raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                                     detail=f"Error updating LDAP with multiple DIDs: {str(e)}") from e
-        else:
+        elif query.externalnumber:
             logger.debug("LDAP update with single DID by user: %s for ACD user: %s", current_user, query.username)
             try:
                 update_contacts_num_withDID(
@@ -487,6 +488,17 @@ async def update_ldap_numbers(query: QueryModelLdap, acd: bool = False, current_
                                 current_user, query.username, str(e))
                 raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                                     detail=f"Error updating LDAP with DID: {str(e)}") from e
+        else:
+            logger.debug("LDAP update without DID by user: %s for ACD user: %s", current_user, query.username)
+            try:
+                update_acdcontacts_num(query.username, internal_extension=extension)
+                logger.info("LDAP update completed by user: %s for ACD user: %s", current_user, query.username)
+                return {"Status": "LDAP update Completed"}
+            except Exception as e:
+                logger.error("Error updating LDAP by user: %s for ACD user %s: %s",
+                                current_user, query.username, str(e))
+                raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                                    detail=f"Error updating LDAP: {str(e)}") from e
     if query.externalnumber:
         externalnumber = query.externalnumber
         logger.debug("LDAP update with external number by user: %s for target user: %s", current_user, query.username)
