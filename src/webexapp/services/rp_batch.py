@@ -99,8 +99,8 @@ def batch_updatecallforwarding_auto(file, filename, service):
     logger.info("Loaded %d rows from CSV file", len(df))
     for idx, row in df.iterrows():
         logger.debug("Processing row %d", idx + 1)
-        routepattern = f"\+{row['PatternToUpdate']}"
-        destination_pattern = f"+{row['DestinationPattern']}"
+        routepattern = row['PatternToUpdate']
+        destination_pattern = row['DestinationPattern']
         logger.info("Processing route pattern: %s update call forwarding to destination: %s", routepattern, destination_pattern)
         try:
             logger.debug("Updating call forwarding for route pattern: %s", routepattern)

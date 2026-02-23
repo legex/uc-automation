@@ -151,17 +151,30 @@ function switchTab(tab, buttonElement) {
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(formData)
             });
-            const data = await response.json();
+            const isNoContent = response.status === 204;
+            let data = null;
+            if (!isNoContent) {
+                const contentType = response.headers.get('content-type') || '';
+                if (contentType.includes('application/json')) {
+                    data = await response.json();
+                }
+            }
             loader.style.display = 'none';
 
-            const isSuccess = data.Status && data.Status === "Virtual line assignment initiated";
-            if (response.ok && isSuccess) {
+            const hasStatusSuccess = data && data.Status && data.Status.toLowerCase().includes('completed');
+            if (response.ok && (isNoContent || hasStatusSuccess)) {
                 result.innerHTML = `<div class="alert alert-success">
-                    <strong>Success!</strong> ${data.Status || 'Virtual line assigned successfully'}
-                    ${data.Detail ? '<br><small>' + JSON.stringify(data.Detail) + '</small>' : ''}
+                    <strong>Success!</strong> ${data && data.Status ? data.Status : 'Virtual line assigned successfully'}
+                    ${data && data.Detail ? '<br><small>' + JSON.stringify(data.Detail) + '</small>' : ''}
+                </div>`;
+            } else if (response.ok) {
+                result.innerHTML = `<div class="alert alert-success">
+                    <strong>Success!</strong> Virtual line assigned successfully
                 </div>`;
             } else {
-                const errorMsg = `${data.Status || data.detail || data.error || 'Operation failed'}${data.Detail ? '\n\nDetails: ' + JSON.stringify(data.Detail) : ''}`;
+                const errorMsg = data && (data.Status || data.detail || data.error)
+                    ? `${data.Status || data.detail || data.error}${data.Detail ? '\n\nDetails: ' + JSON.stringify(data.Detail) : ''}`
+                    : 'Operation failed';
                 showErrorModal(errorMsg);
             }
         } catch (error) {

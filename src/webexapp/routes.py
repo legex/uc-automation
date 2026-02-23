@@ -47,12 +47,16 @@ from webexapi.webexoperations import WebexOperation
 from webexapi.webexnumberadd import addnumbersingle, addnumberbatch, assign_virtual_line_to_user
 from utils.logger import setup_logger
 from utils.auth_helper import RoleChecker, get_current_user
-from appdatainternal.config import get_locations_config, get_resultfile_location
+from appdatainternal.config import get_locations_config, get_resultfile_location, get_cucm_rl_mapping
+
 
 admin_required = RoleChecker(["admin"])
 viewer_required = RoleChecker(["viewer"])
 user_required = RoleChecker(["user"])
 resultfile_location = get_resultfile_location()
+CUCM_RL_PARTITION_MAP = get_cucm_rl_mapping()
+rl_list = sorted(CUCM_RL_PARTITION_MAP["RL"].keys())
+partition_list = sorted(CUCM_RL_PARTITION_MAP["Partitions"].keys())
 # Load environment variables from .env file
 load_dotenv()
 # API_TOKEN = os.getenv("WEBEXBOTTOKEN")
@@ -525,7 +529,7 @@ async def update_ldap_numbers(query: QueryModelLdap, acd: bool = False, current_
                             detail=f"Error updating LDAP: {str(e)}") from e
 
 @router.post("/api/updateldap/batch")
-async def batch_update_ldap_numbers(file: UploadFile, acd: bool = Form(False), current_user: str = Depends(admin_required)):
+async def batch_update_ldap_numbers(file: UploadFile, acd: bool = False, current_user: str = Depends(admin_required)):
     """
     Batch update LDAP contact numbers from a CSV file.
     

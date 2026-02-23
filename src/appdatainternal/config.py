@@ -82,6 +82,11 @@ def get_cucm_credentials():
             ucm_creds["LOCAL"]["AXL_PASSWORD"] = os.environ.get("AXL_PASSWORD", "default_cucm_password")
         return ucm_creds[ENV]
 
+def get_cucm_rl_mapping():
+    with open("appdatainternal/cucm_rl.json", 'r') as f:
+        cucm_rl_mapping = json.load(f)
+    return cucm_rl_mapping
+
 def get_webex_token():
     """
     Retrieve the Webex API token.

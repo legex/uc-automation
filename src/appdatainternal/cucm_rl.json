@@ -1,0 +1,10 @@
+{
+    "RL": {
+        "ICT RL": "US-India-BLR-ICT",
+        "Webex RL": "RL-WBX-CALLING"
+    },
+    "Partitions": {
+        "Hidden Partition": "PT-HIDDEN",
+        "Global Partition": "PT-Global-Internal"
+    }
+}
