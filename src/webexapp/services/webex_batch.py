@@ -25,9 +25,10 @@ webex_mig_gen = WebexGenMigration()
 webex_acd_mig = WebexMigACD()
 webop = WebexOperation()
 
-def batch_update_webex_gen(file, filename):
+def batch_update_webex_gen(file, filename, exclude_users_override=None):
     """Update Webex Extension"""
     logger.info("Starting batch Webex General update for file: %s", filename)
+    effective_excluded_list = exclude_users_override if exclude_users_override is not None else excluded_list
     df = pd.read_csv(file, dtype=str, na_filter=True, keep_default_na=True)
     logger.info("Loaded %d rows from CSV file", len(df))
     df['ContactNumber'] = df['ContactNumber'].where(
@@ -46,7 +47,7 @@ def batch_update_webex_gen(file, filename):
         email = row["Email"]
         status_on_webex = ""
         logger.info("Processing user: %s, email: %s, extension: %s, region: %s", username, email, extension, region)
-        if username not in excluded_list:
+        if username not in effective_excluded_list:
             if phonenumber is not None and phonenumber.lower() != 'none':
                 contact = "+" + phonenumber
                 logger.debug("Processing with contact number: %s for user: %s", contact, username)
@@ -100,7 +101,7 @@ def batch_update_webex_gen(file, filename):
     logger.info("Batch Webex General update completed for file: %s", filename)
     return "Script Run is Finished"
 
-def batch_update_webex_acd(file, filename):
+def batch_update_webex_acd(file, filename, exclude_users_override=None):
     """Update Webex Extension"""
     logger.info("Starting batch Webex ACD update for file: %s", filename)
     df = pd.read_csv(file, dtype={'extension': str, 'ContactNumber': str})
@@ -108,6 +109,7 @@ def batch_update_webex_acd(file, filename):
         pd.notna(df['ContactNumber']), None  # NaN → None
     )
     logger.info("Loaded %d rows from Excel file", len(df))
+    effective_excluded_list = exclude_users_override if exclude_users_override is not None else []
     for idx, row in df.iterrows():
         logger.debug("Processing row %d", idx + 1)
         username = row['UserId'].strip()
@@ -117,36 +119,40 @@ def batch_update_webex_acd(file, filename):
         ad_num = location_config[region]['prefix']+extension
         email = row["Email"].strip()
         logger.info("Processing user: %s, email: %s, extension: %s, phone: %s", username, email, extension, phonenumber)
-        if phonenumber is not None and phonenumber.lower() != 'none':
-            phonenumber = "+" + phonenumber.strip()
-            logger.debug("Processing with contact number: %s for user: %s", phonenumber, username)
+        if username not in effective_excluded_list:
+            if phonenumber is not None and phonenumber.lower() != 'none':
+                phonenumber = "+" + phonenumber.strip()
+                logger.debug("Processing with contact number: %s for user: %s", phonenumber, username)
 
-            try:
-                logger.debug("Updating Webex ACD for user: %s", username)
-                webex_results = webex_acd_mig.patch_dn_acd(
-                    email,
-                    phonenumber,
-                    extension,
-                    region
-                )
-                status_on_webex = "Success" if webex_results["result"] else "Failed"
-                logger.info("Webex ACD update for %s: %s", username, status_on_webex)
-            except (Exception) as e:
-                logger.error("Error updating CUCM for %s: %s", username, e)
-                status_on_webex = "Error"
+                try:
+                    logger.debug("Updating Webex ACD for user: %s", username)
+                    webex_results = webex_acd_mig.patch_dn_acd(
+                        email,
+                        phonenumber,
+                        extension,
+                        region
+                    )
+                    status_on_webex = "Success" if webex_results["result"] else "Failed"
+                    logger.info("Webex ACD update for %s: %s", username, status_on_webex)
+                except (Exception) as e:
+                    logger.error("Error updating CUCM for %s: %s", username, e)
+                    status_on_webex = "Error"
+            else:
+                try:
+                    logger.debug("Updating Webex license Extension for user: %s", username)
+                    webex_results = webex_mig_gen.patch_license_dn(
+                        email,
+                        extension,
+                        region
+                    )
+                    status_on_webex = "Success" if webex_results["result"] else "Failed"
+                    logger.info("Webex license Extension update for %s: %s", username, status_on_webex)
+                except (Exception) as e:
+                    logger.error("Error updating Webex Extension for %s: %s", username, e)
+                    status_on_webex = "Error"
         else:
-            try:
-                logger.debug("Updating Webex license Extension for user: %s", username)
-                webex_results = webex_mig_gen.patch_license_dn(
-                    email,
-                    extension,
-                    region
-                )
-                status_on_webex = "Success" if webex_results["result"] else "Failed"
-                logger.info("Webex license Extension update for %s: %s", username, status_on_webex)
-            except (Exception) as e:
-                logger.error("Error updating Webex Extension for %s: %s", username, e)
-                status_on_webex = "Error"
+            logger.info("User %s is in Exclude list", username)
+            status_on_webex = "Skipped"
         acd_result = {
             "username": username,
             "email": email,

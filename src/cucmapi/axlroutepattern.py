@@ -172,7 +172,7 @@ class AXLRoutePatternOperations:
             logger.debug("No service provided")
         routerpattern = {
         'pattern': f'{pattern}',
-        'description':f'WxC DID - {username}',
+        'description':f'WxC - {username}',
         'usage':'Route',
         'routePartitionName' : 'PT-Global-Internal',
         'patternPrecedence' : 'Default',

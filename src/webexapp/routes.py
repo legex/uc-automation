@@ -76,6 +76,34 @@ webop = WebexOperation()
 
 #webexbot = WebexbotBase()
 router = APIRouter()
+
+
+def _parse_exclude_users_from_file(exclude_file: UploadFile | None) -> list[str] | None:
+    """Parse exclude user IDs from uploaded CSV/TXT file."""
+    if exclude_file is None:
+        return None
+    content = exclude_file.file.read()
+    if not content:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail="Uploaded exclude list file is empty")
+    try:
+        df = pd.read_csv(pd.io.common.BytesIO(content), dtype=str)
+    except Exception as exc:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail="Invalid exclude list file. Upload a valid CSV/TXT file.") from exc
+
+    if "UserId" in df.columns:
+        values = df["UserId"].dropna().astype(str).str.strip().tolist()
+    elif len(df.columns) > 0:
+        values = df.iloc[:, 0].dropna().astype(str).str.strip().tolist()
+    else:
+        values = []
+
+    values = [value for value in values if value]
+    if not values:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail="Exclude list file has no usable user IDs")
+    return values
 # orgId = ""
 # @router.post("/roomwebhook")
 # async def room_webhook(request: Request):
@@ -547,7 +575,11 @@ async def update_ldap_numbers(query: QueryModelLdap, acd: bool = False, current_
                             detail=f"Error updating LDAP: {str(e)}") from e
 
 @router.post("/api/updateldap/batch")
-async def batch_update_ldap_numbers(file: UploadFile, acd: bool = False, current_user: str = Depends(admin_required)):
+async def batch_update_ldap_numbers(
+    file: UploadFile,
+    acd: bool = False,
+    current_user: str = Depends(admin_required)
+):
     """
     Batch update LDAP contact numbers from a CSV file.
     
@@ -659,7 +691,11 @@ async def update_webex_general(query: QueryModelWebex, current_user: str = Depen
                             detail=f"Error updating Webex: {str(e)}") from e
 
 @router.post("/api/updatewebexgeneral/batch")
-async def batch_update_webex_general(file: UploadFile | None = None, current_user: str = Depends(admin_required)):
+async def batch_update_webex_general(
+    file: UploadFile | None = None,
+    exclude_file: UploadFile | None = None,
+    current_user: str = Depends(admin_required)
+):
     """
     Batch update Webex settings from a CSV file.
     
@@ -684,6 +720,7 @@ async def batch_update_webex_general(file: UploadFile | None = None, current_use
         logger.error("Invalid file type for batch Webex update by user: %s: %s", current_user, file.content_type)
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail="Invalid file type. Please upload a CSV file.")
+    exclude_users = _parse_exclude_users_from_file(exclude_file)
     contents = await file.read()
     if not contents:
         logger.error("Empty file uploaded for batch Webex update by user: %s, file: %s", current_user, file.filename)
@@ -691,9 +728,11 @@ async def batch_update_webex_general(file: UploadFile | None = None, current_use
                             detail="Uploaded file is empty")
     try:
         logger.debug("Processing batch Webex general update by user: %s for file: %s", current_user, file.filename)
-        response = batch_update_webex_gen(pd.io.common.BytesIO(contents),
-                                          file.filename
-                                          )
+        response = batch_update_webex_gen(
+            pd.io.common.BytesIO(contents),
+            file.filename,
+            exclude_users_override=exclude_users
+        )
         logger.info("Batch Webex general update completed by user: %s for file: %s", current_user, file.filename)
         return {"Status": "Success", "Detail": response}
     except HTTPException as e:
@@ -751,7 +790,7 @@ async def update_webex_acd(query: QueryModelWebex, current_user: str = Depends(a
                                 detail="External number must be provided for ACD updates.")
 
 @router.post("/api/updatewebexacd/batch")
-async def b_update_webex_acd(file: UploadFile | None = None, current_user: str = Depends(admin_required)):
+async def b_update_webex_acd(file: UploadFile | None = None, exclude_file: UploadFile | None = None, current_user: str = Depends(admin_required)):
     """
     Batch update Webex ACD settings from an Excel file.
     
@@ -774,6 +813,7 @@ async def b_update_webex_acd(file: UploadFile | None = None, current_user: str =
         logger.error("Invalid file type for batch Webex ACD update by user: %s: %s", current_user, file.content_type)
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail="Invalid file type. Please upload a CSV file.")
+    exclude_users = _parse_exclude_users_from_file(exclude_file)
     contents = await file.read()
     if not contents:
         logger.error("Empty file uploaded for batch Webex ACD update by user: %s, file: %s", current_user, file.filename)
@@ -781,7 +821,7 @@ async def b_update_webex_acd(file: UploadFile | None = None, current_user: str =
                             detail="Uploaded file is empty")
     try:
         logger.debug("Processing batch Webex ACD update by user: %s for file: %s", current_user, file.filename)
-        response = batch_update_webex_acd(pd.io.common.BytesIO(contents), file.filename)
+        response = batch_update_webex_acd(pd.io.common.BytesIO(contents), file.filename, exclude_users_override=exclude_users)
         logger.info("Batch Webex ACD update completed by user: %s for file: %s", current_user, file.filename)
         return {"Status": "Success", "Detail": response}
     except HTTPException as e:

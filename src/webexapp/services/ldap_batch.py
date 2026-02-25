@@ -23,6 +23,8 @@ logger = setup_logger('ldapbatch', '/a/logs/ldapbatch.log')
 
 excluded_list = exclude_list
 resultpath = get_resultfile_location()
+
+
 def batch_update_ldap(file, filename):
     """Update CUCM Extension"""
     logger.info("Starting batch LDAP update for file: %s", filename)
