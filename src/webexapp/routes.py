@@ -54,6 +54,7 @@ from appdatainternal.config import get_locations_config, get_resultfile_location
 admin_required = RoleChecker(["admin"])
 viewer_required = RoleChecker(["viewer"])
 user_required = RoleChecker(["user"])
+admin_or_jpuser_required = RoleChecker(["admin", "jpuser"])
 resultfile_location = get_resultfile_location()
 CUCM_RL_PARTITION_MAP = get_cucm_rl_mapping()
 rl_list = sorted(CUCM_RL_PARTITION_MAP["RL"].keys())
@@ -236,6 +237,11 @@ async def callforwarding_services_page(request: Request, current_user: str = Dep
         HTMLResponse: The rendered callforwarding_services.html template.
     """
     return templates.TemplateResponse("callforwarding_services.html", {"request": request, "current_user": current_user})
+
+@router.get("/api/japancallforwarding", response_class=HTMLResponse)
+async def japancallforwarding_page(request: Request, current_user: str = Depends(admin_or_jpuser_required)):
+    """Render the Japan call forwarding single-update page UI."""
+    return templates.TemplateResponse("japancallforwarding.html", {"request": request, "current_user": current_user})
 
 @router.get("/api/single-update", response_class=HTMLResponse)
 async def single_update_page(request: Request, current_user: str = Depends(admin_required)):
@@ -1127,6 +1133,42 @@ async def create_new_route_pattern(query: QueryModelRPSingle, is_india: bool = F
         logger.error("Error creating route pattern (new method) by user: %s for target user %s: %s", current_user, query.username, str(e))
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                             detail=f"Error creating route pattern: {str(e)}") from e
+
+
+@router.post("/api/japancallforwarding/single")
+async def update_call_forwarding_japan_single(query: QueryModelCallForward, current_user: str = Depends(admin_or_jpuser_required)):
+    """
+    Update call forwarding settings for a single user in Japan region.
+    
+    Args:
+        query (QueryModelCallForward): Information containing line number, forwarding number, and forwarding type.
+    
+    Returns:
+        dict: Status and detail message with call forwarding update result.
+    """
+    logger.info("Single call forwarding update for Japan requested by user: %s for target line: %s",
+                current_user, query.linenumber if query else "None")
+    
+    axlconn = ConnectionAXL()
+    service = axlconn.service(is_india=False) # Assuming Japan region uses the same service as non-India, adjust if needed
+    if query is None:
+        logger.error("No query provided for call forwarding update by user: %s", current_user)
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail="Query must be provided.")
+    source_line = query.linenumber.strip("+")  # Remove leading + if present
+    destination_line = query.forwardingnumber.strip("+")  # Remove leading + if present
+    try:
+        logger.debug("Processing call forwarding update for Japan by user: %s for target line: %s", current_user, source_line)
+        result = axlrp.update_callforwarding_apac_japan(source_line, destination_line, service)
+        if not result:
+            logger.warning("Call forwarding update for Japan returned no results for user: %s, target line: %s", current_user, source_line) 
+            return {"Status": "Call forwarding update failed", "Detail": "No response from CUCM"}
+        logger.info("Call forwarding update for Japan completed by user: %s for target line: %s", current_user, source_line)
+        return {"Status": "Call forwarding update Completed", "Detail": result}
+    except Exception as e:
+        logger.error("Error updating call forwarding for Japan by user: %s for target line %s: %s", current_user, source_line, str(e))
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                            detail=f"Error updating call forwarding: {str(e)}") from e
 
 #Hidden API for retrieving line details, not exposed in the frontend
 @router.get("/api/linedetails")

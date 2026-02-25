@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block title %}Japan Call Forwarding - Webex CUCM Integration{% endblock %}
+
+{% block content %}
+<h1>Japan Call Forwarding</h1>
+
+<div class="section">
+    <a href="/" class="btn btn-secondary" style="margin-bottom: 20px;">← Back to Home</a>
+
+    <h2>Single Line Update</h2>
+    <p style="color: #cccccc; margin-bottom: 30px;">
+        Update call forwarding for Japan lines using the APAC Japan flow.
+    </p>
+
+    <div class="section" style="background: rgba(0, 100, 200, 0.15); margin-bottom: 0;">
+        <h3 style="color: #00d4ff; margin-bottom: 15px;">📞 Japan Single Call Forwarding Update</h3>
+        <p style="color: #cccccc; margin-bottom: 15px;">Enter source and destination line numbers.</p>
+
+        <form id="japanCallForwardingForm">
+            <div class="form-group">
+                <label for="jp_linenumber">Source Number *</label>
+                <input type="text" id="jp_linenumber" name="linenumber" required placeholder="Enter source number">
+            </div>
+
+            <div class="form-group">
+                <label for="jp_forwardingnumber">Destination Number *</label>
+                <input type="text" id="jp_forwardingnumber" name="forwardingnumber" required placeholder="Enter destination number">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Update Call Forwarding</button>
+            <div id="jp_single_loader" class="loader"></div>
+            <div id="jp_single_result"></div>
+        </form>
+    </div>
+</div>
+
+<div class="section">
+    <h2>ℹ️ Information</h2>
+    <ul style="color: #cccccc; line-height: 1.8;">
+        <li>This page is dedicated to Japan single call forwarding updates</li>
+        <li>Leading <code>+</code> is optional for line numbers</li>
+    </ul>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.getElementById('japanCallForwardingForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const loader = document.getElementById('jp_single_loader');
+        const result = document.getElementById('jp_single_result');
+
+        loader.style.display = 'block';
+        result.innerHTML = '';
+
+        const payload = {
+            linenumber: document.getElementById('jp_linenumber').value,
+            forwardingnumber: document.getElementById('jp_forwardingnumber').value
+        };
+
+        try {
+            const response = await fetch('/api/japancallforwarding/single', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            const data = await response.json();
+            loader.style.display = 'none';
+
+            if (response.ok) {
+                result.innerHTML = `<div class="alert alert-success">
+                    <strong>Success!</strong> ${data.Status || 'Japan call forwarding updated successfully'}
+                    ${data.Detail ? '<br><small>' + JSON.stringify(data.Detail) + '</small>' : ''}
+                </div>`;
+            } else {
+                showErrorModal(data.detail || data.error || 'Operation failed');
+            }
+        } catch (error) {
+            loader.style.display = 'none';
+            showErrorModal(error.message);
+        }
+    });
+</script>
+{% endblock %}

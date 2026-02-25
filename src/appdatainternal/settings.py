@@ -21,5 +21,6 @@ rbac_roles = {
               "ratiwar", "rpangira", "rasahu",
               "akalpath"],
     "viewer": ["dforeste"],
-    "user": []
+    "user": [],
+    "jpuser": ['ynarita']
 }
