@@ -83,7 +83,13 @@ def batch_update_ldap(file, filename):
 def batch_update_ldap_acd(file, filename):
     """Update CUCM Extension"""
     logger.info("Starting batch LDAP update for file: %s", filename)
-    df = pd.read_csv(file, dtype={'extension': str})
+    df = pd.read_csv(file, dtype=str, na_filter=True, keep_default_na=True)
+    logger.info("Loaded %d rows from CSV file", len(df))
+    df['ExternalNumber'] = df['ExternalNumber'].where(
+        pd.notna(df['ExternalNumber']), None  # NaN → None
+    )
+    # Now safe to strip (no NaN left)
+    df['ExternalNumber'] = df['ExternalNumber'].replace('', None)
     logger.info("Loaded %d rows from CSV file", len(df))
     status_on_ad = ""
     for idx, row in df.iterrows():
