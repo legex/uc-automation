@@ -44,6 +44,8 @@ def batch_update_ldap(file, filename):
         logger.info("Processing user: %s, extension: %s, external: %s", username, extension, externalnumber)
         if username not in excluded_list:
             if externalnumber is not None and externalnumber.lower() != 'none':
+                externalnumber = externalnumber.strip()
+                externalnumber = externalnumber.removesuffix(".0")
                 try:
                     logger.debug("Updating LDAP with DID for user: %s", username)
                     ad_result = update_general_contacts_num_withDID(
@@ -99,10 +101,12 @@ def batch_update_ldap_acd(file, filename):
         externalnumber = row.get('ExternalNumber', None)
         logger.info("Processing user: %s, extension: %s, external: %s", username, extension, externalnumber)
         if externalnumber:
+            externalnumber = externalnumber.strip()
+            externalnumber = externalnumber.removesuffix(".0")
             try:
                 logger.debug("Updating LDAP with DID for user: %s", username)
                 ad_result = update_contacts_num_withDID(
-                    username, extension, externalnumber)
+                    username, extension, f"+{externalnumber}")
                 status_on_ad = "Success" if ad_result else "Failed"
                 logger.info("LDAP update with DID for %s: %s", username, status_on_ad)
             except (Exception) as e:
