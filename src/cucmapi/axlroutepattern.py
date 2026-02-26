@@ -208,6 +208,7 @@ class AXLRoutePatternOperations:
         """
         if not service:
             logger.debug("No service provided")
+        print(f'Pattern observed in update_routepattern: {pattern} and partition observed: {partition}')
         routerpattern = {
         'pattern': f'{pattern}',
         'routePartitionName' : 'PT-Global-Internal',
@@ -216,10 +217,12 @@ class AXLRoutePatternOperations:
         try:
             logger.info("Updating route pattern %s ", pattern)
             response = service.updateRoutePattern(**routerpattern)['return']
+            print(response)
             logger.info("Route pattern %s updated successfully", pattern)
             return response
         except Fault as e:
             logger.error("Failed to update route pattern: %s", e)
+            print(f'Error in update_routepattern: {e}')
             return None
 
     def update_callforwarding(self, pattern, destination_pattern, service=None):

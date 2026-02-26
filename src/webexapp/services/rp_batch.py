@@ -56,16 +56,17 @@ def batch_routepattern_auto(file, filename, service):
     logger.info("Batch route pattern creation completed for file: %s", filename)
     return "Script Run is Finished"
 
-def batch_updateroutepatterns_auto(file, filename, partition, service):
+def batch_updateroutepatterns_auto(file, filename, service=None):
     """Update Route Pattern in CUCM from CSV"""
     if not service:
         logger.debug("No service provided to batch_updateroutepatterns_auto")
     logger.info("Starting batch route pattern update for file: %s", filename)
     df = pd.read_csv(file, dtype={'PatternToUpdate': str})
     logger.info("Loaded %d rows from CSV file", len(df))
+    partition = "PT-Hidden"
     for idx, row in df.iterrows():
         logger.debug("Processing row %d", idx + 1)
-        routepattern = f"\+{row['PatternToUpdate']}"
+        routepattern = row['PatternToUpdate']
         logger.info("Processing route pattern: %s update partition to %s", routepattern, partition)
         try:
             logger.debug("Updating route pattern: %s", routepattern)

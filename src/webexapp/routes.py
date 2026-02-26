@@ -948,7 +948,7 @@ async def update_route_pattern_single(query: QueryModelRPUpdate, is_india: bool 
         dict: Status and detail message with route pattern update result.
     """
     logger.info("Single route pattern update requested by user: %s for target user: %s",
-                current_user, query.username if query else "None")
+                current_user, query.routepattern if query else "None")
     if query is None:
         logger.error("No query provided for route pattern update by user: %s", current_user)
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
@@ -957,12 +957,12 @@ async def update_route_pattern_single(query: QueryModelRPUpdate, is_india: bool 
     axlconn = ConnectionAXL()
     service = axlconn.service(is_india)
     try:
-        logger.debug("Processing route pattern update by user: %s for target user: %s", current_user, query.username)
+        logger.debug("Processing route pattern update by user: %s for target user: %s", current_user, query.routepattern)
         result = axlrp.update_routepattern(pattern, query.partition, service=service)
-        logger.info("Route pattern update completed by user: %s for target user: %s", current_user, query.username)
+        logger.info("Route pattern update completed by user: %s for target user: %s", current_user, query.routepattern)
         return {"Status": "Route pattern update Completed", "Detail": result}
     except Exception as e:
-        logger.error("Error updating route pattern by user: %s for target user %s: %s", current_user, query.username, str(e))
+        logger.error("Error updating route pattern by user: %s for target user %s: %s", current_user, query.routepattern, str(e))
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                             detail=f"Error updating route pattern: {str(e)}") from e
 
