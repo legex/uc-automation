@@ -29,7 +29,7 @@ from ldapapi.updateldap import (
     update_general_contacts_num_with_multiple_DID
     )
 from webexapp.services.ldap_batch import batch_update_ldap, batch_update_ldap_acd
-from webexapp.services.webex_batch import batch_update_webex_gen, batch_update_webex_acd
+from webexapp.services.webex_batch import batch_remove_license, batch_update_webex_gen, batch_update_webex_acd
 from webexapp.models.query_models import (
     QueryModelLdap, QueryModelWebex,
     QueryModelNumberSingle, QueryModelRPSingle,
@@ -338,7 +338,8 @@ async def download_template(template_name: str, current_user: str = Depends(admi
         "cucm_route_pattern": "template/cucm_route_pattern_template.csv",
         "cucm_route_pattern_update": "template/rp_update_template.csv",
         "call_forwarding_update": "template/call_forwarding_update_template.csv",
-        "virtual_lines": "template/virtual_line_assignment_template.csv"
+        "virtual_lines": "template/virtual_line_assignment_template.csv",
+        "remove_license": "template/webex_license_removal_template.csv"
     }
     file_path = available_templates.get(template_name)
     if not file_path or not os.path.exists(file_path):
@@ -447,7 +448,8 @@ async def download_result_file(result_type: str, filename: str, current_user: st
         "number_add": "numberadd_response_",
         "route_pattern": "rpupdateresult_",
         "call_forwarding": "callforwarding_result_",
-        "virtual_line": "virtual_line_result_"
+        "virtual_line": "virtual_line_result_",
+        "remove_license": "webex_license_removal_"
     }
 
     if result_type not in result_prefixes:
@@ -905,6 +907,32 @@ async def remove_webex_license(email: str = Form(...), region_India: bool = Fals
         logger.error("Error removing Webex license by user: %s for %s: %s", current_user, email, str(e))
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                             detail=f"Error removing Webex license: {str(e)}") from e
+
+@router.post("/api/removewebexlicense/batch")
+async def batch_remove_webex_license(file: UploadFile, region_india: bool = False, current_user: str = Depends(admin_required)):
+    """Batch remove Webex licenses from a CSV file.
+
+    Args:
+        file (UploadFile): CSV file containing email addresses of users whose Webex licenses should be removed.
+        region_india (bool): Flag indicating if the users are in the India region.
+        current_user (str): The user requesting the batch license removal.
+    
+    Returns:
+        dict: Status and detail message with license removal results.
+    
+    Raises:
+        HTTPException: 500 if license removal fails.
+    """
+    logger.info("Batch Webex license removal requested by user: %s for file: %s", current_user, file.filename)
+    try:
+        contents = await file.read()
+        result = batch_remove_license(pd.io.common.BytesIO(contents), file.filename, region_india)
+        logger.info("Batch Webex license removal completed by user: %s for file: %s", current_user, file.filename)
+        return {"Status": "Batch Webex license removal Completed", "Detail": result}
+    except Exception as e:
+        logger.error("Error removing Webex licenses by user: %s for file %s: %s", current_user, file.filename, str(e))
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                            detail=f"Error removing Webex licenses: {str(e)}") from e
 
 @router.post("/api/createroutepattern/single")
 async def updateline_createpattern(query: QueryModelRPSingle, is_india: bool = False, current_user: str = Depends(admin_required)):

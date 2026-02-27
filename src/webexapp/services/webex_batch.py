@@ -170,3 +170,34 @@ def batch_update_webex_acd(file, filename, exclude_users_override=None):
             )
     logger.info("Batch Webex ACD update completed for file: %s", filename)
     return "Script Run is Finished"
+
+
+def batch_remove_license(file, filename, region_India):
+    """Remove Webex License from CSV"""
+    logger.info("Starting batch Webex license removal for file: %s", filename)
+    df = pd.read_csv(file, dtype=str)
+    logger.info("Loaded %d rows from CSV file", len(df))
+    for idx, row in df.iterrows():
+        logger.debug("Processing row %d", idx + 1)
+        email = row["Email"].strip()
+        logger.info("Processing license removal for email: %s", email)
+        try:
+            logger.debug("Removing Webex license for email: %s", email)
+            webex_results = webop.remove_webex_license(email, region_India=region_India)
+            status_on_webex = "Success" if webex_results["result"] else "Failed"
+            logger.info("Webex license removal for %s: %s", email, status_on_webex)
+        except (Exception) as e:
+            logger.error("Error removing Webex license for %s: %s", email, e)
+            status_on_webex = "Error"
+        removal_result = {
+            "email": email,
+            "status_on_webex": status_on_webex
+        }
+        pd.DataFrame([removal_result]).to_csv(
+            f"{resultpath}/webex_license_removal_{filename}",
+            mode='a',
+            header=False,
+            index=False
+            )
+    logger.info("Batch Webex license removal completed for file: %s", filename)
+    return "Script Run is Finished"

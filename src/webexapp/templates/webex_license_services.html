@@ -2,26 +2,60 @@
 
 {% block title %}Remove Webex License - Webex CUCM Integration{% endblock %}
 
+{% block extra_css %}
+<style>
+    .tab-container { display: flex; gap: 10px; margin-bottom: 30px; border-bottom: 2px solid rgba(0, 212, 255, 0.3); }
+    .tab-button { padding: 12px 24px; background: rgba(0, 100, 200, 0.2); border: none; border-radius: 10px 10px 0 0; color: #00d4ff; cursor: pointer; }
+    .tab-button.active { background: rgba(0, 212, 255, 0.3); border-bottom: 3px solid #00d4ff; color: #ffffff; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+</style>
+{% endblock %}
+
 {% block content %}
 <h1>Remove Webex License</h1>
 <div class="section">
     <a href="/api/webex-services" class="btn btn-secondary" style="margin-bottom: 20px;">← Back to Webex Services</a>
     <div style="background: rgba(0, 100, 200, 0.2); border-left: 4px solid #00d4ff; border-radius: 8px; padding: 12px 16px; margin-bottom: 20px; color: #cccccc;">🏠 <a href="/" style="color:#00d4ff;text-decoration:none;">Home</a> <span style="margin:0 8px;color:#aaaaaa;">›</span> <a href="/api/webex-services" style="color:#00d4ff;text-decoration:none;">Webex Services</a> <span style="margin:0 8px;color:#aaaaaa;">›</span> <strong style="color:#fff;">Remove License</strong></div>
 
-    <div class="section" style="background: rgba(0, 100, 200, 0.15);">
-        <h3 style="color:#00d4ff; margin-bottom:15px;">🗑️ Remove Webex License from User</h3>
-        <form id="removeLicenseForm">
-            <div class="form-group"><label for="remove_license_email">Email *</label><input type="email" id="remove_license_email" required></div>
-            <div class="form-group"><label style="display:flex;align-items:center;gap:10px;cursor:pointer;"><input type="checkbox" id="region_india_checkbox" style="width:auto;cursor:pointer;"><span>India Region</span></label></div>
-            <button type="submit" class="btn btn-primary">Remove License</button>
-            <div id="remove_license_loader" class="loader"></div><div id="remove_license_result"></div>
-        </form>
+    <div class="tab-container">
+        <button class="tab-button active" onclick="switchTab('single', this)">Single Remove</button>
+        <button class="tab-button" onclick="switchTab('batch', this)">Batch Remove</button>
+    </div>
+
+    <div id="single-tab" class="tab-content active">
+        <div class="section" style="background: rgba(0, 100, 200, 0.15);">
+            <h3 style="color:#00d4ff; margin-bottom:15px;">🗑️ Remove Webex License from User</h3>
+            <form id="removeLicenseForm">
+                <div class="form-group"><label for="remove_license_email">Email *</label><input type="email" id="remove_license_email" required></div>
+                <div class="form-group"><label style="display:flex;align-items:center;gap:10px;cursor:pointer;"><input type="checkbox" id="region_india_checkbox" style="width:auto;cursor:pointer;"><span>India Region</span></label></div>
+                <button type="submit" class="btn btn-primary">Remove License</button>
+                <div id="remove_license_loader" class="loader"></div><div id="remove_license_result"></div>
+            </form>
+        </div>
+    </div>
+
+    <div id="batch-tab" class="tab-content">
+        <div class="section" style="background: rgba(0, 100, 200, 0.15);">
+            <h3 style="color:#00d4ff; margin-bottom:15px;">📋 Batch Remove Webex Licenses</h3>
+            <form id="removeLicenseBatchForm">
+                <div class="form-group"><label for="remove_license_batch_file">Upload CSV File *</label><input type="file" id="remove_license_batch_file" accept=".csv" required style="padding:8px;background:rgba(0,0,0,0.5);"></div>
+                <div class="form-group"><label style="display:flex;align-items:center;gap:10px;cursor:pointer;"><input type="checkbox" id="remove_license_batch_region_india" style="width:auto;cursor:pointer;"><span>India Region</span></label></div>
+                <button type="submit" class="btn btn-primary">Upload and Process</button>
+                <div id="remove_license_batch_loader" class="loader"></div><div id="remove_license_batch_result"></div>
+            </form>
+        </div>
+        <div class="section" style="background: rgba(0, 100, 200, 0.15); margin-top:20px;"><p style="color:#cccccc; margin-bottom:10px;">Template purpose: CSV format for batch Webex license removal using user email values.</p><a href="/api/download/template/remove_license" class="btn btn-primary">📥 Download Template</a></div>
     </div>
 </div>
+<script>
+function switchTab(tab, button){document.querySelectorAll('.tab-content').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.tab-button').forEach(x=>x.classList.remove('active'));document.getElementById(tab+'-tab').classList.add('active');button.classList.add('active');}
+</script>
 {% endblock %}
 
 {% block extra_js %}
 <script>
 document.getElementById('removeLicenseForm').addEventListener('submit', async (e)=>{e.preventDefault();const loader=document.getElementById('remove_license_loader');const result=document.getElementById('remove_license_result');loader.style.display='block';result.innerHTML='';const formData=new FormData();formData.append('email',document.getElementById('remove_license_email').value);formData.append('region_India',document.getElementById('region_india_checkbox').checked);try{const response=await fetch('/api/removewebexlicense/single',{method:'POST',body:formData});const data=await response.json();loader.style.display='none';if(response.ok){result.innerHTML=`<div class="alert alert-success"><strong>Success!</strong> ${data.Status || 'License removed successfully'}</div>`;}else{showErrorModal(data.detail||data.error||'Operation failed');}}catch(error){loader.style.display='none';showErrorModal(error.message);}});
+document.getElementById('removeLicenseBatchForm').addEventListener('submit', async (e)=>{e.preventDefault();const loader=document.getElementById('remove_license_batch_loader');const result=document.getElementById('remove_license_batch_result');const fileInput=document.getElementById('remove_license_batch_file');const regionIndiaCheckbox=document.getElementById('remove_license_batch_region_india');loader.style.display='block';result.innerHTML='';const formData=new FormData();formData.append('file',fileInput.files[0]);const fileName=fileInput.files[0].name;try{const response=await fetch(`/api/removewebexlicense/batch?region_india=${regionIndiaCheckbox.checked}`,{method:'POST',body:formData});const data=await response.json();loader.style.display='none';if(response.ok){result.innerHTML=`<div class="alert alert-success"><strong>Success!</strong> ${data.Status || 'Batch operation completed'}<br><br><a href="/api/download/result/remove_license/${fileName}" class="btn btn-primary" style="margin-top:10px;display:inline-block;">📥 Download Result File</a></div>`;}else{showErrorModal(data.detail||data.error||'Operation failed');}}catch(error){loader.style.display='none';showErrorModal(error.message);}});
 </script>
 {% endblock %}
