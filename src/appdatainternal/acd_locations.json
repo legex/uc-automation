@@ -48,5 +48,7 @@
     "Demo": {"id":"1459ff38-b1e6-4a07-a340-4804e3b06c18",
                 "prefix": "000000"},
     "Belgium": {"id":"f768f327-c9e8-4ebd-ac63-53e8f6d8370f",
-                "prefix": "783110"}
+                "prefix": "783110"},
+    "Mexico": {"id":"59a638ad-7a75-4a0f-acd8-07db1bda5d0a",
+               "prefix": "786210"}
 }
