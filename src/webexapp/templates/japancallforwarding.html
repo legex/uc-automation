@@ -24,8 +24,8 @@
             </div>
 
             <div class="form-group">
-                <label for="jp_forwardingnumber">Destination Number *</label>
-                <input type="text" id="jp_forwardingnumber" name="forwardingnumber" required placeholder="Enter destination number">
+                <label for="jp_forwardingnumber">Destination Number</label>
+                <input type="text" id="jp_forwardingnumber" name="forwardingnumber" placeholder="Enter destination number">
             </div>
 
             <button type="submit" class="btn btn-primary">Update Call Forwarding</button>
@@ -56,7 +56,7 @@
 
         const payload = {
             linenumber: document.getElementById('jp_linenumber').value,
-            forwardingnumber: document.getElementById('jp_forwardingnumber').value
+            forwardingnumber: document.getElementById('jp_forwardingnumber').value.trim() || ''
         };
 
         try {
