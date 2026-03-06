@@ -242,7 +242,8 @@ class AXLRoutePatternOperations:
         'pattern': f'\+{pattern}',
         'routePartitionName' : "PT-Global-Internal",
         'callForwardAll': {
-            'destination': f"+{destination_pattern}"
+            'destination': f"+{destination_pattern}",
+            'callingSearchSpaceName': 'CSS-GLOBAL-DEVICE'
         }
         }
         try:
