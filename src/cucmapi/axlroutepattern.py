@@ -236,13 +236,16 @@ class AXLRoutePatternOperations:
         Returns:
             dict or None: Response from CUCM if successful, else None.
         """
+        if destination_pattern == '':
+            destination_pattern = None
+        
         if not service:
             logger.debug("No service provided")
         routerpattern = {
         'pattern': f'\+{pattern}',
         'routePartitionName' : "PT-Global-Internal",
         'callForwardAll': {
-            'destination': f"+{destination_pattern}",
+            'destination': f"+{destination_pattern}" if destination_pattern else '',
             'callingSearchSpaceName': 'CSS-GLOBAL-DEVICE'
         }
         }

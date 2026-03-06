@@ -64,8 +64,8 @@
                     <input type="text" id="cf_linenumber" name="linenumber" required placeholder="Enter line number">
                 </div>
                 <div class="form-group">
-                    <label for="cf_forwardingnumber">Forwarding Number *</label>
-                    <input type="text" id="cf_forwardingnumber" name="forwardingnumber" required placeholder="Enter forwarding number">
+                    <label for="cf_forwardingnumber">Forwarding Number</label>
+                    <input type="text" id="cf_forwardingnumber" name="forwardingnumber" placeholder="Enter forwarding number">
                 </div>
                 <div class="form-group">
                     <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
@@ -155,7 +155,7 @@
         
         const formData = {
             linenumber: document.getElementById('cf_linenumber').value,
-            forwardingnumber: document.getElementById('cf_forwardingnumber').value
+            forwardingnumber: document.getElementById('cf_forwardingnumber').value.trim() || ''
         };
         
         const isIndia = document.getElementById('cf_is_india').checked;
