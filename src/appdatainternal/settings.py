@@ -22,5 +22,8 @@ rbac_roles = {
               "akalpath"],
     "viewer": ["dforeste"],
     "user": [],
-    "jpuser": ['ynarita']
+    "jpuser": ['ynarita', 'misato', 'yoritate', 'sjkin', 'sarakawa', 'thachimu', 
+               'hhokari', 'yozaki', 'naraumi', 'aryonai', 'yiguchi', 'nokajima', 
+               'ysatoi', 'esanpedr', 'tnoguchi', 'fhashita', 'hnagamat', 'esanpedr',
+               'hsato', 'emuto', 'ykawabat']
 }
