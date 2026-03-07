@@ -15,6 +15,7 @@ from webexapi.webexoperations import WebexOperation
 from appdatainternal.settings import exclude_list
 from appdatainternal.config import get_resultfile_location, get_locations_config
 from utils.logger import setup_logger
+from webexapi.webexnumberadd import addnumbersingle
 
 logger = setup_logger('webex_batch', '/a/logs/webex_batch.log')
 
@@ -200,4 +201,37 @@ def batch_remove_license(file, filename, region_India):
             index=False
             )
     logger.info("Batch Webex license removal completed for file: %s", filename)
+    return "Script Run is Finished"
+
+
+def batch_add_number(file, filename):
+    """Add Webex Number from CSV"""
+    logger.info("Starting batch Webex number addition for file: %s", filename)
+    df = pd.read_csv(file, dtype=str)
+    logger.info("Loaded %d rows from CSV file", len(df))
+    for idx, row in df.iterrows():
+        logger.debug("Processing row %d", idx + 1)
+        region = row["Country"].strip()
+        phonenumber = row["ContactNumber"].strip()
+        logger.info("Processing number addition for phone: %s, region: %s", phonenumber, region)
+        try:
+            logger.debug("Adding Webex number for phone: %s, region: %s", phonenumber, region)
+            webex_results = addnumbersingle(phonenumber, region)
+            status_on_webex = "Success" if webex_results["status_code"] in [204, 200] else "Failed"
+            logger.info("Webex number addition for phone: %s: %s", phonenumber, status_on_webex)
+        except (Exception) as e:
+            logger.error("Error adding Webex number for phone: %s: %s", phonenumber, e)
+            status_on_webex = "Error"
+        addition_result = {
+            "Country": region,
+            "phoneNum": phonenumber,
+            "status_on_webex": status_on_webex
+        }
+        pd.DataFrame([addition_result]).to_csv(
+            f"{resultpath}/webex_number_addition_{filename}",
+            mode='a',
+            header=False,
+            index=False
+            )
+    logger.info("Batch Webex number addition completed for file: %s", filename)
     return "Script Run is Finished"

@@ -50,5 +50,7 @@
     "Belgium": {"id":"f768f327-c9e8-4ebd-ac63-53e8f6d8370f",
                 "prefix": "783110"},
     "Mexico": {"id":"59a638ad-7a75-4a0f-acd8-07db1bda5d0a",
-               "prefix": "786210"}
+               "prefix": "786210"},
+    "Hong Kong": {"id": "ba6e3c67-36b7-4904-a91e-1aa3cdcaee6e",
+                   "prefix": "785110"}
 }

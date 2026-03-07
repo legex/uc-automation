@@ -97,7 +97,10 @@ def batch_update_ldap_acd(file, filename):
     for idx, row in df.iterrows():
         logger.debug("Processing row %d", idx + 1)
         username = row['UserId']
-        extension = row['extension']
+        extension = row['extension']  # Remove trailing .0 if present
+        if extension:
+            extension = extension.strip()
+            extension = extension.removesuffix(".0")
         externalnumber = row.get('ExternalNumber', None)
         logger.info("Processing user: %s, extension: %s, external: %s", username, extension, externalnumber)
         if externalnumber:

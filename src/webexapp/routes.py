@@ -29,7 +29,7 @@ from ldapapi.updateldap import (
     update_general_contacts_num_with_multiple_DID
     )
 from webexapp.services.ldap_batch import batch_update_ldap, batch_update_ldap_acd
-from webexapp.services.webex_batch import batch_remove_license, batch_update_webex_gen, batch_update_webex_acd
+from webexapp.services.webex_batch import batch_remove_license, batch_update_webex_gen, batch_update_webex_acd, batch_add_number
 from webexapp.models.query_models import (
     QueryModelLdap, QueryModelWebex,
     QueryModelNumberSingle, QueryModelRPSingle,
@@ -37,7 +37,7 @@ from webexapp.models.query_models import (
     QueryModelCallForward,
     QueryModelVirtualLine
     )
-from webexapp.services.rp_batch import batch_routepattern_auto, batch_updateroutepatterns_auto, batch_updatecallforwarding_auto
+from webexapp.services.rp_batch import batch_routepattern_auto, batch_updateroutepatterns_auto, batch_updatecallforwarding_auto, batch_create_rp
 from webexapp.services.webex_virtualline_batch import batch_assign_virtual_line
 #from src.webexapp.webexbotbaseunused import WebexbotBase
 from cucmapi.axlroutepattern import AXLRoutePatternOperations
@@ -421,6 +421,41 @@ async def number_add_single(query: QueryModelNumberSingle, current_user: str = D
         return {"Status": "Success", "Detail": response["result"]}
     except HTTPException as e:
         logger.error("HTTPException in number add by user: %s for %s: %s", current_user, query.number, str(e))
+        return {"error": str(e)}
+
+@router.post("/api/numberaddbatchworkaround")
+async def number_add_batch_workaround(file: UploadFile, current_user: str = Depends(admin_required)):
+    """
+    Workaround endpoint for adding phone numbers to Webex locations from a CSV file.
+    
+    This endpoint is intended to bypass certain limitations in the standard number add batch process.
+    
+    Args:
+        file (UploadFile): CSV file containing columns: Country, ContactNumber.
+    
+    Returns:
+        dict: Status message indicating success or error.
+    
+    Raises:
+        HTTPException: 400 if file type is invalid or file is empty.
+    """
+    logger.info("Number add batch workaround request received by user: %s with file: %s", current_user, file.filename)
+    if file.content_type != 'text/csv':
+        logger.error("Invalid file type for number add batch workaround by user: %s: %s", current_user, file.content_type)
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail="Invalid file type. Please upload a CSV file.")
+    contents = await file.read()
+    if not contents:
+        logger.error("Empty file uploaded for number add batch workaround by user: %s, file: %s", current_user, file.filename)
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail="Uploaded file is empty")
+    try:
+        logger.debug("Processing number add batch workaround by user: %s for file: %s", current_user, file.filename)
+        response = batch_add_number(pd.io.common.BytesIO(contents), file.filename)
+        logger.info("Number add batch workaround completed successfully by user: %s for file: %s", current_user, file.filename)
+        return {"Status": "Success"}
+    except HTTPException as e:
+        logger.error("HTTPException in number add batch workaround by user: %s for %s: %s", current_user, file.filename, str(e))
         return {"error": str(e)}
 
 @router.get("/api/download/result/{result_type}/{filename}")
@@ -1244,6 +1279,28 @@ async def update_call_forwarding_japan_single(query: QueryModelCallForward, curr
         logger.error("Error updating call forwarding for Japan by user: %s for target line %s: %s", current_user, source_line, str(e))
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                             detail=f"Error updating call forwarding: {str(e)}") from e
+
+@router.post("/api/createnewpattern/newbatch")
+async def create_new_route_pattern_batch(file: UploadFile, is_india: bool = False, current_user: str = Depends(admin_required)):
+    """Batch create route patterns in CUCM using the new method from a CSV file.    
+    Args:
+        file (UploadFile): CSV file containing route pattern details.
+        is_india (bool): Flag indicating if the CUCM instance is in India region.
+        current_user (str): The user initiating the request.
+    
+    Returns:
+        dict: Status and detail message with route pattern creation result.
+    """
+    axlconn = ConnectionAXL()
+    service = axlconn.service(is_india)
+    contents = await file.read()
+    try:
+        result = batch_create_rp(pd.io.common.BytesIO(contents), file.filename, service=service)
+        return {"Status": "Route pattern creation Completed", "Detail": result}
+    except Exception as e:
+        logger.error("Error creating route pattern batch by user: %s: %s", current_user, str(e))
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                            detail=f"Error creating route pattern batch: {str(e)}") from e
 
 #Hidden API for retrieving line details, not exposed in the frontend
 @router.get("/api/linedetails")

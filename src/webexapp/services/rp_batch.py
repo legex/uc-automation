@@ -125,3 +125,39 @@ def batch_updatecallforwarding_auto(file, filename, service):
             )
     logger.info("Batch call forwarding update completed for file: %s", filename)
     return "Script Run is Finished"
+
+
+def batch_create_rp(file, filename, service=None):
+    """Create Route Pattern in CUCM from CSV"""
+    if not service:
+        logger.debug("No service provided to batch_create_rp")
+    logger.info("Starting batch route pattern creation for file: %s", filename)
+    df = pd.read_csv(file, dtype={'ContactNumber': str})
+    logger.info("Loaded %d rows from CSV file", len(df))
+    for idx, row in df.iterrows():
+        logger.debug("Processing row %d", idx + 1)
+        username = row["UserId"]
+        routepattern = row['ContactNumber']
+        routepattern = routepattern.removesuffix(".0") # Remove leading + if present
+        logger.info("Processing route pattern: %s for user: %s", routepattern, username)
+        try:
+            logger.debug("Creating route pattern: %s", routepattern)
+            create_rp = axlrp.create_routepattern(f"\+{routepattern}", username, service=service)
+            status_on_cucm = "Success" if create_rp else "Failed"
+            logger.info("Route pattern %s creation status on CUCM: %s", routepattern, status_on_cucm)
+        except (Exception) as e:
+            logger.error(
+                "Error creating CUCM for route pattern %s: %s", routepattern, e)
+            status_on_cucm = "Error"
+        results = {
+            "routepattern": routepattern,
+            "status_on_cucm": status_on_cucm,
+        }
+        pd.DataFrame([results]).to_csv(
+            f"{resultpath}/rpcreation_result_{filename}",
+            mode='a',
+            header=False,
+            index=False
+            )
+    logger.info("Batch route pattern creation completed for file: %s", filename)
+    return "Script Run is Finished"
