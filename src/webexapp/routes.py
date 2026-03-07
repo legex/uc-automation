@@ -902,7 +902,10 @@ async def remove_webex_license(email: str = Form(...), region_India: bool = Fals
         logger.debug("Processing Webex license removal by user: %s for: %s", current_user, email)
         result = webop.remove_webex_license(email, region_India)
         logger.info("Webex license removal completed by user: %s for: %s", current_user, email)
-        return {"Status": "Webex license removal Completed", "Detail": result}
+        if not result or not result.get("result", None):
+            logger.warning("Webex license removal returned no results for user: %s, email: %s", current_user, email)
+            return {"Status": "Webex license removal failed", "Detail": result.get("details", "Unknown error") if isinstance(result, dict) else "Unknown error"}
+        return {"Status": "Webex license removal Completed", "Detail": result.get("details", result)}
     except Exception as e:
         logger.error("Error removing Webex license by user: %s for %s: %s", current_user, email, str(e))
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,

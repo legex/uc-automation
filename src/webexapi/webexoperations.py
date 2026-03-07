@@ -267,14 +267,16 @@ class WebexOperation:
                                 data=json.dumps(patch_payload),
                                 timeout=30)
             resp.raise_for_status()
-            return resp.json()
+            if region_India:
+                try:
+                    self.update_calling_behavior(userid, profileid_blr)
+                except Exception as e:
+                    logger.error("Error updating calling behavior for India region: %s", e)
+            return {"result": "success", "details": resp.json()}
         except HTTPError as e:
             logger.error("HTTP error updating user: %s", e)
+            return {"result": None, "details": str(e)}
         except Exception as e:
             logger.error("General error updating user: %s", e)
-        if region_India:
-            try:
-                self.update_calling_behavior(userid, profileid_blr)
-            except Exception as e:
-                logger.error("Error updating calling behavior for India region: %s", e)
-        return None
+            return {"result": None, "details": str(e)}
+

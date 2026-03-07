@@ -370,13 +370,16 @@
             const data = await response.json();
             loader.style.display = 'none';
             
-            if (response.ok) {
+            const isFailure = data.Status && (data.Status.toLowerCase().includes('failed') || data.Status.toLowerCase().includes('error'));
+
+            if (response.ok && !isFailure) {
                 result.innerHTML = `<div class="alert alert-success">
                     <strong>Success!</strong> ${data.Status || 'License removed successfully'}
                     ${data.Detail ? '<br><small>' + JSON.stringify(data.Detail) + '</small>' : ''}
                 </div>`;
             } else {
-                showErrorModal(data.detail || data.error || 'Operation failed');
+                const errorMsg = `${data.Status || data.detail || data.error || 'Operation failed'}${data.Detail ? '\n\nDetails: ' + JSON.stringify(data.Detail) : ''}`;
+                showErrorModal(errorMsg);
             }
         } catch (error) {
             loader.style.display = 'none';
