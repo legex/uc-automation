@@ -879,7 +879,11 @@ async def update_line_create_route_pattern(file: UploadFile, is_india: bool = Fa
                             detail=f"Error processing file: {str(e)}") from e
 
 @router.post("/api/removewebexlicense/single")
-async def remove_webex_license(email: str = Form(...), region_India: bool = False, current_user: str = Depends(admin_required)):
+async def remove_webex_license(
+    email: str = Form(...),
+    region_India: bool = Form(False),
+    current_user: str = Depends(admin_required)
+):
     """
     Remove Webex license from a single user.
     
