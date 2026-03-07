@@ -24,6 +24,9 @@ from requests.auth import HTTPBasicAuth
 from urllib3 import disable_warnings
 from urllib3.exceptions import InsecureRequestWarning
 from appdatainternal.config import get_ldap_creds
+from utils.logger import setup_logger
+
+logger = setup_logger('ldapapp', '/a/logs/ldapapp.log')
 
 ldap_creds = get_ldap_creds()
 ADSERVER = ldap_creds["SERVER"]
@@ -52,6 +55,12 @@ def update_contacts_num_withDID(userid, internal_extension,
 		ConnectionError: If LDAP connection fails.
 		Exception: For other errors during the update process.
 	"""
+	logger.info(
+		"update_contacts_num_withDID called with userid=%s, internal_extension=%s, external_number=%s",
+		userid,
+		internal_extension,
+		external_number,
+	)
 	try:
 		server = Server(ADSERVER, get_info=ALL)
 		conn = Connection(server, user=ADLDAP_USERNAME, password=ADLDAP_PASSWORD, authentication=NTLM)
@@ -86,10 +95,10 @@ def update_contacts_num_withDID(userid, internal_extension,
 			conn.unbind()
 			return True
 	except ConnectionError as er:
-		print(f'Error encountered as {er}')
+		logger.error(f'Error encountered as {er}')
 		return False
 	except Exception as e:
-		print(f"Error encountered: {e}")
+		logger.error(f"Error encountered: {e}")
 		return False
 
 
@@ -111,6 +120,11 @@ def update_contacts_num(userid, internal_extension):
 		ConnectionError: If LDAP connection fails.
 		Exception: For other errors during the update process.
 	"""
+	logger.info(
+		"update_contacts_num called with userid=%s, internal_extension=%s",
+		userid,
+		internal_extension,
+	)
 	try:
 		server = Server(ADSERVER, get_info=ALL)
 		conn = Connection(server, user=ADLDAP_USERNAME, password=ADLDAP_PASSWORD, authentication=NTLM)
@@ -142,10 +156,10 @@ def update_contacts_num(userid, internal_extension):
 			conn.unbind()
 			return True
 	except ConnectionError as er:
-		print(f'Error encountered as {er}')
+		logger.error(f'Error encountered as {er}')
 		return False
 	except Exception as e:
-		print(f"Error encountered: {e}")
+		logger.error(f"Error encountered: {e}")
 		return False
 	
 def update_acdcontacts_num(userid, internal_extension):
@@ -166,6 +180,11 @@ def update_acdcontacts_num(userid, internal_extension):
 		ConnectionError: If LDAP connection fails.
 		Exception: For other errors during the update process.
 	"""
+	logger.info(
+		"update_acdcontacts_num called with userid=%s, internal_extension=%s",
+		userid,
+		internal_extension,
+	)
 	try:
 		server = Server(ADSERVER, get_info=ALL)
 		conn = Connection(server, user=ADLDAP_USERNAME, password=ADLDAP_PASSWORD, authentication=NTLM)
@@ -196,10 +215,10 @@ def update_acdcontacts_num(userid, internal_extension):
 			conn.unbind()
 			return True
 	except ConnectionError as er:
-		print(f'Error encountered as {er}')
+		logger.error(f'Error encountered as {er}')
 		return False
 	except Exception as e:
-		print(f"Error encountered: {e}")
+		logger.error(f"Error encountered: {e}")
 		return False
 	
 def update_general_contacts_num_withDID(userid,external_number, internal_extension):
@@ -223,6 +242,12 @@ def update_general_contacts_num_withDID(userid,external_number, internal_extensi
 		ConnectionError: If LDAP connection fails.
 		Exception: For other errors during the update process.
 	"""
+	logger.info(
+		"update_general_contacts_num_withDID called with userid=%s, external_number=%s, internal_extension=%s",
+		userid,
+		external_number,
+		internal_extension,
+	)
 	try:
 		server = Server(ADSERVER, get_info=ALL)
 		conn = Connection(server, user=ADLDAP_USERNAME, password=ADLDAP_PASSWORD, authentication=NTLM)
@@ -254,10 +279,10 @@ def update_general_contacts_num_withDID(userid,external_number, internal_extensi
 			conn.unbind()
 			return True
 	except ConnectionError as er:
-		print(f'Error encountered as {er}')
+		logger.error(f'Error encountered as {er}')
 		return False
 	except Exception as e:
-		print(f"Error encountered: {e}")
+		logger.error(f"Error encountered: {e}")
 		return False
 	
 
@@ -282,6 +307,13 @@ def update_general_contacts_num_with_multiple_DID(userid,external_number, intern
 		ConnectionError: If LDAP connection fails.
 		Exception: For other errors during the update process.
 	"""
+	logger.info(
+		"update_general_contacts_num_with_multiple_DID called with userid=%s, external_number=%s, internal_extension=%s, other_external_number=%s",
+		userid,
+		external_number,
+		internal_extension,
+		other_external_number,
+	)
 	try:
 		server = Server(ADSERVER, get_info=ALL)
 		conn = Connection(server, user=ADLDAP_USERNAME, password=ADLDAP_PASSWORD, authentication=NTLM)
@@ -313,8 +345,8 @@ def update_general_contacts_num_with_multiple_DID(userid,external_number, intern
 			conn.unbind()
 			return True
 	except ConnectionError as er:
-		print(f'Error encountered as {er}')
+		logger.error(f'Error encountered as {er}')
 		return False
 	except Exception as e:
-		print(f"Error encountered: {e}")
+		logger.error(f"Error encountered: {e}")
 		return False
