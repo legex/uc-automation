@@ -866,6 +866,7 @@ async def b_update_webex_acd(file: UploadFile | None = None, exclude_file: Uploa
         return {"error": str(e)}
     except Exception as e:
         logger.error("Error processing batch Webex ACD file by user: %s, file %s: %s", current_user, file.filename, str(e))
+        logger.error("Raising HTTPException for batch Webex ACD update by user: %s, file %s", current_user, file.filename)
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                             detail=f"Error processing file: {str(e)}") from e
 
@@ -910,8 +911,6 @@ async def update_line_create_route_pattern(file: UploadFile, is_india: bool = Fa
         return {"error": str(e)}
     except Exception as e:
         logger.error("Error processing route pattern file by user: %s, file %s: %s", current_user, file.filename, str(e))
-        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                            detail=f"Error processing file: {str(e)}") from e
 
 @router.post("/api/removewebexlicense/single")
 async def remove_webex_license(
