@@ -18,7 +18,7 @@ import os
 import json
 import pandas as pd
 from dotenv import load_dotenv
-from fastapi import APIRouter, Request, UploadFile, HTTPException, status, Form, Depends
+from fastapi import APIRouter, Request, UploadFile, HTTPException, status, Form, Depends, BackgroundTasks
 from fastapi.responses import FileResponse, HTMLResponse
 from fastapi.templating import Jinja2Templates
 from ldapapi.updateldap import (
@@ -1324,3 +1324,65 @@ def get_line_details(line_number: str, is_india: bool = False):
         logger.error("Error retrieving line details for line number %s: %s", line_number, str(e))
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                             detail=f"Error retrieving line details: {str(e)}") from e
+
+@router.post("/api/updateldap/batchbackground")
+async def batch_update_ldap_numbers_bg(
+    background_tasks: BackgroundTasks,
+    file: UploadFile,
+    acd: bool = False,
+    current_user: str = Depends(admin_required)
+):
+    """
+    Batch update LDAP contact numbers from a CSV file.
+    
+    Args:
+        file (UploadFile): CSV file containing columns: UserId, targetNum,
+                          and optional ExternalNumber.
+        acd (bool): If True, process as ACD contacts; otherwise general contacts.
+    
+    Returns:
+        dict: Status and detail message indicating completion.
+    
+    Raises:
+        HTTPException: 400 if file is invalid or empty, 500 if processing fails.
+    """
+    logger.info("Batch LDAP update requested by user: %s with file: %s, acd=%s",
+                current_user, file.filename if file else "None", acd)
+    if file is None:
+        logger.error("No file provided for batch Webex update by user: %s", current_user)
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail="File must be provided.")
+    if file.content_type != 'text/csv':
+        logger.error("Invalid file type for batch LDAP update by user: %s: %s", current_user, file.content_type)
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail="Invalid file type. Please upload a CSV file.")
+    contents = await file.read()
+    if not contents:
+        logger.error("Empty file uploaded for batch LDAP update by user: %s, file: %s", current_user, file.filename)
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
+                            detail="Uploaded file is empty")
+    if acd:
+        try:
+            logger.debug("Processing batch ACD LDAP update by user: %s for file: %s", current_user, file.filename)
+            background_tasks.add_task(batch_update_ldap_acd, pd.io.common.BytesIO(contents), file.filename)
+            logger.info("Batch ACD LDAP update initiated by user: %s for file: %s", current_user, file.filename)
+            return {"Status": "Success", "Detail": "Batch ACD LDAP update initiated"}
+        except HTTPException as e:
+            logger.error("HTTPException in batch ACD LDAP update by user: %s for %s: %s", current_user, file.filename, str(e))
+            return {"error": str(e)}
+        except Exception as e:
+            logger.error("Error processing batch ACD LDAP file by user: %s, file %s: %s", current_user, file.filename, str(e))
+            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                                detail=f"Error processing file: {str(e)}") from e
+    try:
+        logger.debug("Processing batch LDAP update by user: %s for file: %s", current_user, file.filename)
+        background_tasks.add_task(batch_update_ldap, pd.io.common.BytesIO(contents), file.filename)
+        logger.info("Batch LDAP update initiated by user: %s for file: %s", current_user, file.filename)
+        return {"Status": "Success", "Detail": "Batch LDAP update initiated"}
+    except HTTPException as e:
+        logger.error("HTTPException in batch LDAP update by user: %s for %s: %s", current_user, file.filename, str(e))
+        return {"error": str(e)}
+    except Exception as e:
+        logger.error("Error processing batch LDAP file by user: %s, file %s: %s", current_user, file.filename, str(e))
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                            detail=f"Error processing file: {str(e)}") from e

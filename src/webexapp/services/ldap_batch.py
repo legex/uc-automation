@@ -80,7 +80,7 @@ def batch_update_ldap(file, filename):
                                 header=False,
                                 index=False
                                 )
-        time.sleep(3)
+        
     logger.info("Batch LDAP update completed for file: %s", filename)
     return "Script Run is Finished"
 
@@ -138,6 +138,6 @@ def batch_update_ldap_acd(file, filename):
                                 header=False,
                                 index=False
                                 )
-        time.sleep(3)
+        
     logger.info("Batch LDAP update completed for file: %s", filename)
     return "Script Run is Finished"
