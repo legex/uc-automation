@@ -20,7 +20,7 @@ from appdatainternal.settings import exclude_list
 from appdatainternal.config import get_resultfile_location
 from utils.logger import setup_logger
 from utils.csv_helper import create_csv_holder
-from src.webexapp.webexbotbase import WebexbotBase
+from webexapp.webexbotbase import WebexbotBase
 
 logger = setup_logger('ldapbatch', '/a/logs/ldapbatch.log')
 
