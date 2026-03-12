@@ -613,6 +613,7 @@ async def update_ldap_numbers(query: QueryModelLdap, acd: bool = False, current_
 
 @router.post("/api/updateldap/batch")
 async def batch_update_ldap_numbers(
+    background_tasks: BackgroundTasks,
     file: UploadFile,
     acd: bool = False,
     current_user: str = Depends(admin_required)
@@ -649,9 +650,9 @@ async def batch_update_ldap_numbers(
     if acd:
         try:
             logger.debug("Processing batch ACD LDAP update by user: %s for file: %s", current_user, file.filename)
-            response = batch_update_ldap_acd(pd.io.common.BytesIO(contents), file.filename)
-            logger.info("Batch ACD LDAP update completed by user: %s for file: %s", current_user, file.filename)
-            return {"Status": "Success", "Detail": response}
+            background_tasks.add_task(batch_update_ldap_acd, pd.io.common.BytesIO(contents), file.filename, current_user)
+            logger.info("Batch ACD LDAP update initiated by user: %s for file: %s", current_user, file.filename)
+            return {"Status": "Success", "Detail": "Batch ACD LDAP update initiated, results will be delivered over Webex"}
         except HTTPException as e:
             logger.error("HTTPException in batch ACD LDAP update by user: %s for %s: %s", current_user, file.filename, str(e))
             return {"error": str(e)}
@@ -661,9 +662,9 @@ async def batch_update_ldap_numbers(
                                 detail=f"Error processing file: {str(e)}") from e
     try:
         logger.debug("Processing batch LDAP update by user: %s for file: %s", current_user, file.filename)
-        response = batch_update_ldap(pd.io.common.BytesIO(contents), file.filename)
-        logger.info("Batch LDAP update completed by user: %s for file: %s", current_user, file.filename)
-        return {"Status": "Success", "Detail": response}
+        background_tasks.add_task(batch_update_ldap, pd.io.common.BytesIO(contents), file.filename, current_user)
+        logger.info("Batch LDAP update initiated by user: %s for file: %s", current_user, file.filename)
+        return {"Status": "Success", "Detail": "Batch LDAP update initiated, results will be delivered over Webex"}
     except HTTPException as e:
         logger.error("HTTPException in batch LDAP update by user: %s for %s: %s", current_user, file.filename, str(e))
         return {"error": str(e)}
