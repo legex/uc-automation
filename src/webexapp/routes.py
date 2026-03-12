@@ -1378,7 +1378,7 @@ async def batch_update_ldap_numbers_bg(
         logger.debug("Processing batch LDAP update by user: %s for file: %s", current_user, file.filename)
         background_tasks.add_task(batch_update_ldap, pd.io.common.BytesIO(contents), file.filename, current_user)
         logger.info("Batch LDAP update initiated by user: %s for file: %s", current_user, file.filename)
-        return {"Status": "Success", "Detail": "Batch LDAP update initiated"}
+        return {"Status": "Success", "Detail": "Batch LDAP update initiated results will be delivered over Webex"}
     except HTTPException as e:
         logger.error("HTTPException in batch LDAP update by user: %s for %s: %s", current_user, file.filename, str(e))
         return {"error": str(e)}
