@@ -8,7 +8,6 @@ Functions:
     batch_update_ldap: Process general LDAP updates from CSV.
     batch_update_ldap_acd: Process ACD LDAP updates from CSV.
 """
-import time
 import pandas as pd
 from ldapapi.updateldap import (
     update_contacts_num,
