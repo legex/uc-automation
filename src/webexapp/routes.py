@@ -1364,7 +1364,7 @@ async def batch_update_ldap_numbers_bg(
     if acd:
         try:
             logger.debug("Processing batch ACD LDAP update by user: %s for file: %s", current_user, file.filename)
-            background_tasks.add_task(batch_update_ldap_acd, pd.io.common.BytesIO(contents), file.filename)
+            background_tasks.add_task(batch_update_ldap_acd, pd.io.common.BytesIO(contents), file.filename, current_user)
             logger.info("Batch ACD LDAP update initiated by user: %s for file: %s", current_user, file.filename)
             return {"Status": "Success", "Detail": "Batch ACD LDAP update initiated"}
         except HTTPException as e:
@@ -1376,7 +1376,7 @@ async def batch_update_ldap_numbers_bg(
                                 detail=f"Error processing file: {str(e)}") from e
     try:
         logger.debug("Processing batch LDAP update by user: %s for file: %s", current_user, file.filename)
-        background_tasks.add_task(batch_update_ldap, pd.io.common.BytesIO(contents), file.filename)
+        background_tasks.add_task(batch_update_ldap, pd.io.common.BytesIO(contents), file.filename, current_user)
         logger.info("Batch LDAP update initiated by user: %s for file: %s", current_user, file.filename)
         return {"Status": "Success", "Detail": "Batch LDAP update initiated"}
     except HTTPException as e:

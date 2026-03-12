@@ -19,14 +19,16 @@ from ldapapi.updateldap import (
 from appdatainternal.settings import exclude_list
 from appdatainternal.config import get_resultfile_location
 from utils.logger import setup_logger
+from utils.csv_helper import create_csv_holder
+from webexapp.webexbotbaseunused import WebexbotBase
 
 logger = setup_logger('ldapbatch', '/a/logs/ldapbatch.log')
 
 excluded_list = exclude_list
 resultpath = get_resultfile_location()
+webex_bot = WebexbotBase()
 
-
-def batch_update_ldap(file, filename):
+def batch_update_ldap(file, filename, current_user):
     """Update CUCM Extension"""
     logger.info("Starting batch LDAP update for file: %s", filename)
     df = pd.read_csv(file, dtype=str, na_filter=True, keep_default_na=True)
@@ -37,6 +39,7 @@ def batch_update_ldap(file, filename):
     # Now safe to strip (no NaN left)
     df['ExternalNumber'] = df['ExternalNumber'].replace('', None)
     status_on_ad = ""
+    results = []
     for idx, row in df.iterrows():
         logger.debug("Processing row %d", idx + 1)
         username = row['UserId']
@@ -68,23 +71,23 @@ def batch_update_ldap(file, filename):
                     status_on_ad = "Error"
         else:
             logger.info("User %s is in Exclude list", username)
-            status_on_ad = "Skipped"
-        ad_result = {
+            status_on_ad = "Skipped" 
+        results.append({
             "username": username,
             "extension": extension,
             "status_on_ad": status_on_ad
-        }
-        pd.DataFrame(
-            [ad_result]).to_csv(f"{resultpath}/ldap_response_{filename}",
-                                mode='a',
-                                header=False,
-                                index=False
-                                )
-        
+        })
+    csv_content = create_csv_holder(results, ["username", "extension", "status_on_ad"])
+    webex_bot.send_message_with_attachment(
+        f'{current_user}@akamai.com',
+        filename,
+        message=f"Batch LDAP update completed for file: {filename}",
+        csv_text=csv_content,
+    )
     logger.info("Batch LDAP update completed for file: %s", filename)
     return "Script Run is Finished"
 
-def batch_update_ldap_acd(file, filename):
+def batch_update_ldap_acd(file, filename, current_user):
     """Update CUCM Extension"""
     logger.info("Starting batch LDAP update for file: %s", filename)
     df = pd.read_csv(file, dtype=str, na_filter=True, keep_default_na=True)
@@ -96,6 +99,7 @@ def batch_update_ldap_acd(file, filename):
     df['ExternalNumber'] = df['ExternalNumber'].replace('', None)
     logger.info("Loaded %d rows from CSV file", len(df))
     status_on_ad = ""
+    results = []
     for idx, row in df.iterrows():
         logger.debug("Processing row %d", idx + 1)
         username = row['UserId']
@@ -132,12 +136,14 @@ def batch_update_ldap_acd(file, filename):
             "extension": extension,
             "status_on_ad": status_on_ad
         }
-        pd.DataFrame(
-            [ad_result]).to_csv(f"{resultpath}/ldap_response_{filename}",
-                                mode='a',
-                                header=False,
-                                index=False
-                                )
+        results.append(ad_result)
         
+    csv_content = create_csv_holder(results, ["username", "extension", "status_on_ad"])
+    webex_bot.send_message_with_attachment(
+        f'{current_user}@akamai.com',
+        filename,
+        message=f"Batch LDAP update completed for file: {filename}",
+        csv_text=csv_content
+    )
     logger.info("Batch LDAP update completed for file: %s", filename)
     return "Script Run is Finished"
