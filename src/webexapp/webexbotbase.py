@@ -14,6 +14,7 @@ from abc import ABC
 from requests import HTTPError
 from requests_toolbelt.multipart.encoder import MultipartEncoder
 from dotenv import load_dotenv
+from appdatainternal.config import get_webex_token
 from utils.logger import setup_logger
 
 # Load environment variables from .env file
@@ -23,7 +24,7 @@ load_dotenv()
 logger = setup_logger('webexcalls', '/a/logs/webexcalls.log')
 
 # Read API token from environment
-AUTH_TOKEN = os.getenv('AUTHTOKEN')
+AUTH_TOKEN = get_webex_token()
 if not AUTH_TOKEN:
     raise RuntimeError("AUTHTOKEN environment variable must be set")
 
