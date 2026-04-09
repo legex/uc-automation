@@ -52,7 +52,7 @@ def batch_routepattern_auto(file, filename, current_user, service):
         })
         csv_content = create_csv_holder(results, ["routepattern", "status_on_cucm","rp_update_status"])
         webex_bot.send_message_with_attachment(
-            f'{current_user}@akamai.com',
+            f'{current_user}@org.com',
             filename,
             message=f"Batch routepattern update completed for file: {filename}",
             csv_text=csv_content,
@@ -88,7 +88,7 @@ def batch_updateroutepatterns_auto(file, filename, current_user, service=None):
         })
         csv_content = create_csv_holder(results, ["routepattern", "status_on_cucm"])
         webex_bot.send_message_with_attachment(
-            f'{current_user}@akamai.com',
+            f'{current_user}@org.com',
             filename,
             message=f"Batch routepattern update completed for file: {filename}",
             csv_text=csv_content,
