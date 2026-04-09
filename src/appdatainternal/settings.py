@@ -12,7 +12,7 @@ with open("appdatainternal/location.json", 'r') as f:
 exclude_df = pd.read_csv("appdatainternal/excludelist.csv")
 exclude_list = exclude_df['UserId'].tolist()
 
-profileid_blr = "Y2lzY29zcGFyazovL3VzL0NBTExJTkdfUFJPRklMRS9iNTQyYWY1ZS0wMzkzLTQ0MjQtODI2OC1jYzdjYjI0ZGVkMDk"
+profileid_blr = "dummyidfromCH"
 
 allowed_users_list = []
 rbac_roles = {
