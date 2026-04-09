@@ -23,7 +23,7 @@ from webexapp.webexbotbase import WebexbotBase
 
 logger = setup_logger('ldapbatch', '/a/logs/ldapbatch.log')
 
-excluded_list = exclude_list
+excluded_list = []
 resultpath = get_resultfile_location()
 webex_bot = WebexbotBase()
 

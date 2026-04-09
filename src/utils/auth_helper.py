@@ -16,7 +16,7 @@ def get_current_user(request: Request):
         norm_username = username.strip().lower()
     else:
         # For non-PROD environments, use a default test user or environment variable
-        norm_username = "abshukla"
+        norm_username = "default_user"
     return norm_username
 
 class RoleChecker:
@@ -26,7 +26,7 @@ class RoleChecker:
     def __call__(self, user: str = Depends(get_current_user)):
         user_roles = [role for role, users in rbac_roles.items() if user in users]
         if env == "STAG":
-            if user != "abshukla":
+            if user != "default_user":
                 raise HTTPException(
                     status_code=403,
                     detail="Operation not permitted in STAG environment"

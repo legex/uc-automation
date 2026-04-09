@@ -15,7 +15,9 @@ from webexapi.webexoperations import WebexOperation
 from appdatainternal.settings import exclude_list
 from appdatainternal.config import get_resultfile_location, get_locations_config
 from utils.logger import setup_logger
+from utils.csv_helper import create_csv_holder
 from webexapi.webexnumberadd import addnumbersingle
+from webexapp.webexbotbase import WebexbotBase
 
 logger = setup_logger('webex_batch', '/a/logs/webex_batch.log')
 
@@ -25,8 +27,9 @@ resultpath = get_resultfile_location()
 webex_mig_gen = WebexGenMigration()
 webex_acd_mig = WebexMigACD()
 webop = WebexOperation()
+webex_bot = WebexbotBase()
 
-def batch_update_webex_gen(file, filename, exclude_users_override=None):
+def batch_update_webex_gen(file, filename, current_user, exclude_users_override=None):
     """Update Webex Extension"""
     logger.info("Starting batch Webex General update for file: %s", filename)
     effective_excluded_list = exclude_users_override if exclude_users_override is not None else excluded_list
@@ -47,6 +50,7 @@ def batch_update_webex_gen(file, filename, exclude_users_override=None):
         ad_num = location_config[region]['prefix']+extension
         email = row["Email"]
         status_on_webex = ""
+        results = []
         logger.info("Processing user: %s, email: %s, extension: %s, region: %s", username, email, extension, region)
         if username not in effective_excluded_list:
             if phonenumber is not None and phonenumber.lower() != 'none':
@@ -83,8 +87,7 @@ def batch_update_webex_gen(file, filename, exclude_users_override=None):
         else:
             logger.info("User %s is in Exclude list", username)
         
-
-        webex_mig_result = {
+        results.append({
             "username": username,
             "email": email,
             "FullExtension": ad_num,
@@ -92,23 +95,25 @@ def batch_update_webex_gen(file, filename, exclude_users_override=None):
             "extension": extension,
             "region": region,
             "status_on_webex": status_on_webex,
-        }
-        pd.DataFrame(
-            [webex_mig_result]).to_csv(f"{resultpath}/webex_migresult_{filename}",
-                                       mode='a',
-                                       header=False,
-                                       index=False
-                                       )
+        })
+        csv_content = create_csv_holder(results, ["username", "email", "FullExtension", "phoneNum", "extension", "region", "status_on_webex"])
+        webex_bot.send_message_with_attachment(
+            f'{current_user}@akamai.com',
+            filename,
+            message=f"Batch Webex General update completed for file: {filename}",
+            csv_text=csv_content,
+        )
     logger.info("Batch Webex General update completed for file: %s", filename)
     return "Script Run is Finished"
 
-def batch_update_webex_acd(file, filename, exclude_users_override=None):
+def batch_update_webex_acd(file, filename, current_user, exclude_users_override=None):
     """Update Webex Extension"""
     logger.info("Starting batch Webex ACD update for file: %s", filename)
     df = pd.read_csv(file, dtype={'extension': str, 'ContactNumber': str})
     df['ContactNumber'] = df['ContactNumber'].where(
         pd.notna(df['ContactNumber']), None  # NaN → None
     )
+    results=[]
     logger.info("Loaded %d rows from Excel file", len(df))
     effective_excluded_list = exclude_users_override if exclude_users_override is not None else []
     for idx, row in df.iterrows():
@@ -154,7 +159,7 @@ def batch_update_webex_acd(file, filename, exclude_users_override=None):
         else:
             logger.info("User %s is in Exclude list", username)
             status_on_webex = "Skipped"
-        acd_result = {
+        results.append({
             "username": username,
             "email": email,
             "phoneNum": phonenumber if phonenumber else "",
@@ -162,22 +167,24 @@ def batch_update_webex_acd(file, filename, exclude_users_override=None):
             "extension": extension,
             "region": region,
             "status_on_webex": status_on_webex
-        }
-        pd.DataFrame([acd_result]).to_csv(
-            f"{resultpath}/acd_migresult_{filename}",
-            mode='a',
-            header=False,
-            index=False
-            )
+        })
+        csv_content = create_csv_holder(results, ["username", "email", "phoneNum", "FullExtension", "extension", "region", "status_on_webex"])
+        webex_bot.send_message_with_attachment(
+            f'{current_user}@akamai.com',
+            filename,
+            message=f"Batch Webex General update completed for file: {filename}",
+            csv_text=csv_content,
+        )
     logger.info("Batch Webex ACD update completed for file: %s", filename)
     return "Script Run is Finished"
 
 
-def batch_remove_license(file, filename, region_India):
+def batch_remove_license(file, filename, current_user, region_India):
     """Remove Webex License from CSV"""
     logger.info("Starting batch Webex license removal for file: %s", filename)
     df = pd.read_csv(file, dtype=str)
     logger.info("Loaded %d rows from CSV file", len(df))
+    results=[]
     for idx, row in df.iterrows():
         logger.debug("Processing row %d", idx + 1)
         email = row["Email"].strip()
@@ -194,21 +201,24 @@ def batch_remove_license(file, filename, region_India):
             "email": email,
             "status_on_webex": status_on_webex
         }
-        pd.DataFrame([removal_result]).to_csv(
-            f"{resultpath}/webex_license_removal_{filename}",
-            mode='a',
-            header=False,
-            index=False
-            )
+        results.append(removal_result)
+    csv_content = create_csv_holder(results, ["email", "status_on_webex"])
+    webex_bot.send_message_with_attachment(
+        f'{current_user}@akamai.com',
+        filename,
+        message=f"Batch Webex license removal completed for file: {filename}",
+        csv_text=csv_content,
+    )
     logger.info("Batch Webex license removal completed for file: %s", filename)
     return "Script Run is Finished"
 
 
-def batch_add_number(file, filename):
+def batch_add_number(file, filename, current_user):
     """Add Webex Number from CSV"""
     logger.info("Starting batch Webex number addition for file: %s", filename)
     df = pd.read_csv(file, dtype=str)
     logger.info("Loaded %d rows from CSV file", len(df))
+    results=[]
     for idx, row in df.iterrows():
         logger.debug("Processing row %d", idx + 1)
         region = row["Country"].strip()
@@ -227,11 +237,13 @@ def batch_add_number(file, filename):
             "phoneNum": phonenumber,
             "status_on_webex": status_on_webex
         }
-        pd.DataFrame([addition_result]).to_csv(
-            f"{resultpath}/webex_number_addition_{filename}",
-            mode='a',
-            header=False,
-            index=False
-            )
+        results.append(addition_result)
+    csv_content = create_csv_holder(results, ["Country", "phoneNum", "status_on_webex"])
+    webex_bot.send_message_with_attachment(
+        f'{current_user}@akamai.com',
+        filename,
+        message=f"Batch Webex number addition completed for file: {filename}",
+        csv_text=csv_content,
+    )
     logger.info("Batch Webex number addition completed for file: %s", filename)
     return "Script Run is Finished"

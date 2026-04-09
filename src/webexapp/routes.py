@@ -730,6 +730,7 @@ async def update_webex_general(query: QueryModelWebex, current_user: str = Depen
 
 @router.post("/api/updatewebexgeneral/batch")
 async def batch_update_webex_general(
+    background_tasks: BackgroundTasks,
     file: UploadFile | None = None,
     exclude_file: UploadFile | None = None,
     current_user: str = Depends(admin_required)
@@ -766,13 +767,13 @@ async def batch_update_webex_general(
                             detail="Uploaded file is empty")
     try:
         logger.debug("Processing batch Webex general update by user: %s for file: %s", current_user, file.filename)
-        response = batch_update_webex_gen(
-            pd.io.common.BytesIO(contents),
-            file.filename,
-            exclude_users_override=exclude_users
-        )
+        background_tasks.add_task(batch_update_webex_gen,
+                                  pd.io.common.BytesIO(contents),
+                                  file.filename, current_user,
+                                  exclude_users_override=exclude_users)
+
         logger.info("Batch Webex general update completed by user: %s for file: %s", current_user, file.filename)
-        return {"Status": "Success", "Detail": response}
+        return {"Status": "Success", "Detail": "Batch update initiated response will be sent over webex"}
     except HTTPException as e:
         logger.error("HTTPException in batch Webex update by user: %s for %s: %s", current_user, file.filename, str(e))
         return {"error": str(e)}
@@ -828,7 +829,11 @@ async def update_webex_acd(query: QueryModelWebex, current_user: str = Depends(a
                                 detail="External number must be provided for ACD updates.")
 
 @router.post("/api/updatewebexacd/batch")
-async def b_update_webex_acd(file: UploadFile | None = None, exclude_file: UploadFile | None = None, current_user: str = Depends(admin_required)):
+async def b_update_webex_acd(
+    background_tasks: BackgroundTasks,
+    file: UploadFile | None = None,
+    exclude_file: UploadFile | None = None,
+    current_user: str = Depends(admin_required)):
     """
     Batch update Webex ACD settings from an Excel file.
     
@@ -859,9 +864,13 @@ async def b_update_webex_acd(file: UploadFile | None = None, exclude_file: Uploa
                             detail="Uploaded file is empty")
     try:
         logger.debug("Processing batch Webex ACD update by user: %s for file: %s", current_user, file.filename)
-        response = batch_update_webex_acd(pd.io.common.BytesIO(contents), file.filename, exclude_users_override=exclude_users)
-        logger.info("Batch Webex ACD update completed by user: %s for file: %s", current_user, file.filename)
-        return {"Status": "Success", "Detail": response}
+        background_tasks.add_task(batch_update_webex_acd,
+                                  pd.io.common.BytesIO(contents),
+                                  file.filename,
+                                  current_user,
+                                  exclude_users_override=exclude_users)
+        logger.info("Batch Webex ACD update initiated by user: %s for file: %s", current_user, file.filename)
+        return {"Status": "Success", "Detail": "Batch update initiated, results will be delivered over Webex"}
     except HTTPException as e:
         logger.error("HTTPException in batch Webex ACD update by user: %s for %s: %s", current_user, file.filename, str(e))
         return {"error": str(e)}
@@ -951,7 +960,11 @@ async def remove_webex_license(
                             detail=f"Error removing Webex license: {str(e)}") from e
 
 @router.post("/api/removewebexlicense/batch")
-async def batch_remove_webex_license(file: UploadFile, region_india: bool = False, current_user: str = Depends(admin_required)):
+async def batch_remove_webex_license(
+    background_tasks: BackgroundTasks,
+    file: UploadFile,
+    region_india: bool = False,
+    current_user: str = Depends(admin_required)):
     """Batch remove Webex licenses from a CSV file.
 
     Args:
@@ -968,9 +981,13 @@ async def batch_remove_webex_license(file: UploadFile, region_india: bool = Fals
     logger.info("Batch Webex license removal requested by user: %s for file: %s", current_user, file.filename)
     try:
         contents = await file.read()
-        result = batch_remove_license(pd.io.common.BytesIO(contents), file.filename, region_india)
-        logger.info("Batch Webex license removal completed by user: %s for file: %s", current_user, file.filename)
-        return {"Status": "Batch Webex license removal Completed", "Detail": result}
+        background_tasks.add_task(batch_remove_license,
+                                  pd.io.common.BytesIO(contents),
+                                  file.filename,
+                                  current_user,
+                                  region_india)
+        logger.info("Batch Webex license removal initiated by user: %s for file: %s", current_user, file.filename)
+        return {"Status": "Batch Webex license removal Initiated", "Detail": "Batch removal task has been started results will be shared over webex."}
     except Exception as e:
         logger.error("Error removing Webex licenses by user: %s for file %s: %s", current_user, file.filename, str(e))
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -1037,7 +1054,11 @@ async def update_route_pattern_single(query: QueryModelRPUpdate, is_india: bool 
                             detail=f"Error updating route pattern: {str(e)}") from e
 
 @router.post("/api/updateroutepattern/batchupdate")
-async def batch_update_route_pattern(file: UploadFile, is_india: bool = False, current_user: str = Depends(admin_required)):
+async def batch_update_route_pattern(
+    background_tasks: BackgroundTasks,
+    file: UploadFile,
+    is_india: bool = False,
+    current_user: str = Depends(admin_required)):
     """
     Batch update route patterns in CUCM from a CSV file.
     
@@ -1065,11 +1086,7 @@ async def batch_update_route_pattern(file: UploadFile, is_india: bool = False, c
                             detail="Uploaded file is empty")
     try:
         logger.debug("Processing batch route pattern update by user: %s for file: %s", current_user, file.filename)
-        response = batch_updateroutepatterns_auto(
-            pd.io.common.BytesIO(contents),
-            file.filename,
-            service
-            )
+        background_tasks.add_task(batch_updateroutepatterns_auto, pd.io.common.BytesIO(contents), file.filename, service)
         logger.info("Batch route pattern update completed by user: %s for file: %s", current_user, file.filename)
         return {"Status": "Success", "Detail": response}
     except HTTPException as e:

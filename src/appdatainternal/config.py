@@ -12,13 +12,13 @@ print(f"Application environment set to: {ENV}")
 def get_webex_license_config():
     if ENV == "PROD" or ENV == "STAG" or ENV == "LOCAL":
         license_store = {
-            "ucmlic": "Y2lzY29zcGFyazovL3VzL0xJQ0VOU0UvYTM3NDkzMTUtYWUwOS00YTUyLTgwNmMtMmMzMjIyZmE3YzJjOlVDUFJFTV9jMzMyOWQzMi0xNmVkLTQxNDUtOTUyNS02M2FjYjRiMzFiMjA",
-            "webexlic": "Y2lzY29zcGFyazovL3VzL0xJQ0VOU0UvYTM3NDkzMTUtYWUwOS00YTUyLTgwNmMtMmMzMjIyZmE3YzJjOkJDU1REXzFhNGRhOTZiLTNmYWUtNGVlYi1hZDYwLWFkNTA3MTE4NzFkMA"
+            "ucmlic":"licenseid",
+            "ucmlic":"licenseid",
         }
     else:
         license_store = {
-            "ucmlic": "Y2lzY29zcGFyazovL3VzL0xJQ0VOU0UvYmMyZDgzNzItMzIzZS00ZGVmLTg1MWItZGMxM2M2ODQ0ZjExOlVDUFJFTV9jMzMyOWQzMi0xNmVkLTQxNDUtOTUyNS02M2FjYjRiMzFiMjA",
-            "webexlic": "Y2lzY29zcGFyazovL3VzL0xJQ0VOU0UvYmMyZDgzNzItMzIzZS00ZGVmLTg1MWItZGMxM2M2ODQ0ZjExOkJDU1REXzBhNmM3NGI1LWZiYjktNDU3NS04MTdjLTFjZjc1ZTBlNjhlOQ"
+            "ucmlic":"licenseid",
+            "ucmlic":"licenseid",
         }
     return license_store
 
@@ -34,12 +34,12 @@ def cucm_servers():
     return CUCM_ADDRESSES
 
 def get_ldap_creds():
-    ldap_creds = {'SERVER': "wauth.corp.akamai.com:636",
-                'LDAP_USERNAME': "akamai.com\\svc_tmt_account",
+    ldap_creds = {'SERVER':"ldapserver",
+                'LDAP_USERNAME':"ldapuser",
                 'LDAP_PASSWORD': None
                 }
     
-    ldapsecretfile = "/a/secrets/app/ldap_user/ldap_user.opaque"
+    ldapsecretfile = "path_to_ldap_password_file"
     if ENV == "PROD" or ENV == "STAG":
         with open(ldapsecretfile, 'r') as f:
             ldap_creds["LDAP_PASSWORD"] = f.read().strip()
@@ -66,15 +66,15 @@ def get_cucm_credentials():
         Returns:
             tuple: A tuple containing (username, password).
         """
-        ucm_creds = {"PROD": {"AXL_USERNAME": "admin1",
+        ucm_creds = {"PROD": {"AXL_USERNAME": "username_prod",
                             "AXL_PASSWORD": None},
-                    "STAG": {"AXL_USERNAME": "admin1",
+                    "STAG": {"AXL_USERNAME": "username_stag",
                             "AXL_PASSWORD": None},
-                    "LOCAL": {"AXL_USERNAME": "admin1",
+                    "LOCAL": {"AXL_USERNAME": "username_local",
                             "AXL_PASSWORD": None}
                     }
         if ENV == "PROD" or ENV == "STAG":
-            passfile = "/a/secrets/app/cucm_user/cucm_user.opaque"
+            passfile = "path_to_cucm_password_file"
             with open(passfile, 'r') as pf:
                 ucm_creds["PROD"]["AXL_PASSWORD"] = pf.read().strip()
                 print("Read CUCM password from file")
@@ -95,7 +95,7 @@ def get_webex_token():
         str: The Webex API token.
     """
     if ENV == "PROD" or ENV == "STAG":
-        tokenfile = "/a/secrets/app/webex_token/webex_token.opaque"
+        tokenfile = "path_to_webex_token_file"
         with open(tokenfile, 'r') as tf:
             token = tf.read().strip()
             print("Read Webex token from file")

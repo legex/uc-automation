@@ -2,7 +2,7 @@ import os
 import json
 
 def get_env_config():
-    env = os.environ.get("ABATTERY_APP_NAME", "localhost")
+    env = os.environ.get("CONTAINER_APP_NAME", "localhost")
     is_staging = False
 
     if env != "localhost":

@@ -9,21 +9,24 @@ Functions:
 import pandas as pd
 from cucmapi.axlop import AXLOperations
 from cucmapi.axlroutepattern import AXLRoutePatternOperations
+from utils.csv_helper import create_csv_holder
 from utils.logger import setup_logger
 from appdatainternal.config import get_resultfile_location
+from webexapp.webexbotbase import WebexbotBase
 
 resultpath = get_resultfile_location()
 logger = setup_logger('rp_batch', '/a/logs/rp_batch.log')
 axloperations = AXLOperations()
 axlrp = AXLRoutePatternOperations()
-
-def batch_routepattern_auto(file, filename, service):
+webex_bot = WebexbotBase()
+def batch_routepattern_auto(file, filename, current_user, service):
     if not service:
         logger.debug("No service provided to batch_routepattern_auto")
     """Create Route Pattern in CUCM from CSV"""
     logger.info("Starting batch route pattern creation for file: %s", filename)
     df = pd.read_csv(file, dtype={'ContactNumber': str})
     logger.info("Loaded %d rows from CSV file", len(df))
+    results = []
     for idx, row in df.iterrows():
         logger.debug("Processing row %d", idx + 1)
         routepattern = f"\+{row['ContactNumber']}"
@@ -42,21 +45,22 @@ def batch_routepattern_auto(file, filename, service):
                 "Error updating CUCM for route pattern %s: %s", routepattern, e)
             status_on_cucm = "Error"
             status_partition = "Error"
-        results = {
+        results.append({
             "routepattern": routepattern,
             "status_on_cucm": status_on_cucm,
             "rp_update_status": status_partition,
-        }
-        pd.DataFrame([results]).to_csv(
-            f"{resultpath}/rpupdateresult_{filename}",
-            mode='a',
-            header=False,
-            index=False
-            )
+        })
+        csv_content = create_csv_holder(results, ["routepattern", "status_on_cucm","rp_update_status"])
+        webex_bot.send_message_with_attachment(
+            f'{current_user}@akamai.com',
+            filename,
+            message=f"Batch routepattern update completed for file: {filename}",
+            csv_text=csv_content,
+        )
     logger.info("Batch route pattern creation completed for file: %s", filename)
     return "Script Run is Finished"
 
-def batch_updateroutepatterns_auto(file, filename, service=None):
+def batch_updateroutepatterns_auto(file, filename, current_user, service=None):
     """Update Route Pattern in CUCM from CSV"""
     if not service:
         logger.debug("No service provided to batch_updateroutepatterns_auto")
@@ -64,6 +68,7 @@ def batch_updateroutepatterns_auto(file, filename, service=None):
     df = pd.read_csv(file, dtype={'PatternToUpdate': str})
     logger.info("Loaded %d rows from CSV file", len(df))
     partition = "PT-Hidden"
+    results = []
     for idx, row in df.iterrows():
         logger.debug("Processing row %d", idx + 1)
         routepattern = row['PatternToUpdate']
@@ -77,16 +82,17 @@ def batch_updateroutepatterns_auto(file, filename, service=None):
             logger.error(
                 "Error updating CUCM for route pattern %s: %s", routepattern, e)
             status_on_cucm = "Error"
-        results = {
+        results.append({
             "routepattern": routepattern,
             "status_on_cucm": status_on_cucm,
-        }
-        pd.DataFrame([results]).to_csv(
-            f"{resultpath}/rpupdateresult_{filename}",
-            mode='a',
-            header=False,
-            index=False
-            )
+        })
+        csv_content = create_csv_holder(results, ["routepattern", "status_on_cucm"])
+        webex_bot.send_message_with_attachment(
+            f'{current_user}@akamai.com',
+            filename,
+            message=f"Batch routepattern update completed for file: {filename}",
+            csv_text=csv_content,
+        )
     logger.info("Batch route pattern update completed for file: %s", filename)
     return "Script Run is Finished"
 
