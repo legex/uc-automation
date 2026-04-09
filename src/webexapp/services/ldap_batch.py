@@ -78,7 +78,7 @@ def batch_update_ldap(file, filename, current_user):
         })
     csv_content = create_csv_holder(results, ["username", "extension", "status_on_ad"])
     webex_bot.send_message_with_attachment(
-        f'{current_user}@akamai.com',
+        f'{current_user}@org.com',
         filename,
         message=f"Batch LDAP update completed for file: {filename}",
         csv_text=csv_content,
@@ -139,7 +139,7 @@ def batch_update_ldap_acd(file, filename, current_user):
         
     csv_content = create_csv_holder(results, ["username", "extension", "status_on_ad"])
     webex_bot.send_message_with_attachment(
-        f'{current_user}@akamai.com',
+        f'{current_user}@org.com',
         filename,
         message=f"Batch LDAP update completed for file: {filename}",
         csv_text=csv_content
