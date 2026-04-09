@@ -98,7 +98,7 @@ def batch_update_webex_gen(file, filename, current_user, exclude_users_override=
         })
         csv_content = create_csv_holder(results, ["username", "email", "FullExtension", "phoneNum", "extension", "region", "status_on_webex"])
         webex_bot.send_message_with_attachment(
-            f'{current_user}@akamai.com',
+            f'{current_user}@org.com',
             filename,
             message=f"Batch Webex General update completed for file: {filename}",
             csv_text=csv_content,
@@ -170,7 +170,7 @@ def batch_update_webex_acd(file, filename, current_user, exclude_users_override=
         })
         csv_content = create_csv_holder(results, ["username", "email", "phoneNum", "FullExtension", "extension", "region", "status_on_webex"])
         webex_bot.send_message_with_attachment(
-            f'{current_user}@akamai.com',
+            f'{current_user}@org.com',
             filename,
             message=f"Batch Webex General update completed for file: {filename}",
             csv_text=csv_content,
@@ -204,7 +204,7 @@ def batch_remove_license(file, filename, current_user, region_India):
         results.append(removal_result)
     csv_content = create_csv_holder(results, ["email", "status_on_webex"])
     webex_bot.send_message_with_attachment(
-        f'{current_user}@akamai.com',
+        f'{current_user}@org.com',
         filename,
         message=f"Batch Webex license removal completed for file: {filename}",
         csv_text=csv_content,
@@ -240,7 +240,7 @@ def batch_add_number(file, filename, current_user):
         results.append(addition_result)
     csv_content = create_csv_holder(results, ["Country", "phoneNum", "status_on_webex"])
     webex_bot.send_message_with_attachment(
-        f'{current_user}@akamai.com',
+        f'{current_user}@org.com',
         filename,
         message=f"Batch Webex number addition completed for file: {filename}",
         csv_text=csv_content,
