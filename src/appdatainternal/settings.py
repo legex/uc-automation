@@ -14,16 +14,10 @@ exclude_list = exclude_df['UserId'].tolist()
 
 profileid_blr = "Y2lzY29zcGFyazovL3VzL0NBTExJTkdfUFJPRklMRS9iNTQyYWY1ZS0wMzkzLTQ0MjQtODI2OC1jYzdjYjI0ZGVkMDk"
 
-allowed_users_list = ['abshukla', 'risaxen', 'raksingh', 'sshrutik', 'nvemula', 'emontero', 'ratiwar', 'rpangira', 'rasahu', 'akalpath']
+allowed_users_list = []
 rbac_roles = {
-    "admin": ["abshukla", "risaxen", "raksingh",
-              "sshrutik", "nvemula", "emontero",
-              "ratiwar", "rpangira", "rasahu",
-              "akalpath"],
-    "viewer": ["dforeste"],
+    "admin": [],
+    "viewer": [],
     "user": [],
-    "jpuser": ['ynarita', 'misato', 'yoritate', 'sjkin', 'sarakawa', 'thachimu', 
-               'hhokari', 'yozaki', 'naraumi', 'aryonai', 'yiguchi', 'nokajima', 
-               'ysatoi', 'esanpedr', 'tnoguchi', 'fhashita', 'hnagamat', 'esanpedr',
-               'hsato', 'emuto', 'ykawabat']
+    "jpuser": []
 }
